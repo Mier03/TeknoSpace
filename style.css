@@ -19,6 +19,15 @@ body
 h1{
     color:#df0808;
 }
+img
+{
+    margin-bottom: 20px;
+    width:100px;
+    height:100px;
+    display: block;
+    margin: 0 auto;
+}
+
 .login-container{
     margin:70px;
     width: 380px;
@@ -35,21 +44,31 @@ h1{
     letter-spacing:0.5px;
     text-align:center;
 }
-.social-icons{
+.buttonuser-type{
     text-align: center;
     margin-bottom: 20px;
 }
-.social-icons .icon{
+.buttonuser-type .type{
     display: inline-block;
     font-size:20px;
     margin:0 10px;
     border: 2px solid rgba(255,255,255,.2);
     border-radius:16px;
-    padding:7px 10px;
+    padding:10px 10px;
     transition:color 0.3s ease;
+    background-position: center;
+    width: 25%;
+    height: 25%;
+    height: 50px;
+    background-color: rgba(229, 211, 9, 0.726);
+    font-size:15px;
+    text-indent:center;
+    text-align: center;
+
 }
-.social-icons .icon:hover{
-    color:#c2c2c2;
+
+.buttonuser-type .type:hover{
+    color:#e2dbdb;
 }
 form{
     display:flex;
@@ -84,7 +103,7 @@ button{
     background-color:#a10202;
     border:none;
     cursor:pointer;
-    transitions: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
 
 }
 button:hover{
