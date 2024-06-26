@@ -106,17 +106,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="login-container">
         <div class="login-form" id="loginForm">
-            <h1>Sign In</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class='bx bxl-google-plus'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-github'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-linkedin'></i></a>
-            </div>
-
-            <div class="form-message-container">
-                <span>Or use your email and password</span>
-            </div>
+        <img class="upper-cit"src="cit-logo-upper.png" >
+        <img   class="cit"src="cit-logo.png"  >
 
             <form method="post" action="">
                 <input type="text" name="email_or_id" placeholder="Email or ID Number" required>
@@ -128,15 +119,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         
         <div class="signup-form hidden" id="signupForm">
-            <h1>Create An Account</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class='bx bxl-google-plus'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-github'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-linkedin'></i></a>
-            </div>
-            <div class="form-message-container">
-                <span>Or use your email for registration</span>
+            <img   class="cit"src="cit-logo.png"  >
+            <div class="buttonuser-type">
+                
+                <button class="type">Faculty</button>
+                <button class="type">Student</button>
             </div>
 
             <form method="post" action="">
