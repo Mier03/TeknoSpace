@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['valid'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$userName = $_SESSION['username'];
+$firstName = $_SESSION['firstName'];
+$course = $_SESSION['course'];
+$idNumber = $_SESSION['idNumber'];
+$email = $_SESSION['valid'];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +32,7 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <img src="teknospace-logo.jpg" alt="Teknospace Logo">
+                <img src="images/teknospace-logo.jpg" alt="Teknospace Logo">
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
@@ -37,11 +54,11 @@
             <div class="post-header">
                 <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                 <div class="post-header-info">
-                    <h3>Your Name</h3>
+                    <h3><?php echo htmlspecialchars($firstName); ?></h3>
                 </div>
             </div>
             <div class="post-input" id="postInput">
-                <p>What's on your mind, Your Name?</p>
+                <p><?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?></p>
             </div>
         </div>
     
@@ -53,14 +70,14 @@
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3>Your Name</h3>
+                        <h3><?php echo htmlspecialchars($firstName); ?></h3>
                         <select>
                             <option>All students</option>
                             <option>Department</option>
                         </select>
                     </div>
                 </div>
-                <textarea placeholder="What's on your mind, Your Name?"></textarea>
+                <textarea placeholder="<?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?>"></textarea>
                 <div class="post-options">
                     <p>Add to your post</p>
                     <div class="option-icons">
