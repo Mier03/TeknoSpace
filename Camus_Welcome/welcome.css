@@ -2,7 +2,16 @@ img {
     width: 100%;
     border-radius: 0.5rem;
   }
-  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+.logo img {
+    width: 75px;
+    height: auto;
+    margin-right: 10px;
+}
   h1 {
     font-size: 4rem;
     margin: 0.5rem 0;
