@@ -2,6 +2,7 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //including connection of database
     include('php/config.php');
 
     if (!$conn) {
@@ -9,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if (isset($_POST['submit_signup'])) { // name of the button in the html tag for sign up
+
         $userType = $conn->real_escape_string($_POST['userType']);
         $firstName = $conn->real_escape_string($_POST['firstName']);
         $middleName = $conn->real_escape_string($_POST['middleName']);
@@ -98,27 +100,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result && mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
+
             if (password_verify($password, $row['password'])) {
+
                 $_SESSION['valid'] = $row['email'];
                 $_SESSION['username'] = $row['firstName'] . ' ' . $row['lastName'];
                 $_SESSION['firstName'] = $row['firstName'];
                 $_SESSION['lastName'] = $row['lastName'];
                 $_SESSION['course'] = $row['course']; 
                 $_SESSION['idNumber'] = $row['idNumber']; 
+                $_SESSION['userType'] = $row['userType'];
+
+                $sql = "SELECT * FROM users WHERE userType='$userType'";
 
                 if ($_SESSION['firstName'] == "admin") {
                     $hashedPasswordFromDB = $row['password']; 
                     if (password_verify($password, $hashedPasswordFromDB)) {
                         // Password matches for admin
-                        header("Location: SUNGAHID/homepage.php");
+                        header("Location: SUNGAHID/adminHomepage.php");
                         exit();
                     } else {
                         echo "<div class='message'><p>Wrong Password</p></div><br>";
                     }
-                } else {
-                    //location for users
-                    header("Location: SUNGAHID/homepage.php");
+                } elseif ($_SESSION['userType'] === "Student") {
+                    //student homepage
+                    header("Location: SUNGAHID/studentHomepage.php");
                     exit();
+                } elseif ($_SESSION['userType'] === "Faculty") {
+                    //faculty admin homepage
+                    header("Location: SUNGAHID/adminHomepage.php");
+                    exit();
+                } else {
+                    echo "<div class='message'><p>Unknown user type</p></div><br>";
                 }
             } else {
                 echo "<div class='message'><p>Wrong Password</p></div><br>";
@@ -129,5 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     mysqli_close($conn);
+    
 }
+
 ?>
