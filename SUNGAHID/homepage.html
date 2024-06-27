@@ -3,71 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeknoSpace</title>
+    <title>Teknospace</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
-    <link rel="stylesheet" href="homepage-styles.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    
 </head>
 <body>
-    <header>
-        <nav>
+    <header class="header">
+        <div class="header-content">
             <div class="logo">
-                <img src="images/teknospace-logo.jpg" alt="TeknoSpace" class="logo-image">
-                TeknoSpace</div>
-            <div class="nav-links">
-                <a href="#home" class="icon"><i class='bx bxs-home'></i></a>                
-                <a href="#profile" class="icon"><i class='bx bx-face'></i></a>                
-                <a href="#logout">Log Out</a>
+                <img src="teknospace-logo.jpg" alt="Teknospace Logo">
+                <span>TEKNOSPACE</span>
             </div>
-        </nav>
+            <div class="nav-links">
+                <a href="#home" class="icon"><i class="fi fi-ss-user"></i></a>                
+                <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
+                <a href="about_us.html">Log Out</a>
+            </div>
+        </div>
     </header>
-    <!--sidebar-->
-    <div class="container">
-        <aside class="sidebar">
-        
-            <ul class="sidebar-menu">
-                <li><a href="#updates" class="menu-item"><i class='bx bx-news'></i> School Updates</a></li>
-                <li><a href="#maintenance" class="menu-item"><i class='bx bx-wrench'></i> Maintenance</a></li>
-                <li><a href="#lost&found" class="menu-item"><i class='bx bx-search-alt'></i> Lost and Found</a></li>
-            </ul>
-        </aside>
-        <main class="main-content">
-            <div class="create-post">
+    <nav class="nav">
+        <ul>
+            <li><a href="Homepage.html" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="#maintenance" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="#lost&found" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
+        </ul>
+    </nav>
+    <main class="main">
+        <div class="posts">
+            <div class="post">
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3>Your Name</h3>
-                        <p>Public</p>
+                        <h3>John Doe</h3>
+                        <p>2 hours ago</p>
                     </div>
                 </div>
-                <textarea rows="4" cols="50" placeholder="What's on your mind, Your Name?"></textarea>
+                <div class="post-content">
+                    <p>This is an example post content.</p>
+                </div>
                 <div class="post-actions">
-                    <button class="btn-post">Post</button>
-                    <button class="btn-cancel">Cancel</button>
+                    <a href="#">Like</a>
+                    <a href="#">Comment</a>
+                    <a href="#">Share</a>
                 </div>
             </div>
 
-            <div class="posts">
-                <div class="post">
-                    <div class="post-header">
-                        <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
-                        <div class="post-header-info">
-                            <h3>John Doe</h3>
-                            <p>2 hours ago</p>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        <p>This is an example post content.</p>
-                    </div>
-                    <div class="post-actions">
-                        <a href="#">Like</a>
-                        <a href="#">Comment</a>
-                        <a href="#">Share</a>
-                    </div>
-                </div>
-
-            </div>
-        </main>
-    </div>
+        </div>
+    </main>
 </body>
 </html>
