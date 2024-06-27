@@ -9,7 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <!DOCTYPE html>
-<html>
+<html >
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,25 +22,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com' crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-
 </head>
+
 <body>
     <div class="login-container">
         <div class="login-form" id="loginForm">
-            <h1>Sign In</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class='bx bxl-google-plus'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-github'></i></a>
-                <a href="#" class="icon"><i class='bx bxl-linkedin'></i></a>
-            </div>
-
-            <div class="form-message-container">
-                <span>Or use your email and password</span>
-            </div>
-
+            <!-- <h1>Sign In</h1> -->
+            <img class="upper-cit"src="cit-logo-upper.png" >
+            <img   class="cit"src="cit-logo.png"  >
+           
             <form method="post" action="">
                 <input type="text" name="email_or_id" placeholder="Email or ID Number" required>
                 <input type="password" name="password" placeholder="Password" required>
@@ -48,7 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
             <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
         </div>
-        
+       
+
         <div class="signup-form hidden" id="signupForm">
             <img   class="cit"src="cit-logo.png"  >
            
@@ -75,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" name="course" placeholder="Course" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="password" name="confirmpassword" placeholder="Confirm Password" required>
+
                 <button type="submit" name="submit_signup">Sign Up</button>
             </form>
             <p>Already have an account? <a href="#" id="showLogin">Sign In</a></p>
@@ -82,4 +77,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
