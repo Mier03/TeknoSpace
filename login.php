@@ -45,22 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="signup-form hidden" id="signupForm">
             <img   class="cit"src="cit-logo.png"  >
-           
-           <div class="select-container">
-                <select class="user-type">
-                    <option  class="type">Select user type</option>
-                    <option  class="type">Faculty</option>
-                    <option class="type">Student</option>
-                </select>
-                <div class="icon-container">
-                    <i id="icon" class='bx bxs-down-arrow'></i>
-                </div>
-           </div>
-            
-           
-
-        
+          
             <form method="post" action="">
+                <div class="select-container">
+                    <select id="userType" name="userType" class="user-type" required>
+                        <option value="">Select user type</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Student">Student</option>
+                    </select>
+
+                    <div class="icon-container">
+                        <i id="icon" class='bx bxs-down-arrow'></i>
+                    </div>
+                </div>
+
                 <input type="text" name="firstName" placeholder="First Name" required>
                 <input type="text" name="middleName" placeholder="Middle Name" required>
                 <input type="text" name="lastName" placeholder="Last Name" required>
