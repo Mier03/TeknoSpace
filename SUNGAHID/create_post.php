@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root"; // Default XAMPP username
-$password = ""; // Default XAMPP password
-$dbname = "teknospace"; // Your database name
+$servername = "127.0.0.1";
+$username = "root"; 
+$password = ""; 
+$dbname = "teknospace"; 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -44,14 +44,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($imagePath) {
             echo "<img src='$imagePath' alt='Post Image' style='max-width: 100%; height: auto;'>";
         }
-        echo "
+        echo '
+                    </div>
+                    <div class="post-actions">
+                        <a href="#" class="like-btn"><i class="fi fi-rs-social-network"></i> Like</a>
+                        <a href="#" class="comment-btn"><i class="fi fi-ts-comment-dots"></i> Comment</a>
+                    </div>
+                    <div class="comments-section" style="display: none;">
+                        <div class="comment-input">
+                            <input type="text" placeholder="Write a comment...">
+                            <button class="submit-comment"><i class="fi fi-ss-paper-plane-top"></i></button>
+                        </div>
+                        <div class="comments-list"></div>
+                    </div>
                 </div>
-                <div class='post-actions'>
-                    <a href='#'>Like</a>
-                    <a href='#'>Comment</a>
-                    <a href='#'>Share</a>
-                </div>
-            </div>";
+            </div>';
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
