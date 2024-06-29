@@ -419,3 +419,32 @@ body {
     margin-top: 5px;
     border: 1px solid #ccc;
 }
+
+
+/* TABLE FOR ADMIN -START*/
+table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px;
+}
+
+th {
+    background-color: #dedbdb; 
+    padding: 8px;
+    text-align: left; 
+    border: 1px solid #dddddd;
+}
+
+td {
+    padding: 8px; 
+    border: 1px solid #dddddd; 
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1; 
+}
+/* TABLE FOR ADMIN -END*/
