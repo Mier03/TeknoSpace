@@ -1,0 +1,122 @@
+*{
+    
+    font-family: "Outfit", sans-serif;
+    color: rgb(239, 239, 239);
+}
+body
+{
+    
+    margin:0;
+    padding:0;
+    display: flex;
+    justify-content:center;
+    min-height:100vh;
+	background-image: url('images/bg-image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+    align-items: center;
+}
+
+h1{
+    color:#df0808;
+}
+img
+{
+    width:110px;
+    height:110px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 0;
+}
+.cit{
+    margin-bottom: 0;
+    width: 300px;
+    height: 100px;
+
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+}
+input{
+    width: 100%;
+    height: 100%;
+    height: 50px;
+    margin:10px 0;
+    background: transparent;
+    border: 3px solid rgba(251, 246, 246, 0.5);
+    border-radius: 60px;
+    font-size:15px;
+    text-indent:15px;
+}
+button{
+    width: 100%;
+    height: 100%;
+    height: 50px;
+    margin:10px 0;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 60px;
+    font-size:20px;
+    text-indent:15px;
+    color:white;
+    font-weight: bold;
+
+}
+input::placeholder{
+    color: rgb(245, 245, 245);
+    text-indent:15px;
+}
+input:focus,button:focus{
+    border-color:transparent;
+}
+button{
+    background-color:#a10202;
+    border:none;
+    cursor:pointer;
+    transition: all 0.4s ease-in-out;
+
+}
+button:hover{
+    background-color: #a04545;
+}
+a{
+    color:blue;
+    text-align:center;
+    transition: all 0.4s ease-in-out;
+    font-size:18px;
+}
+a:hover{
+    text-decoration: none;
+}
+.hidden{
+    display:none;
+}
+p{
+    margin-top: 0;
+}
+
+.success-msg {
+    margin:10px 0;
+    padding: 5px 2px;
+    display:block;;
+    background:rgb(24, 138, 11);
+    color:white;
+    border-radius:5px;
+    font-size: 15px;
+    text-align:center;
+}
+
+.error-msg{
+    margin:10px 0;
+    padding: 5px 2px;
+    display:block;;
+    background:crimson;
+    color:white;
+    border-radius:5px;
+    font-size: 15px;
+    text-align:center;
+}
+

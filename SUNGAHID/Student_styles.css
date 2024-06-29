@@ -40,7 +40,7 @@ body {
 
 .nav {
     background-color: #630E15;
-    padding: 15px 0;
+    padding: 5px 0;
 }
 
 .nav ul {
@@ -189,5 +189,42 @@ body {
 
 .post-actions a:hover {
     text-decoration: underline;
-    color: #3b5998;
+    color: #630E15;
+}
+
+.comments-section {
+    margin-top: 10px;
+}
+
+.comment-input {
+    display: flex;
+    margin-top: 10px;
+}
+
+.comment-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-input button {
+    padding: 8px 12px;
+    background-color: #630E15;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.comments-list {
+    margin-top: 10px;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
 }
