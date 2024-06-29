@@ -55,6 +55,41 @@ body {
     margin: 0 10px;
 }
 
+.nav ul li a .fi {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.nav ul li a .nav-text {
+    margin-left: 10px;
+}
+
+.nav ul li a.manage-account .nav-text {
+    margin-left: 15px; 
+}
+
+/* All Accounts and Verify Account */
+.modal-content button {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    border: 2px solid #FFD700;
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #dcbb04;
+    color: #1e1e1e;
+}
+
+.modal-content button:hover {
+    background-color: rgb(252, 217, 14);
+    color: black;
+}
+
 
 @media screen and (max-width: 629px) {
     .nav {
@@ -199,6 +234,11 @@ body {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: rgb(247, 247, 31); 
 }
 
 .modal-content h2 {

@@ -120,11 +120,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $sql = "SELECT * FROM users WHERE userType='$userType'";
 
-                if ($_SESSION['firstName'] == "admin") {
+                if ($_SESSION['userType'] == "Admin") {
                     $hashedPasswordFromDB = $row['password']; 
                     if (password_verify($password, $hashedPasswordFromDB)) {
                         // Password matches for admin
-                        header("Location: SUNGAHID/adminHomepage.php");
+                        header("Location: SUNGAHID/ADMIN.php");
                         exit();
                     } else {
                         $errors[]='Wrong Password';
