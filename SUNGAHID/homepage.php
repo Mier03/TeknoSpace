@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['valid'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -20,7 +20,7 @@ $email = $_SESSION['valid'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknospace</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Admin_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -31,7 +31,7 @@ $email = $_SESSION['valid'];
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <img src="SUNGAHID/teknospace-logo.jpg" alt="Teknospace Logo">
+                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">

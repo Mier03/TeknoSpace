@@ -13,18 +13,18 @@ if (isset($_POST['submit_signup'])) {
     <link rel="stylesheet" href="welcome.css" />
     <link rel="stylesheet" href="welcome_startup.css" />
     <title>Tekno Space</title>
-    <link rel="icon" href="/logo circle.png" type="image/x-icon">
+    <link rel="icon" href="../images/logo circle.png" type="image/x-icon">
   </head>
   <body>
     <header>
         <div class="wrapper header-wrapper">
           <nav>
             <a href="#" onclick="window.location.reload(true)" class="logo">
-              <img src="LOGOTEKNO.png" height="50" width="50" class="logo-img" alt="Logo">Tekno Space
+              <img src="../images/logo circle.png" height="50" width="50" class="logo-img" alt="Logo">Tekno Space
             </a>
             <ul class="header-links">
-              <li><a href="/TeknoSpaceLogin/login.php" class="navbar__link">Log In</a></li>
-              <li><a href="/TeknoSpaceLogin/login.php" class="navbar__link">Sign Up</a></li>
+              <li><a href="../login.php" class="navbar__link">Log In</a></li>
+              <li><a href="../login.php" class="navbar__link">Sign Up</a></li>
             </ul>
           </nav>
         </div>
@@ -49,7 +49,7 @@ if (isset($_POST['submit_signup'])) {
 
           </div>
           <div class="image">
-            <img src="logotekno2.png" alt="" />
+          <img src="../images/logotekno2.png" alt="" />
           </div>
         </section>
         <section class="about">
@@ -60,7 +60,7 @@ if (isset($_POST['submit_signup'])) {
                 insightful articles, and a platform to connect with the school community.</p>
           </div>
           <div class="img">
-            <img src="/LOGO_OKAY.jpg" alt="">
+            <img src="../images/LOGO_OKAY.jpg" alt="">
           </div>
         </section>
         <section class="services">
@@ -71,7 +71,7 @@ if (isset($_POST['submit_signup'])) {
                 transparency and communication, ensuring that every student stays informed and involved.</p>
           </div>
           <div class="img">
-            <img src="/groufie 2.jpg" alt="">
+            <img src="../images/groufie 2.jpg" alt="">
           </div>
         </section>
         <section class="portfolio">
@@ -82,7 +82,7 @@ if (isset($_POST['submit_signup'])) {
                 we strive to deliver accurate updates and engaging content that enriches your school experience.</p>
           </div>
           <div class="img">
-            <img src="/groufie 2.jpg" alt="">
+            <img src="../images/groufie 2.jpg" alt="">
           </div>
         </section>
         <section class="projects">
@@ -91,7 +91,7 @@ if (isset($_POST['submit_signup'])) {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat illum sit voluptatem voluptatibus sequi at amet explicabo quam. Aut reiciendis obcaecati enim ut sed magni unde quae quam ipsum ratione?</p>
           </div>
           <div class="img">
-            <img src="/groufie 2.jpg" alt="">
+            <img src="../images/groufie 2.jpg" alt="">
           </div>
         </section>
         <section class="Clients">
@@ -100,7 +100,7 @@ if (isset($_POST['submit_signup'])) {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat illum sit voluptatem voluptatibus sequi at amet explicabo quam. Aut reiciendis obcaecati enim ut sed magni unde quae quam ipsum ratione?</p>
           </div>
           <div class="img">
-            <img src="/groufie 2.jpg" alt="">
+            <img src="../images/groufie 2.jpg" alt="">
           </div>
         </section>
     </main>

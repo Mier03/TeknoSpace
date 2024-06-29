@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['valid'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -32,13 +32,13 @@ $email = $_SESSION['valid'];
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <img src="images/teknospace-logo.jpg" alt="Teknospace Logo">
+            <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
                 <a href="#home" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
-                <a href="about_us.html">Log Out</a>
+                <a href="../Camus_Welcome/welcome.php">Log Out</a>
             </div>
         </div>
     </header>
