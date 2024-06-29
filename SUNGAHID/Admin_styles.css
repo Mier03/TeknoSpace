@@ -1,0 +1,347 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.header {
+    background-color: #1D0001;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav {
+    background-color: #630E15;
+    padding: 8px 0;
+}
+
+.nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav ul li {
+    margin: 0 10px;
+}
+
+
+@media screen and (max-width: 629px) {
+    .nav {
+        padding: 10px 0;
+        padding-right: 100px;
+        padding-left: 100px;
+    }
+
+    .nav ul {
+        justify-content: space-between;
+    }
+
+    .nav ul li a {  
+        flex-direction: row;
+    }
+
+    .nav ul li a .fi {
+        margin-bottom: 0;
+        font-size: 24px;
+    }
+
+    .nav ul li a .nav-text {
+        display: none;
+    }
+}
+
+.nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav ul li a .fi {
+    margin-right: 12px;
+    font-size: 17px; 
+}
+.nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+.nav ul li a:hover,
+.nav ul li a.active {
+    background-color: #8B1818; 
+}
+
+.nav ul li a .fi {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav ul li a {
+        flex-direction: column;
+        padding: 10px 5px;
+    }
+
+    .nav ul li a .fi {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .nav ul li a .nav-text {
+        display: none;
+    }
+
+    .nav ul li a.active {
+        background-color: #8B1818;
+    }
+}
+
+.nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 18px; 
+    padding: 0 5px;
+}
+.nav-links a:hover{
+    color: gold;
+}
+
+.posts {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.post-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.create-post {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.post-input {
+    background-color: #f0f2f5;
+    border-radius: 20px;
+    padding: 10px 15px;
+    color: #65676b;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #630E15;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    color: white;
+}
+
+.close {
+    color: gold;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content textarea {
+    width: 100%;
+    height: 100px;
+    background-color: whitesmoke;
+    border: none;
+    color: goldenrod;
+    resize: vertical;
+    font-size: 18px;
+}
+
+.modal-content textarea ::placeholder {
+    color: white;
+}
+
+.post-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.option-icons i {
+    margin-right: 10px;
+    font-size: 20px;
+    color: gold;
+}
+
+.btn-post {
+    width: 100%;
+    padding: 10px;
+    background-color: goldenrod;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-post:hover {
+    background-color: #365899;
+}
+
+.create-post .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.create-post .post-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.create-post .post-header-info h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.create-post .post-header-info p {
+    color: #808080;
+    margin: 0;
+}
+
+.create-post textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.create-post .post-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-post .post-actions .btn-post, .create-post .post-actions .btn-cancel {
+    background-color: maroon;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-post .post-actions .btn-post:hover, .create-post .post-actions .btn-cancel:hover {
+    background-color: gold;
+    color: black;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-header .post-header-info h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.post-header .post-header-info p {
+    color: #808080;
+    margin: 0;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.post-actions {
+    margin-top: 10px;
+}
+
+.post-actions a {
+    color: #808080;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.post-actions a:hover {
+    text-decoration: underline;
+    color: #3b5998;
+}

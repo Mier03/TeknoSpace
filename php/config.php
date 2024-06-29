@@ -1,6 +1,7 @@
 <?php 
 
-    $conn = mysqli_connect("localhost","root","","accounts") or die("Couldn't connect");
-    
+ 
+    $conn = mysqli_connect("localhost","root","","testing_db") or die("Couldn't connect");
+
 
 ?>
