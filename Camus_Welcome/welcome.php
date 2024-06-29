@@ -7,108 +7,118 @@ if (isset($_POST['submit_signup'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="welcome.css" />
-    <link rel="stylesheet" href="welcome_startup.css" />
-    <title>Tekno Space</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="aboutus.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" href="../images/logo circle.png" type="image/x-icon">
-  </head>
-  <body>
+</head>
+<body>
+    <div class="intro">
+        <h1 class="tekno-header">
+            <span class="tekno">Tekno</span>
+            <span class="tekno"> Space</span>
+        </h1>
+    </div>
     <header>
-        <div class="wrapper header-wrapper">
-          <nav>
-            <a href="#" onclick="window.location.reload(true)" class="logo">
-              <img src="../images/logo circle.png" height="50" width="50" class="logo-img" alt="Logo">Tekno Space
-            </a>
-            <ul class="header-links">
-              <li><a href="../login.php" class="navbar__link">Log In</a></li>
-              <li><a href="../signup.php" class="navbar__link">Sign Up</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+        <section class="header">
+            <nav>
+                <div class="logo-title-container">
+                    <a href="about_us.html"><img src="../images/logo circle.png" alt="Tekno Space Logo"></a>
+                    <h1>Tekno Space</h1>
+                </div>
+                <div class="welcome-nav">
+                    <a href="#aboutus">About Us</a>
+                    <a href="#theteam">The Team</a>
+                    <a href="#services">Services</a>
+                </div>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="login.php">Log In</a></li>
+                        <li><a href="signup.php">Register Now</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+    </header>
     <div id="scroll-indicator"></div>
-    <main>
-      <div class="wrapper">
-        <section class="hero">
-          <div class="intro">
-            <h1>Welcome Teknoys!</h1>
-            <p>
-                Welcome to Teknoys! Your go-to source for all school updates, events, and important announcements. 
-                Stay informed and connected with everything happening at our school.
-            </p>
+    <div class="container">
+    <section class="welcome">
+        <div class="bg">
+            <img src="../images/Background.png" alt="Background About Us">
+        </div>
+        <div class="midscreen-text">
+            <h1>Welcome to Tekno Space~!</h1>
+            <p>YWelcome to Teknoys! Your go-to source for all school updates, events, and important announcements. 
+                Stay informed and connected with everything happening at our school.</p>
+        </div>
+    </section>
 
-            <!-- Sign up button -->
-            <form method="post">
-              <button type="submit" name="submit_signup" class="btn btn-cta">
-                <i class="sign-up"></i> Sign Up Now!
-              </button>
-            </form>
+    <section id="aboutus" class="alternating-section">
+        <div class="bg">
+            <img src="../images/Background.png" alt="Background">
+        </div>
+        <div class="section-content">
+            <div class="image-container">
+                <img src="../images/logo circle.png" alt="About Us Image">
+            </div>
+            <div class="text-container">
+                <h1>About Us</h1>
+                <p>Tekno Space is more than just a website; it's a digital hub designed to keep students informed 
+                    and engaged. Here, you'll find timely updates, 
+                    insightful articles, and a platform to connect with the school community.</p>
+            </div>
+        </div>
+    </section>
 
-          </div>
-          <div class="image">
-          <img src="../images/logotekno2.png" alt="" />
-          </div>
-        </section>
-        <section class="about">
-          <div class="intro">
-            <h1>About Tekno Space</h1>
-            <p>Tekno Space is more than just a website; it's a digital hub designed to keep students informed 
-                and engaged. Here, you'll find timely updates, 
-                insightful articles, and a platform to connect with the school community.</p>
-          </div>
-          <div class="img">
-            <img src="../images/LOGO_OKAY.jpg" alt="">
-          </div>
-        </section>
-        <section class="services">
-          <div class="intro">
-            <h1>Why did we make Tekno Space?</h1>
-            <p>Tekno Space was created to bridge the gap between students and school updates in an accessible 
-                and user-friendly way. We believe in 
-                transparency and communication, ensuring that every student stays informed and involved.</p>
-          </div>
-          <div class="img">
-            <img src="../images/groufie 2.jpg" alt="">
-          </div>
-        </section>
-        <section class="portfolio">
-          <div class="intro">
-            <h1>The Team</h1>
-            <p>Meet us, the creators of Tekno Space! We are passionate students dedicated to keeping our 
-                school community informed and connected. Through Tekno Space, 
-                we strive to deliver accurate updates and engaging content that enriches your school experience.</p>
-          </div>
-          <div class="img">
-            <img src="../images/groufie 2.jpg" alt="">
-          </div>
-        </section>
-        <section class="projects">
-          <div class="intro">
-            <h1>Others...</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat illum sit voluptatem voluptatibus sequi at amet explicabo quam. Aut reiciendis obcaecati enim ut sed magni unde quae quam ipsum ratione?</p>
-          </div>
-          <div class="img">
-            <img src="../images/groufie 2.jpg" alt="">
-          </div>
-        </section>
-        <section class="Clients">
-          <div class="intro">
-            <h1>Others...</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat illum sit voluptatem voluptatibus sequi at amet explicabo quam. Aut reiciendis obcaecati enim ut sed magni unde quae quam ipsum ratione?</p>
-          </div>
-          <div class="img">
-            <img src="../images/groufie 2.jpg" alt="">
-          </div>
-        </section>
-    </main>
+    <section id="theteam" class="alternating-section reverse">
+        <div class="bg">
+            <img src="../images/Background.png" alt="Background">
+        </div>
+        <div class="section-content">
+            <div class="image-container">
+                <img src="../images/groufie 2.jpg" alt="Our Team">
+            </div>
+            <div class="text-container">
+                <h1>The Team</h1>
+                <p>Meet us, the creators of Tekno Space! We are passionate students dedicated to keeping our 
+                    school community informed and connected. Through Tekno Space, 
+                    we strive to deliver accurate updates and engaging content that enriches your school experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="alternating-section">
+        <div class="bg">
+            <img src="../images/Background.png" alt="Background">
+        </div>
+        <div class="section-content">
+            <div class="image-container">
+                <img src="../images/cit-logo-upper.png" alt="Our Services">
+            </div>
+            <div class="text-container">
+                <h1>Services</h1>
+                <p>Tekno Space was created to bridge the gap between students and school updates in an accessible 
+                    and user-friendly way. We believe in 
+                    transparency and communication, ensuring that every student stays informed and involved.</p>
+            </div>
+        </div>
+    </section>
 
     <footer>
-      Copyright &copy;2024 
+        <div class="creds">
+            <hr>
+            Author: ARMA (Angelina, Rainelyn, Mitch, Adrianne)<br>
+            &copy; Copyright Reserved 2024 
+        </div>
     </footer>
+</div>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="welcome.js"></script>
-  </body>
+    <script src="aboutus.js"></script>
+</body>
 </html>
+
