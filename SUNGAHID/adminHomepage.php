@@ -88,26 +88,6 @@ $email = $_SESSION['valid'];
             </div>
         </div>
 
-        <div class="posts">
-            <div class="post">
-                <div class="post-header">
-                    <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
-                    <div class="post-header-info">
-                        <h3>John Doe</h3>
-                        <p>2 hours ago</p>
-                    </div>
-                </div>
-                <div class="post-content">
-                    <p>This is an example post content.</p>
-                </div>
-                <div class="post-actions">
-                    <a href="#">Like</a>
-                    <a href="#">Comment</a>
-                    <a href="#">Share</a>
-                </div>
-            </div>
-
-        </div>
     </main>
     <script src="Admin_Homepage.js"></script>
 </body>

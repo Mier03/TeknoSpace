@@ -86,45 +86,7 @@ $email = $_SESSION['valid'];
 
 
     <main class="main">
-        <div class="create-post">
-            <div class="post-header">
-                <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
-                <div class="post-header-info">
-                    <h3><?php echo htmlspecialchars($firstName); ?></h3>
-                </div>
-            </div>
-            <div class="post-input" id="postInput">
-                <p><?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?></p>
-            </div>
-        </div>
-
-        <!-- Pop-up Create Post -->
-        <div id="postModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Create post</h2>
-                <div class="post-header">
-                    <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
-                    <div class="post-header-info">
-                        <h3><?php echo htmlspecialchars($firstName); ?></h3>
-                        <select>
-                            <option>All students</option>
-                            <option>Department</option>
-                        </select>
-                    </div>
-                </div>
-                <textarea placeholder="<?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?>"></textarea>
-                <div class="post-options">
-                    <p>Add to your post</p>
-                    <div class="option-icons">
-                        <i class="fi fi-br-picture"></i>
-                    </div>
-                </div>
-                <button class="btn-post">Post</button>
-            </div>
-        </div>
-
-
+        
     </main>
     <script src="Admin_Homepage.js"></script>
     <script>
