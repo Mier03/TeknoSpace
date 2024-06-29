@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['submit_signup'])) {
-    header('Location: ../login.php');
+    header('Location: login.php');
     exit();
 }
 ?>
@@ -11,11 +11,13 @@ if (isset($_POST['submit_signup'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="aboutus.css">
+    <!-- HERE -->
+    <link rel="stylesheet" href="Camus_Welcome/aboutus.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="icon" href="../images/logo circle.png" type="image/x-icon">
+    <!-- HERE -->
+    <link rel="icon" href="images/logo circle.png" type="image/x-icon">
 </head>
 <body>
     <div class="intro">
@@ -28,7 +30,8 @@ if (isset($_POST['submit_signup'])) {
         <section class="header">
             <nav>
                 <div class="logo-title-container">
-                    <a href="about_us.html"><img src="../images/logo circle.png" alt="Tekno Space Logo"></a>
+                    <!-- here -->
+                    <a href="aboutUs.php"><img src="images/logo circle.png" alt="Tekno Space Logo"></a>
                     <h1>Tekno Space</h1>
                 </div>
                 <div class="welcome-nav">
@@ -49,7 +52,8 @@ if (isset($_POST['submit_signup'])) {
     <div class="container">
     <section class="welcome">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background About Us">
+            <!-- HERE -->
+            <img src="images/Background.png" alt="Background About Us">
         </div>
         <div class="midscreen-text">
             <h1>Welcome to Tekno Space~!</h1>
@@ -60,11 +64,13 @@ if (isset($_POST['submit_signup'])) {
 
     <section id="aboutus" class="alternating-section">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background">
+            <!-- HERE -->
+            <img src="images/Background.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
-                <img src="../images/logo circle.png" alt="About Us Image">
+                <!-- HERE -->
+                <img src="images/logo circle.png" alt="About Us Image">
             </div>
             <div class="text-container">
                 <h1>About Us</h1>
@@ -77,11 +83,13 @@ if (isset($_POST['submit_signup'])) {
 
     <section id="theteam" class="alternating-section reverse">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background">
+            <!-- HERE -->
+            <img src="images/Background.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
-                <img src="../images/groufie 2.jpg" alt="Our Team">
+                <!-- HERE -->
+                <img src="images/groufie 2.jpg" alt="Our Team">
             </div>
             <div class="text-container">
                 <h1>The Team</h1>
@@ -94,11 +102,13 @@ if (isset($_POST['submit_signup'])) {
 
     <section id="services" class="alternating-section">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background">
+            <!-- HERE -->
+            <img src="images/Background.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
-                <img src="../images/cit-logo-upper.png" alt="Our Services">
+                <!-- HERE -->
+                <img src="images/cit-logo-upper.png" alt="Our Services">
             </div>
             <div class="text-container">
                 <h1>Services</h1>
@@ -118,7 +128,8 @@ if (isset($_POST['submit_signup'])) {
     </footer>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="aboutus.js"></script>
+    <!-- HERE -->
+    <script src="Camus_Welcome/aboutus.js"></script>
 </body>
 </html>
 
