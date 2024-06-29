@@ -1,5 +1,4 @@
 
-
 * {
     font-family: Montserrat, sans-serif;
     margin: 0;
@@ -54,30 +53,6 @@
 }
 
 nav {
-=======
-img {
-    width: 100%;
-    border-radius: 0.5rem;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-  }
-
-.logo img {
-    width: 75px;
-    height: auto;
-    margin-right: 10px;
-}
-  h1 {
-    font-size: 4rem;
-    margin: 0.5rem 0;
-  }
-  
-  /* sections */
-  section {
-    height: 80vh;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
