@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['submit_signup'])) {
-    header('Location: /TeknoSpaceLogin/login.php');
+    header('Location: ../login.php');
     exit();
 }
 ?>
@@ -24,7 +24,7 @@ if (isset($_POST['submit_signup'])) {
             </a>
             <ul class="header-links">
               <li><a href="../login.php" class="navbar__link">Log In</a></li>
-              <li><a href="../login.php" class="navbar__link">Sign Up</a></li>
+              <li><a href="../signup.php" class="navbar__link">Sign Up</a></li>
             </ul>
           </nav>
         </div>
