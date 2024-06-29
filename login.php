@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" name="email_or_id" placeholder="Email or ID Number" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="submit_signin">Sign In</button>
-                <a href="#">Forgot Your Password?</a>
+                <a href="forgotPass.php">Forgot Your Password?</a>
             </form>
             <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
         </div>
