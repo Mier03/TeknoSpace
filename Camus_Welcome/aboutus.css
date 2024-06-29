@@ -65,7 +65,7 @@ nav {
 }
 
 .logo-title-container img {
-    width: 60px;
+    width: 75px;
     margin-right: 10px;
 }
 
@@ -240,7 +240,7 @@ nav {
 
 #scroll-indicator {
     position: fixed;
-    top: 66px;
+    top: 75px;
     left: 0;
     height: 10px;
     width: 0%;
