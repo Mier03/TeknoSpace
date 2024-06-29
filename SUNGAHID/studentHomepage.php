@@ -59,7 +59,29 @@
                     <div class="comments-list"></div>
                 </div>
             </div>
-
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
+                    <div class="post-header-info">
+                        <h3>John Doe</h3>
+                        <p>2 hours ago</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>This is an example post content.</p>
+                </div>
+                <div class="post-actions">
+                    <a href="#" class="like-btn"><i class="fi fi-rs-social-network"></i> Like</a>
+                    <a href="#" class="comment-btn"><i class="fi fi-ts-comment-dots"></i> Comment</a>
+                </div>
+                <div class="comments-section" style="display: none;">
+                    <div class="comment-input">
+                        <input type="text" placeholder="Write a comment...">
+                        <button class="submit-comment"><i class="fi fi-ss-paper-plane-top"></i></button>
+                    </div>
+                    <div class="comments-list"></div>
+                </div>
+            </div>
         </div>
     </main>
     <script src="Student_Homepage.js"></script>

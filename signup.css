@@ -45,7 +45,7 @@
     padding: 0 30px 0 15px;
     width:100%;
     color:#d50000;
-    background-color:#cabd00;
+    background-color: rgb(252, 233, 31);
     font-size:20px;
 } 
 .type{
@@ -67,7 +67,7 @@ select{
     width: 25%;
     height: 25%;
     height: 50px;
-    background-color: rgba(229, 211, 9, 0.726);
+    
     font-size:15px;
     text-indent:center;
     text-align: center;
@@ -92,7 +92,7 @@ a{
 .already-account{
     font-size: 20px;
     text-align:center;
-    padding:10px 10px;
+    padding:7px 7px;
     color:#a10202;
 }
 a:hover{

@@ -97,4 +97,13 @@ a:hover{
 p{
     margin-top: 0;
 }
-
+.error-msg{
+    margin:10px 0;
+    padding: 5px 2px;
+    display:block;;
+    background:crimson;
+    color:white;
+    border-radius:5px;
+    font-size: 15px;
+    text-align:center;
+}
