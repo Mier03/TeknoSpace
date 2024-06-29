@@ -1,5 +1,4 @@
 <?php
-//session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('php/config.php');
@@ -36,12 +35,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img   class="cit"src="images/cit-logo.png"  >
            
             <form method="post" action="">
-                <input type="text" name="email_or_id" placeholder="Email or ID Number" required>
+            <?php
+                        if(isset($errors)){
+                            foreach($errors as $error){
+                                echo '<span class="error-msg">'.$error.'</span>';
+                            }
+                        }
+
+                    ?>
+                <input type="text" name="email_or_id" placeholder="Email or ID Number" required >
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="submit_signin">Sign In</button>
                 <a href="#">Forgot Your Password?</a>
             </form>
-            <p class="dont-account">Don't have an account? <a href="signup.html" id="showSignup">Sign Up</a></p>
+            <p class="dont-account">Don't have an account? <a href="signup.php" id="showSignup">Sign Up</a></p>
         </div>
            
     </div>
