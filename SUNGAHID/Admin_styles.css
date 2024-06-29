@@ -55,6 +55,55 @@ body {
     margin: 0 10px;
 }
 
+.nav ul li a .fi {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.nav ul li a .nav-text {
+    margin-left: 10px;
+}
+
+.nav ul li a.manage-account .nav-text {
+    margin-left: 15px; 
+}
+
+/* All Accounts and Verify Account */
+.modal-content a[href="#allAccounts"],
+.modal-content a[href="#verifyAccounts"] {
+    text-decoration: none;
+    border: 2px solid #FFD700;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+.modal-content a[href="#allAccounts"] {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #dcbb04;
+    color: #1e1e1e;
+}
+
+.modal-content a[href="#verifyAccounts"] {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #dcbb04;
+    color: #1e1e1e;
+}
+
+.modal-content a[href="#allAccounts"]:hover,
+.modal-content a[href="#verifyAccounts"]:hover {
+    background-color: rgb(252, 217, 14); 
+    color: black; 
+}
 
 @media screen and (max-width: 629px) {
     .nav {
@@ -180,6 +229,7 @@ body {
     height: 100%;
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
+    transition: opacity 0.5s ease, max-height 0.5s ease-out;
 }
 
 .modal-content {
@@ -189,6 +239,10 @@ body {
     border-radius: 8px;
     width: 500px;
     color: white;
+
+    opacity: 1; 
+    max-height: 500px; 
+    transition: opacity 0.5s ease, max-height 0.5s ease-out;
 }
 
 .close {
@@ -197,6 +251,11 @@ body {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: rgb(247, 247, 31); 
 }
 
 .modal-content h2 {

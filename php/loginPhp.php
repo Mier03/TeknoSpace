@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //including connection of database
-    include('php/config.php');
+    include('config.php');
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -113,11 +113,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $sql = "SELECT * FROM users WHERE userType='$userType'";
 
-                if ($_SESSION['firstName'] == "admin") {
+                if ($_SESSION['userType'] == "Admin") {
                     $hashedPasswordFromDB = $row['password']; 
                     if (password_verify($password, $hashedPasswordFromDB)) {
                         // Password matches for admin
-                        header("Location: SUNGAHID/adminHomepage.php");
+                        header("Location: SUNGAHID/ADMIN.php");
                         exit();
                     } else {
                         echo "<div class='message'><p>Wrong Password</p></div><br>";
