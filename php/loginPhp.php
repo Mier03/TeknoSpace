@@ -10,14 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if (isset($_POST['submit_signup'])) { // name of the button in the html tag for sign up
+        var_dump('ssdss');
 
+        exit;
         $userType = $conn->real_escape_string($_POST['userType']);
         $firstName = $conn->real_escape_string($_POST['firstName']);
         $middleName = $conn->real_escape_string($_POST['middleName']);
         $lastName = $conn->real_escape_string($_POST['lastName']);
         $idNumber = $conn->real_escape_string($_POST['idNumber']);
-        $email = $conn->real_escape_string($_POST['email']);
         $course = $conn->real_escape_string($_POST['course']);
+        $email = $conn->real_escape_string($_POST['email']);
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $confirmPassword = $_POST['confirmpassword'];
         $p = $_POST['password'];
@@ -61,8 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
-        $sql = "INSERT INTO users (userType, firstName, middleName, lastName, idNumber, email, course, password) 
-                VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course', '$password')";
+        $sql = "INSERT INTO users (userType, firstName, middleName, lastName, idNumber, email,course,  password) 
+                VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course','$password')";
 
         if ($conn->query($sql) === TRUE) {
             $_SESSION['userType'] = $userType;
@@ -83,6 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
     } elseif (isset($_POST['submit_signin'])) { // name of the button in the html tag for log in
+      
+
+     
         // Handle login form submission
         // The field where the user inputs his/her email or id was named email_or_id
         // This code will get the user's input once the sign in button is clicked
