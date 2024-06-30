@@ -1,3 +1,88 @@
+<?php
+session_start();
+
+// this session is get from the login
+$loggedUserId = $_SESSION['id'];
+
+include('../php/config.php');
+include('../php/helper.php');
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// get all posts from db together and its comments
+$sql = "SELECT 
+posts.id as postId,
+posts.content,
+posts.created_at,
+posts.image_path,
+poster.Id as posterId,
+poster.firstName,
+poster.lastName,
+comments.Id as commentId,
+comments.comment,
+commenter.Id as commenterId,
+commenter.firstName as commenterFname,
+commenter.lastName as commenterLname 
+FROM posts 
+LEFT JOIN comments ON posts.id = comments.postId 
+LEFT JOIN users as poster ON poster.Id = posts.userId
+LEFT JOIN users as commenter ON commenter.Id = comments.userId
+ORDER BY posts.created_at DESC";
+
+$result = $conn->query($sql);
+
+// all post container together its comments if has
+$posts = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $post_id = $row['postId'];
+        
+        if (!isset($posts[$post_id])) {
+            $posts[$post_id] = [
+                'id' => $row['postId'],
+                'fullName' => $row['firstName'].' '.$row['lastName'],
+                'datePosted'=>$row['created_at'],
+                'postImage'=>$row['image_path'],
+                'postContent'=>$row['content'],
+                'comments' => []
+            ];
+        }
+
+        // this is to assign the posts comments
+        if (!is_null($row['commentId'])) {
+            $posts[$post_id]['comments'][] = [
+                'comment' => $row['comment'],
+                'commenter' => $row['commenterFname'].' '.$row['commenterLname'],
+            ];
+        }
+    }
+}
+
+// when submit comment
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['submit_comment_btn'])){
+        if(! empty($_POST['post_comment'])) {
+            $postId = $conn->real_escape_string($_POST['pid']);
+            $comment = $conn->real_escape_string($_POST['post_comment']);
+            
+            // saving new comment in db
+            $conn->query("INSERT INTO comments (postId, userId, comment) 
+                    VALUES ('$postId', '$loggedUserId', '$comment')");
+
+            $_POST = array();
+
+            Header('Location: '.$_SERVER['PHP_SELF']);
+        }
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,54 +120,67 @@
         </ul>
     </nav>
     <main class="main">
-        <div class="posts">
-            <div class="post">
-                <div class="post-header">
-                    <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
-                    <div class="post-header-info">
-                        <h3>John Doe</h3>
-                        <p>2 hours ago</p>
+    <div class="posts">
+        <?php
+            if (count($posts) > 0) {
+                foreach($posts as $post) {
+                    ?>
+
+                    <div class="post">
+                        <div class="post-header">
+                        <!-- TO DO IMAGE -->
+                            <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image"> 
+                            <div class="post-header-info">
+                                <h3><?php echo $post['fullName']; ?></h3>
+                                <p><?php echo relative_time($post['datePosted']); ?></p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p><?php echo $post['postContent']; ?></p>
+                            <?php 
+                                $image = $post['postImage'];
+
+                                if(! empty($image)) {
+                                    echo '<img src="'.$image.'" width="100%"/>';
+                                } 
+                            ?>
+                        </div>
+                        <div class="post-actions">
+                            <a href="#" class="like-btn"><i class="fi fi-rs-social-network"></i> Like</a>
+                            <a href="#" class="comment-btn"><i class="fi fi-ts-comment-dots"></i>
+                                <small><?php echo count($post['comments']); ?></small>
+                                Comment
+                            </a>
+                        </div>
+                        <div class="comments-section" style="display: none;">
+                            <div class="comment-input">
+                                <form method="POST" style="width:100%">
+                                    <input type="text" name="post_comment" placeholder="Write a comment..." style="width:90%" value=""/>
+                                    <button type="submit" name="submit_comment_btn">
+                                        <i class="fi fi-ss-paper-plane-top"></i>
+                                    </button>
+                                    <input type="hidden" name="pid" value="<?php echo $post['id'];?>" />
+                                </form>
+                            </div>
+                            <div class="comments-list">
+                                <?php
+                                    if (count($post['comments']) > 0) {
+                                        foreach($post['comments'] as $comment) { 
+                                            echo '<div class="comment">';
+                                            echo '<b>'.$comment['commenter'].'</b>';
+                                            echo '<p>'.$comment['comment'].'</p>';
+                                            echo '</div>';
+                                        }
+                                    }
+                                ?>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="post-content">
-                    <p>This is an example post content.</p>
-                </div>
-                <div class="post-actions">
-                    <a href="#" class="like-btn"><i class="fi fi-rs-social-network"></i> Like</a>
-                    <a href="#" class="comment-btn"><i class="fi fi-ts-comment-dots"></i> Comment</a>
-                </div>
-                <div class="comments-section" style="display: none;">
-                    <div class="comment-input">
-                        <input type="text" placeholder="Write a comment...">
-                        <button class="submit-comment"><i class="fi fi-ss-paper-plane-top"></i></button>
-                    </div>
-                    <div class="comments-list"></div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post-header">
-                    <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
-                    <div class="post-header-info">
-                        <h3>John Doe</h3>
-                        <p>2 hours ago</p>
-                    </div>
-                </div>
-                <div class="post-content">
-                    <p>This is an example post content.</p>
-                </div>
-                <div class="post-actions">
-                    <a href="#" class="like-btn"><i class="fi fi-rs-social-network"></i> Like</a>
-                    <a href="#" class="comment-btn"><i class="fi fi-ts-comment-dots"></i> Comment</a>
-                </div>
-                <div class="comments-section" style="display: none;">
-                    <div class="comment-input">
-                        <input type="text" placeholder="Write a comment...">
-                        <button class="submit-comment"><i class="fi fi-ss-paper-plane-top"></i></button>
-                    </div>
-                    <div class="comments-list"></div>
-                </div>
-            </div>
-        </div>
+            <?php    }
+            } else {
+                echo "No posts found.";
+            }
+        ?>
     </main>
     <script src="Student_Homepage.js"></script>
 </body>

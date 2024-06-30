@@ -13,7 +13,7 @@ if (isset($_POST['submit_signup'])) {
     <link rel="stylesheet" href="welcome.css" />
     <link rel="stylesheet" href="welcome_startup.css" />
     <title>Tekno Space</title>
-    <link rel="icon" href="../images/logo circle.png" type="image/x-icon">
+    <link rel="icon" href="../images/LOGO_OKAY.jpg" type="image/x-icon">
   </head>
   <body>
     <header>

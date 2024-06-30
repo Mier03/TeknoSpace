@@ -1,11 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root"; // Default XAMPP username
-$password = ""; // Default XAMPP password
-$dbname = "teknospace"; // Your database name
+session_start();
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+include('../php/config.php');
 
 // Check connection
 if ($conn->connect_error) {
@@ -18,18 +14,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = "Your Name"; // Replace with dynamic user name if applicable
     $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; // Replace with dynamic profile image if applicable
     $imagePath = "";
+    $loggedInUserId = $_SESSION['id'];
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $targetDir = "uploads/";
         $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+        
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile);
         $imagePath = $targetFile;
     }
 
-    $sql = "INSERT INTO posts (username, content, audience, profile_image, image_path) VALUES ('$username', '$content', '$audience', '$profile_image', '$imagePath')";
+    $sql = "INSERT INTO posts (username, content, audience, profile_image, image_path, userId) VALUES ('$username', '$content', '$audience', '$profile_image', '$imagePath', '$loggedInUserId')";
 
     if ($conn->query($sql) === TRUE) {
-        $post_id = $conn->insert_id;
         echo "
             <div class='post'>
                 <div class='post-header'>

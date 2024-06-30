@@ -1,11 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "root"; // Default XAMPP username
-$password = ""; // Default XAMPP password
-$dbname = "teknospace"; // Your database name
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+include('../php/config.php');
 
 // Check connection
 if ($conn->connect_error) {

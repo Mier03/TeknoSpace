@@ -32,7 +32,7 @@ $email = $_SESSION['valid'];
     <header class="header">
         <div class="header-content">
             <div class="logo">
-            <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
+                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
@@ -54,11 +54,11 @@ $email = $_SESSION['valid'];
             <div class="post-header">
                 <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                 <div class="post-header-info">
-                    <h3><?php echo htmlspecialchars($firstName); ?></h3>
+                    <h3>Your Name</h3>
                 </div>
             </div>
             <div class="post-input" id="postInput">
-                <p><?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?></p>
+                <p>What's on your mind, Your Name?</p>
             </div>
         </div>
     
@@ -70,45 +70,47 @@ $email = $_SESSION['valid'];
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3><?php echo htmlspecialchars($firstName); ?></h3>
-                        <select>
-                            <option>All students</option>
-                            <option>Department</option>
+                        <h3>Your Name</h3>
+                        <select id="postAudience">
+                            <option value="All students">All students</option>
+                            <option value="Department">Department</option>
                         </select>
                     </div>
                 </div>
-                <textarea placeholder="<?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?>"></textarea>
+                <textarea id="postContent" placeholder="What's on your mind, Your Name?"></textarea>
+                <input type="file" id="postImage" accept="image/*">
                 <div class="post-options">
                     <p>Add to your post</p>
                     <div class="option-icons">
                         <i class="fi fi-br-picture"></i>
                     </div>
                 </div>
-                <button class="btn-post">Post</button>
+                <button class="btn-post" id="submitPost">Post</button>
             </div>
         </div>
 
+
+        <!-- Post -->
         <div class="posts">
-            <div class="post">
-                <div class="post-header">
-                    <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
-                    <div class="post-header-info">
-                        <h3>John Doe</h3>
-                        <p>2 hours ago</p>
-                    </div>
-                </div>
-                <div class="post-content">
-                    <p>This is an example post content.</p>
-                </div>
-                <div class="post-actions">
-                    <a href="#">Like</a>
-                    <a href="#">Comment</a>
-                    <a href="#">Share</a>
-                </div>
-            </div>
 
         </div>
     </main>
     <script src="Admin_Homepage.js"></script>
+    <script>
+        // Function to fetch and display posts
+        function loadPosts() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "fetch_posts.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    document.querySelector('.posts').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Load posts when the page is loaded
+        window.onload = loadPosts;
+    </script>
 </body>
 </html>
