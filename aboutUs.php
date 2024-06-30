@@ -1,14 +1,25 @@
+<?php
+if (isset($_POST['submit_signup'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="aboutus.css">
+    <!-- HERE -->
+    <link rel="stylesheet" href="Camus_Welcome/aboutus.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="icon" href="../images/logo circle.png" type="image/x-icon">
+    <!-- HERE -->
+    <link rel="icon" href="images/logo circle.png" type="image/x-icon">
+
 </head>
 <body>
     <div class="intro">
@@ -21,7 +32,8 @@
         <section class="header">
             <nav>
                 <div class="logo-title-container">
-                    <a href="about_us.html"><img src="../images/logo circle.png" alt="Tekno Space Logo"></a>
+                    <!-- HERE -->
+                    <a href="aboutUs.php"><img src="images/logo circle.png" alt="Tekno Space Logo"></a>
                     <h1>Tekno Space</h1>
                 </div>
                 <div class="welcome-nav">
@@ -31,8 +43,8 @@
                 </div>
                 <div class="nav-links">
                     <ul>
-                        <li><a href="#LogIn">Log In</a></li>
-                        <li><a href="#RegisterNow">Register Now</a></li>
+                        <li><a href="login.php">Log In</a></li>
+                        <li><a href="signup.php">Register Now</a></li>
                     </ul>
                 </div>
             </nav>
@@ -42,7 +54,8 @@
     <div class="container">
     <section class="welcome">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background About Us">
+            <!-- HERE -->
+            <img src="images/Background.png" alt="Background About Us">
         </div>
         <div class="midscreen-text">
             <h1>Welcome to Tekno Space~!</h1>
@@ -53,11 +66,11 @@
 
     <section id="aboutus" class="alternating-section">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background">
+            <img src="images/Background.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
-                <img src="../images/logo circle.png" alt="About Us Image">
+                <img src="images/logo circle.png" alt="About Us Image">
             </div>
             <div class="text-container">
                 <h1>About Us</h1>
@@ -70,11 +83,11 @@
 
     <section id="theteam" class="alternating-section reverse">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background">
+            <img src="images/Background.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
-                <img src="../images/groufie 2.jpg" alt="Our Team">
+                <img src="images/groufie 2.jpg" alt="Our Team">
             </div>
             <div class="text-container">
                 <h1>The Team</h1>
@@ -87,11 +100,11 @@
 
     <section id="services" class="alternating-section">
         <div class="bg">
-            <img src="../images/Background.png" alt="Background">
+            <img src="images/Background.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
-                <img src="../images/cit-logo-upper.png" alt="Our Services">
+                <img src="images/cit-logo-upper.png" alt="Our Services">
             </div>
             <div class="text-container">
                 <h1>Services</h1>
@@ -111,7 +124,6 @@
     </footer>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="aboutus.js"></script>
+    <script src="Camus_Welcome/aboutus.js"></script>
 </body>
 </html>
-

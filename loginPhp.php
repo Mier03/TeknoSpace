@@ -6,9 +6,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('php/config.php');
 
     if (!$conn) {
+
         die("Connection failed: " . mysqli_connect_error());
+
     }
-    
+
+    $successes = [];
+
     if (isset($_POST['submit_signup'])) { // name of the button in the html tag for sign up
         $errors = [];
 
@@ -40,8 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // The user must select a user type
-        if (empty($userType) || $userType === '') {
-            $errors[] = 'Please select a valid user type.';
+        if (empty($userType) || $userType === '' || $userType === "Select user type") {
+
+            $errors[] = "Please select a valid user type.";
+            exit;
         } 
 
         // Check if email already exists
@@ -114,11 +120,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $sql = "SELECT * FROM users WHERE userType='$userType'";
 
-                if ($_SESSION['firstName'] == "admin") {
+                if ($_SESSION['userType'] == "Admin") {
                     $hashedPasswordFromDB = $row['password']; 
                     if (password_verify($password, $hashedPasswordFromDB)) {
                         // Password matches for admin
-                        header("Location: SUNGAHID/adminHomepage.php");
+                        header("Location: SUNGAHID/ADMIN.php");
                         exit();
                     } else {
                         $errors[]='Wrong Password';
@@ -141,9 +147,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[]='User not found';
         }
     }
+} 
+if (isset($_POST['submit_newpass'])){
+    $errors = [];
+
+    $email_or_id = mysqli_real_escape_string($conn, $_POST['email_or_id']);
+    $password = mysqli_real_escape_string($conn, $_POST['newpassword']);
+    $confirm_password = mysqli_real_escape_string($conn, $_POST['cpassword']);
+
+    if (empty($email_or_id)) {
+        $errors[] = 'Email or ID Number is required.';
+    }
+
+    if (empty($password)) {
+        $errors[] = 'New Password is required.';
+    }
+
+    if ($password !== $confirm_password) {
+        $errors[] = 'Passwords do not match.';
+    }
+
+    if (empty($errors)) {
+        if (filter_var($email_or_id, FILTER_VALIDATE_EMAIL)) {
+            $sql = "SELECT * FROM users WHERE email='$email_or_id'";
+        } else {
+            $sql = "SELECT * FROM users WHERE idNumber='$email_or_id'";
+        }    
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result && mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            $user_id = $row['Id'];
+        
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    
+            $update_sql = "UPDATE users SET password='$hashed_password' WHERE Id={$row['Id']}";
+    
+            if (mysqli_query($conn, $update_sql)) {
+    
+                $successes[] = 'Password Updated Successfully';
+
+                $_POST['email_or_id'] = '';
+                $_POST['newpassword'] = '';
+                $_POST['cpassword'] = '';
+    
+            } else {
+                $errors[] = 'Error Updating Password: ' . mysqli_error($conn);
+
+                $_POST['email_or_id'] = '';
+                $_POST['newpassword'] = '';
+                $_POST['cpassword'] = '';
+            }
+        }
+        else{
+            
+            $errors[]='User not found';
+
+            $_POST['newpassword'] = '';
+            $_POST['cpassword'] = '';
+
+        }
+    }
+     
 
     mysqli_close($conn);
     
 }
+
+
+
+
 
 ?>

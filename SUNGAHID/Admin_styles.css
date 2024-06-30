@@ -55,6 +55,41 @@ body {
     margin: 0 10px;
 }
 
+.nav ul li a .fi {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.nav ul li a .nav-text {
+    margin-left: 10px;
+}
+
+.nav ul li a.manage-account .nav-text {
+    margin-left: 15px; 
+}
+
+/* All Accounts and Verify Account */
+.modal-content button {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    border: 2px solid #FFD700;
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #dcbb04;
+    color: #1e1e1e;
+}
+
+.modal-content button:hover {
+    background-color: rgb(252, 217, 14);
+    color: black;
+}
+
 
 @media screen and (max-width: 629px) {
     .nav {
@@ -141,22 +176,16 @@ body {
     color: gold;
 }
 
-.posts {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    max-width: 800px;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
+    
 .post-container {
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
 }
 
 .create-post {
@@ -205,6 +234,11 @@ body {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: rgb(247, 247, 31); 
 }
 
 .modal-content h2 {
@@ -213,17 +247,19 @@ body {
 }
 
 .modal-content textarea {
-    width: 100%;
+    width: 95%;
     height: 100px;
     background-color: whitesmoke;
     border: none;
-    color: goldenrod;
+    color: black;
     resize: vertical;
     font-size: 18px;
+    border-radius: 10px;
+    padding: 10px;
 }
 
-.modal-content textarea ::placeholder {
-    color: white;
+.modal-content textarea::placeholder {
+    color: grey;
 }
 
 .post-options {
@@ -283,7 +319,7 @@ body {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: vertical; /* Allow vertical resizing */
+    resize: vertical; 
 }
 
 .create-post .post-actions {
@@ -345,3 +381,70 @@ body {
     text-decoration: underline;
     color: #3b5998;
 }
+
+/* WRITE COMMENT */
+.comments-section {
+    margin-top: 10px;
+}
+
+.comment-input {
+    display: flex;
+    margin-top: 10px;
+}
+
+.comment-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.comment-input button {
+    padding: 8px 12px;
+    background-color: #630E15;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.comments-list {
+    margin-top: 10px;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+}
+
+
+/* TABLE FOR ADMIN -START*/
+table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px;
+}
+
+th {
+    background-color: #dedbdb; 
+    padding: 8px;
+    text-align: left; 
+    border: 1px solid #dddddd;
+}
+
+td {
+    padding: 8px; 
+    border: 1px solid #dddddd; 
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1; 
+}
+/* TABLE FOR ADMIN -END*/
