@@ -1,12 +1,12 @@
 <?php
-$servername = "127.0.0.1";
-$username = "root"; 
-$password = ""; 
-$dbname = "teknospace"; 
+// $servername = "127.0.0.1";
+// $username = "root"; 
+// $password = ""; 
+// $dbname = "teknospace"; 
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
+// // Create connection
+// $conn = new mysqli($servername, $username, $password, $dbname);
+$conn = mysqli_connect("localhost","root","","accounts") or die("Couldn't connect");
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
