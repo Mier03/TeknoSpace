@@ -56,11 +56,11 @@ $email = $_SESSION['valid'];
             <div class="post-header">
                 <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                 <div class="post-header-info">
-                    <h3>Your Name</h3>
+                    <h3><?php echo htmlspecialchars($userName); ?></h3>
                 </div>
             </div>
             <div class="post-input" id="postInput">
-                <p>What's on your mind, Your Name?</p>
+                <p><?php echo "What's on your mind, " . htmlspecialchars($firstName); ?>?</p>
             </div>
         </div>
     
@@ -72,7 +72,7 @@ $email = $_SESSION['valid'];
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3>Your Name</h3>
+                        <h3><?php echo htmlspecialchars($userName); ?></h3>
                         <select id="postAudience">
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
