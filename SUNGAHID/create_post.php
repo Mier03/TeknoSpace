@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+// this session is get from the login
+$loggedUserId = $_SESSION['id'];
+
 $servername = "127.0.0.1";
 $username = "root"; 
 $password = ""; 
@@ -26,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imagePath = $targetFile;
     }
 
-    $sql = "INSERT INTO posts (username, content, audience, profile_image, image_path) VALUES ('$username', '$content', '$audience', '$profile_image', '$imagePath')";
+    $sql = "INSERT INTO posts (username, content, audience, profile_image, image_path, userId) VALUES ('$username', '$content', '$audience', '$profile_image', '$imagePath', '$loggedUserId')";
 
     if ($conn->query($sql) === TRUE) {
         $post_id = $conn->insert_id;
