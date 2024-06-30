@@ -448,3 +448,91 @@ tr:hover {
     background-color: #f1f1f1; 
 }
 /* TABLE FOR ADMIN -END*/
+
+
+/* FOR SEARCH - START*/
+.search-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+#searchForm {
+    display: flex;
+    align-items: center;
+}
+
+.search-input-wrapper {
+    position: relative;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.search-input-wrapper i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    margin-right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.search-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.search-results-table th, .search-results-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.search-results-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.search-results-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.edit-icon {
+    margin-right: 20px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    color: #0056b3;
+}
+
+.no-results {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}
+/* FOR SEARCH - START*/
