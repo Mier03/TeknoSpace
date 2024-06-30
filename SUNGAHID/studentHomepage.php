@@ -4,8 +4,8 @@ session_start();
 // this session is get from the login
 $loggedUserId = $_SESSION['id'];
 
-include('../php/config.php');
-include('../php/helper.php');
+include('../config.php');
+include('../helper.php');
 
 // Check connection
 if ($conn->connect_error) {
@@ -108,7 +108,7 @@ $conn->close();
             <div class="nav-links">
                 <a href="#profile" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
-                <a href="../Camus_Welcome/welcome.php">Log Out</a>
+                <a href="../aboutUs.php">Log Out</a>
             </div>
         </div>
     </header>
