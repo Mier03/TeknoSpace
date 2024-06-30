@@ -26,19 +26,21 @@ $email = $_SESSION['valid'];
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-straight/css/uicons-thin-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-straight/css/uicons-regular-straight.css'>
     
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <div class="logo">
-            <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
+                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
                 <a href="#home" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
-                <a href="../Camus_Welcome/welcome.php">Log Out</a>
+                <a href="../aboutUs.php">Log Out</a>
             </div>
         </div>
     </header>
@@ -54,11 +56,11 @@ $email = $_SESSION['valid'];
             <div class="post-header">
                 <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                 <div class="post-header-info">
-                    <h3><?php echo htmlspecialchars($firstName); ?></h3>
+                    <h3>Your Name</h3>
                 </div>
             </div>
             <div class="post-input" id="postInput">
-                <p><?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?></p>
+                <p>What's on your mind, Your Name?</p>
             </div>
         </div>
     
@@ -70,25 +72,47 @@ $email = $_SESSION['valid'];
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3><?php echo htmlspecialchars($firstName); ?></h3>
-                        <select>
-                            <option>All students</option>
-                            <option>Department</option>
+                        <h3>Your Name</h3>
+                        <select id="postAudience">
+                            <option value="All students">All students</option>
+                            <option value="Department">Department</option>
                         </select>
                     </div>
                 </div>
-                <textarea placeholder="<?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?>"></textarea>
+                <textarea id="postContent" placeholder="What's on your mind, Your Name?"></textarea>
+                <input type="file" id="postImage" accept="image/*">
                 <div class="post-options">
                     <p>Add to your post</p>
                     <div class="option-icons">
                         <i class="fi fi-br-picture"></i>
                     </div>
                 </div>
-                <button class="btn-post">Post</button>
+                <button class="btn-post" id="submitPost">Post</button>
             </div>
         </div>
 
+
+        <!-- Post -->
+        <div class="posts">
+
+        </div>
     </main>
     <script src="Admin_Homepage.js"></script>
+    <script>
+        // Function to fetch and display posts
+        function loadPosts() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "fetch_posts.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    document.querySelector('.posts').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Load posts when the page is loaded
+        window.onload = loadPosts;
+    </script>
 </body>
 </html>

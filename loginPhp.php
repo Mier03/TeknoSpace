@@ -3,7 +3,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //including connection of database
-    include('php/config.php');
+    include('config.php');
 
     if (!$conn) {
 
@@ -109,7 +109,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = mysqli_fetch_assoc($result);
 
             if (password_verify($password, $row['password'])) {
-
                 $_SESSION['valid'] = $row['email'];
                 $_SESSION['username'] = $row['firstName'] . ' ' . $row['lastName'];
                 $_SESSION['firstName'] = $row['firstName'];
@@ -117,6 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['course'] = $row['course']; 
                 $_SESSION['idNumber'] = $row['idNumber']; 
                 $_SESSION['userType'] = $row['userType'];
+                $_SESSION['id'] = $row['Id'];
 
                 $sql = "SELECT * FROM users WHERE userType='$userType'";
 
