@@ -66,14 +66,14 @@ $email = $_SESSION['valid'];
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3>Your Name</h3>
+                        <h3><?php echo $fullName?></h3>
                         <select id="postAudience">
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
                     </div>
                 </div>
-                <textarea id="postContent" placeholder="What's on your mind, <?php echo htmlspecialchars($firstName); ?>?"></textarea>
+                <textarea id="postContent" placeholder="What's on your mind, <?php echo $fullName ?>?"></textarea>
                 <input type="file" id="postImage" accept="image/*">
                 <div class="post-options">
                     <p>Add to your post</p>
@@ -88,7 +88,7 @@ $email = $_SESSION['valid'];
         </div>
     </main>
    
-    <script src="Faculty_Homepage.js"></script>
+    <script src="post.js"></script>
     <script src="comment.js"></script>
 </body>
 </html>
