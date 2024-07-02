@@ -7,95 +7,10 @@ if (!isset($_SESSION['valid'])) {
 }
 
 $userName = $_SESSION['username'];
-$firstName = $_SESSION['firstName'];
+$fullName = $_SESSION['firstName'].' '. $_SESSION['lastName']; 
 $course = $_SESSION['course'];
 $idNumber = $_SESSION['idNumber'];
 $email = $_SESSION['valid'];
-
-
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
-
-// $sql = "SELECT Id, userType, firstName, middleName, lastName, idNumber, course, email FROM users";
-// $result = $conn->query($sql);
-
-// if ($result->num_rows > 0) {
-//     echo "<table>";
-//     echo "<tr><th>Id</th><th>User Type</th><th>First Name</th><th>Middle Name</th><th>Last Name</th><th>ID Number</th><th>Course</th><th>Email</th></tr>";
-//     while($row = $result->fetch_assoc()) {
-//         echo "<tr><td>" . $row["Id"]. "</td><td>" . $row["userType"]. "</td><td>" . $row["firstName"]. "</td><td>" . $row["middleName"]. "</td><td>" . $row["lastName"]. "</td><td>" . $row["idNumber"]. "</td><td>" . $row["course"]. "</td><td>" . $row["email"]. "</td></tr>";
-//     }
-//     echo "</table>";
-// } else {
-//     echo "0 results";
-// }
-
-// $conn->close();
-// this session is get from the login
-$loggedUserId = $_SESSION['id'];
-
-include('../config.php');
-include('../helper.php');
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// get all posts from db together and its comments
-$sql = "SELECT 
-posts.id as postId,
-posts.content,
-posts.created_at,
-posts.image_path,
-poster.Id as posterId,
-poster.firstName,
-poster.lastName,
-comments.Id as commentId,
-comments.comment,
-commenter.Id as commenterId,
-commenter.firstName as commenterFname,
-commenter.lastName as commenterLname 
-FROM posts 
-LEFT JOIN comments ON posts.id = comments.postId 
-LEFT JOIN users as poster ON poster.Id = posts.userId
-LEFT JOIN users as commenter ON commenter.Id = comments.userId
-ORDER BY posts.created_at DESC";
-
-$result = $conn->query($sql);
-
-// all post container together its comments if has
-$posts = [];
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $post_id = $row['postId'];
-        
-        if (!isset($posts[$post_id])) {
-            $posts[$post_id] = [
-                'id' => $row['postId'],
-                'fullName' => $row['firstName'].' '.$row['lastName'],
-                'datePosted'=>$row['created_at'],
-                'postImage'=>$row['image_path'],
-                'postContent'=>$row['content'],
-                'comments' => []
-            ];
-        }
-
-        // this is to assign the posts comments
-        if (!is_null($row['commentId'])) {
-            $posts[$post_id]['comments'][] = [
-                'comment' => $row['comment'],
-                'commenter' => $row['commenterFname'].' '.$row['commenterLname'],
-            ];
-        }
-    }
-}
-
-
-
-$conn->close();
 
 ?>
 
@@ -130,7 +45,7 @@ $conn->close();
 
     <nav class="nav">
         <ul>
-            <li><a href="Homepage.html" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
             <li><a href="#maintenance" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="#lost&found" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
@@ -155,13 +70,14 @@ $conn->close();
             <div class="post-header">
                 <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                 <div class="post-header-info">
-                    <h3><?php echo htmlspecialchars($firstName); ?></h3>
+                    <h3><?php echo $fullName?></h3>
                 </div>
             </div>
             <div class="post-input" id="postInput">
-                <p><?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?></p>
+                <p>What's on your mind, Your Name?</p>
             </div>
         </div>
+        
 
         <!-- Pop-up Create Post -->
         <div id="postModal" class="modal">
@@ -171,14 +87,14 @@ $conn->close();
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3>Your Name</h3>
+                        <h3><?php echo $fullName?></h3>
                         <select id="postAudience">
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
                     </div>
                 </div>
-                <textarea id="postContent" placeholder="What's on your mind, Your Name?"></textarea>
+                <textarea id="postContent" placeholder="What's on your mind, <?php echo $fullName ?>?"></textarea>
                 <input type="file" id="postImage" accept="image/*">
                 <div class="post-options">
                     <p>Add to your post</p>
@@ -198,76 +114,9 @@ $conn->close();
 
 
     </main>
-    <script src="Admin_Homepage.js"></script>
-
-    <script>
-        // Function to fetch and display posts
-        function loadPosts() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "fetch_posts.php", true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    document.querySelector('.posts').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-
-        // Load posts when the page is loaded
-        window.onload = loadPosts;
-    </script>
-
-    <script>
-    
-    const modal = document.getElementById("manageAccountModal");
-        const manageAccountLink = document.querySelector('.manage-account');
-        const closeBtn = document.querySelector('.modal-content .close');
-
-        manageAccountLink.addEventListener('click', function (e) {
-            e.preventDefault();
-            modal.style.display = "block";
-        });
-
-        closeBtn.addEventListener('click', function () {
-            modal.style.display = "none"; 
-        });
-
-        window.addEventListener('click', function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        });
-
-        function goToAllAccounts() {
-            modal.style.display = "none";
-            window.location.href = "allAccounts.php"; 
-        }
-
-        function goToVerifyAccounts() {
-            modal.style.display = "none";
-            window.location.href = "verify.php"; 
-        }
-
-        const postModal = document.getElementById("postModal");
-        const postModalCloseBtn = document.querySelector('#postModal .close');
-
-        function openPostModal() {
-            postModal.style.display = "block";
-        }
-
-        function closePostModal() {
-            postModal.style.display = "none"; 
-        }
-
-        postModalCloseBtn.addEventListener('click', closePostModal);
-
-        window.addEventListener('click', function (event) {
-            if (event.target == postModal) {
-                postModal.style.display = "none"; 
-            }
-        });
-</script>
-<script src="Student_Homepage.js"></script>
+    <script src="admin.js"></script>
+    <script src="post.js"></script>
+    <script src="comment.js"></script>
 </body>
 
 </html>
