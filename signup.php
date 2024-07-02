@@ -1,8 +1,8 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include('php/config.php');
-    include('php/loginPhp.php');
+    include('config.php');
+    include('loginPhp.php');
 }
 ?>
 

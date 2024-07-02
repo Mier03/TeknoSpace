@@ -62,23 +62,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-// when submit comment
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['submit_comment_btn'])){
-        if(! empty($_POST['post_comment'])) {
-            $postId = $conn->real_escape_string($_POST['pid']);
-            $comment = $conn->real_escape_string($_POST['post_comment']);
-            
-            // saving new comment in db
-            $conn->query("INSERT INTO comments (postId, userId, comment) 
-                    VALUES ('$postId', '$loggedUserId', '$comment')");
 
-            $_POST = array();
-
-            Header('Location: '.$_SERVER['PHP_SELF']);
-        }
-    }
-}
 
 $conn->close();
 ?>
@@ -121,66 +105,7 @@ $conn->close();
     </nav>
     <main class="main">
     <div class="posts">
-        <?php
-            if (count($posts) > 0) {
-                foreach($posts as $post) {
-                    ?>
-
-                    <div class="post">
-                        <div class="post-header">
-                        <!-- TO DO IMAGE -->
-                            <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image"> 
-                            <div class="post-header-info">
-                                <h3><?php echo $post['fullName']; ?></h3>
-                                <p><?php echo relative_time($post['datePosted']); ?></p>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            <p><?php echo $post['postContent']; ?></p>
-                            <?php 
-                                $image = $post['postImage'];
-
-                                if(! empty($image)) {
-                                    echo '<img src="'.$image.'" width="100%"/>';
-                                } 
-                            ?>
-                        </div>
-                        <div class="post-actions">
-                            <a href="#" class="like-btn"><i class="fi fi-rs-social-network"></i> Like</a>
-                            <a href="#" class="comment-btn"><i class="fi fi-ts-comment-dots"></i>
-                                <small><?php echo count($post['comments']); ?></small>
-                                Comment
-                            </a>
-                        </div>
-                        <div class="comments-section" style="display: none;">
-                            <div class="comment-input">
-                                <form method="POST" style="width:100%">
-                                    <input type="text" name="post_comment" placeholder="Write a comment..." style="width:90%" value=""/>
-                                    <button type="submit" name="submit_comment_btn">
-                                        <i class="fi fi-ss-paper-plane-top"></i>
-                                    </button>
-                                    <input type="hidden" name="pid" value="<?php echo $post['id'];?>" />
-                                </form>
-                            </div>
-                            <div class="comments-list">
-                                <?php
-                                    if (count($post['comments']) > 0) {
-                                        foreach($post['comments'] as $comment) { 
-                                            echo '<div class="comment">';
-                                            echo '<b>'.$comment['commenter'].'</b>';
-                                            echo '<p>'.$comment['comment'].'</p>';
-                                            echo '</div>';
-                                        }
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-            <?php    }
-            } else {
-                echo "No posts found.";
-            }
-        ?>
+    </div>
     </main>
     <script src="Student_Homepage.js"></script>
 </body>
