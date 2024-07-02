@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon.classList.add('fi-rs-social-network');
                 icon.style.color = '';
             }
-        };
-        xhr.send();
-    }
+        });
+    });
+
 
     function attachPostEventListeners() {
         const likeBtns = document.querySelectorAll('.like-btn');
