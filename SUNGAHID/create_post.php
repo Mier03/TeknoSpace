@@ -1,17 +1,9 @@
 <?php
 session_start();
-
+include('../config.php');
 // this session is get from the login
 $loggedUserId = $_SESSION['id'];
 
-// $servername = "127.0.0.1";
-// $username = "root"; 
-// $password = ""; 
-// $dbname = "teknospace"; 
-
-// // Create connection
-// $conn = new mysqli($servername, $username, $password, $dbname);
-$conn = mysqli_connect("localhost","root","","accounts") or die("Couldn't connect");
 
 // Check connection
 if ($conn->connect_error) {

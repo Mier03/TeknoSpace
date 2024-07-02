@@ -58,11 +58,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 const commentsList = post.querySelector('.comments-list');
 
                 if (commentInput.value.trim() !== '') {
-                    const comment = document.createElement('div');
-                    comment.className = 'comment';
-                    comment.textContent = commentInput.value;
-                    commentsList.appendChild(comment);
-                    commentInput.value = '';
+                    var formData = new FormData();
+                    formData.append("postId", btn.getAttribute('data-pid'));
+                    formData.append("postComment", commentInput.value.trim());
+                    formData.append("userId", btn.getAttribute('data-uid'));
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "create_comment.php", true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                            loadPosts();
+                            console.log('test');
+                            post.querySelector('.comments-section').style.display='block';
+
+                        }
+                    };
+                    xhr.send(formData);
+                    
+                    
                 }
             });
         });
