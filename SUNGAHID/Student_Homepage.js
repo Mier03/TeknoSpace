@@ -1,16 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
-    //fetch and display posts
-    function loadPosts() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "fetch_posts.php", true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                document.querySelector('.posts').innerHTML = xhr.responseText;
-                attachPostEventListeners(); 
+    const likeBtns = document.querySelectorAll('.like-btn');
+    const commentBtns = document.querySelectorAll('.comment-btn');
+    const submitCommentBtns = document.querySelectorAll('.submit-comment');
+    //const submitCommentBtns = document.querySelectorAll('.submit-comment');
+
+    likeBtns.forEach(btn => {
+        btn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('fi-rs-social-network')) {
+                icon.classList.remove('fi-rs-social-network');
+                icon.classList.add('fi-ss-social-network');
+                icon.style.color = '#630E15';
+            } else {
+                icon.classList.remove('fi-ss-social-network');
+                icon.classList.add('fi-rs-social-network');
+                icon.style.color = '';
             }
-        };
-        xhr.send();
-    }
+        });
+    });
+
 
     function attachPostEventListeners() {
         const likeBtns = document.querySelectorAll('.like-btn');
