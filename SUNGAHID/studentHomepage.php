@@ -125,7 +125,7 @@ $conn->close();
             if (count($posts) > 0) {
                 foreach($posts as $post) {
                     ?>
-                <div class="post-container">
+
                     <div class="post">
                         <div class="post-header">
                         <!-- TO DO IMAGE -->
@@ -176,13 +176,9 @@ $conn->close();
                             </div>
                         </div>
                     </div>
-                </div>
             <?php    }
             } else {
-                echo '<div class="post-container">
-                <div class="post">"No posts found."
-                </div>
-                </div>';
+                echo "No posts found.";
             }
         ?>
     </main>
