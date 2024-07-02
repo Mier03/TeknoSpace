@@ -67,21 +67,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // if no error proceed to insertion
-        if(empty($errors)) {
-            $sql = "INSERT INTO users (userType, firstName, middleName, lastName, idNumber, email,course,  password) 
-                    VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course','$password')";
+        if (empty($errors)) {
+            $sql = "INSERT INTO users (userType, firstName, middleName, lastName, idNumber, email, course, password) 
+                    VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course', '$password')";
 
             if ($conn->query($sql) === TRUE) {
-                $_SESSION['userType'] = $userType;
-                $_SESSION['first_name'] = $firstName;
-                $_SESSION['middle_name'] = $middletName;
-                $_SESSION['last_name'] = $lastName;
-                $_SESSION['idNumber'] = $idNumber;
-                $_SESSION['valid'] = $email;
-                $_SESSION['course'] = $course;
-                $_SESSION['id'] = $conn->insert_id;
+                $last_id = $conn->insert_id; // Get the last inserted ID
 
-                header("Location: login.php");
+                // Insert into profile table
+                $defaultProfilePic = "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg";
+                $defaultCoverPhoto = "https://www.rappler.com/tachyon/2021/09/cit-campus-20210916.png?resize=850%2C315&zoom=1";
+                $profileSql = "INSERT INTO profile (userId, profile_pic, cover_photo) 
+                               VALUES ('$last_id', '$defaultProfilePic', '$defaultCoverPhoto')";
+
+                if ($conn->query($profileSql) === TRUE) {
+                    $_SESSION['userType'] = $userType;
+                    $_SESSION['first_name'] = $firstName;
+                    $_SESSION['middle_name'] = $middleName;
+                    $_SESSION['last_name'] = $lastName;
+                    $_SESSION['idNumber'] = $idNumber;
+                    $_SESSION['valid'] = $email;
+                    $_SESSION['course'] = $course;
+                    $_SESSION['id'] = $last_id;
+
+                    header("Location: login.php");
+                } else {
+                    $errors[] = 'Error to insert new profile. Contact admin for further investigation.';
+                }
             } else {
                 $errors[] = 'Error to insert new user. Contact admin for further investigation.';
             }

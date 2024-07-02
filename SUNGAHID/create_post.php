@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST['content'];
     $audience = $_POST['audience'];
-    $username = "Your Name"; // Replace with dynamic user name if applicable
+    $username = $_SESSION['username']; 
     $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; // Replace with dynamic profile image if applicable
     $imagePath = "";
 

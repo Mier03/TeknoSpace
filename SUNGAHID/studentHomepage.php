@@ -90,7 +90,7 @@ $conn->close();
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
-                <a href="#profile" class="icon"><i class="fi fi-ss-user"></i></a>                
+                <a href="Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
                 <a href="../aboutUs.php">Log Out</a>
             </div>
