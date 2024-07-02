@@ -22,9 +22,11 @@ body {
     align-items: center;
 }
 
-.logo {
+.logo a {
     display: flex;
     align-items: center;
+    text-decoration: none; 
+    color: inherit;
 }
 
 .logo img {

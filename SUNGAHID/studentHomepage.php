@@ -18,7 +18,8 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">
-            <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
+                <?php echo '<a href="studentHomepage.php">'; ?>
+                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo"> </a>
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">

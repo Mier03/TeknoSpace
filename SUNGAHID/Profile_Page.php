@@ -66,8 +66,15 @@ if ($userType === 'Faculty') {
     <header class="header">
         <div class="header-content">
             <div class="logo">
+                <?php
+                if ($userType === 'Student') {
+                    echo '<a href="studentHomepage.php">';
+                } elseif ($userType === 'Faculty') {
+                    echo '<a href="facultyHomepage.php">';
+                } 
+                ?>
                 <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
-                <span>TEKNOSPACE</span>
+                <span>TEKNOSPACE</span></a>
             </div>
             <div class="nav-links">
                 <a href="Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                

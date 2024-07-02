@@ -29,8 +29,9 @@ $email = $_SESSION['valid'];
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
-                <span>TEKNOSPACE</span>
+                <a href="facultyHomepage.php"><img src="../images/teknospace-logo.jpg" alt="Tekno Space Logo"><span>TEKNOSPACE</span></a>
+                <!--<a href="facultyHomepage.php"><img src="../images/teknospace-logo.jpg" alt="Tekno Space Logo"></a>
+                <span>TEKNOSPACE</span>-->
             </div>
             <div class="nav-links">
                 <a href="Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                
