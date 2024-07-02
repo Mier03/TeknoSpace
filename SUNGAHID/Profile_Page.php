@@ -26,8 +26,13 @@ if ($result->num_rows > 0) {
     $coverPhoto = $profile['cover_photo'];
 } else {
     // Default images if no profile found
-    $profilePic = "https://static.thenounproject.com/png/3918329-200.png";
-    $coverPhoto = "https://www.rappler.com/tachyon/2021/09/cit-campus-20210916.png?resize=850%2C315&zoom=1";
+    $profilePic = "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg";
+    $coverPhoto = "https://cit.edu/wp-content/uploads/2024/03/PNG_2nd-Semester_Website-Banner-2024.png";
+    // Insert default images into the profile table
+    $insert = $conn->query("INSERT INTO profile (userId, profile_pic, cover_photo) VALUES ('$userId', '$profilePic', '$coverPhoto')");
+    if (!$insert) {
+        die("Error inserting new profile: " . $conn->error);
+    }
 }
 ?>
 
@@ -54,7 +59,7 @@ if ($result->num_rows > 0) {
             <div class="nav-links">
                 <a href="Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
-                <a href="login.php">Log Out</a>
+                <a href="../aboutUs.php">Log Out</a>
             </div>
         </div>
     </header>

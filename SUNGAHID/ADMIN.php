@@ -121,7 +121,7 @@ $conn->close();
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
-                <a href="#home" class="icon"><i class="fi fi-ss-user"></i></a>                
+                <a href="Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
                 <a href="../index.php">Log Out</a>
             </div>
