@@ -1,54 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var postInput = document.getElementById('postInput');
-    var modal = document.getElementById('postModal');
-    var span = document.getElementsByClassName('close')[0];
-    var submitPost = document.getElementById('submitPost');
-    var postContent = document.getElementById('postContent');
-    var postAudience = document.getElementById('postAudience');
-    var postImage = document.getElementById('postImage');
-    
-    postInput.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    submitPost.onclick = function() {
-        var content = postContent.value;
-        var audience = postAudience.value;
-        var imageFile = postImage.files[0];
-
-        if (content) {
-            var formData = new FormData();
-            formData.append("content", content);
-            formData.append("audience", audience);
-            if (imageFile) {
-                formData.append("image", imageFile);
-            }
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "create_post.php", true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    loadPosts();
-                    postContent.value = '';
-                    postImage.value = '';
-                    modal.style.display = "none";
-                }
-            };
-            xhr.send(formData);
-        }
-    }
-
-    // Function to fetch and display posts
+    //fetch and display posts
     function loadPosts() {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "fetch_posts.php", true);
@@ -65,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const likeBtns = document.querySelectorAll('.like-btn');
         const commentBtns = document.querySelectorAll('.comment-btn');
         const submitCommentBtns = document.querySelectorAll('.submit-comment');
-
+        //like
         likeBtns.forEach(btn => {
             btn.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -81,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-
+        //comment
         commentBtns.forEach(btn => {
             btn.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -99,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-
+        //postcomment
         submitCommentBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const post = btn.closest('.post');
@@ -107,15 +58,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 const commentsList = post.querySelector('.comments-list');
 
                 if (commentInput.value.trim() !== '') {
-                    const comment = document.createElement('div');
-                    comment.className = 'comment';
-                    comment.textContent = commentInput.value;
-                    commentsList.appendChild(comment);
-                    commentInput.value = '';
+                    var formData = new FormData();
+                    formData.append("postId", btn.getAttribute('data-pid'));
+                    formData.append("postComment", commentInput.value.trim());
+                    formData.append("userId", btn.getAttribute('data-uid'));
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "create_comment.php", true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                            loadPosts();
+                           // console.log('test');TO DO  need i fix
+                            post.querySelector('.comments-section').style.display='block';
+
+                        }
+                    };
+                    xhr.send(formData);
+                    
+                    
                 }
             });
         });
     }
-
+    //reload page
     window.onload = loadPosts;
 });

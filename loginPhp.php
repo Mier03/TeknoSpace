@@ -147,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 } elseif ($_SESSION['userType'] === "Faculty") {
                     //faculty admin homepage
-                    header("Location: SUNGAHID/adminHomepage.php");
+                    header("Location: SUNGAHID/facultyHomepage.php");
                     exit();
                 } else {
                     $errors[]='Unknown user type';
