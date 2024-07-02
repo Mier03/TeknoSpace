@@ -7,10 +7,18 @@ $dbname = "teknospace";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+<<<<<<< Updated upstream
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+=======
+// // Create connection
+// $conn = new mysqli($servername, $username, $password, $dbname);
+include('../config.php');
+include('../helper.php');// Check connection
+
+>>>>>>> Stashed changes
 
 $sql = "SELECT * FROM posts ORDER BY created_at DESC";
 $result = $conn->query($sql);

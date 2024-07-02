@@ -5,6 +5,8 @@ if (!isset($_SESSION['valid'])) {
     header("Location: ../login.php");
     exit();
 }
+include('../config.php');
+include('../helper.php');
 
 $userName = $_SESSION['username'];
 $firstName = $_SESSION['firstName'];
@@ -77,7 +79,12 @@ $email = $_SESSION['valid'];
                         </select>
                     </div>
                 </div>
+<<<<<<< Updated upstream
                 <textarea placeholder="<?php echo "What's on your mind, " . htmlspecialchars($firstName) . "?"; ?>"></textarea>
+=======
+                <textarea id="postContent" placeholder="What's on your mind, <?php echo htmlspecialchars($firstName); ?>?"></textarea>
+                <input type="file" id="postImage" accept="image/*">
+>>>>>>> Stashed changes
                 <div class="post-options">
                     <p>Add to your post</p>
                     <div class="option-icons">
@@ -110,5 +117,50 @@ $email = $_SESSION['valid'];
         </div>
     </main>
     <script src="Admin_Homepage.js"></script>
+<<<<<<< Updated upstream
+=======
+    <script>
+        submitPost.onclick = function() {
+        var content = postContent.value;
+        var audience = postAudience.value;
+        var imageFile = postImage.files[0];
+
+        if (content) {
+            var formData = new FormData();
+            formData.append("content", content);
+            formData.append("audience", audience);
+            if (imageFile) {
+                formData.append("image", imageFile);
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "create_post.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    loadPosts();
+                    postContent.value = '';
+                    postImage.value = '';
+                    modal.style.display = "none";
+                }
+            };
+            xhr.send(formData);
+        }
+    }
+        // Function to fetch and display posts
+        function loadPosts() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "fetch_posts.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    document.querySelector('.posts').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Load posts when the page is loaded
+        window.onload = loadPosts;
+    </script>
+>>>>>>> Stashed changes
 </body>
 </html>

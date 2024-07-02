@@ -4,18 +4,40 @@ $username = "root";
 $password = ""; 
 $dbname = "teknospace"; 
 
+<<<<<<< Updated upstream
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+=======
+// this session is get from the login
+$loggedUserId = $_SESSION['id'];
+$username = $_SESSION['username'];
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// $servername = "127.0.0.1";
+// $username = "root"; 
+// $password = ""; 
+// $dbname = "teknospace"; 
+
+// // Create connection
+// $conn = new mysqli($servername, $username, $password, $dbname);
+include('../config.php');
+include('../helper.php');
+>>>>>>> Stashed changes
+
+/*$userQuery = "SELECT username FROM users WHERE id = $loggedUserId";
+$userResult = $conn->query($userQuery);
+
+if ($userResult->num_rows > 0) {
+    // Fetch the username
+    $userRow = $userResult->fetch_assoc();
+    $username = htmlspecialchars($userRow['username']);
+} else {
+    die("User not found.");
+}*/
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST['content'];
     $audience = $_POST['audience'];
-    $username = "Your Name"; // Replace with dynamic user name if applicable
+    
     $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; // Replace with dynamic profile image if applicable
     $imagePath = "";
 
