@@ -7,6 +7,7 @@ if (!isset($_SESSION['valid'])) {
 }
 
 include('../config.php');
+include('../helper.php');
 
 $userId = $_SESSION['id'];
 $userType = $_SESSION['userType'];
@@ -26,12 +27,24 @@ if ($result->num_rows > 0) {
     $coverPhoto = $profile['cover_photo'];
 } else {
     // Default images if no profile found
-    $profilePic = "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg";
+    $profilePic = "https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=";
     $coverPhoto = "https://cit.edu/wp-content/uploads/2024/03/PNG_2nd-Semester_Website-Banner-2024.png";
     // Insert default images into the profile table
     $insert = $conn->query("INSERT INTO profile (userId, profile_pic, cover_photo) VALUES ('$userId', '$profilePic', '$coverPhoto')");
     if (!$insert) {
         die("Error inserting new profile: " . $conn->error);
+    }
+}
+
+// Fetch user posts only if user is Faculty
+$posts = [];
+if ($userType === 'Faculty') {
+    $sqlPosts = "SELECT * FROM posts WHERE userId = '$userId' ORDER BY created_at DESC";
+    $resultPosts = $conn->query($sqlPosts);
+    if ($resultPosts->num_rows > 0) {
+        while ($row = $resultPosts->fetch_assoc()) {
+            $posts[] = $row;
+        }
     }
 }
 ?>
@@ -86,12 +99,35 @@ if ($result->num_rows > 0) {
             </div>
         </section>
 
-        <section id="posts">
-            <h2>Posts</h2>
-            <div id="post-list">
-                <!-- Posts will be here -->
-            </div>
-        </section>
+        <?php if ($userType === 'Faculty'): ?>
+            <section id="posts">
+                <h2>Posts</h2>
+                <div id="post-list">
+                    <?php if (!empty($posts)): ?>
+                <?php foreach ($posts as $post): ?>
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="profile-pic">
+                                <img src="<?php echo $profilePic; ?>" alt="Profile Photo"></div>
+                            <div class="post-header-info">
+                                <h3><?php echo htmlspecialchars($post['username']); ?></h3>
+                                <span class="post-date"><?php echo htmlspecialchars(relative_time($post['created_at'])); ?></span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p><?php echo htmlspecialchars($post['content']); ?></p>
+                            <?php if (!empty($post['image_path'])): ?>
+                                <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No posts available.</p>
+                    <?php endif; ?>
+                </div>
+            </section>
+        <?php endif; ?>
     </main>
 
     <form id="uploadForm" method="post" action="ProfileCoverUpload.php" enctype="multipart/form-data">

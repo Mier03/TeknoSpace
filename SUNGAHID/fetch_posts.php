@@ -45,18 +45,30 @@ if ($result->num_rows > 0) {
         $post_id = $row['postId'];
         
         if (!isset($posts[$post_id])) {
+            // Fetch profile image from the 'profile' table
+            $profile_image = ''; // Default profile image path
+            
+            // Fetch profile image from the 'profile' table based on userId
+            $profile_query = "SELECT profile_pic FROM profile WHERE userId = '{$row['posterId']}'";
+            $profile_result = $conn->query($profile_query);
+            
+            if ($profile_result->num_rows > 0) {
+                $profile_row = $profile_result->fetch_assoc();
+                $profile_image = $profile_row['profile_pic'];
+            }
+            
             $posts[$post_id] = [
                 'id' => $row['postId'],
                 'fullName' => $row['firstName'].' '.$row['lastName'],
-                'datePosted'=>$row['created_at'],
-                'postImage'=>$row['image_path'],
-                'postContent'=>$row['content'],
+                'datePosted' => $row['created_at'],
+                'postImage' => $row['image_path'],
+                'postContent' => $row['content'],
                 'comments' => [],
-                'profileImage' => 'https://static.thenounproject.com/png/3918329-200.png'
+                'profileImage' => $profile_image
             ];
         }
 
-        // this is to assign the posts comments
+        // Assign comments to the corresponding post
         if (!is_null($row['commentId'])) {
             $posts[$post_id]['comments'][] = [
                 'comment' => $row['comment'],
