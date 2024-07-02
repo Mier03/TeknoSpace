@@ -1,85 +1,15 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['valid'])) {
     header("Location: ../login.php");
     exit();
 }
-
 $userName = $_SESSION['username'];
-$firstName = $_SESSION['firstName'];
+$fullName = $_SESSION['firstName'].' '.$_SESSION['lastName'];
 $course = $_SESSION['course'];
 $idNumber = $_SESSION['idNumber'];
 $email = $_SESSION['valid'];
-
-// this session is get from the login
-$loggedUserId = $_SESSION['id'];
-
-include('../config.php');
-include('../helper.php');
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// get all posts from db together and its comments
-$sql = "SELECT 
-posts.id as postId,
-posts.content,
-posts.created_at,
-posts.image_path,
-poster.Id as posterId,
-poster.firstName,
-poster.lastName,
-comments.Id as commentId,
-comments.comment,
-commenter.Id as commenterId,
-commenter.firstName as commenterFname,
-commenter.lastName as commenterLname 
-FROM posts 
-LEFT JOIN comments ON posts.id = comments.postId 
-LEFT JOIN users as poster ON poster.Id = posts.userId
-LEFT JOIN users as commenter ON commenter.Id = comments.userId
-ORDER BY posts.created_at DESC";
-
-$result = $conn->query($sql);
-
-// all post container together its comments if has
-$posts = [];
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $post_id = $row['postId'];
-        
-        if (!isset($posts[$post_id])) {
-            $posts[$post_id] = [
-                'id' => $row['postId'],
-                'fullName' => $row['firstName'].' '.$row['lastName'],
-                'datePosted'=>$row['created_at'],
-                'postImage'=>$row['image_path'],
-                'postContent'=>$row['content'],
-                'comments' => []
-            ];
-        }
-
-        // this is to assign the posts comments
-        if (!is_null($row['commentId'])) {
-            $posts[$post_id]['comments'][] = [
-                'comment' => $row['comment'],
-                'commenter' => $row['commenterFname'].' '.$row['commenterLname'],
-            ];
-        }
-    }
-}
-
-
-
-$conn->close();
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,27 +47,26 @@ $conn->close();
         </ul>
     </nav>
     <main class="main">
-        <div class="create-post">
+    <div class="create-post">
             <div class="post-header">
                 <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                 <div class="post-header-info">
-                    <h3><?php echo htmlspecialchars($userName); ?></h3>
+                    <h3><?php echo $fullName?></h3>
                 </div>
             </div>
             <div class="post-input" id="postInput">
-                <p><?php echo "What's on your mind, " . htmlspecialchars($firstName); ?>?</p>
+                <p>What's on your mind, Your Name?</p>
             </div>
         </div>
-    
-        <!-- Pop-up Create Post -->
-        <div id="postModal" class="modal">
+      <!-- Pop-up Create Post -->
+    <div id="postModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Create post</h2>
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3><?php echo htmlspecialchars($userName); ?></h3>
+                        <h3>Your Name</h3>
                         <select id="postAudience">
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
@@ -155,30 +84,11 @@ $conn->close();
                 <button class="btn-post" id="submitPost">Post</button>
             </div>
         </div>
-
-
-        <!-- Post -->
         <div class="posts">
-
         </div>
     </main>
-    <script src="Admin_Homepage.js"></script>
-    <script>
-        // Function to fetch and display posts
-        function loadPosts() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "fetch_posts.php", true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    document.querySelector('.posts').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-
-        // Load posts when the page is loaded
-        window.onload = loadPosts;
-    </script>
-    <script src="Student_Homepage.js"></script>
+   
+    <script src="Faculty_Homepage.js"></script>
+    <script src="comment.js"></script>
 </body>
 </html>

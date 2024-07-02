@@ -26,14 +26,16 @@ poster.firstName,
 poster.lastName,
 comments.Id as commentId,
 comments.comment,
+comments.created_at as dateCommented,
 commenter.Id as commenterId,
 commenter.firstName as commenterFname,
 commenter.lastName as commenterLname 
+
 FROM posts 
 LEFT JOIN comments ON posts.id = comments.postId 
 LEFT JOIN users as poster ON poster.Id = posts.userId
 LEFT JOIN users as commenter ON commenter.Id = comments.userId
-ORDER BY posts.created_at DESC";
+ORDER BY posts.created_at DESC, dateCommented DESC";
 
 $result = $conn->query($sql);
 

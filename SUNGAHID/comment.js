@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                             loadPosts();
-                            console.log('test');
+                           // console.log('test');TO DO  need i fix
                             post.querySelector('.comments-section').style.display='block';
 
                         }
