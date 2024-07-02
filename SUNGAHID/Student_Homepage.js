@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const likeBtns = document.querySelectorAll('.like-btn');
     const commentBtns = document.querySelectorAll('.comment-btn');
     const submitCommentBtns = document.querySelectorAll('.submit-comment');
+    //const submitCommentBtns = document.querySelectorAll('.submit-comment');
 
     likeBtns.forEach(btn => {
         btn.addEventListener('click', function(event) {
