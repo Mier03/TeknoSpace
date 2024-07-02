@@ -144,7 +144,7 @@ $conn->close();
                         </select>
                     </div>
                 </div>
-                <textarea id="postContent" placeholder="What's on your mind, Your Name?"></textarea>
+                <textarea id="postContent" placeholder="What's on your mind, <?php echo htmlspecialchars($firstName); ?>?"></textarea>
                 <input type="file" id="postImage" accept="image/*">
                 <div class="post-options">
                     <p>Add to your post</p>
