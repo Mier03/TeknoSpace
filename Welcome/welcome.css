@@ -1,0 +1,269 @@
+
+* {
+    font-family: Montserrat, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*intro animation*/
+.intro{
+    position: fixed;
+    z-index: 1;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100vh;
+    background-color: #161616;
+    transition: 1s;
+}
+
+.tekno-header{
+    position: absolute;
+    top:40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffff;
+}
+
+.tekno{
+    position: relative;
+    display: inline-block;
+    bottom: -20px;
+    opacity: 0;
+}
+
+.tekno.active{
+    bottom: 0;
+    opacity: 1;
+    transition: ease-in-out 0.5s;
+
+}
+.tekno.fade{
+    bottom: 150px;
+    opacity: 0;
+    transition: ease-in-out 0.5s;
+}
+/*nav bar*/
+.header {
+    width: 100%;
+    background-color: rgb(92, 12, 12);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 6%;
+}
+
+.logo-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-title-container img {
+    width: 75px;
+    margin-right: 10px;
+}
+
+.logo-title-container h1 {
+    color: white;
+    font-size: 30px;
+}
+
+.welcome-nav {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+.welcome-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 25px;
+    position: relative;
+    text-align: center;
+}
+
+.welcome-nav a::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: white;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.welcome-nav a:hover::after {
+    width: 100%;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links ul li {
+    display: inline-block;
+    padding: 4px 20px;
+    position: relative;
+}
+
+.nav-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-links ul li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: white;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.nav-links ul li:hover::after {
+    width: 100%;
+}
+
+.welcome {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+}
+
+.bg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.midscreen-text {
+    width: 90%;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.midscreen-text h1 {
+    font-size: 100px;
+}
+.welcome, .alternating-section{
+    scroll-snap-align: start;
+    height: 100vh;
+}
+.alternating-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 50px 0;
+    overflow: hidden;
+}
+
+.alternating-section .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.alternating-section .bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.alternating-section .section-content {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.alternating-section .image-container,
+.alternating-section .text-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.alternating-section .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.alternating-section .text-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.alternating-section .text-container p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.alternating-section.reverse .section-content {
+    flex-direction: row-reverse;
+}
+
+.creds {
+    color: grey;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#scroll-indicator {
+    position: fixed;
+    top: 75px;
+    left: 0;
+    height: 10px;
+    width: 0%;
+    background-color: goldenrod;
+    z-index: 1000;
+    transition: width 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .alternating-section .section-content,
+    .alternating-section.reverse .section-content {
+        flex-direction: column;
+    }
+
+    .midscreen-text h1 {
+        font-size: 50px;
+    }
+
+    .alternating-section .text-container h1 {
+        font-size: 2rem;
+    }
+
+    .alternating-section .text-container p {
+        font-size: 3.5rem;
+    }
+}

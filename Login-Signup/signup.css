@@ -1,0 +1,103 @@
+
+.signup-container{
+    margin:70px;
+    width: 380px;
+    background:transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(20px);
+    color:white;
+    border-radius: 14px;
+    padding: 30px 40px;
+}
+.signup-container h1{
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing:0.5px;
+    text-align:center;
+}
+.select-container{
+    display:flex;
+    justify-content:center;
+    position:relative;
+    min-width:250;
+    height:50px
+}
+.select-container .icon-container{
+    width:50px;
+    height:50px;
+    position:absolute;
+    right:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.icon-container #icon{
+    font-size:20px;
+    color:white;
+}
+.icon-container{
+    
+    background-color:rgb(174, 0, 0);
+}
+ .user-type {
+    border:none;
+    appearance:none;
+    padding: 0 30px 0 15px;
+    width:100%;
+    color:#d50000;
+    background-color: rgb(252, 233, 31);
+    font-size:20px;
+} 
+.type{
+    color:#d50000;
+}
+select{
+    width: 200px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    appearance: none;
+    display : flex;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition:color 0.3s ease;
+    background-position: center;
+    width: 25%;
+    height: 25%;
+    height: 50px;
+    
+    font-size:15px;
+    text-indent:center;
+    text-align: center;
+    display:flex;
+    color:#a10202;
+
+}
+
+#showSignup{
+    
+    color:blue;
+    text-align:center;
+    transition: all 0.4s ease-in-out;
+    font-size:20px;
+}
+a{
+    color:blue;
+    text-align:center;
+    transition: all 0.4s ease-in-out;
+    font-size:18px;
+}
+.already-account{
+    font-size: 20px;
+    text-align:center;
+    padding:7px 7px;
+    color:#a10202;
+}
+a:hover{
+    text-decoration: none;
+}
+.hidden{
+    display:none;
+}
