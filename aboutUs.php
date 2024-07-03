@@ -13,7 +13,7 @@ if (isset($_POST['submit_signup'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     <!-- HERE -->
-    <link rel="stylesheet" href="Camus_Welcome/aboutus.css">
+    <link rel="stylesheet" href="Welcome/aboutus.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -43,8 +43,8 @@ if (isset($_POST['submit_signup'])) {
                 </div>
                 <div class="nav-links">
                     <ul>
-                        <li><a href="login.php">Log In</a></li>
-                        <li><a href="signup.php">Register Now</a></li>
+                        <li><a href="Login-Signup/login.php">Log In</a></li>
+                        <li><a href="Login-Signup/signup.php">Register Now</a></li>
                     </ul>
                 </div>
             </nav>
@@ -124,6 +124,6 @@ if (isset($_POST['submit_signup'])) {
     </footer>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="Camus_Welcome/aboutus.js"></script>
+    <script src="Welcome/aboutus.js"></script>
 </body>
 </html>
