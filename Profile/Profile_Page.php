@@ -20,21 +20,36 @@ $email = $_SESSION['valid'];
 // Fetch profile data
 $sql = "SELECT * FROM profile WHERE userId = '$userId'";
 $result = $conn->query($sql);
+$default_profile_image = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=';
+$default_cover_photo = 'https://cit.edu/wp-content/uploads/2024/03/PNG_2nd-Semester_Website-Banner-2024.png';
+
 
 if ($result->num_rows > 0) {
-    $profile = $result->fetch_assoc();
-    $profilePic = $profile['profile_pic'];
-    $coverPhoto = $profile['cover_photo'];
+    $profile_row = $result->fetch_assoc();
+    
+    if (!empty($profile_row['profile_pic']) && file_exists($profile_row['profile_pic'])) {
+        $profilePic = $profile_row['profile_pic'];
+    } else {
+        $profilePic = $default_profile_image;
+    }
+    
+    if (!empty($profile_row['cover_photo'])) {
+        $coverPhoto = $profile_row['cover_photo'];
+    } else {
+        $coverPhoto = $default_cover_photo;
+    }
 } else {
     // Default images if no profile found
-    $profilePic = "https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=";
-    $coverPhoto = "https://cit.edu/wp-content/uploads/2024/03/PNG_2nd-Semester_Website-Banner-2024.png";
+    $profilePic = $default_profile_image;
+    $coverPhoto = $default_cover_photo;
+    
     // Insert default images into the profile table
-    $insert = $conn->query("INSERT INTO profile (userId, profile_pic, cover_photo) VALUES ('$userId', '$profilePic', '$coverPhoto')");
+    $insert = $conn->query("INSERT INTO profile (userId, profile_pic, cover_photo) VALUES ('$userId', '$profile_image', '$cover_photo')");
     if (!$insert) {
         die("Error inserting new profile: " . $conn->error);
     }
 }
+
 
 // Fetch user posts only if user is Faculty
 $posts = [];
