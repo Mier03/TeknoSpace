@@ -20,16 +20,44 @@ document.addEventListener('DOMContentLoaded', function() {
         likeBtns.forEach(btn => {
             btn.addEventListener('click', function(event) {
                 event.preventDefault();
-                const icon = btn.querySelector('i');
-                if (icon.classList.contains('fi-rs-social-network')) {
-                    icon.classList.remove('fi-rs-social-network');
-                    icon.classList.add('fi-ss-social-network');
-                    icon.style.color = '#630E15';
-                } else {
-                    icon.classList.remove('fi-ss-social-network');
-                    icon.classList.add('fi-rs-social-network');
-                    icon.style.color = '';
-                }
+    
+                const postId = this.getAttribute('data-postid');
+                const icon = this.querySelector('i');
+                const likesCountElement = this.querySelector('.likes-count');
+                const action = icon.classList.contains('fi-ss-social-network') ? 'unlike' : 'like';
+    
+                // Send AJAX request to like.php
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'like.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.status === 'success') {
+                                likesCountElement.textContent = response.like_count;
+    
+                                // Toggle like/unlike icon based on response
+                                if (action === 'like') {
+                                    icon.classList.add('fi-ss-social-network');
+                                    icon.classList.remove('fi-rs-social-network');
+                                    icon.style.color = '#630E15';
+                                } else {
+                                    icon.classList.remove('fi-ss-social-network');
+                                    icon.classList.add('fi-rs-social-network');
+                                    icon.style.color = '';
+                                }
+                            } else if (response.status === 'already_liked') {
+                                console.log(response.message);
+                            } else {
+                                console.error('Error:', response.message);
+                            }
+                        } else {
+                            console.error('Error:', xhr.status);
+                        }
+                    }
+                };
+                xhr.send('postId=' + postId + '&action=' + action);
             });
         });
         //comment

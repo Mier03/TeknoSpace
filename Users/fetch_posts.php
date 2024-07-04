@@ -17,25 +17,27 @@ if ($conn->connect_error) {
 
 // get all posts from db together and its comments
 $sql = "SELECT 
-posts.id as postId,
-posts.content,
-posts.created_at,
-posts.image_path,
-poster.Id as posterId,
-poster.firstName,
-poster.lastName,
-comments.Id as commentId,
-comments.comment,
-comments.created_at as dateCommented,
-commenter.Id as commenterId,
-commenter.firstName as commenterFname,
-commenter.lastName as commenterLname 
-
-FROM posts 
-LEFT JOIN comments ON posts.id = comments.postId 
-LEFT JOIN users as poster ON poster.Id = posts.userId
-LEFT JOIN users as commenter ON commenter.Id = comments.userId
-ORDER BY posts.created_at DESC, dateCommented DESC";
+           posts.id AS postId,
+            posts.content,
+            posts.created_at,
+            posts.image_path,
+            poster.id AS posterId,
+            poster.firstName,
+            poster.lastName,
+            comments.id AS commentId,
+            comments.comment,
+            comments.created_at AS dateCommented,
+            commenter.id AS commenterId,
+            commenter.firstName AS commenterFname,
+            commenter.lastName AS commenterLname,
+            (SELECT COUNT(*) FROM likes WHERE postid = posts.id) AS like_count,
+            (SELECT COUNT(*) FROM likes WHERE postid = posts.id AND userid = '$loggedUserId') AS user_liked
+        FROM posts 
+        LEFT JOIN comments ON posts.id = comments.postId 
+        LEFT JOIN users AS poster ON poster.id = posts.userId
+        LEFT JOIN users AS commenter ON commenter.id = comments.userId
+        GROUP BY posts.id, comments.id, poster.id, commenter.id
+        ORDER BY posts.created_at DESC, dateCommented DESC";
 
 $result = $conn->query($sql);
 
@@ -68,6 +70,8 @@ if ($result->num_rows > 0) {
                 'postImage' => $row['image_path'],
                 'postContent' => $row['content'],
                 'comments' => [],
+                'likes' => $row['like_count'],
+                'user_liked' => $row['user_liked'],
                 'profileImage' => $profile_image
             ];
         }
@@ -104,7 +108,12 @@ if (!empty($posts)) {
         echo '
                     </div>
                     <div class="post-actions">
-                        <a href="#" class="like-btn"><i class="fi fi-rs-social-network"></i> Like</a>
+                       <a href="#" class="like-btn" data-postid="'.$post['id'].'">
+                            <i class="fi '.($post['user_liked'] ? 'fi-ss-social-network' : 'fi-rs-social-network').'"></i>
+                            <small class="likes-count">'.$post['likes'].'</small> 
+                            Likes
+                        </a>
+
                         <a href="#" class="comment-btn">
                             <i class="fi fi-ts-comment-dots"></i> 
                             <small>'.count($post['comments']).'</small>
