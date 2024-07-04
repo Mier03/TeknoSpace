@@ -31,7 +31,7 @@ $email = $_SESSION['valid'];
     <header class="header">
         <div class="header-content">
             <div class="logo">
-            <a href="../aboutUs.php"><img src="../images/teknospace-logo.jpg" alt="Tekno Space Logo"></a>
+            <a href="ADMIN.php"><img src="../images/teknospace-logo.jpg" alt="Tekno Space Logo"></a>
             <!-- <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo"> -->
                 <span>TEKNOSPACE</span>
             </div>

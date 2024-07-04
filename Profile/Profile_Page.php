@@ -430,7 +430,81 @@ if ($userType === 'Faculty') {
             </div>
         </section>
 
+        <?php if ($userType === 'Student'): ?>
+            <section id="posts">
+                <h2>Posts</h2>
+                <div id="post-list">
+                    <?php if (!empty($posts)): ?>
+                        <?php foreach ($posts as $post): ?>
+                            <div class="post" data-post-id="<?php echo htmlspecialchars($post['id']); ?>">
+                                <div class="post-header">
+                                    <div class="profile-pic">
+                                        <img src="<?php echo $profilePic; ?>" alt="Profile Photo">
+                                    </div>
+                                    <div class="post-header-info">
+                                        <h3><?php echo htmlspecialchars($post['username']); ?></h3>
+                                        <span class="post-date"><?php echo htmlspecialchars(relative_time($post['created_at'])); ?></span>
+                                    </div>
+                                    <div class="post-options">
+                                        <button class="post-options-btn"><i class='bx bx-dots-horizontal-rounded'></i></button>
+                                        <div class="post-options-content">
+                                            <a href="#" class="edit-post">Edit Post</a>
+                                            <a href="#" class="delete-post">Delete Post</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-content">
+                                    <p><?php echo htmlspecialchars($post['content']); ?></p>
+                                    <?php if (!empty($post['image_path'])): ?>
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No posts available.</p>
+                    <?php endif; ?>
+                </div>
+            </section>
+        <?php endif; ?>
         <?php if ($userType === 'Faculty'): ?>
+            <section id="posts">
+                <h2>Posts</h2>
+                <div id="post-list">
+                    <?php if (!empty($posts)): ?>
+                        <?php foreach ($posts as $post): ?>
+                            <div class="post" data-post-id="<?php echo htmlspecialchars($post['id']); ?>">
+                                <div class="post-header">
+                                    <div class="profile-pic">
+                                        <img src="<?php echo $profilePic; ?>" alt="Profile Photo">
+                                    </div>
+                                    <div class="post-header-info">
+                                        <h3><?php echo htmlspecialchars($post['username']); ?></h3>
+                                        <span class="post-date"><?php echo htmlspecialchars(relative_time($post['created_at'])); ?></span>
+                                    </div>
+                                    <div class="post-options">
+                                        <button class="post-options-btn"><i class='bx bx-dots-horizontal-rounded'></i></button>
+                                        <div class="post-options-content">
+                                            <a href="#" class="edit-post">Edit Post</a>
+                                            <a href="#" class="delete-post">Delete Post</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-content">
+                                    <p><?php echo htmlspecialchars($post['content']); ?></p>
+                                    <?php if (!empty($post['image_path'])): ?>
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No posts available.</p>
+                    <?php endif; ?>
+                </div>
+            </section>
+        <?php endif; ?>
+        <?php if ($userType === 'Admin'): ?>
             <section id="posts">
                 <h2>Posts</h2>
                 <div id="post-list">
