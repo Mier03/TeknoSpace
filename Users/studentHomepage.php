@@ -15,6 +15,9 @@
     
 </head>
 <body>
+    <div class="background-container">
+        <img src="../images/signin-bg.png" alt="Background Image">
+    </div>
     <header class="header">
         <div class="header-content">
             <div class="logo">
@@ -40,5 +43,17 @@
     </div>
     </main>
     <script src="comment.js"></script>
+    <style>
+        .background-container img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    opacity: 0.5; 
+    object-fit: cover;
+    }
+    </style>
 </body>
 </html>
