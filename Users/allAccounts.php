@@ -45,7 +45,7 @@ if (!isset($_SESSION['valid'])) {
 
     <nav class="nav">
         <ul>
-            <li><a href="Homepage.html" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
             <li><a href="#maintenance" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="#lost&found" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['valid'])) {
         <div class="search-container">
             <form id="searchForm" method="GET" action="">
                 <div class="search-input-wrapper">
-                    <input type="text" id="searchInput" name="search" value="<?php if (isset($_GET['searchInput'])) {
+                    <input type="text" id="searchInput" style="width: 97%" name="search" value="<?php if (isset($_GET['searchInput'])) {
                                                                                                         echo $_GET['search'];
                                                                                                     } ?>" class="form-control" placeholder="Search by Name, ID, Course, or Email...">
                     <i class="fa fa-search"></i>
@@ -180,6 +180,7 @@ if (!isset($_SESSION['valid'])) {
 
 
     <script src="Admin_Homepage.js"></script>
+    <script src="admin.js"></script>
     <script>
         const modal = document.getElementById("manageAccountModal");
         const manageAccountLink = document.querySelector('.manage-account');
