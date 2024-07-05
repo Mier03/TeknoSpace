@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
 
 // Fetch user posts only if user is Faculty
 $posts = [];
-if ($userType === 'Faculty') {
+if ($userType === 'Faculty' || $userType === 'Admin') {
     $sqlPosts = "SELECT * FROM posts WHERE userId = '$userId' ORDER BY created_at DESC";
     $resultPosts = $conn->query($sqlPosts);
     if ($resultPosts->num_rows > 0) {

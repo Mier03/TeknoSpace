@@ -2,7 +2,7 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('../config.php');
-    include('../loginPhp.php');
+    include('loginPhp.php');
 }
 ?>
 
