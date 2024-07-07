@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var span = document.getElementsByClassName('close')[0];
     var submitPost = document.getElementById('submitPost');
     var postContent = document.getElementById('postContent');
+    var posttype = document.getElementById('postType');
     var postAudience = document.getElementById('postAudience');
     var postImage = document.getElementById('postImage');
     
@@ -25,11 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var content = postContent.value;
         var audience = postAudience.value;
         var imageFile = postImage.files[0];
+        var post = posttype.value;
 
         if (content) {
             var formData = new FormData();
             formData.append("content", content);
             formData.append("audience", audience);
+            formData.append("posts", post);
             if (imageFile) {
                 formData.append("image", imageFile);
             }

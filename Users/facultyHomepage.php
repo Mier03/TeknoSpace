@@ -74,6 +74,10 @@ $email = $_SESSION['valid'];
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
+                        <select id="postType">
+                            <option value="Lost & Found">Lost & Found</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
                     </div>
                 </div>
                 <textarea id="postContent" placeholder="What's on your mind, <?php echo $userName ?>?"></textarea>

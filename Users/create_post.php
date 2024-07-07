@@ -13,6 +13,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST['content'];
     $audience = $_POST['audience'];
+    $posttype = $_POST['posts'];
     $username = $_SESSION['firstName'].' '. $_SESSION['lastName']; // Replace with dynamic user name if applicable
     $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; // Replace with dynamic profile image if applicable
     $imagePath = "";
@@ -24,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imagePath = $targetFile;
     }
 
-    $sql = "INSERT INTO posts (username, content, audience, profile_image, image_path, userId) VALUES ('$username', '$content', '$audience', '$profile_image', '$imagePath', '$loggedUserId')";
+    $sql = "INSERT INTO posts (username, content, posttype, audience, profile_image, image_path, userId) VALUES ('$username', '$content','$posttype', '$audience', '$profile_image', '$imagePath', '$loggedUserId')";
 
     if ($conn->query($sql) === TRUE) {
         $post_id = $conn->insert_id;
