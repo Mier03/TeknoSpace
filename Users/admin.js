@@ -45,3 +45,13 @@ const modal = document.getElementById("manageAccountModal");
                 postModal.style.display = "none"; 
             }
         });
+        
+        function showLogoutModal() {
+            var modal = document.getElementById('logoutModal');
+            modal.style.display = "block";
+            
+            setTimeout(function() {
+                modal.style.display = "none";
+                window.location.href = "../index.php";
+            }, 1500);
+        }

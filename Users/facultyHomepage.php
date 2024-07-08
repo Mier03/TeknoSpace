@@ -144,7 +144,35 @@ input:checked + .slider:before {
         display: block;
         margin: 10px 0;
     }
-    
+    /* MODAL */
+    .logout-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.logout-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 250px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
     </style>
     
 </head>
@@ -161,7 +189,7 @@ input:checked + .slider:before {
             <div class="nav-links">
                 <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
-                <a href="../aboutUs.php">Log Out</a>
+                <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
             </div>
         </div>
     </header>
@@ -224,8 +252,31 @@ input:checked + .slider:before {
         </div>
         <div class="posts">
         </div>
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged Out Successfully</p>
+            </div>
+        </div>
     </main>
     <script src="post.js"></script>
     <script src="comment.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.showLogoutModal = function() {
+        console.log("Logout function called"); // Debugging line
+        var modal = document.getElementById('logoutModal');
+        if (modal) {
+            modal.style.display = "block";
+            setTimeout(function() {
+                modal.style.display = "none";
+                window.location.href = "../aboutUs.php"; // Adjust this URL as needed
+            }, 1250);
+        } else {
+            console.error("Logout modal not found"); // Debugging line
+        }
+    };
+});
+</script>
 </body>
 </html>
