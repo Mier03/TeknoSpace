@@ -16,7 +16,7 @@ $email = $_SESSION['valid'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknospace</title>
-    <link rel="stylesheet" href="Admin_styles.css">
+    <link rel="stylesheet" href="../Users/Admin_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -44,8 +44,8 @@ $email = $_SESSION['valid'];
     </header>
     <nav class="nav">
         <ul>
-            <li><a href="facultyHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="../Maintenance/facultyMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="../Users/facultyHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="facultyMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/facultyLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
         </ul>
     </nav>
@@ -74,11 +74,6 @@ $email = $_SESSION['valid'];
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
-                        <select id="postType">
-
-                            <option value="Announcement">Announcement</option>
-                            
-                        </select>
                     </div>
                 </div>
                 <textarea id="postContent" placeholder="What's on your mind, <?php echo $userName ?>?"></textarea>
@@ -93,6 +88,7 @@ $email = $_SESSION['valid'];
             </div>
         </div>
         <div class="posts">
+
         </div>
     </main>
    

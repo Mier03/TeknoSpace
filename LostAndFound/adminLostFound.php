@@ -49,7 +49,7 @@ $email = $_SESSION['valid'];
     <nav class="nav">
         <ul>
             <li><a href="../Users/ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="#maintenance" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="../Maintenance/adminMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
                 <a href="#manageAccount" class="icon manage-account"><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>
@@ -94,11 +94,6 @@ $email = $_SESSION['valid'];
                         <select id="postAudience">
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
-                        </select>
-                        <select id="postType">
-
-                            <option value="Lost & Found">Lost & Found</option>
-                         
                         </select>
                     </div>
                 </div>

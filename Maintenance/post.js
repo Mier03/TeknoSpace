@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var content = postContent.value;
         var audience = postAudience.value;
         var imageFile = postImage.files[0];
-        var post = 'Lost & Found';
+        var post = 'Maintenance';
 
         if (content) {
             var formData = new FormData();
