@@ -525,3 +525,36 @@ tr:hover {
 }
 
 /* FOR SEARCH - START*/
+
+
+/* MODAL LOGOUT */
+
+    /* MODAL */
+    .logout-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.4);
+    }
+    
+    .logout-modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 5px;
+        width: 250px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .logout-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }

@@ -41,7 +41,7 @@ $email = $_SESSION['valid'];
             <div class="nav-links">
                 <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                
                 <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
-                <a href="../index.php">Log Out</a>
+                <a href="#"  onclick="showLogoutModal()">Log Out</a>
             </div>
         </div>
     </header>
@@ -114,7 +114,12 @@ $email = $_SESSION['valid'];
             </div>
         </div>
 
-
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged out successfully</p>
+            </div>
+        </div>
         <!-- Post -->
         <div class="posts">
 

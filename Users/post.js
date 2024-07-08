@@ -81,3 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+//Modal
+

@@ -24,7 +24,7 @@ if (isset($_POST['submit_signup'])) {
 <body>
     <div class="intro">
         <h1 class="tekno-header">
-            <span class="tekno">Tekno</span>
+            <span class="tekno">Tekna</span>
             <span class="tekno"> Space</span>
         </h1>
     </div>

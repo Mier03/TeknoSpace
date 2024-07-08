@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="common-auth.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../Login-Signup/common-auth.css">
+    <link rel="stylesheet" href="../Login-Signup/login.css">
     <title>Sign In/Sign Up Page | Dan Aleko</title>
 
     <!-- boxicons -->
@@ -35,6 +35,47 @@
         </div>
            
     </div>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <img src="../images/success-icon.png" alt="Success" class="modal-image">
+            <p>Log in successful</p>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: 'process_login.php',
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        var modal = document.getElementById("loginModal");
+                        var modalMessage = document.getElementById("modalMessage");
+                        modalMessage.textContent = response.message;
+                        modal.style.display = "block";
+                        
+                        if (response.success) {
+                            setTimeout(function() {
+                                modal.style.display = "none";
+                                window.location.href = response.redirect;
+                            }, 2000);
+                        } else {
+                            setTimeout(function() {
+                                modal.style.display = "none";
+                            }, 2000);
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred. Please try again.');
+                    }
+                });
+            });
+        });
+        </script>
     <script src="script.js"></script>
 </body>
 
