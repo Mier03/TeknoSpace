@@ -28,6 +28,101 @@ if (!isset($_SESSION['valid'])) {
 
 </head>
 
+<!-- style for pop up edit user -->
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: white;
+        color: maroon;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .close {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: maroon;
+        text-decoration: none;
+    }
+
+    .edit-btn {
+        background: none;
+        border: none;
+        color: blue;
+        cursor: pointer;
+    }
+
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 20px;
+        overflow: hidden;
+    }
+
+    .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #editForm label {
+        display: inline-block;
+        width: 100px;
+        margin-bottom: 10px;
+    }
+
+    #editForm input {
+        width: calc(100% - 110px);
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    #editForm button {
+        background-color: maroon;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    #editForm button:hover {
+        background-color: #600;
+    }
+</style>
+
+
 <body>
     <header class="header">
         <div class="header-content">
@@ -71,8 +166,8 @@ if (!isset($_SESSION['valid'])) {
             <form id="searchForm" method="GET" action="">
                 <div class="search-input-wrapper">
                     <input type="text" id="searchInput" style="width: 97%" name="search" value="<?php if (isset($_GET['searchInput'])) {
-                                                                                                        echo $_GET['search'];
-                                                                                                    } ?>" class="form-control" placeholder="Search by Name, ID, Course, or Email...">
+                                                                                                    echo $_GET['search'];
+                                                                                                } ?>" class="form-control" placeholder="Search by Name, ID, Course, or Email...">
                     <i class="fa fa-search"></i>
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
@@ -149,6 +244,7 @@ if (!isset($_SESSION['valid'])) {
                     echo "<th>ID Number</th>";
                     echo "<th>Course</th>";
                     echo "<th>Email</th>";
+                    echo "<th>Edit</th>";
                     echo "</tr>";
 
                     while ($row = $result->fetch_assoc()) {
@@ -159,6 +255,7 @@ if (!isset($_SESSION['valid'])) {
                         echo "<td>" . $row["idNumber"] . "</td>";
                         echo "<td>" . $row["course"] . "</td>";
                         echo "<td>" . $row["email"] . "</td>";
+                        echo "<td><button onclick='openEditModal(" . json_encode($row) . ")' class='edit-btn'><i class='fas fa-edit'></i></button></td>";
                         echo "</tr>";
                     }
 
@@ -175,6 +272,35 @@ if (!isset($_SESSION['valid'])) {
             $conn->close();
             ?>
         </div>
+
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Edit User</h2>
+                <div class="profile-photo">
+                    <img id="profileImage" src="" alt="Profile Photo">
+                </div>
+                <form id="editForm">
+                    <input type="hidden" id="editId">
+                    <label for="editUserType">User Type:</label>
+                    <input type="text" id="editUserType"><br>
+                    <label for="editFirstName">First Name:</label>
+                    <input type="text" id="editFirstName"><br>
+                    <label for="editMiddleName">Middle Name:</label>
+                    <input type="text" id="editMiddleName"><br>
+                    <label for="editLastName">Last Name:</label>
+                    <input type="text" id="editLastName"><br>
+                    <label for="editIdNumber">ID Number:</label>
+                    <input type="text" id="editIdNumber"><br>
+                    <label for="editCourse">Course:</label>
+                    <input type="text" id="editCourse"><br>
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail"><br>
+                    <button type="button" onclick="saveChanges()">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
 
     </main>
 
@@ -363,7 +489,7 @@ if (!isset($_SESSION['valid'])) {
                 document.head.appendChild(style);
             }
 
-            
+
             window.closeEditPopup = function() {
                 const popup = document.querySelector('.edit-popup');
                 if (popup) {
@@ -371,6 +497,73 @@ if (!isset($_SESSION['valid'])) {
                 }
             };
         });
+    </script>
+
+    <!-- for editting user accounts -->
+    <script>
+        var modalEdit = document.getElementById("editModal");
+
+        function openEditModal(userData) {
+            document.getElementById("editId").value = userData.Id;
+            document.getElementById("editUserType").value = userData.userType;
+            document.getElementById("editFirstName").value = userData.firstName;
+            document.getElementById("editMiddleName").value = userData.middleName;
+            document.getElementById("editLastName").value = userData.lastName;
+            document.getElementById("editIdNumber").value = userData.idNumber;
+            document.getElementById("editCourse").value = userData.course;
+            document.getElementById("editEmail").value = userData.email;
+
+            // Set a placeholder image or user's actual photo if available
+            document.getElementById("profileImage").src = userData.profilePhoto || 'path/to/placeholder-image.jpg';
+
+            modalEdit.style.display = "block";
+        }
+
+        function closeModal() {
+            modalEdit.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalEdit) {
+                closeModal();
+            }
+        }
+
+        function saveChanges() {
+            var updatedData = {
+                Id: document.getElementById("editId").value,
+                userType: document.getElementById("editUserType").value,
+                firstName: document.getElementById("editFirstName").value,
+                middleName: document.getElementById("editMiddleName").value,
+                lastName: document.getElementById("editLastName").value,
+                idNumber: document.getElementById("editIdNumber").value,
+                course: document.getElementById("editCourse").value,
+                email: document.getElementById("editEmail").value
+            };
+
+            fetch('update_user.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("User updated successfully");
+                        closeModal();
+                        //for refresh
+                        location.reload(); 
+                    } else {
+                        alert("Error updating user: " + data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert("An error occurred while updating the user");
+                });
+        }
     </script>
 
 </body>
