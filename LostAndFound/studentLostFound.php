@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknospace</title>
-    <link rel="stylesheet" href="Student_styles.css">
+    <link rel="stylesheet" href="../Users/Student_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -33,16 +33,16 @@
     </header>
     <nav class="nav">
         <ul>
-            <li><a href="studentHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="../Users/studentHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
             <li><a href="#maintenance" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
-            <li><a href="../LostAndFound/studentLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
+            <li><a href="studentLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
         </ul>
     </nav>
     <main class="main">
     <div class="posts">
     </div>
     </main>
-    <script src="comment.js"></script>
+    <script src="../Users/comment.js"></script>
     <style>
         .background-container img {
     position: fixed;
