@@ -246,7 +246,7 @@ body {
     margin-bottom: 20px;
 }
 
-.modal-content textarea {
+/* .modal-content textarea {
     width: 95%;
     height: 100px;
     background-color: whitesmoke;
@@ -260,20 +260,8 @@ body {
 
 .modal-content textarea::placeholder {
     color: grey;
-}
+} */
 
-.post-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.option-icons i {
-    margin-right: 10px;
-    font-size: 20px;
-    color: gold;
-}
 
 .btn-post {
     width: 100%;

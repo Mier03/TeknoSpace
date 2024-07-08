@@ -14,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST['content'];
     $audience = $_POST['audience'];
     $posttype = $_POST['posts'];
-    $username = $_SESSION['firstName'].' '. $_SESSION['lastName']; // Replace with dynamic user name if applicable
-    $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; // Replace with dynamic profile image if applicable
+    $username = $_SESSION['firstName'].' '. $_SESSION['lastName']; 
+    $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; //change this
     $imagePath = "";
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {

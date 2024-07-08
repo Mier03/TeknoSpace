@@ -48,8 +48,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             };
             xhr.send(formData);
-            
         }
     }
+
+    // Select the picture icon and the hidden file input
+    const pictureIcon = document.querySelector('.fi.fi-br-picture');
     
+    // Add click event listener to the picture icon
+    pictureIcon.addEventListener('click', function() {
+        // Trigger a click on the hidden file input
+        postImage.click();
+    });
+
+    // Add event listener to handle the file selection
+    postImage.addEventListener('change', function() {
+        if (postImage.files && postImage.files[0]) {
+            // Create a FileReader to read the selected image file
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // Create an img element and set its src to the image data
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '300px';
+                img.alt = 'Selected Image';
+                
+                // Insert the img element into the post content area
+                postContent.value = '';
+                postContent.appendChild(img);
+            };
+            reader.readAsDataURL(postImage.files[0]);
+        }
+    });
 });
