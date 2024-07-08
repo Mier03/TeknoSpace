@@ -76,7 +76,7 @@ $email = $_SESSION['valid'];
                         </select>
                         <select id="postType">
                             <option value="Lost & Found">Lost & Found</option>
-                            <option value="Maintenance">Maintenance</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -92,11 +92,12 @@ $email = $_SESSION['valid'];
             </div>
         </div>
         <div class="posts">
+
         </div>
     </main>
    
-    <script src="../Users/post.js"></script>
-    <script src="../Users/comment.js"></script>
+    <script src="post.js"></script>
+    <script src="comment.js"></script>
     <style>
         .background-container img {
     position: fixed;

@@ -96,8 +96,9 @@ $email = $_SESSION['valid'];
                             <option value="Department">Department</option>
                         </select>
                         <select id="postType">
-                            <option value="Lost & Found">Lost & Found</option>
-                            <option value="Maintenance">Maintenance</option>
+
+                            <option value="Announcement">Announcement</option>
+                            
                         </select>
                     </div>
                 </div>
