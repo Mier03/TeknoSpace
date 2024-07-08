@@ -20,7 +20,7 @@ $email = $_SESSION['valid'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknospace</title>
-    <link rel="stylesheet" href="Admin_styles.css">
+    <link rel="stylesheet" href="../Users/Admin_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -48,8 +48,8 @@ $email = $_SESSION['valid'];
 
     <nav class="nav">
         <ul>
-            <li><a href="ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="../Maintenance/adminMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="../Users/ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="adminMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
                 <a href="#manageAccount" class="icon manage-account"><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>
@@ -95,11 +95,6 @@ $email = $_SESSION['valid'];
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
-                        <select id="postType">
-
-                            <option value="Announcement">Announcement</option>
-                            
-                        </select>
                     </div>
                 </div>
                 <textarea id="postContent" placeholder="What's on your mind, <?php echo $fullName ?>?"></textarea>
@@ -122,7 +117,7 @@ $email = $_SESSION['valid'];
 
 
     </main>
-    <script src="admin.js"></script>
+    
     <script src="post.js"></script>
     <script src="comment.js"></script>
     <style>
@@ -137,6 +132,57 @@ $email = $_SESSION['valid'];
     object-fit: cover;
     }
     </style>
+
+
+<script>
+    const modal = document.getElementById("manageAccountModal");
+        const manageAccountLink = document.querySelector('.manage-account');
+        const closeBtn = document.querySelector('.modal-content .close');
+
+        manageAccountLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = "block";
+        });
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = "none"; 
+        });
+
+        window.addEventListener('click', function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        function goToAllAccounts() {
+            modal.style.display = "none";
+            window.location.href = "../Users/allAccounts.php"; 
+        }
+
+        function goToVerifyAccounts() {
+            modal.style.display = "none";
+            window.location.href = "../Users/verify.php"; 
+        }
+
+        const postModal = document.getElementById("postModal");
+        const postModalCloseBtn = document.querySelector('#postModal .close');
+
+        function openPostModal() {
+            postModal.style.display = "block";
+        }
+
+        function closePostModal() {
+            postModal.style.display = "none"; 
+        }
+
+        postModalCloseBtn.addEventListener('click', closePostModal);
+
+        window.addEventListener('click', function (event) {
+            if (event.target == postModal) {
+                postModal.style.display = "none"; 
+            }
+        });
+</script>
 </body>
 
 </html>
