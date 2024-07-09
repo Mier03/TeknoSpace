@@ -129,26 +129,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['idNumber'] = $row['idNumber']; 
                 $_SESSION['userType'] = $row['userType'];
                 $_SESSION['id'] = $row['Id'];
-
+                
+                //Mu error siya besh
                 $sql = "SELECT * FROM users WHERE userType='$userType'";
-
+                
+                $_SESSION['login_success'] = true;
+                //LOGIN MODAL (echo...)
                 if ($_SESSION['userType'] == "Admin") {
                     $hashedPasswordFromDB = $row['password']; 
                     if (password_verify($password, $hashedPasswordFromDB)) {
                         // Password matches for admin
-                        header("Location: ../USERS/ADMIN.php");
-                        exit();
+                        echo "<script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                        showSuccessModal();
+                        setTimeout(function() {
+                            window.location.href = '../USERS/ADMIN.php';
+                        }, 1500);
+                        });
+                        </script>";
                     } else {
                         $errors[]='Wrong Password';
                     }
                 } elseif ($_SESSION['userType'] === "Student") {
                     //student homepage
-                    header("Location: ../USERS/studentHomepage.php");
-                    exit();
+                    echo "<script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            showSuccessModal();
+                            setTimeout(function() {
+                                window.location.href = '../USERS/studentHomepage.php';
+                            }, 1500);
+                            });
+                        </script>";
                 } elseif ($_SESSION['userType'] === "Faculty") {
-                    //faculty admin homepage
-                    header("Location: ../USERS/facultyHomepage.php");
-                    exit();
+                    //faculty homepage
+                    echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        showSuccessModal();
+                        setTimeout(function() {
+                            window.location.href = '../USERS/facultyHomepage.php';
+                        }, 1500);
+                        });
+                        </script>";
                 } else {
                     $errors[]='Unknown user type';
                 }

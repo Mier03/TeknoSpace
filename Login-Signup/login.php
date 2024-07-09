@@ -4,6 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('../config.php');
     include('loginPhp.php');
 }
+
 ?>
 
 
@@ -56,7 +57,87 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
            
     </div>
+                    <!--LOGIN MODAL DIV-->
+    <div id="loginSuccessModal" class="login-success-modal">
+        <div class="login-success-modal-content">
+            <img src="../images/check_gif.webp" alt="Success" class="login-success-icon">
+            <p>Logged In Successfully</p>
+        </div>
+    </div>
     <script src="script.js"></script>
+                    <!--LOGIN MODAL SCRIPT-->
+    <script>
+        function showLoginSuccessModal(redirectUrl) {
+            var modal = document.getElementById('loginSuccessModal');
+            if (modal) {
+                modal.style.display = "block";
+                setTimeout(function () {
+                    modal.style.display = "none";
+                    window.location.href = redirectUrl;
+                }, 1250);
+            } else {
+                console.error("Login success modal not found");
+                window.location.href = redirectUrl;
+            }
+        }
+
+        <?php
+        if (isset($_SESSION['login_success']) && $_SESSION['login_success'] === true) {
+            $redirect_url = '';
+            switch ($_SESSION['userType']) {
+                case 'Admin':
+                    $redirect_url = '../USERS/ADMIN.php';
+                    break;
+                case 'Student':
+                    $redirect_url = '../USERS/studentHomepage.php';
+                    break;
+                case 'Faculty':
+                    $redirect_url = '../USERS/facultyHomepage.php';
+                    break;
+            }
+            if (!empty($redirect_url)) {
+                echo "document.addEventListener('DOMContentLoaded', function() { showLoginSuccessModal('$redirect_url'); });";
+            }
+            unset($_SESSION['login_success']);
+        }
+        ?>
+    </script>
+    <!--LOGIN MODAL STYLE-->
+    <style>
+        .login-success-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .login-success-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            
+            padding: 20px;
+            border-radius: 5px;
+            width: 220px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .login-success-modal-content p{
+            margin-top: 10px;
+            color: #000000;
+        }
+        .login-success-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+        }
+    </style>
 </body>
 
 </html>
