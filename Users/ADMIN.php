@@ -1,8 +1,13 @@
 <?php
-session_start();
+
+
+
+include('auth.php');
+checkLogin();
+checkUserRole('Admin');
 
 if (!isset($_SESSION['valid'])) {
-    header("Location: ../login.php");
+    header("Location: ../Login-Signup/login.php");
     exit();
 }
 
