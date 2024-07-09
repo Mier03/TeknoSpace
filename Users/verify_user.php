@@ -6,7 +6,7 @@ $json = file_get_contents('php://input');
 $userData = json_decode($json, true);
 
 
-if (!$userData || !isset($userData['userType'], $userData['firstName'], $userData['middleName'], $userData['lastName'], $userData['idNumber'], $userData['course'], $userData['email'])) {
+if (!$userData || !isset($userData['userType'], $userData['firstName'], $userData['middleName'], $userData['lastName'], $userData['idNumber'], $userData['course'], $userData['email'], $userData['password'])) {
     echo json_encode(['success' => false, 'message' => 'Invalid data received']);
     exit;
 }
@@ -29,15 +29,22 @@ try {
     
     $checkStmt->close();
 
-    $insertSql = "INSERT INTO users (userType, firstName, middleName, lastName, idNumber, course, email) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $insertSql = "INSERT INTO users (userType, firstName, middleName, lastName, idNumber, course, email, password) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $insertStmt = $conn->prepare($insertSql);
 
     if ($insertStmt) {
         
-        $insertStmt->bind_param("sssssss", $userData['userType'], $userData['firstName'], $userData['middleName'], $userData['lastName'], $userData['idNumber'], $userData['course'], $userData['email']);
-
+        $insertStmt->bind_param("ssssssss", 
+                            $userData['userType'], 
+                            $userData['firstName'], 
+                            $userData['middleName'], 
+                            $userData['lastName'], 
+                            $userData['idNumber'], 
+                            $userData['course'], 
+                            $userData['email'], 
+                            $userData['password']);
         
         if (!$insertStmt->execute()) {
             throw new Exception('Error inserting data: ' . $insertStmt->error);
