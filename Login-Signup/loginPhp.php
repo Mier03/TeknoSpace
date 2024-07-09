@@ -54,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($userType) || $userType === '' || $userType === "Select user type") {
 
             $errors[] = "Please select a valid user type.";
-            exit;
         }
 
         // Check if email already exists
