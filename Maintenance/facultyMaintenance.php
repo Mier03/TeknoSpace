@@ -24,6 +24,163 @@ $email = $_SESSION['valid'];
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-straight/css/uicons-thin-straight.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-straight/css/uicons-regular-straight.css'>
     
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 32px;
+            height: 20px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: gold;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(12px);
+            -ms-transform: translateX(12px);
+            transform: translateX(12px);
+        }
+
+        .label-text {
+            font-size: 14px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .background-container img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            object-fit: cover;
+        }
+
+        .post-options {
+            display: flex;
+            justify-content: space-between;
+            /* Align items to the left and right */
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post-options .add-picture {
+            display: flex;
+            align-items: center;
+            /* Align items vertically */
+        }
+
+        .post-options .add-picture i {
+            margin-right: 10px;
+            /* Adjust the margin between the icon and the label */
+            font-size: 16px;
+            color: gold;
+        }
+
+        /* Style for the contenteditable div */
+        #postContent {
+            outline: none;
+            width: 95%;
+            height: 100px;
+            background-color: whitesmoke;
+            font-family: monospace;
+            margin: 0 0;
+            border: none;
+            color: black;
+            resize: vertical;
+            font-size: 18px;
+            border-radius: 10px;
+            padding: 5px;
+            overflow-y: auto;
+        }
+
+        /* Placeholder style for contenteditable div */
+        #postContent:empty:before {
+            content: attr(placeholder);
+            color: grey;
+        }
+
+        /* Style for the inserted image */
+        #postContent img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* MODAL */
+        .logout-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .logout-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logout-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+    </style>
+
+
 </head>
 <body>
     <div class="background-container">
@@ -79,9 +236,17 @@ $email = $_SESSION['valid'];
                 <textarea id="postContent" placeholder="What's on your mind, <?php echo $userName ?>?"></textarea>
                 <input type="file" id="postImage" accept="image/*">
                 <div class="post-options">
-                    <p>Add to your post</p>
-                    <div class="option-icons">
+                    <div class="add-picture">
                         <i class="fi fi-br-picture"></i>
+                        <input type="file" id="postImage" accept="image/*" style="display: none;">
+                        <label for="postImage" class="custom-file-upload">Add Picture or Video</label>
+                    </div>
+                    <div class="important">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="label-text">IMPORTANT</span>
                     </div>
                 </div>
                 <button class="btn-post" id="submitPost">Post</button>

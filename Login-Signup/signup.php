@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                     <div class="select-container">
                         <select class="user-type" name="userType">
-                            <option  class="type">Select user type</option>
+                            <option  value="Select user type" class="type">Select user type</option>
                             <option  class="type" <?php echo isset($_POST['userType']) && $_POST['userType'] == 'Faculty' ? 'selected' : '' ?>>Faculty</option>
                             <option class="type" <?php echo isset($_POST['userType']) && $_POST['userType'] == 'Student' ? 'selected' : '' ?>>Student</option>
                         </select>
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" name="course" placeholder="Course" required value="<?php echo isset($_POST['course']) ? $_POST['course'] : '' ?>">
                         <input type="email" name="email" placeholder="Email" required value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
                         <input type="password" name="password" placeholder="Password" required>
-                        <input type="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
+                        <input type="password" name="confirmpassword" placeholder="Confirm Password" required>
                         
                         <button type="submit" name="submit_signup">Sign Up</button>
                         

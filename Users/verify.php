@@ -154,7 +154,7 @@ if (!isset($_SESSION['valid'])) {
 
 
 
-            $sql = "SELECT Id, userType, firstName, middleName, lastName, idNumber, course, email FROM verify";
+            $sql = "SELECT Id, userType, firstName, middleName, lastName, idNumber, course, email, password FROM verify";
             if ($conn) {
                 $result = $conn->query($sql);
 

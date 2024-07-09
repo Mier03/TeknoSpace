@@ -9,7 +9,38 @@ if (!isset($_SESSION['valid'])) {
     exit();
 }
 
+if (isset($_GET['userId'])) {
+    $userId = $_GET['userId'];
+
+    // Fetch user data and profile picture in one query
+    $query = "SELECT u.*, p.profile_pic 
+              FROM users u 
+              LEFT JOIN profile p ON u.Id = p.userId 
+              WHERE u.Id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $userData = $result->fetch_assoc();
+
+        // If no profile pic, set a default
+        if (empty($userData['profile_pic'])) {
+            $userData['profile_pic'] = 'path/to/default/profile-image.jpg';
+        }
+
+        echo json_encode($userData);
+    } else {
+        echo json_encode(["error" => "User not found"]);
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +108,15 @@ if (!isset($_SESSION['valid'])) {
         cursor: pointer;
     }
 
+    .cover-photo {
+        width: 100%;
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        margin-bottom: 20px;
+    }
+
     .profile-photo {
         width: 100px;
         height: 100px;
@@ -85,8 +125,11 @@ if (!isset($_SESSION['valid'])) {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 auto 20px;
+        margin: 0 auto 30px;
         overflow: hidden;
+        position: absolute;
+        bottom: -10px;
+        left: calc(50% - 50px);
     }
 
     .profile-photo img {
@@ -273,12 +316,15 @@ if (!isset($_SESSION['valid'])) {
             ?>
         </div>
 
+        <!-- EDIT USER -->
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <h2>Edit User</h2>
-                <div class="profile-photo">
-                    <img id="profileImage" src="" alt="Profile Photo">
+                <div id="coverPhoto" class="cover-photo">
+                    <div class="profile-photo">
+                        <img id="profileImage" src="" alt="Profile Photo">
+                    </div>
                 </div>
                 <form id="editForm">
                     <input type="hidden" id="editId">
@@ -307,6 +353,7 @@ if (!isset($_SESSION['valid'])) {
 
     <script src="Admin_Homepage.js"></script>
     <script src="admin.js"></script>
+    <!-- Manage Accounts -->
     <script>
         const modal = document.getElementById("manageAccountModal");
         const manageAccountLink = document.querySelector('.manage-account');
@@ -358,7 +405,7 @@ if (!isset($_SESSION['valid'])) {
     </script>
 
 
-
+    <!-- SEARCH -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchForm = document.getElementById('searchForm');
@@ -441,6 +488,7 @@ if (!isset($_SESSION['valid'])) {
         });
     </script>
 
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.body.addEventListener('click', function(e) {
@@ -513,8 +561,11 @@ if (!isset($_SESSION['valid'])) {
             document.getElementById("editCourse").value = userData.course;
             document.getElementById("editEmail").value = userData.email;
 
-            // Set a placeholder image or user's actual photo if available
-            document.getElementById("profileImage").src = userData.profilePhoto || 'path/to/placeholder-image.jpg';
+            if (userData.profile_pic) {
+                document.getElementById("profileImage").src = userData.profile_pic;
+            } else {
+                document.getElementById("profileImage").src = 'path/to/default/profile-image.jpg';
+            }
 
             modalEdit.style.display = "block";
         }
@@ -554,7 +605,7 @@ if (!isset($_SESSION['valid'])) {
                         alert("User updated successfully");
                         closeModal();
                         //for refresh
-                        location.reload(); 
+                        location.reload();
                     } else {
                         alert("Error updating user: " + data.message);
                     }

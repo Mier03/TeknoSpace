@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$conn) {
 
         die("Connection failed: " . mysqli_connect_error());
-
     }
 
     $successes = [];
@@ -34,8 +33,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = 'Passwords do not match.';
         }
         // Email should only end with @citt.edu
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/@cit.edu$/', $email)) {
-            $errors[] = 'Please enter a valid email ending with @cit.edu.';
+        // if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/@cit.edu$/', $email)) {
+        //     $errors[] = 'Please enter a valid email ending with @cit.edu.';
+        // }
+        if (
+            !filter_var($email, FILTER_VALIDATE_EMAIL)
+            || !preg_match('/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@cit\.edu$/', $email)
+            || strpos($email, '..') !== false
+            || strpos($email, ' ') !== false
+        ) {
+            $errors[] = 'Please enter a valid email ending with @cit.edu with no spaces';
         }
 
         // Strict ID number format
@@ -48,27 +55,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $errors[] = "Please select a valid user type.";
             exit;
-        } 
+        }
 
         // Check if email already exists
-        $check_email_query = "SELECT * FROM users WHERE email = '$email'";
+        $check_email_query = "SELECT * FROM users WHERE email = '$email' 
+                      UNION 
+                      SELECT * FROM verify WHERE email = '$email'";
         $result_email = $conn->query($check_email_query);
 
         if ($result_email->num_rows > 0) {
-            $errors[] ='Email already exists.';
+            $errors[] = 'Email already exists or your information is still in the verification process.';
         }
 
         // Check if ID number already exists
-        $check_id_query = "SELECT * FROM users WHERE idNumber = '$idNumber'";
+        $check_id_query = "SELECT * FROM users WHERE idNumber = '$idNumber' 
+                   UNION 
+                   SELECT * FROM verify WHERE idNumber = '$idNumber'";
         $result_id = $conn->query($check_id_query);
 
         if ($result_id->num_rows > 0) {
-            $errors[] = 'Id number is already exists.';
+            $errors[] = 'ID number already exists or your information is still in the verification process.';
         }
 
         // if no error proceed to insertion
         if (empty($errors)) {
-            $sql = "INSERT INTO users (userType, firstName, middleName, lastName, idNumber, email, course, password) 
+            $sql = "INSERT INTO verify (userType, firstName, middleName, lastName, idNumber, email, course, password) 
                     VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course', '$password')";
 
             if ($conn->query($sql) === TRUE) {
@@ -125,21 +136,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username'] = $row['firstName'] . ' ' . $row['lastName'];
                 $_SESSION['firstName'] = $row['firstName'];
                 $_SESSION['lastName'] = $row['lastName'];
-                $_SESSION['course'] = $row['course']; 
-                $_SESSION['idNumber'] = $row['idNumber']; 
+                $_SESSION['course'] = $row['course'];
+                $_SESSION['idNumber'] = $row['idNumber'];
                 $_SESSION['userType'] = $row['userType'];
                 $_SESSION['id'] = $row['Id'];
 
                 $sql = "SELECT * FROM users WHERE userType='$userType'";
 
                 if ($_SESSION['userType'] == "Admin") {
-                    $hashedPasswordFromDB = $row['password']; 
+                    $hashedPasswordFromDB = $row['password'];
                     if (password_verify($password, $hashedPasswordFromDB)) {
                         // Password matches for admin
                         header("Location: ../USERS/ADMIN.php");
                         exit();
                     } else {
-                        $errors[]='Wrong Password';
+                        $errors[] = 'Wrong Password';
                     }
                 } elseif ($_SESSION['userType'] === "Student") {
                     //student homepage
@@ -150,17 +161,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: ../USERS/facultyHomepage.php");
                     exit();
                 } else {
-                    $errors[]='Unknown user type';
+                    $errors[] = 'Unknown user type';
                 }
             } else {
-                $errors[]='Wrong Password';
+                $errors[] = 'Wrong Password';
             }
         } else {
-            $errors[]='User not found';
+            $errors[] = 'User not found';
         }
     }
-} 
-if (isset($_POST['submit_newpass'])){
+}
+if (isset($_POST['submit_newpass'])) {
     $errors = [];
 
     $email_or_id = mysqli_real_escape_string($conn, $_POST['email_or_id']);
@@ -184,26 +195,25 @@ if (isset($_POST['submit_newpass'])){
             $sql = "SELECT * FROM users WHERE email='$email_or_id'";
         } else {
             $sql = "SELECT * FROM users WHERE idNumber='$email_or_id'";
-        }    
+        }
 
         $result = mysqli_query($conn, $sql);
 
         if ($result && mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             $user_id = $row['Id'];
-        
+
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    
+
             $update_sql = "UPDATE users SET password='$hashed_password' WHERE Id={$row['Id']}";
-    
+
             if (mysqli_query($conn, $update_sql)) {
-    
+
                 $successes[] = 'Password Updated Successfully';
 
                 $_POST['email_or_id'] = '';
                 $_POST['newpassword'] = '';
                 $_POST['cpassword'] = '';
-    
             } else {
                 $errors[] = 'Error Updating Password: ' . mysqli_error($conn);
 
@@ -211,21 +221,15 @@ if (isset($_POST['submit_newpass'])){
                 $_POST['newpassword'] = '';
                 $_POST['cpassword'] = '';
             }
-        }
-        else{
-            
-            $errors[]='User not found';
+        } else {
+
+            $errors[] = 'User not found';
 
             $_POST['newpassword'] = '';
             $_POST['cpassword'] = '';
-
         }
     }
-     
+
 
     mysqli_close($conn);
-    
 }
-
-
-?>
