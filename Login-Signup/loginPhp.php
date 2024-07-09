@@ -140,8 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['userType'] = $row['userType'];
                 $_SESSION['id'] = $row['Id'];
                 
-                //Mu error siya besh
-                $sql = "SELECT * FROM users WHERE userType='$userType'";
+                $sql = "SELECT * FROM users WHERE userType='" . $row['userType'] . "'";
                 
                 $_SESSION['login_success'] = true;
                 //LOGIN MODAL (echo...)
