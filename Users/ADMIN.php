@@ -193,17 +193,27 @@ $email = $_SESSION['valid'];
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <a href="ADMIN.php"><img src="../images/teknospace-logo.jpg" alt="Tekno Space Logo"></a>
-                <!-- <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo"> -->
+                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
                 <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
-                <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
-                <a href="#" onclick="showLogoutModal()">Log Out</a>
+                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
+                <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
+            </div>
+            <div class="burger-icon">
+                <i class='bx bx-menu burger-icon' onclick="toggleMenu()"></i>
             </div>
         </div>
     </header>
+    <div id="navModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleMenu()">&times;</span>
+            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
+                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
+                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+        </div>
+    </div>
 
     <nav class="nav">
         <ul>
@@ -297,6 +307,19 @@ $email = $_SESSION['valid'];
     <script src="admin.js"></script>
     <script src="post.js"></script>
     <script src="comment.js"></script>
+    <script>
+        function toggleMenu() {
+            const modal = document.getElementById('navModal');
+            const closeButton = document.querySelector('.close');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+
+            closeButton.addEventListener('click', toggleMenu);
+        }
+    </script>
     <style>
         .background-container img {
             position: fixed;
