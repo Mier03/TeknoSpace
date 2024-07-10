@@ -266,8 +266,9 @@ $email = $_SESSION['valid'];
                         </select>
                     </div>
                 </div>
-                <textarea id="postContent" placeholder="What's on your mind, <?php echo $fullName ?>?"></textarea>
-                <input type="file" id="postImage" accept="image/*">
+                <div class="post-input" id="postInput">
+                    <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
+                </div>
                 <div class="post-options">
                     <div class="add-picture">
                         <i class="fi fi-br-picture"></i>
@@ -283,6 +284,12 @@ $email = $_SESSION['valid'];
                     </div>
                 </div>
                 <button class="btn-post" id="submitPost">Post</button>
+            </div>
+        </div>
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged out successfully</p>
             </div>
         </div>
 
@@ -323,7 +330,21 @@ $email = $_SESSION['valid'];
 
             closeButton.addEventListener('click', toggleMenu);
         }
-        
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showLogoutModal = function() {
+                console.log("Logout function called"); // Debugging line
+                var modal = document.getElementById('logoutModal');
+                if (modal) {
+                    modal.style.display = "block";
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                        window.location.href = "../aboutUs.php"; // Adjust this URL as needed
+                    }, 1250);
+                } else {
+                    console.error("Logout modal not found"); // Debugging line
+                }
+            };
+        });
         const modal = document.getElementById("manageAccountModal");
         const manageAccountLink = document.querySelector('.manage-account');
         const closeBtn = document.querySelector('.modal-content .close');

@@ -280,9 +280,9 @@ body {
     margin-top: 20px;
 }
 
-.btn-post:hover {
+/* .btn-post:hover {
     background-color: #365899;
-}
+} */
 
 .create-post .post-header {
     display: flex;
