@@ -81,7 +81,7 @@ if (isset($_GET['userId'])) {
         border: 1px solid #888;
         width: 80%;
         max-width: 500px;
-        border-radius: 10px;
+        border-radius: 20px;
         position: relative;
     }
 
@@ -114,12 +114,13 @@ if (isset($_GET['userId'])) {
         background-size: cover;
         background-position: center;
         position: relative;
-        margin-bottom: 20px;
+        margin-bottom: 70px;
+        border-radius: 20px;
     }
 
     .profile-photo {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         background-color: #ddd;
         display: flex;
@@ -128,8 +129,10 @@ if (isset($_GET['userId'])) {
         margin: 0 auto 30px;
         overflow: hidden;
         position: absolute;
-        bottom: -10px;
-        left: calc(50% - 50px);
+        bottom: -80px;
+        left: 20px;
+        border: 3px solid white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .profile-photo img {
@@ -138,19 +141,36 @@ if (isset($_GET['userId'])) {
         object-fit: cover;
     }
 
-    #editForm label {
-        display: inline-block;
-        width: 100px;
-        margin-bottom: 10px;
+    #editForm {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 10px;
+        align-items: center;
     }
 
-    #editForm input {
-        width: calc(100% - 110px);
+    #editForm label {
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    #editForm input[type="text"],
+    #editForm input[type="email"] {
+        width: 100%;
         padding: 5px;
-        margin-bottom: 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+    }
+
+    #editForm br {
+        display: none;
     }
 
     #editForm button {
+        grid-column: 2;
+        width: auto;
+        padding: 5px 15px;
+        margin-top: 10px;
         background-color: maroon;
         color: white;
         border: none;
@@ -162,6 +182,26 @@ if (isset($_GET['userId'])) {
 
     #editForm button:hover {
         background-color: #600;
+    }
+
+
+    .reset-password {
+        color: darkred;
+        font-size: 14px;
+        cursor: pointer;
+        display: block;
+        text-align: right;
+        margin-top: -45px;
+        margin-right: 20px;
+        margin-bottom: 30px;
+        text-decoration: none;
+        transition: color 0.3s, background-color 0.3s, text-decoration 0.3s;
+    }
+
+    .reset-password:hover {
+        color: maroon;
+        background-clip: text;
+        text-decoration: underline;
     }
 </style>
 
@@ -320,12 +360,16 @@ if (isset($_GET['userId'])) {
         <div id="editModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
-                <h2>Edit User</h2>
+
+                <h2 style="color: maroon; text-align: center;">Edit User</h2>
+
                 <div id="coverPhoto" class="cover-photo">
                     <div class="profile-photo">
                         <img id="profileImage" src="" alt="Profile Photo">
                     </div>
                 </div>
+                <span class="reset-password" onclick="confirmResetPassword()">Reset Password</span>
+
                 <form id="editForm">
                     <input type="hidden" id="editId">
                     <label for="editUserType">User Type:</label>
@@ -344,6 +388,7 @@ if (isset($_GET['userId'])) {
                     <input type="email" id="editEmail"><br>
                     <button type="button" onclick="saveChanges()">Save Changes</button>
                 </form>
+
             </div>
         </div>
 
@@ -488,7 +533,7 @@ if (isset($_GET['userId'])) {
         });
     </script>
 
-
+    <!-- EDIT USER POP UP -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.body.addEventListener('click', function(e) {
@@ -561,13 +606,38 @@ if (isset($_GET['userId'])) {
             document.getElementById("editCourse").value = userData.course;
             document.getElementById("editEmail").value = userData.email;
 
-            if (userData.profile_pic) {
-                document.getElementById("profileImage").src = userData.profile_pic;
-            } else {
-                document.getElementById("profileImage").src = 'path/to/default/profile-image.jpg';
-            }
+            // Retrieve and display the profile image
+            const editId = userData.Id;
+            fetchProfileImage(editId);
 
             modalEdit.style.display = "block";
+        }
+
+        function fetchProfileImage(userId) {
+            fetch(`../Profile/get_profile_image.php?userId=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.profile_pic) {
+                        document.getElementById("profileImage").src = data.profile_pic;
+                    } else {
+                        // Set a default image if no profile picture is found
+                        document.getElementById("profileImage").src = "../images/profile-icon.png";
+                    }
+
+                    if (data.cover_photo) {
+                        console.log('Setting cover photo:', data.cover_photo);
+                        coverPhoto.style.backgroundImage = `url('${data.cover_photo}')`;
+                    } else {
+                        console.log('No cover photo found, using default');
+                        coverPhoto.style.backgroundImage = "url('../images/Background.png')";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching profile image:', error);
+                    // default image
+                    document.getElementById("profileImage").src = "../images/profile-icon.png";
+                    document.getElementById("coverPhoto").style.backgroundImage = "url('../images/Background.png')";
+                });
         }
 
         function closeModal() {
@@ -617,6 +687,23 @@ if (isset($_GET['userId'])) {
         }
     </script>
 
+
+    <script>
+        function openModal() {
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        function confirmResetPassword() {
+            if (confirm('Are you sure you want to reset the password of this user?')) {
+                // Add your reset password code here
+                alert('Password has been reset.');
+            }
+        }
+    </script>
 </body>
 
 </html>

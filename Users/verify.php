@@ -46,6 +46,30 @@ if (!isset($_SESSION['valid'])) {
     background-color: #f44336;
     color: white;
 }
+
+
+/* All Accounts and Verify Account START*/
+.modal-content button {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    border: 2px solid #FFD700;
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #dcbb04;
+    color: #1e1e1e;
+}
+
+.modal-content button:hover {
+    background-color: rgb(252, 217, 14);
+    color: black;
+}
+/* All Accounts and Verify Account END*/
 </style>
 
 <body>
