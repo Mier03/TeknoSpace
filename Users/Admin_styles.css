@@ -44,7 +44,7 @@ body {
     color: white;
     margin-left: 20px;
     text-decoration: none;
-    font-size: 18px; 
+    font-size: 18px;
     padding: 0 5px;
 }
 
@@ -52,7 +52,7 @@ body {
     color: white;
     margin-left: 20px;
     text-decoration: none;
-    font-size: 18px; 
+    font-size: 18px;
     padding: 0 5px;
 }
 
@@ -95,18 +95,18 @@ body {
         overflow: auto;
         background-color: #630F10;
     }
-    
+
     .modal-content {
         background-color: #fefefe;
-        margin: 25% auto; 
+        margin: 25% auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%; 
+        width: 80%;
         max-width: 200px;
         text-align: center;
-        position: relative; 
+        position: relative;
     }
-    
+
     .modal-content a {
         color: rgb(247, 229, 126);
         display: block;
@@ -114,14 +114,14 @@ body {
         /* border-bottom: 1px solid #ddd;  */
         text-align: left;
     }
-    
+
     .close {
         color: gold;
         float: right;
         font-size: 28px;
         font-weight: bold;
     }
-    
+
     .close:hover,
     .close:focus {
         color: #888;
@@ -164,7 +164,7 @@ body {
 
 .nav ul li a:hover,
 .nav ul li a.active {
-    background-color: #8B1818; 
+    background-color: #8B1818;
 }
 
 @media screen and (max-width: 768px) {
@@ -182,7 +182,7 @@ body {
         display: none;
     }
 }
-    
+
 .post-container {
     margin-bottom: 20px;
     padding: 20px;
@@ -222,7 +222,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -244,7 +244,7 @@ body {
 }
 
 .close:hover {
-    color: rgb(247, 247, 31); 
+    color: rgb(247, 247, 31);
 }
 
 .modal-content h2 {
@@ -313,7 +313,7 @@ body {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: vertical; 
+    resize: vertical;
 }
 
 .create-post .post-actions {
@@ -321,7 +321,8 @@ body {
     justify-content: space-between;
 }
 
-.create-post .post-actions .btn-post, .create-post .post-actions .btn-cancel {
+.create-post .post-actions .btn-post,
+.create-post .post-actions .btn-cancel {
     background-color: maroon;
     color: white;
     padding: 8px 16px;
@@ -331,7 +332,8 @@ body {
     transition: background-color 0.3s;
 }
 
-.create-post .post-actions .btn-post:hover, .create-post .post-actions .btn-cancel:hover {
+.create-post .post-actions .btn-post:hover,
+.create-post .post-actions .btn-cancel:hover {
     background-color: gold;
     color: black;
 }
@@ -417,21 +419,21 @@ body {
 
 /* TABLE FOR ADMIN -START*/
 table {
-    width: 100%; 
-    border-collapse: collapse; 
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
 th {
-    background-color: #dedbdb; 
+    background-color: #dedbdb;
     padding: 8px;
-    text-align: left; 
+    text-align: left;
     border: 1px solid #dddddd;
 }
 
 td {
-    padding: 8px; 
-    border: 1px solid #dddddd; 
+    padding: 8px;
+    border: 1px solid #dddddd;
 }
 
 tr:nth-child(even) {
@@ -439,8 +441,9 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #f1f1f1; 
+    background-color: #f1f1f1;
 }
+
 /* TABLE FOR ADMIN -END*/
 
 
@@ -499,7 +502,8 @@ tr:hover {
     margin-top: 20px;
 }
 
-.search-results-table th, .search-results-table td {
+.search-results-table th,
+.search-results-table td {
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
@@ -535,32 +539,72 @@ tr:hover {
 
 /* MODAL LOGOUT */
 
-    /* MODAL */
-    .logout-modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.4);
-    }
-    
-    .logout-modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border-radius: 5px;
-        width: 250px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .logout-icon {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-    }
+/* MODAL */
+.logout-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.logout-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 250px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+
+/* All Accounts and Verify Account START*/
+#manageAccountModal .modal-content {
+    background-color: maroon !important;
+}
+
+.modal-content h2 {
+    color: white;
+    text-align: center;
+}
+
+/* For the icon space */
+.nav ul li a .fas { 
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.modal-content button {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    border: 2px solid #FFD700;
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #dcbb04;
+    color: #1e1e1e;
+}
+
+.modal-content button:hover {
+    background-color: rgb(252, 217, 14);
+    color: black;
+}
+
+/* All Accounts and Verify Account END*/
