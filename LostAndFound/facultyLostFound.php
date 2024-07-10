@@ -9,6 +9,7 @@ $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
 $course = $_SESSION['course'];
 $idNumber = $_SESSION['idNumber'];
 $email = $_SESSION['valid'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -181,7 +182,6 @@ $email = $_SESSION['valid'];
         }
     </style>
 
-
 </head>
 
 <body>
@@ -212,6 +212,7 @@ $email = $_SESSION['valid'];
                 <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
         </div>
     </div>
+
     <nav class="nav">
         <ul>
             <li><a href="../Users/facultyHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
@@ -244,10 +245,14 @@ $email = $_SESSION['valid'];
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
+
                     </div>
                 </div>
-                <textarea id="postContent" placeholder="What's on your mind, <?php echo $userName ?>?"></textarea>
-                <input type="file" id="postImage" accept="image/*">
+                <div class="post-input" id="postInput">
+                    <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
+                </div>
+
+
                 <div class="post-options">
                     <div class="add-picture">
                         <i class="fi fi-br-picture"></i>
@@ -266,25 +271,16 @@ $email = $_SESSION['valid'];
             </div>
         </div>
         <div class="posts">
-
+        </div>
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged Out Successfully</p>
+            </div>
         </div>
     </main>
-
     <script src="post.js"></script>
     <script src="comment.js"></script>
-    <style>
-        .background-container img {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.5;
-            object-fit: cover;
-        }
-    </style>
-
     <script>
         function toggleMenu() {
             const modal = document.getElementById('navModal');
@@ -297,6 +293,8 @@ $email = $_SESSION['valid'];
 
             closeButton.addEventListener('click', toggleMenu);
         }
+
+
         document.addEventListener('DOMContentLoaded', function() {
             window.showLogoutModal = function() {
                 console.log("Logout function called"); // Debugging line
@@ -305,7 +303,7 @@ $email = $_SESSION['valid'];
                     modal.style.display = "block";
                     setTimeout(function() {
                         modal.style.display = "none";
-                        window.location.href = "../aboutUs.php";
+                        window.location.href = "../aboutUs.php"; // Adjust this URL as needed
                     }, 1250);
                 } else {
                     console.error("Logout modal not found"); // Debugging line
@@ -313,7 +311,18 @@ $email = $_SESSION['valid'];
             };
         });
     </script>
-
+    <style>
+        .background-container img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            object-fit: cover;
+        }
+    </style>
 </body>
 
 </html>

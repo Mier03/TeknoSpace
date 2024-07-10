@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var postContent = document.getElementById('postContent');
     var postAudience = document.getElementById('postAudience');
     var postImage = document.getElementById('postImage');
-    
+
+    var selectedImage = null; // Store the selected image data URL
+
     postInput.onclick = function() {
         modal.style.display = "block";
     }
@@ -21,15 +23,48 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Select the picture icon and the hidden file input
+    const pictureIcon = document.querySelector('.fi.fi-br-picture');
+
+    // Add click event listener to the picture icon
+    pictureIcon.addEventListener('click', function() {
+        // Trigger a click on the hidden file input
+        postImage.click();
+    });
+
+    // Add event listener to handle the file selection
+    postImage.addEventListener('change', function() {
+        if (postImage.files && postImage.files[0]) {
+            // Create a FileReader to read the selected image file
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // Store the selected image data
+                selectedImage = e.target.result;
+
+                // Create an img element and set its src to the image data
+                var img = document.createElement('img');
+                img.src = selectedImage;
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '300px';
+                img.alt = 'Selected Image';
+
+                // Clear the post content area and insert the img element
+                
+                postContent.appendChild(img);
+            };
+            reader.readAsDataURL(postImage.files[0]);
+        }
+    });
+
     submitPost.onclick = function() {
-        var content = postContent.value;
+        var textContent = postContent.innerText; // Get text content
         var audience = postAudience.value;
         var imageFile = postImage.files[0];
         var post = 'Maintenance';
 
-        if (content) {
+        if (textContent || imageFile) {
             var formData = new FormData();
-            formData.append("content", content);
+            formData.append("content", textContent); // Append text content
             formData.append("audience", audience);
             formData.append("posts", post);
             if (imageFile) {
@@ -40,15 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
             xhr.open("POST", "../Users/create_post.php", true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    postContent.value = '';
-                    postImage.value = '';
+                    postContent.innerHTML = ''; // Clear text content
+                    postImage.value = ''; // Clear file input
                     modal.style.display = "none";
                     window.location.reload();
                 }
             };
             xhr.send(formData);
-            
         }
     }
-    
 });

@@ -264,15 +264,11 @@ $email = $_SESSION['valid'];
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
-                        <select id="postType">
-
-                            <option value="Announcement">Announcement</option>
-
-                        </select>
                     </div>
                 </div>
-                <textarea id="postContent" placeholder="What's on your mind, <?php echo $fullName ?>?"></textarea>
-                <input type="file" id="postImage" accept="image/*">
+                <div class="post-input" id="postInput">
+                    <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
+                </div>
                 <div class="post-options">
                     <div class="add-picture">
                         <i class="fi fi-br-picture"></i>

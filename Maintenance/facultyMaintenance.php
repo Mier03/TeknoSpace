@@ -5,13 +5,15 @@ if (!isset($_SESSION['valid'])) {
     exit();
 }
 $userName = $_SESSION['firstName'];
-$fullName = $_SESSION['firstName'].' '.$_SESSION['lastName'];
+$fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
 $course = $_SESSION['course'];
 $idNumber = $_SESSION['idNumber'];
 $email = $_SESSION['valid'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +25,7 @@ $email = $_SESSION['valid'];
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-straight/css/uicons-thin-straight.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-straight/css/uicons-regular-straight.css'>
-    
+
     <style>
         .switch {
             position: relative;
@@ -180,8 +182,8 @@ $email = $_SESSION['valid'];
         }
     </style>
 
-
 </head>
+
 <body>
     <div class="background-container">
         <img src="../images/signin-bg.png" alt="Background Image">
@@ -210,6 +212,7 @@ $email = $_SESSION['valid'];
                 <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
         </div>
     </div>
+
     <nav class="nav">
         <ul>
             <li><a href="../Users/facultyHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
@@ -218,34 +221,38 @@ $email = $_SESSION['valid'];
         </ul>
     </nav>
     <main class="main">
-    <div class="create-post">
+        <div class="create-post">
             <div class="post-header">
                 <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                 <div class="post-header-info">
-                    <h3><?php echo $fullName?></h3>
+                    <h3><?php echo $fullName ?></h3>
                 </div>
             </div>
             <div class="post-input" id="postInput">
-                <p>What's on your mind, <?php echo $userName?>?</p>
+                <p>What's on your mind, <?php echo $userName ?>?</p>
             </div>
         </div>
-      <!-- Pop-up Create Post -->
-    <div id="postModal" class="modal">
+        <!-- Pop-up Create Post -->
+        <div id="postModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Create post</h2>
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
-                        <h3><?php echo $fullName?></h3>
+                        <h3><?php echo $fullName ?></h3>
                         <select id="postAudience">
                             <option value="All students">All students</option>
                             <option value="Department">Department</option>
                         </select>
+
                     </div>
                 </div>
-                <textarea id="postContent" placeholder="What's on your mind, <?php echo $userName ?>?"></textarea>
-                <input type="file" id="postImage" accept="image/*">
+                <div class="post-input" id="postInput">
+                    <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
+                </div>
+
+
                 <div class="post-options">
                     <div class="add-picture">
                         <i class="fi fi-br-picture"></i>
@@ -264,10 +271,14 @@ $email = $_SESSION['valid'];
             </div>
         </div>
         <div class="posts">
-
+        </div>
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged Out Successfully</p>
+            </div>
         </div>
     </main>
-   
     <script src="post.js"></script>
     <script src="comment.js"></script>
     <script>
@@ -282,19 +293,36 @@ $email = $_SESSION['valid'];
 
             closeButton.addEventListener('click', toggleMenu);
         }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showLogoutModal = function() {
+                console.log("Logout function called"); // Debugging line
+                var modal = document.getElementById('logoutModal');
+                if (modal) {
+                    modal.style.display = "block";
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                        window.location.href = "../aboutUs.php"; // Adjust this URL as needed
+                    }, 1250);
+                } else {
+                    console.error("Logout modal not found"); // Debugging line
+                }
+            };
+        });
     </script>
     <style>
         .background-container img {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; 
-    opacity: 0.5; 
-    object-fit: cover;
-    }
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            object-fit: cover;
+        }
     </style>
-
 </body>
+
 </html>
