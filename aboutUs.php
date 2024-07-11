@@ -47,26 +47,40 @@ if (isset($_POST['submit_signup'])) {
                         <li><a href="Login-Signup/signup.php">Register Now</a></li>
                     </ul>
                 </div>
+                <!-- Hamburger Menu  -->
+                <div class="hamburger-menu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </nav>
         </section>
     </header>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#aboutus">About Us</a>
+        <a href="#theteam">The Team</a>
+        <a href="#services">Services</a>
+        <a href="Login-Signup/login.php">Log In</a>
+        <a href="Login-Signup/signup.php">Register Now</a>
+    </div>
     <div id="scroll-indicator"></div>
     <div class="container">
     <section class="welcome">
         <div class="bg">
             <!-- HERE -->
-            <img src="images/Background.png" alt="Background About Us">
+            <img src="images/Background1.png" alt="Background About Us">
         </div>
         <div class="midscreen-text">
             <h1>Welcome to Tekno Space~!</h1>
-            <p>Welcome to Teknoys! Your go-to source for all school updates, events, and important announcements. 
+            <p>Welcome Teknoys! Your go-to source for all school updates, events, and important announcements. 
                 Stay informed and connected with everything happening at our school.</p>
         </div>
     </section>
 
     <section id="aboutus" class="alternating-section">
         <div class="bg">
-            <img src="images/Background.png" alt="Background">
+           <!-- <img src="images/Background1.png" alt="Background">-->
         </div>
         <div class="section-content">
             <div class="image-container">
@@ -83,11 +97,11 @@ if (isset($_POST['submit_signup'])) {
 
     <section id="theteam" class="alternating-section reverse">
         <div class="bg">
-            <img src="images/Background.png" alt="Background">
+            <img src="images/background-team.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
-                <img src="images/groufie 2.jpg" alt="Our Team">
+                <!--<img src="images/groufie 2.jpg" alt="Our Team">-->
             </div>
             <div class="text-container">
                 <h1>The Team</h1>
@@ -100,7 +114,7 @@ if (isset($_POST['submit_signup'])) {
 
     <section id="services" class="alternating-section">
         <div class="bg">
-            <img src="images/Background.png" alt="Background">
+            <img src="images/Background1.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
