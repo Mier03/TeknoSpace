@@ -1,8 +1,8 @@
 const scroll_indicator = document.getElementById("scroll-indicator");
 
 window.addEventListener("scroll", function () {
-  const maxScrollHeight = document.body.scrollHeight - window.innerHeight;
-  const currentScrollHeight = (window.scrollY / maxScrollHeight) * 100;
+  const maxScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const currentScrollHeight = (window.pageYOffset / maxScrollHeight) * 100;
   scroll_indicator.style.width = `${currentScrollHeight}%`;
 });
 
@@ -75,3 +75,31 @@ window.addEventListener('DOMContentLoaded', ()=>{
         },2300)
     })
 })
+
+
+// Hamburger menu functionality
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const mobileMenu = document.querySelector('.mobile-menu');
+const overlay = document.createElement('div');
+overlay.classList.add('overlay');
+document.body.appendChild(overlay);
+
+function toggleMobileMenu() {
+    hamburgerMenu.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+}
+
+hamburgerMenu.addEventListener('click', toggleMobileMenu);
+
+// Close mobile menu when clicking outside
+overlay.addEventListener('click', toggleMobileMenu);
+
+// Close mobile menu when a link is clicked
+const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', toggleMobileMenu);
+});
+
+
