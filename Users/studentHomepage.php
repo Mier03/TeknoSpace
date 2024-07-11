@@ -1,4 +1,19 @@
+<?php
+include('auth.php');
+checkLogin();
+checkUserRole('Student');
 
+if (!isset($_SESSION['valid'])) {
+    header("Location: ../Login-Signup/login.php");
+    exit();
+}
+$userName = $_SESSION['firstName'];
+$fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+$course = $_SESSION['course'];
+$idNumber = $_SESSION['idNumber'];
+$email = $_SESSION['valid'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

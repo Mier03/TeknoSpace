@@ -1,7 +1,11 @@
 <?php
-session_start();
+
+include('auth.php');
+checkLogin();
+checkUserRole('Faculty');
+
 if (!isset($_SESSION['valid'])) {
-    header("Location: ../login.php");
+    header("Location: ../Login-Signup/login.php");
     exit();
 }
 $userName = $_SESSION['firstName'];
