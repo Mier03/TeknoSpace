@@ -141,4 +141,14 @@ p{
     font-size: 15px;
     text-align:center;
 }
+@media (max-width: 768px) {
+    .bgs img {
+        height: 200%; 
+    }
+}
 
+@media (max-width: 480px) {
+    .bgs img {
+        height: 180%; 
+    }
+}

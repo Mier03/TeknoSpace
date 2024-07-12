@@ -70,56 +70,56 @@ $email = $_SESSION['valid'];
     </main>
     <script src="comment.js"></script>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    window.showLogoutModal = function() {
-        console.log("Logout function called");
-        var modal = document.getElementById('logoutModal');
-        if (modal) {
-            modal.style.display = "block";
-            setTimeout(function() {
-                modal.style.display = "none";
-                window.location.href = "../aboutUs.php";
-            }, 1250);
-        } else {
-            console.error("Logout modal not found");
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showLogoutModal = function() {
+                console.log("Logout function called");
+                var modal = document.getElementById('logoutModal');
+                if (modal) {
+                    modal.style.display = "block";
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                        window.location.href = "../aboutUs.php";
+                    }, 1250);
+                } else {
+                    console.error("Logout modal not found");
+                }
+            };
+        });
+
+
+            /**Notification Modal */
+            document.addEventListener('DOMContentLoaded', function() {
+            const notificationIcon = document.querySelector('a[href="#notif"] i');
+            const notificationModal = document.getElementById('notificationModal');
+
+        function openNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'block';
+            notificationIcon.classList.add('active');
+            notificationIcon.classList.remove('fi-br-bell-notification-social-media');
+            notificationIcon.classList.add('fi-br-cross-small');
+            notificationIcon.removeEventListener('click', openNotificationModal);
+            notificationIcon.addEventListener('click', closeNotificationModal);
         }
-    };
-});
 
+        function closeNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'none';
+            notificationIcon.classList.remove('active');
+            notificationIcon.classList.remove('fi-br-cross-small');
+            notificationIcon.classList.add('fi-br-bell-notification-social-media');
+            notificationIcon.removeEventListener('click', closeNotificationModal);
+            notificationIcon.addEventListener('click', openNotificationModal);
+        }
 
-    /**Notification Modal */
-    document.addEventListener('DOMContentLoaded', function() {
-    const notificationIcon = document.querySelector('a[href="#notif"] i');
-    const notificationModal = document.getElementById('notificationModal');
+        notificationIcon.addEventListener('click', openNotificationModal);
 
-function openNotificationModal(e) {
-    e.preventDefault();
-    notificationModal.style.display = 'block';
-    notificationIcon.classList.add('active');
-    notificationIcon.classList.remove('fi-br-bell-notification-social-media');
-    notificationIcon.classList.add('fi-br-cross-small');
-    notificationIcon.removeEventListener('click', openNotificationModal);
-    notificationIcon.addEventListener('click', closeNotificationModal);
-}
-
-function closeNotificationModal(e) {
-    e.preventDefault();
-    notificationModal.style.display = 'none';
-    notificationIcon.classList.remove('active');
-    notificationIcon.classList.remove('fi-br-cross-small');
-    notificationIcon.classList.add('fi-br-bell-notification-social-media');
-    notificationIcon.removeEventListener('click', closeNotificationModal);
-    notificationIcon.addEventListener('click', openNotificationModal);
-}
-
-notificationIcon.addEventListener('click', openNotificationModal);
-
-window.addEventListener('click', function(e) {
-    if (e.target == notificationModal) {
-        closeNotificationModal(e);
-}
-});
-});
+        window.addEventListener('click', function(e) {
+            if (e.target == notificationModal) {
+                closeNotificationModal(e);
+        }
+        });
+        });
 </script>
 </body>
     <style>

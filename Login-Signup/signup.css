@@ -101,5 +101,17 @@ a:hover{
 .hidden{
     display:none;
 }
+@media (max-width: 768px) {
+    .signup-container {
+        width: 80%;
+        padding: 20px;
+    }
+}
 
+@media (max-width: 480px) {
+    .signup-container {
+        width: 90%;
+        padding: 15px;
+    }
+}
 
