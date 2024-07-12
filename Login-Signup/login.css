@@ -66,3 +66,17 @@
  input::placeholder {
     text-indent: 25px; 
 }
+/* Media queries */
+@media (max-width: 768px) {
+    .login-container {
+        width: 80%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%;
+        padding: 15px;
+    }
+}
