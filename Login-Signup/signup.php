@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="bg">
+    <div class="bgs">
             <!-- HERE -->
             <img src="../images/signin-bg.png" alt="Background About Us">
         </div>

@@ -48,9 +48,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
 
                     ?>
-                <input type="text" name="email_or_id" placeholder="Email or ID Number" required >
-                <input type="password" name="password" placeholder="Password" required>
+                     
+                <div class = "container-email">
+                <i class='bx bxs-user'></i>
+                <input type="text" id="email" name="email_or_id" placeholder="Email or ID Number" required >
+                    </div>
+                    <div class = "container-pass">
+                <i class='bx bxs-lock'></i>
+                <input type="password" id="pass" name="password" placeholder="Password" required>
+                </div>
                 <button type="submit" name="submit_signin">Sign In</button>
+                   
                 <a href="forgotPass.php">Forgot Your Password?</a>
             </form>
             <p class="dont-account">Don't have an account? <a href="signup.php" id="showSignup">Sign Up</a></p>
