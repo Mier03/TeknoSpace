@@ -8,12 +8,38 @@
     color:white;
     border-radius: 14px;
     padding: 30px 40px;
+    position: absolute;
 }
 .login-container h1{
     font-size: 30px;
     font-weight: 800;
     letter-spacing:0.5px;
     text-align:center;
+}
+
+.container-email,
+.container-pass {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.container-email i,
+.container-pass i {
+    position: absolute;
+    margin-bottom:2px;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c10202;
+}
+
+.container-email input,
+.container-pass input {
+    width: 100%; 
+    height:50px;
+    border: none;
+    border-radius: 60px;
+    font-size: 16px;
 }
 
 #showLogin{
@@ -29,4 +55,14 @@
     padding:10px 10px;
     color:#a10202;
 }
-/* LOGIN MODAL */
+.container-email input {
+    text-indent: 25px;
+}
+
+.container-pass input {
+    text-indent: 25px; /* or remove this line if you want to use the default */
+}
+  input::placeholder,
+ input::placeholder {
+    text-indent: 25px; 
+}

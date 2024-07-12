@@ -28,11 +28,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <div class="bg">
+            <!-- HERE -->
+            <img src="../images/signin-bg.png" alt="Background About Us">
+        </div>
     <div class="login-container">
         <div class="login-form" id="loginForm">
             <!-- <h1>Sign In</h1> -->
         </div>
-            <img class="upper-cit"src=".../images/cit-logo-upper.png" >
+            <img class="upper-cit"src="../images/cit-logo-upper.png" >
             <img   class="cit"src="../images/cit-logo.png"  >
            
             <div class="forgot-password">
@@ -65,6 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            
     </div>
     <script src="script.js"></script>
+    <style>
+    </style>
 </body>
 
 </html>
