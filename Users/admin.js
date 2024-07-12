@@ -55,3 +55,35 @@ const modal = document.getElementById("manageAccountModal");
                 window.location.href = "../index.php";
             }, 1500);
         }
+
+        /* Log  Out Modal Javascript*/
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationIcon = document.querySelector('a[href="#notif"] i');
+            const notificationModal = document.getElementById('notificationModal');
+            const closeNotification = document.querySelector('.close-notification');
+        
+            notificationIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                notificationModal.style.display = 'block';
+                this.classList.add('active');
+                this.classList.remove('fi-br-bell-notification-social-media');
+                this.classList.add('fi-br-cross-small');
+            });
+        
+            closeNotification.addEventListener('click', function() {
+                notificationModal.style.display = 'none';
+                notificationIcon.classList.remove('active');
+                notificationIcon.classList.remove('fi-br-cross-small');
+                notificationIcon.classList.add('fi-br-bell-notification-social-media');
+            });
+        
+            window.addEventListener('click', function(e) {
+                if (e.target == notificationModal) {
+                    notificationModal.style.display = 'none';
+                    notificationIcon.classList.remove('active');
+                    notificationIcon.classList.remove('fi-br-cross-small');
+                    notificationIcon.classList.add('fi-br-bell-notification-social-media');
+                }
+            });
+        });

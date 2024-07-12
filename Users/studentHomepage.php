@@ -62,23 +62,63 @@ $email = $_SESSION['valid'];
                 <p>Logged Out Successfully</p>
             </div>
         </div>
+        <div id="notificationModal" class="notification-modal">
+            <div class="notification-content">
+                <p>No new notifications</p>
+            </div>
+        </div>
     </main>
     <script src="comment.js"></script>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     window.showLogoutModal = function() {
-        console.log("Logout function called"); // Debugging line
+        console.log("Logout function called");
         var modal = document.getElementById('logoutModal');
         if (modal) {
             modal.style.display = "block";
             setTimeout(function() {
                 modal.style.display = "none";
-                window.location.href = "../aboutUs.php"; // Adjust this URL as needed
+                window.location.href = "../aboutUs.php";
             }, 1250);
         } else {
-            console.error("Logout modal not found"); // Debugging line
+            console.error("Logout modal not found");
         }
     };
+});
+
+
+    /**Notification Modal */
+    document.addEventListener('DOMContentLoaded', function() {
+    const notificationIcon = document.querySelector('a[href="#notif"] i');
+    const notificationModal = document.getElementById('notificationModal');
+
+function openNotificationModal(e) {
+    e.preventDefault();
+    notificationModal.style.display = 'block';
+    notificationIcon.classList.add('active');
+    notificationIcon.classList.remove('fi-br-bell-notification-social-media');
+    notificationIcon.classList.add('fi-br-cross-small');
+    notificationIcon.removeEventListener('click', openNotificationModal);
+    notificationIcon.addEventListener('click', closeNotificationModal);
+}
+
+function closeNotificationModal(e) {
+    e.preventDefault();
+    notificationModal.style.display = 'none';
+    notificationIcon.classList.remove('active');
+    notificationIcon.classList.remove('fi-br-cross-small');
+    notificationIcon.classList.add('fi-br-bell-notification-social-media');
+    notificationIcon.removeEventListener('click', closeNotificationModal);
+    notificationIcon.addEventListener('click', openNotificationModal);
+}
+
+notificationIcon.addEventListener('click', openNotificationModal);
+
+window.addEventListener('click', function(e) {
+    if (e.target == notificationModal) {
+        closeNotificationModal(e);
+}
+});
 });
 </script>
 </body>
