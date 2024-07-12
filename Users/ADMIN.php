@@ -300,7 +300,13 @@ $email = $_SESSION['valid'];
         <div class="posts">
 
         </div>
-
+    <!--Notification Modal-->
+        <div id="notificationModal" class="notification-modal">
+            <div class="notification-content">
+                <span class="close-notification">&times;</span>
+                <p>No new notifications</p>
+            </div>
+        </div>
 
     </main>
     <script src="admin.js"></script>
