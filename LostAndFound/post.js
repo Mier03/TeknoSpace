@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var postInput = document.getElementById('postInput');
     var modal = document.getElementById('postModal');
-    var span = document.getElementsByClassName('close')[0];
+    var span = document.querySelector('#postModal .close');
     var submitPost = document.getElementById('submitPost');
     var postContent = document.getElementById('postContent');
     var postAudience = document.getElementById('postAudience');

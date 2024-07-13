@@ -92,7 +92,7 @@ $email = $_SESSION['valid'];
                     <h3><?php echo $fullName ?></h3>
                 </div>
             </div>
-            <div class="post-input" id="postInput">
+            <div class="post-space" id="postInput">
                 <p>What's on your mind, Your Name?</p>
             </div>
         </div>
@@ -113,7 +113,7 @@ $email = $_SESSION['valid'];
                         </select>
                     </div>
                 </div>
-                <div class="post-input" id="postInput">
+                <div class="post-input">
                     <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
                 </div>
                 <div class="post-options">
@@ -127,7 +127,7 @@ $email = $_SESSION['valid'];
                             <input type="checkbox">
                             <span class="slider"></span>
                         </label>
-                        <span class="label-text">IMPORTANT</span>
+                        <span class="label-text">LOST</span>
                     </div>
                 </div>
                 <button class="btn-post" id="submitPost">Post</button>
@@ -183,7 +183,7 @@ $email = $_SESSION['valid'];
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: gold; /* Initial color is gold */
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 34px;
@@ -194,7 +194,7 @@ $email = $_SESSION['valid'];
             content: "";
             height: 12px;
             width: 12px;
-            left: 4px;
+            right: 4px;
             bottom: 4px;
             background-color: white;
             -webkit-transition: .4s;
@@ -202,19 +202,20 @@ $email = $_SESSION['valid'];
             border-radius: 50%;
         }
 
-        input:checked+.slider {
-            background-color: gold;
+        input:checked + .slider {
+            background-color: #ccc; /* Change to gray when checked */
         }
 
-        input:focus+.slider {
+        input:focus + .slider {
             box-shadow: 0 0 1px #2196F3;
         }
 
-        input:checked+.slider:before {
-            -webkit-transform: translateX(12px);
-            -ms-transform: translateX(12px);
-            transform: translateX(12px);
+        input:checked + .slider:before {
+            -webkit-transform: translateX(-12px);
+            -ms-transform: translateX(-12px);
+            transform: translateX(-12px);
         }
+
 
         .label-text {
             font-size: 14px;

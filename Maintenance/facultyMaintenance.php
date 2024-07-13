@@ -75,7 +75,7 @@ $email = $_SESSION['valid'];
                     <h3><?php echo $fullName ?></h3>
                 </div>
             </div>
-            <div class="post-input" id="postInput">
+            <div class="post-space" id="postInput">
                 <p>What's on your mind, <?php echo $userName ?>?</p>
             </div>
         </div>
@@ -83,7 +83,7 @@ $email = $_SESSION['valid'];
         <div id="postModal" class="postmodal">
             <div class="postmodal-content">
                 <span class="close">&times;</span>
-                <h2>Create post</h2>
+                <h2>Create post</h2> 
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
@@ -95,7 +95,7 @@ $email = $_SESSION['valid'];
 
                     </div>
                 </div>
-                <div class="post-input" id="postInput">
+                <div class="post-input">
                     <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
                 </div>
 
