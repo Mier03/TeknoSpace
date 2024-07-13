@@ -78,34 +78,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // if no error proceed to insertion
         if (empty($errors)) {
-            $sql = "INSERT INTO verify (userType, firstName, middleName, lastName, idNumber, email, course, password) 
+
+            if ($userType === 'Faculty') {
+                $table = 'verify';
+            } elseif ($userType === 'Student') {
+                $table = 'users';
+            } else {
+                $errors[] = "Invalid user type.";
+            }
+            
+            if (empty($errors)) {
+                $sql = "INSERT INTO $table (userType, firstName, middleName, lastName, idNumber, email, course, password) 
                     VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course', '$password')";
 
-            if ($conn->query($sql) === TRUE) {
-                $last_id = $conn->insert_id; // Get the last inserted ID
+                if ($conn->query($sql) === TRUE) {
+                    $last_id = $conn->insert_id; // Get the last inserted ID
 
-                // Insert into profile table
-                $defaultProfilePic = "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg";
-                $defaultCoverPhoto = "https://www.rappler.com/tachyon/2021/09/cit-campus-20210916.png?resize=850%2C315&zoom=1";
-                $profileSql = "INSERT INTO profile (userId, profile_pic, cover_photo) 
+                    // Insert into profile table
+                    $defaultProfilePic = "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg";
+                    $defaultCoverPhoto = "https://www.rappler.com/tachyon/2021/09/cit-campus-20210916.png?resize=850%2C315&zoom=1";
+                    $profileSql = "INSERT INTO profile (userId, profile_pic, cover_photo) 
                                VALUES ('$last_id', '$defaultProfilePic', '$defaultCoverPhoto')";
 
-                if ($conn->query($profileSql) === TRUE) {
-                    $_SESSION['userType'] = $userType;
-                    $_SESSION['first_name'] = $firstName;
-                    $_SESSION['middle_name'] = $middleName;
-                    $_SESSION['last_name'] = $lastName;
-                    $_SESSION['idNumber'] = $idNumber;
-                    $_SESSION['valid'] = $email;
-                    $_SESSION['course'] = $course;
-                    $_SESSION['id'] = $last_id;
+                    if ($conn->query($profileSql) === TRUE) {
+                        $_SESSION['userType'] = $userType;
+                        $_SESSION['first_name'] = $firstName;
+                        $_SESSION['middle_name'] = $middleName;
+                        $_SESSION['last_name'] = $lastName;
+                        $_SESSION['idNumber'] = $idNumber;
+                        $_SESSION['valid'] = $email;
+                        $_SESSION['course'] = $course;
+                        $_SESSION['id'] = $last_id;
 
-                    header("Location: login.php");
+                        header("Location: login.php");
+                    } else {
+                        $errors[] = 'Error to insert new profile. Contact admin for further investigation.';
+                    }
                 } else {
-                    $errors[] = 'Error to insert new profile. Contact admin for further investigation.';
+                    $errors[] = 'Error to insert new user. Contact admin for further investigation.';
                 }
-            } else {
-                $errors[] = 'Error to insert new user. Contact admin for further investigation.';
             }
         }
     } elseif (isset($_POST['submit_signin'])) { // name of the button in the html tag for log in
@@ -130,7 +141,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result && mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
 
-            if (password_verify($password, $row['password'])) {
+            if (empty($row['password']) || $row['password'] === null) {
+                $identifier = urlencode($email_or_id);
+                echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        alert('Your password has been reset. Initial password setup required.');
+                        window.location.href = 'passwordReset.php?identifier=$identifier';
+                    });
+                </script>";
+            } else if (password_verify($password, $row['password'])) {
                 $_SESSION['valid'] = $row['email'];
                 $_SESSION['username'] = $row['firstName'] . ' ' . $row['lastName'];
                 $_SESSION['firstName'] = $row['firstName'];
@@ -139,9 +158,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['idNumber'] = $row['idNumber'];
                 $_SESSION['userType'] = $row['userType'];
                 $_SESSION['id'] = $row['Id'];
-                
+
                 $sql = "SELECT * FROM users WHERE userType='" . $row['userType'] . "'";
-                
+
                 $_SESSION['login_success'] = true;
                 //LOGIN MODAL (echo...)
                 if ($_SESSION['userType'] == "Admin") {
@@ -191,6 +210,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 if (isset($_POST['submit_newpass'])) {
+    $errors = [];
+
+    $email_or_id = mysqli_real_escape_string($conn, $_POST['email_or_id']);
+    $password = mysqli_real_escape_string($conn, $_POST['newpassword']);
+    $confirm_password = mysqli_real_escape_string($conn, $_POST['cpassword']);
+
+    if (empty($email_or_id)) {
+        $errors[] = 'Email or ID Number is required.';
+    }
+
+    if (empty($password)) {
+        $errors[] = 'New Password is required.';
+    }
+
+    if ($password !== $confirm_password) {
+        $errors[] = 'Passwords do not match.';
+    }
+
+    if (empty($errors)) {
+        if (filter_var($email_or_id, FILTER_VALIDATE_EMAIL)) {
+            $sql = "SELECT * FROM users WHERE email='$email_or_id'";
+        } else {
+            $sql = "SELECT * FROM users WHERE idNumber='$email_or_id'";
+        }
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result && mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            $user_id = $row['Id'];
+
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            $update_sql = "UPDATE users SET password='$hashed_password' WHERE Id={$row['Id']}";
+
+            if (mysqli_query($conn, $update_sql)) {
+
+                $successes[] = 'Password Updated Successfully';
+
+                $_POST['email_or_id'] = '';
+                $_POST['newpassword'] = '';
+                $_POST['cpassword'] = '';
+            } else {
+                $errors[] = 'Error Updating Password: ' . mysqli_error($conn);
+
+                $_POST['email_or_id'] = '';
+                $_POST['newpassword'] = '';
+                $_POST['cpassword'] = '';
+            }
+        } else {
+
+            $errors[] = 'User not found';
+
+            $_POST['newpassword'] = '';
+            $_POST['cpassword'] = '';
+        }
+    }
+
+
+    mysqli_close($conn);
+}
+
+
+
+if (isset($_POST['submit_newResetPass'])) {
     $errors = [];
 
     $email_or_id = mysqli_real_escape_string($conn, $_POST['email_or_id']);
