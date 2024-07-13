@@ -227,7 +227,7 @@ if (isset($_GET['userId'])) {
             <li><a href="#maintenance" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
-                <a href="#manageAccount" class="icon manage-account"><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>
+                <a href="#manageAccount" class="icon manage-account" style="color: #fff3b0; background-color: #8B1818;" ><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>
             </li>
 
         </ul>

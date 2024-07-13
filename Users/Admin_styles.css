@@ -84,34 +84,55 @@ body {
         padding-left: 25px;
     }
 
-    .modal {
+    .navmodal {
         display: none;
         position: fixed;
         z-index: 1000;
         left: 0;
-        top: 50;
+        top: 0;
         width: 100%;
         height: 100%;
-        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .navmodal-content {
+        display: block;
         background-color: #630F10;
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 25% auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         padding: 20px;
-        border: 1px solid #888;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         width: 80%;
-        max-width: 200px;
-        text-align: center;
-        position: relative;
+        max-width: 300px;
     }
-
-    .modal-content a {
-        color: rgb(247, 229, 126);
+    .navmodal-content a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        margin: 15px 0;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+    
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 999;
+    }
+    
+    .overlay.active,
+    .navmodal.active {
         display: block;
         padding: 10px;
-        /* border-bottom: 1px solid #ddd;  */
         text-align: left;
     }
 
@@ -128,6 +149,13 @@ body {
         text-decoration: none;
         cursor: pointer;
     }
+}
+.navmodal {
+    display: none;
+}
+.navmodal-content a:hover, 
+.navmodal-content a.active {
+    color: gold;
 }
 
 .nav {
@@ -212,26 +240,49 @@ body {
     color: #65676b;
 }
 
-/* Modal styles */
-.modal {
+.post-space {
+    background-color: #f0f2f5;
+    border-radius: 20px;
+    padding: 10px 15px;
+    color: #65676b;
+}
+
+/* Post Modal styles */
+.postmodal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.postmodal-content {
+    display: block;
     background-color: #630E15;
     margin: 15% auto;
     padding: 20px;
     border-radius: 8px;
     width: 500px;
     color: white;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.overlay.active,
+.postmodal.active {
+    display: block;
 }
 
 .close {
@@ -247,10 +298,91 @@ body {
     color: rgb(247, 247, 31);
 }
 
-.modal-content h2 {
+.postmodal-content h2 {
     text-align: center;
     margin-bottom: 20px;
 }
+
+@media screen and (max-width: 600px) {
+
+    .postmodal-content {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+        background-color: #630E15;
+        color: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .close {
+        color: gold;
+        font-size: 24px;
+    }
+
+    .post-header {
+        padding: 10px 15px;
+    }
+
+    .post-header img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .post-input {
+        flex-grow: 1;
+        padding: 10px 15px;
+        border-radius: 0;
+        
+    }
+
+    #postContent {
+        border: none;
+        outline: none;
+        height: 350px !important;
+    }
+
+    .post-options {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .add-picture {
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+    .important {
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-post {
+        width: 93% !important;
+        margin: 0 20px 20px 20px !important;
+        background-color: #ffd700;
+        color: #000;
+    }
+}
+
 
 /* .modal-content textarea {
     width: 95%;
@@ -571,8 +703,30 @@ tr:hover {
 
 
 /* All Accounts and Verify Account START*/
+#manageAccountModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 #manageAccountModal .modal-content {
     background-color: maroon !important;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+
 }
 
 .modal-content h2 {
@@ -606,6 +760,7 @@ tr:hover {
     background-color: rgb(252, 217, 14);
     color: black;
 }
+
 
 /* All Accounts and Verify Account END*/
 

@@ -47,22 +47,22 @@ $email = $_SESSION['valid'];
                 <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
             </div>
             <div class="burger-icon">
-                <i class='bx bx-menu burger-icon' onclick="toggleMenu()"></i>
+                <i class='bx bx-menu burger-icon' onclick="toggleMobileMenu()"></i>
             </div>
         </div>
     </header>
-    <div id="navModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="toggleMenu()">&times;</span>
+        <!-- navmodal -->
+    <div id="navModal" class="navmodal">
+        <div class="navmodal-content">
+            <span class="close" onclick="toggleMobileMenu()">&times;</span>
             <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
                 <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
         </div>
     </div>
-
     <nav class="nav">
         <ul>
-            <li><a href="facultyHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="facultyHomepage.php" class="icon" style="color: #fff3b0; background-color: #8B1818;"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
             <li><a href="../Maintenance/facultyMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/facultyLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
         </ul>
@@ -75,15 +75,17 @@ $email = $_SESSION['valid'];
                     <h3><?php echo $fullName ?></h3>
                 </div>
             </div>
-            <div class="post-input" id="postInput">
+            <div class="post-space" id="postInput">
                 <p>What's on your mind, <?php echo $userName ?>?</p>
             </div>
         </div>
         <!-- Pop-up Create Post -->
-        <div id="postModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Create post</h2>
+        <div id="postModal" class="postmodal">
+            <div class="postmodal-content">
+                <div class="modal-header">
+                    <h2>Create post</h2>
+                    <span class="close">&times;</span>
+                </div>
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">
@@ -95,7 +97,7 @@ $email = $_SESSION['valid'];
 
                     </div>
                 </div>
-                <div class="post-input" id="postInput">
+                <div class="post-input">
                     <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
                 </div>
 
@@ -135,17 +137,29 @@ $email = $_SESSION['valid'];
     <script src="post.js"></script>
     <script src="comment.js"></script>
     <script>
-        function toggleMenu() {
-            const modal = document.getElementById('navModal');
-            const closeButton = document.querySelector('.close');
-            if (modal.style.display === 'block') {
-                modal.style.display = 'none';
-            } else {
-                modal.style.display = 'block';
+        // BURGER ICON
+        document.addEventListener("DOMContentLoaded", function () {
+            var burgerIcon = document.querySelector(".burger-icon");
+            var navLinks = document.querySelector(".nav-links");
+            var modal = document.getElementById('navModal');
+            var overlay = document.querySelector(".overlay");
+            var closeBtn = document.querySelector(".close");
+
+            burgerIcon.addEventListener("click", function () {
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            function closeModal() {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
             }
 
-            closeButton.addEventListener('click', toggleMenu);
-        }
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", closeModal);
+            
+        });
+
 
         /**LOGOUT MODAL */
         document.addEventListener('DOMContentLoaded', function() {

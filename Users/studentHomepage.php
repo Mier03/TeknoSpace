@@ -44,12 +44,23 @@ $email = $_SESSION['valid'];
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
                 <a href="#" onclick="showLogoutModal()">Log Out</a>
             </div>
+            <div class="burger-icon">
+                <i class='bx bx-menu burger-icon' onclick="toggleMenu()"></i>
+            </div>
         </div>
     </header>
+    <div id="navModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleMenu()">&times;</span>
+            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
+                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
+                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+        </div>
+    </div>
     <nav class="nav">
         <ul>
-            <li><a href="studentHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="../Maintenance/facultyMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="studentHomepage.php" class="icon" style="color: #fff3b0; background-color: #8B1818;"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="../Maintenance/studentMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/studentLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
         </ul>
     </nav>
