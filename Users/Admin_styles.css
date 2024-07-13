@@ -287,7 +287,7 @@ body {
 
 .close {
     color: gold;
-    float: right;
+    float: right !important;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -315,24 +315,24 @@ body {
         color: white;
         display: flex;
         flex-direction: column;
-    }
-
-    .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 15px;
-        border-bottom: 1px solid #e0e0e0;
-    }
-
-    .modal-header h2 {
-        margin: 0;
-        font-size: 18px;
+        position: relative;
     }
 
     .close {
-        color: gold;
+        position: absolute;
+        top: 10px;
+        right: 15px;
         font-size: 24px;
+        color: #FFD700;
+        cursor: pointer;
+    }
+    
+    h2 {
+        text-align: left !important;
+        padding: 10px 15px;
+        margin: 0;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 18px;
     }
 
     .post-header {

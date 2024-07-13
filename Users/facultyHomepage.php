@@ -82,10 +82,8 @@ $email = $_SESSION['valid'];
         <!-- Pop-up Create Post -->
         <div id="postModal" class="postmodal">
             <div class="postmodal-content">
-                <div class="modal-header">
-                    <h2>Create post</h2>
-                    <span class="close">&times;</span>
-                </div>
+                <span class="close">&times;</span>
+                <h2>Create post</h2> 
                 <div class="post-header">
                     <img src="https://static.thenounproject.com/png/3918329-200.png" alt="Profile Image">
                     <div class="post-header-info">

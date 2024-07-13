@@ -93,7 +93,7 @@ $email = $_SESSION['valid'];
                     <h3><?php echo $fullName ?></h3>
                 </div>
             </div>
-            <div class="post-input" id="postInput">
+            <div class="post-space" id="postInput">
                 <p>What's on your mind, Your Name?</p>
             </div>
         </div>
@@ -114,7 +114,7 @@ $email = $_SESSION['valid'];
                         </select>
                     </div>
                 </div>
-                <div class="post-input" id="postInput">
+                <div class="post-input">
                     <div id="postContent" contenteditable="true" placeholder="What's on your mind, <?php echo $userName ?>?"></div>
                 </div>
 
