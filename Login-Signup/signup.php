@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
                         <input type="text" name="firstName" placeholder="First Name" required  value="<?php echo isset($_POST['firstName']) ? $_POST['firstName'] : '' ?>">
-                        <input type="text" name="middleName" placeholder="Middle Name" required value="<?php echo isset($_POST['middleName']) ? $_POST['middleName'] : '' ?>">
+                        <input type="text" name="middleName" placeholder="Middle Name" value="<?php echo isset($_POST['middleName']) ? $_POST['middleName'] : '' ?>">
                         <input type="text" name="lastName" placeholder="Last Name" required value="<?php echo isset($_POST['lastName']) ? $_POST['lastName'] : '' ?>">
                         <input type="text" name="idNumber" placeholder="ID Number" required value="<?php echo isset($_POST['idNumber']) ? $_POST['idNumber'] : '' ?>">
                         <input type="text" name="course" placeholder="Course" required value="<?php echo isset($_POST['course']) ? $_POST['course'] : '' ?>">

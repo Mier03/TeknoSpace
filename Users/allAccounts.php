@@ -39,6 +39,30 @@ if (isset($_GET['userId'])) {
     $conn->close();
 }
 
+// Reset Password
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
+    $userId = $_POST['reset_password'];
+    
+    // Prepare the SQL statement
+    $sql = "UPDATE users SET password = NULL WHERE Id = ?";
+    
+    // Prepare and bind
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "<script>alert('Password has been reset successfully.');</script>";
+    } else {
+        echo "<script>alert('Error resetting password: " . $conn->error . "');</script>";
+    }
+    
+    // Close statement
+    $stmt->close();
+}
+
+
+
 ?>
 
 
@@ -227,7 +251,7 @@ if (isset($_GET['userId'])) {
             <li><a href="#maintenance" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
-                <a href="#manageAccount" class="icon manage-account" style="color: #fff3b0; background-color: #8B1818;" ><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>
+                <a href="#manageAccount" class="icon manage-account" style="color: #fff3b0; background-color: #8B1818;"><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>
             </li>
 
         </ul>
@@ -629,7 +653,7 @@ if (isset($_GET['userId'])) {
                         coverPhoto.style.backgroundImage = `url('${data.cover_photo}')`;
                     } else {
                         console.log('No cover photo found, using default');
-                        coverPhoto.style.backgroundImage = "url('../images/Background.png')";
+                        coverPhoto.style.backgroundImage = "url('https://www.rappler.com/tachyon/2021/09/cit-campus-20210916.png?resize=850%2C315&zoom=1')";
                     }
                 })
                 .catch(error => {
@@ -699,8 +723,21 @@ if (isset($_GET['userId'])) {
 
         function confirmResetPassword() {
             if (confirm('Are you sure you want to reset the password of this user?')) {
-                // Add your reset password code here
-                alert('Password has been reset.');
+                const userId = document.getElementById("editId").value;
+
+                // Create a form and submit it
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = ''; // Submit to the current page
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'reset_password';
+                input.value = userId;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
             }
         }
     </script>
