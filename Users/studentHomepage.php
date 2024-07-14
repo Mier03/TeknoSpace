@@ -49,8 +49,8 @@ $email = $_SESSION['valid'];
             </div>
         </div>
     </header>
-    <div id="navModal" class="modal">
-        <div class="modal-content">
+    <div id="navModal" class="navmodal">
+        <div class="navmodal-content">
             <span class="close" onclick="toggleMenu()">&times;</span>
             <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
@@ -81,6 +81,28 @@ $email = $_SESSION['valid'];
     </main>
     <script src="comment.js"></script>
     <script>
+        // BURGER ICON
+        document.addEventListener("DOMContentLoaded", function () {
+            var burgerIcon = document.querySelector(".burger-icon");
+            var navLinks = document.querySelector(".nav-links");
+            var modal = document.getElementById('navModal');
+            var overlay = document.querySelector(".overlay");
+            var closeBtn = document.querySelector(".close");
+
+            burgerIcon.addEventListener("click", function () {
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            function closeModal() {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
+            }
+
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", closeModal);
+            
+        });
         document.addEventListener('DOMContentLoaded', function() {
             window.showLogoutModal = function() {
                 console.log("Logout function called");
