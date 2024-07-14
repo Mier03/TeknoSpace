@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_SESSION['firstName'].' '. $_SESSION['lastName']; 
     $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; //change this
     $imagePath = "";
+    $isPostImportant = (int) $_POST['isImportant'];
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $targetDir = "../uploads/";
@@ -25,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imagePath = $targetFile;
     }
 
-    $sql = "INSERT INTO posts (username, content, posttype, audience, profile_image, image_path, userId) VALUES ('$username', '$content','$posttype', '$audience', '$profile_image', '$imagePath', '$loggedUserId')";
+    $sql = "INSERT INTO posts (username, content, posttype, audience, profile_image, image_path, userId, is_important) VALUES ('$username', '$content','$posttype', '$audience', '$profile_image', '$imagePath', '$loggedUserId', '$isPostImportant')";
 
     if ($conn->query($sql) === TRUE) {
         $post_id = $conn->insert_id;

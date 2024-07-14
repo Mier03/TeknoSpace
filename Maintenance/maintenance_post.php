@@ -1,26 +1,21 @@
 <?php
-// $servername = "127.0.0.1";
-// $username = "root"; 
-// $password = ""; 
-// $dbname = "teknospace"; 
 session_start();
 include('../helper.php');
 include('../config.php');
 $loggedUserId = $_SESSION['id'];
-// // Create connection
-// $conn = new mysqli($servername, $username, $password, $dbname);
-// $conn = mysqli_connect("localhost","root","","accounts") or die("Couldn't connect");
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// get lost and found posts from db together and its comments
+// Fetch posts and sort by is_important descending, then by created_at descending
 $sql = "SELECT 
            posts.id AS postId,
            posts.content,
            posts.created_at,
            posts.image_path,
+           posts.is_important,
            poster.id AS posterId,
            poster.firstName,
            poster.lastName,
@@ -32,17 +27,17 @@ $sql = "SELECT
            commenter.lastName AS commenterLname,
            (SELECT COUNT(*) FROM likes WHERE postid = posts.id) AS like_count,
            (SELECT COUNT(*) FROM likes WHERE postid = posts.id AND userid = '$loggedUserId') AS user_liked
-        FROM posts 
-        LEFT JOIN comments ON posts.id = comments.postId 
-        LEFT JOIN users AS poster ON poster.id = posts.userId
-        LEFT JOIN users AS commenter ON commenter.id = comments.userId
-        WHERE posts.posttype = 'Maintenance'
-        GROUP BY posts.id, comments.id, poster.id, commenter.id
-        ORDER BY posts.created_at DESC, dateCommented DESC";
+       FROM posts 
+       LEFT JOIN comments ON posts.id = comments.postId 
+       LEFT JOIN users AS poster ON poster.id = posts.userId
+       LEFT JOIN users AS commenter ON commenter.id = comments.userId
+       WHERE posts.posttype = 'Maintenance'
+       GROUP BY posts.id, comments.id, poster.id, commenter.id
+       ORDER BY posts.is_important DESC, posts.created_at DESC, dateCommented DESC";
 
 $result = $conn->query($sql);
 
-// all post container together its comments if has
+// All post container together with its comments if has
 $posts = [];
 
 if ($result->num_rows > 0) {
@@ -70,6 +65,7 @@ if ($result->num_rows > 0) {
                 'datePosted' => $row['created_at'],
                 'postImage' => $row['image_path'],
                 'postContent' => $row['content'],
+                'isImportant' => $row['is_important'],
                 'comments' => [],
                 'likes' => $row['like_count'],
                 'user_liked' => $row['user_liked'],
@@ -87,66 +83,67 @@ if ($result->num_rows > 0) {
     }
 }
 
-
 if (!empty($posts)) {
-   foreach($posts as $post) {
-       
+    foreach ($posts as $post) {
+        $postClass = $post['isImportant'] ? 'important-post' : '';
+        
         echo '
-            <div class="post-container">
-                <div class="post">
-                    <div class="post-header">
-                        <img src="'.$post['profileImage'].'" alt="Profile Image">
-                        <div class="post-header-info">
-                            <h3>'.$post['fullName'].'</h3>
-                            <p>'.relative_time($post['datePosted']).'</p>
-                        </div>
+        <div class="post-container '.$postClass.'">
+            <div class="post">
+                <div class="post-header">';
+        if ($post['isImportant']) {
+            echo '<span class="important-badge"><strong>IMPORTANT</strong></span>';
+        }
+        echo '
+                    <img src="'.$post['profileImage'].'" alt="Profile Image">
+                    <div class="post-header-info">
+                        <h3>'.$post['fullName'].'</h3>
+                        <p>'.relative_time($post['datePosted']).'</p>
                     </div>
-                    <div class="post-content">
-                        <p>'.$post['postContent'].'</p>';
+                </div>
+                <div class="post-content">
+                    <p>'.$post['postContent'].'</p>';
         if (!empty($post['postImage'])) {
             echo '<img src="'.$post['postImage'].'" alt="Post Image" style="max-width: 100%; height: auto;">';
         }
         echo '
-                    </div>
-                    <div class="post-actions">
-                       <a href="#" class="like-btn" data-postid="'.$post['id'].'">
-                            <i class="fi '.($post['user_liked'] ? 'fi-ss-social-network' : 'fi-rs-social-network').'"></i>
-                            <small class="likes-count">'.$post['likes'].'</small> 
-                            Likes
-                        </a>
-
-                        <a href="#" class="comment-btn">
-                            <i class="fi fi-ts-comment-dots"></i> 
-                            <small>'.count($post['comments']).'</small>
-                            Comment
-                        </a>
-                    </div>
-                    <div class="comments-section" style="display: none;">
-                        <div class="comment-input">
-                            <input type="text" placeholder="Write a comment...">
-                            <button class="submit-comment" data-pid="'.$post['id'].'" data-uid="'.$loggedUserId .'" >
-                                <i class="fi fi-ss-paper-plane-top">
-                                </i>
-                            </button>
-                            
-                        </div>
-                        <div class="comments-list">';
-                        if (count($post['comments']) > 0) {
-                                        foreach($post['comments'] as $comment) { 
-                                            echo '<div class="comment">';
-                                            echo '<b>'.$comment['commenter'].'</b>';
-                                            echo '<p>'.$comment['comment'].'</p>';
-                                            echo '</div>';
-                                        }
-                                    }
-                        echo '</div>
-                    </div>
                 </div>
-            </div>';
+                <div class="post-actions">
+                    <a href="#" class="like-btn" data-postid="'.$post['id'].'">
+                        <i class="fi '.($post['user_liked'] ? 'fi-ss-social-network' : 'fi-rs-social-network').'"></i>
+                        <small class="likes-count">'.$post['likes'].'</small> 
+                        Likes
+                    </a>
+                    <a href="#" class="comment-btn">
+                        <i class="fi fi-ts-comment-dots"></i> 
+                        <small>'.count($post['comments']).'</small>
+                        Comment
+                    </a>
+                </div>
+                <div class="comments-section" style="display: none;">
+                    <div class="comment-input">
+                        <input type="text" placeholder="Write a comment...">
+                        <button class="submit-comment" data-pid="'.$post['id'].'" data-uid="'.$loggedUserId.'">
+                            <i class="fi fi-ss-paper-plane-top"></i>
+                        </button>
+                    </div>
+                    <div class="comments-list">';
+        if (count($post['comments']) > 0) {
+            foreach ($post['comments'] as $comment) {
+                echo '<div class="comment">';
+                echo '<b>'.$comment['commenter'].'</b>';
+                echo '<p>'.$comment['comment'].'</p>';
+                echo '</div>';
+            }
+        }
+        echo '</div>
+                </div>
+            </div>
+        </div>';
     }
 } else {
     echo '<div class="post-container">
-                <div class="post">"No posts found."</div>
+            <div class="post">"No posts found."</div>
           </div>';
 }
 

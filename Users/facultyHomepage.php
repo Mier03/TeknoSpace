@@ -22,6 +22,7 @@ $email = $_SESSION['valid'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknospace</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Admin_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
@@ -108,7 +109,7 @@ $email = $_SESSION['valid'];
                     </div>
                     <div class="important">
                         <label class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox"  id="importantToggle">
                             <span class="slider"></span>
                         </label>
                         <span class="label-text">IMPORTANT</span>
