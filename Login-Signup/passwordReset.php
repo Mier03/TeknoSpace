@@ -77,8 +77,7 @@ $prefill_identifier = isset($_GET['identifier']) ? htmlspecialchars($_GET['ident
 
     </div>
     <script src="script.js"></script>
-    <style>
-    </style>
+
 </body>
 
 </html>
