@@ -801,3 +801,35 @@ tr:hover {
 .notification-icon.active {
     color: #1877F2;
 }
+
+/*important post*/
+.post-container {
+    border: 1px solid #ddd; 
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    display:flex;
+}
+
+.important-post {
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.important-badge {
+    background-color: transparent;
+    color: rgb(246, 0, 0);
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;  
+    right: 10px;
+}
+
+.important-badge::before {
+    content: "❗";
+    margin-right: 5px;
+}
+

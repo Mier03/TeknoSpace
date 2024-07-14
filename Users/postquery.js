@@ -1,28 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var postInput = document.getElementById('postInput');
-    var modal = document.getElementById('postModal');
-    var span = document.querySelector('#postModal .close');
-    var submitPost = document.getElementById('submitPost');
-    var postContent = document.getElementById('postContent');
-    var postAudience = document.getElementById('postAudience');
+$(document).ready(function() {
+    var submitPost =document.getElementById('submitPost');
+    var postContent =document.getElementById('postContent');
+    var postAudience =document.getElementById('postAudience');
     var postImage = document.getElementById('postImage');
-    
     var isImportantToggle = document.getElementById('importantToggle');
+
     var selectedImage = null; // Store the selected image data URL
 
-    postInput.onclick = function() {
-        modal.style.display = "block";
-    }
+    $('#postInput').on('click', function(e) {
+        e.stopPropagation();
+        openPostModal(true);
+    });
 
-    span.onclick = function(){
-        modal.style.display = "none";
-    }
+    $('#postCloseModal').on('click', function() {
+        openPostModal(false);
+    });
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    // closes post modal when click outside the modal
+    $(document).on('click', function(event) {
+        if ($(event.target).closest('.postmodal-content').length === 0 ) {
+            openPostModal(false);
         }
-    }
+    });
 
     // Select the picture icon and the hidden file input
     const pictureIcon = document.querySelector('.fi.fi-br-picture');
@@ -56,12 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
             reader.readAsDataURL(postImage.files[0]);
         }
     });
-
+    
     submitPost.onclick = function() {
         var textContent = postContent.innerText; // Get text content
         var audience = postAudience.value;
         var imageFile = postImage.files[0];
-        var post = 'Maintenance';
+        var post = 'Announcement';
 
         if (textContent || imageFile) {
             var formData = new FormData();
@@ -69,21 +68,36 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append("audience", audience);
             formData.append("posts", post);
             formData.append("isImportant", isImportantToggle.checked ? 1 : 0);
+
             if (imageFile) {
                 formData.append("image", imageFile);
             }
 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../Users/create_post.php", true);
+            xhr.open("POST", "create_post.php", true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     postContent.innerHTML = ''; // Clear text content
                     postImage.value = ''; // Clear file input
-                    modal.style.display = "none";
+
+                    // close modal 
+                    openPostModal(false);
                     window.location.reload();
                 }
             };
             xhr.send(formData);
         }
     }
+
+    function openPostModal(openModal = true) {
+        var postModal = $('#postModal');
+
+        if(openModal) {
+            postModal.show();
+        } else {
+            postModal.hide();
+        }  
+    }
 });
+
+

@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var postContent = document.getElementById('postContent');
     var postAudience = document.getElementById('postAudience');
     var postImage = document.getElementById('postImage');
-
+    
+    var isImportantToggle = document.getElementById('importantToggle');
     var selectedImage = null; // Store the selected image data URL
 
     postInput.onclick = function() {
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append("content", textContent); // Append text content
             formData.append("audience", audience);
             formData.append("posts", post);
+            formData.append("isImportant", isImportantToggle.checked ? 1 : 0);
             if (imageFile) {
                 formData.append("image", imageFile);
             }
@@ -85,5 +87,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
-

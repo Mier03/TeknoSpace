@@ -21,6 +21,7 @@ $sql = "SELECT
             posts.content,
             posts.created_at,
             posts.image_path,
+            posts.is_important,
             poster.id AS posterId,
             poster.firstName,
             poster.lastName,
@@ -38,7 +39,7 @@ $sql = "SELECT
         LEFT JOIN users AS commenter ON commenter.id = comments.userId
         WHERE posts.posttype = 'Announcement'
         GROUP BY posts.id, comments.id, poster.id, commenter.id
-        ORDER BY posts.created_at DESC, dateCommented DESC";
+        ORDER BY posts.is_important DESC,posts.created_at DESC, dateCommented DESC";
 
 $result = $conn->query($sql);
 
@@ -70,6 +71,7 @@ if ($result->num_rows > 0) {
                 'datePosted' => $row['created_at'],
                 'postImage' => $row['image_path'],
                 'postContent' => $row['content'],
+                'isImportant' => $row['is_important'],
                 'comments' => [],
                 'likes' => $row['like_count'],
                 'user_liked' => $row['user_liked'],
@@ -90,19 +92,25 @@ if ($result->num_rows > 0) {
 
 if (!empty($posts)) {
    foreach($posts as $post) {
-       
+        $postClass = $post['isImportant'] ? 'important-post' : '';
+            
         echo '
-            <div class="post-container">
-                <div class="post">
-                    <div class="post-header">
-                        <img src="'.$post['profileImage'].'" alt="Profile Image">
-                        <div class="post-header-info">
-                            <h3>'.$post['fullName'].'</h3>
-                            <p>'.relative_time($post['datePosted']).'</p>
-                        </div>
+        <div class="post-container '.$postClass.'">
+            <div class="post">
+                <div class="post-header">';
+        if ($post['isImportant']) {
+            echo '<span class="important-badge"><strong>IMPORTANT</strong></span>';
+
+        }
+        echo '
+                    <img src="'.$post['profileImage'].'" alt="Profile Image">
+                    <div class="post-header-info">
+                        <h3>'.$post['fullName'].'</h3>
+                        <p>'.relative_time($post['datePosted']).'</p>
                     </div>
-                    <div class="post-content">
-                        <p>'.$post['postContent'].'</p>';
+                </div>
+                <div class="post-content">
+                    <p>'.$post['postContent'].'</p>';
         if (!empty($post['postImage'])) {
             echo '<img src="'.$post['postImage'].'" alt="Post Image" style="max-width: 100%; height: auto;">';
         }
