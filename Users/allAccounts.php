@@ -43,21 +43,21 @@ if (isset($_GET['userId'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
     $userId = $_POST['reset_password'];
     
-    // Prepare the SQL statement
+    
     $sql = "UPDATE users SET password = NULL WHERE Id = ?";
     
-    // Prepare and bind
+    
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $userId);
     
-    // Execute the statement
+    
     if ($stmt->execute()) {
         echo "<script>alert('Password has been reset successfully.');</script>";
     } else {
         echo "<script>alert('Error resetting password: " . $conn->error . "');</script>";
     }
     
-    // Close statement
+    
     $stmt->close();
 }
 
