@@ -23,16 +23,27 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
+            <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
-                <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
-                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
-                <a href="../aboutUs.php">Log Out</a>
+                <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>                
+                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>                
+                <a href="#" onclick="showLogoutModal()">Log Out</a>
+            </div>
+            <div class="burger-icon">
+                <i class='bx bx-menu burger-icon' onclick="toggleMenu()"></i>
             </div>
         </div>
     </header>
+    <div id="navModal" class="navmodal">
+        <div class="navmodal-content">
+            <span class="close" onclick="toggleMenu()">&times;</span>
+            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
+                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
+                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+        </div>
+    </div>
     <nav class="nav">
         <ul>
             <li><a href="../Users/studentHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
@@ -41,13 +52,96 @@
         </ul>
     </nav>
     <main class="main">
-        <div class="posts">
-            
+    <div class="posts">
+    </div>
+    <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged Out Successfully</p>
+            </div>
+        </div>
+        <div id="notificationModal" class="notification-modal">
+            <div class="notification-content">
+                <p>No new notifications</p>
+            </div>
         </div>
     </main>
     
     <script src="comment.js"></script>
-    
+    <script>
+        // BURGER ICON
+        document.addEventListener("DOMContentLoaded", function () {
+            var burgerIcon = document.querySelector(".burger-icon");
+            var navLinks = document.querySelector(".nav-links");
+            var modal = document.getElementById('navModal');
+            var overlay = document.querySelector(".overlay");
+            var closeBtn = document.querySelector(".close");
+
+            burgerIcon.addEventListener("click", function () {
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            function closeModal() {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
+            }
+
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", closeModal);
+            
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showLogoutModal = function() {
+                console.log("Logout function called");
+                var modal = document.getElementById('logoutModal');
+                if (modal) {
+                    modal.style.display = "block";
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                        window.location.href = "../aboutUs.php";
+                    }, 1250);
+                } else {
+                    console.error("Logout modal not found");
+                }
+            };
+        });
+
+
+            /**Notification Modal */
+            document.addEventListener('DOMContentLoaded', function() {
+            const notificationIcon = document.querySelector('a[href="#notif"] i');
+            const notificationModal = document.getElementById('notificationModal');
+
+        function openNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'block';
+            notificationIcon.classList.add('active');
+            notificationIcon.classList.remove('fi-br-bell-notification-social-media');
+            notificationIcon.classList.add('fi-br-cross-small');
+            notificationIcon.removeEventListener('click', openNotificationModal);
+            notificationIcon.addEventListener('click', closeNotificationModal);
+        }
+
+        function closeNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'none';
+            notificationIcon.classList.remove('active');
+            notificationIcon.classList.remove('fi-br-cross-small');
+            notificationIcon.classList.add('fi-br-bell-notification-social-media');
+            notificationIcon.removeEventListener('click', closeNotificationModal);
+            notificationIcon.addEventListener('click', openNotificationModal);
+        }
+
+        notificationIcon.addEventListener('click', openNotificationModal);
+
+        window.addEventListener('click', function(e) {
+            if (e.target == notificationModal) {
+                closeNotificationModal(e);
+        }
+        });
+        });
+    </script>
     <style>
         .background-container img {
             position: fixed;
