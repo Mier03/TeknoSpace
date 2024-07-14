@@ -126,7 +126,7 @@ $email = $_SESSION['valid'];
                     </div>
                     <div class="important">
                         <label class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox"  id="importantToggle">
                             <span class="slider"></span>
                         </label>
                         <span class="label-text">IMPORTANT</span>

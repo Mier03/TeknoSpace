@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Forgot password?</p>
             </div>
 
-            <form method="post" action="">
+            <form method="post" action="forgotPass.php">
             <?php
                 if (!empty($errors)) {
                     foreach ($errors as $error) {
@@ -69,8 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            
     </div>
     <script src="script.js"></script>
-    <style>
-    </style>
+  
 </body>
 
 </html>
