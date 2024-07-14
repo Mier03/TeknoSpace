@@ -840,3 +840,14 @@ tr:hover {
     margin-right: 5px;
 }
 
+/* lost&found */
+.post-content h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(204, 35, 35);
+    padding: 0 !important;
+    margin-bottom: 0;
+    margin-top: 1rem !important; 
+    font-family:'Georgia';
+}
