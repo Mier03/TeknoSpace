@@ -127,7 +127,7 @@ $email = $_SESSION['valid'];
                     </div>
                     <div class="important">
                         <label class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox"  id="importantToggle">
                             <span class="slider"></span>
                         </label>
                         <span class="label-text">IMPORTANT</span>
@@ -156,8 +156,8 @@ $email = $_SESSION['valid'];
         </div>
 
     </main>
-    <script src="admin.js"></script>
     <script src="post.js"></script>
+    <script src="admin.js"></script>
     <script src="comment.js"></script>
     <script>
         // BURGER ICON
