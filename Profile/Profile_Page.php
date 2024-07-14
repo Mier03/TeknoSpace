@@ -400,59 +400,101 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
 
 
         .post-options {
-        position: relative;
-        display: inline-block;
-    }
+            position: relative;
+            display: inline-block;
+        }
 
-    .post-options-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
+        .post-options-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 1.2em;
+            color: #800000;
+        }
 
-    .post-options-btn i {
-        font-size: 1.5rem;
-        color: #333;
-    }
+        .post-options-btn i {
+            font-size: 1.5rem;
+            color: #333;
+        }
 
-    .post-options-content {
-        position: absolute;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border: 1px solid #ccc;
-        padding: 8px;
-        top: 30px;
-        right: 0;
-        z-index: 100;
-        display: none;
-    }
+        .post-options-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 180px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 8px;
+            top: 30px;
+            right: 0;
+            z-index: 1;
+            display: none;
+        }
 
-    .post-options-content.show {
-        display: block;
-    }
+        .post-options-content.show {
+            display: block;
+        }
 
-    .post-options-content a {
-        display: block;
-        padding: 6px 10px;
-        color: #333;
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
+        .post-options-content a {
+            display: block;
+            padding: 6px 10px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
 
-    .post-options-content a:hover {
-        background-color: #f0f0f0;
-    }
+        .post-options-content a:hover {
+            background-color: #f1e6e6;
+        }
 
-    .important-badge {
-        display: inline-block;
-        padding: 4px 8px;
-        background-color: #DC143C; 
-        color: #fff;
-        font-weight: bold;
-        font-size: 0.8rem;
-        margin-right: 6px;
-        border-radius: 4px;
-    }
+        .edit-post,
+        .delete-post,
+        .toggle-important {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .edit-post:before,
+        .delete-post:before,
+        .toggle-important:before {
+            margin-right: 8px;
+            font-family: 'boxicons';
+            font-size: 1.1em;
+            vertical-align: middle;
+        }
+
+        .edit-post:before {
+            /* pa edit sa iconnn hehe  or remove nalang if di ninyo bet mag icon*/
+            content: '\ea8b';
+            
+            color: #800000;
+        }
+
+        .delete-post:before {
+            /* pa edit sa iconnn hehe */
+            content: '\eb78';
+            
+            color: #800000;
+        }
+
+        .toggle-important:before {
+            /* pa edit sa iconnn hehe */
+            content: '\ea0e';
+            
+            color: #800000;
+        }
+
+        .important-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: #DC143C;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 6px;
+            border-radius: 4px;
+        }
     </style>
     <!-- <link rel="stylesheet" href="Profile_styles.css"> -->
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">

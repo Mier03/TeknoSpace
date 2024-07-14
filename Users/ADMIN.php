@@ -31,7 +31,7 @@ $email = $_SESSION['valid'];
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-   
+
 </head>
 
 <body>
@@ -58,9 +58,9 @@ $email = $_SESSION['valid'];
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
             <span class="close" onclick="toggleMobileMenu()">&times;</span>
-            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
-                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
-                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"> Profile</span></a>
+            <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link"> Notifications</span></a>
+            <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit'></i> Log Out</a>
         </div>
     </div>
 
@@ -133,8 +133,8 @@ $email = $_SESSION['valid'];
                         <span class="label-text">IMPORTANT</span>
                     </div>
                 </div>
-        <button class="btn-post" id="submitPost">Post</button>
-        </div>
+                <button class="btn-post" id="submitPost">Post</button>
+            </div>
         </div>
 
         <div id="logoutModal" class="logout-modal">
@@ -147,7 +147,7 @@ $email = $_SESSION['valid'];
         <div class="posts">
 
         </div>
-    <!--Notification Modal-->
+        <!--Notification Modal-->
         <div id="notificationModal" class="notification-modal">
             <div class="notification-content">
                 <span class="close-notification">&times;</span>
@@ -161,14 +161,14 @@ $email = $_SESSION['valid'];
     <script src="comment.js"></script>
     <script>
         // BURGER ICON
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             var burgerIcon = document.querySelector(".burger-icon");
             var navLinks = document.querySelector(".nav-links");
             var modal = document.getElementById('navModal');
             var overlay = document.querySelector(".overlay");
             var closeBtn = document.querySelector(".close");
 
-            burgerIcon.addEventListener("click", function () {
+            burgerIcon.addEventListener("click", function() {
                 modal.classList.toggle("active");
                 overlay.classList.toggle("active");
             });
@@ -180,7 +180,7 @@ $email = $_SESSION['valid'];
 
             closeBtn.addEventListener("click", closeModal);
             overlay.addEventListener("click", closeModal);
-            
+
         });
     </script>
     <style>
@@ -193,7 +193,8 @@ $email = $_SESSION['valid'];
             z-index: -1;
             opacity: 0.5;
             object-fit: cover;
-        } 
+        }
+
         .switch {
             position: relative;
             display: inline-block;
