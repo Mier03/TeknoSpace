@@ -152,6 +152,7 @@ $email = $_SESSION['valid'];
     </main>
 
     <script src="post.js"></script>
+    <script src = "../Users/admin.js"> </script>
     <script src="comment.js"></script>
     <style>
         .background-container img {
