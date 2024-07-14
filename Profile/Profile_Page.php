@@ -453,10 +453,12 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
 
         .edit-post,
         .delete-post,
-        .toggle-important {
+        .toggle-important,
+        .toggle-found {
             border-bottom: 1px solid #e0e0e0;
         }
 
+        .toggle-found:before,
         .edit-post:before,
         .delete-post:before,
         .toggle-important:before {
@@ -465,7 +467,10 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             font-size: 1.1em;
             vertical-align: middle;
         }
-
+        .toggle-found:before {
+            content: '\e9c1';
+            color: #800000;
+        }
         .edit-post:before {
             /* pa edit sa iconnn hehe  or remove nalang if di ninyo bet mag icon*/
             content: '\ea8b';
@@ -496,6 +501,16 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             font-size: 0.8rem;
             margin-right: 6px;
             border-radius: 4px;
+        }
+        .post-content h1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgb(204, 35, 35);
+            padding: 0 !important;
+            margin-bottom: 0;
+            margin-top: 1rem !important; 
+            font-family:'Georgia';
         }
     </style>
     <!-- <link rel="stylesheet" href="Profile_styles.css"> -->
@@ -627,12 +642,22 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                                 <?php else : ?>
                                                     <a href="#" class="toggle-important" data-action="make">Make Important</a>
                                                 <?php endif; ?>
+                                            <?php elseif ($post['posttype'] === 'Lost & Found') : ?>
+                                                <a href="#" class="toggle-found" data-action="found" onclick="toggleFound(<?php echo $post['id']; ?>, 'found', this);">Found</a>
                                             <?php endif; ?>
-
                                         </div>
                                     </div>
                                 </div>
                                 <div class="post-content">
+                                <?php if ($post['posttype'] === 'Lost & Found') : ?>
+                                    <div>
+                                        <?php if ($post['status'] === 'found') : ?>
+                                            <h1 style="color: #800000">! FOUND</h1>
+                                        <?php else : ?>
+                                            <h1 style="color: red">! LOST</h1>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
                                         <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
@@ -684,6 +709,8 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                                 <?php else : ?>
                                                     <a href="#" class="toggle-important" data-action="make">Make Important</a>
                                                 <?php endif; ?>
+                                            <?php elseif ($post['posttype'] === 'Lost & Found') : ?>
+                                                <a href="#" class="toggle-found" data-action="found">Found</a>
                                             <?php endif; ?>
 
                                         </div>
@@ -763,6 +790,14 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                     toggleImportance(postId, action, event.target);
 
                 }
+
+                if (event.target.classList.contains('toggle-found')) {
+                    event.preventDefault();
+                    const postId = event.target.closest('.post').dataset.postId;
+                    const action = event.target.dataset.action;
+                    toggleFound(postId, action, event.target);
+
+                }
             });
 
             function toggleImportance(postId, action, toggleLink) {
@@ -806,7 +841,37 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                     });
             }
 
+            function toggleFound(postId, action, toggleLink) {
+                if (confirm('Is this item found?')) {
+                    fetch('update_status.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `postId=${postId}&action=${action}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const post = toggleLink.closest('.post');
+                            const lostHeading = post.querySelector('h1');
 
+                            if (lostHeading) {
+                                lostHeading.innerText = '! FOUND';
+                                lostHeading.style.color = '#800000'; // Optionally change the color if needed
+                            }
+                        } else {
+                            alert('Failed to update status: ' + (data.error || 'Unknown error'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error: ' + error.message);
+                    });
+                }
+            }
+
+            
             function saveEdit(postId, newContent, contentElement, originalContent) {
                 fetch('edit_post.php', {
                         method: 'POST',
