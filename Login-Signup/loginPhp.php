@@ -146,7 +146,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
                         alert('Your password has been reset. Initial password setup required.');
-                        window.location.href = 'passwordReset.php?identifier=$identifier';
+                        // window.location.href = 'passwordReset.php?identifier=$identifier';
+                        window.location.href = 'admin_reset_pass.php?identifier=$identifier';
                     });
                 </script>";
             } else if (password_verify($password, $row['password'])) {
@@ -247,11 +248,17 @@ if (isset($_POST['submit_newpass'])) {
 
             if (mysqli_query($conn, $update_sql)) {
 
+                $reset_sql = "UPDATE users SET reset_token_hash=NULL, reset_token_expires_at=NULL WHERE Id={$row['Id']}";
+                mysqli_query($conn, $reset_sql);
+
                 $successes[] = 'Password Updated Successfully';
 
                 $_POST['email_or_id'] = '';
                 $_POST['newpassword'] = '';
                 $_POST['cpassword'] = '';
+
+                header('Location: login.php');
+                exit();
             } else {
                 $errors[] = 'Error Updating Password: ' . mysqli_error($conn);
 
@@ -274,7 +281,8 @@ if (isset($_POST['submit_newpass'])) {
 
 
 
-if (isset($_POST['submit_newResetPass'])) {
+//reset by the admin
+if (isset($_POST['submit_newResetPass'])) { 
     $errors = [];
 
     $email_or_id = mysqli_real_escape_string($conn, $_POST['email_or_id']);
@@ -312,11 +320,17 @@ if (isset($_POST['submit_newResetPass'])) {
 
             if (mysqli_query($conn, $update_sql)) {
 
+                $reset_sql = "UPDATE users SET reset_token_hash=NULL, reset_token_expires_at=NULL WHERE Id={$row['Id']}";
+                mysqli_query($conn, $reset_sql);
+
                 $successes[] = 'Password Updated Successfully';
 
                 $_POST['email_or_id'] = '';
                 $_POST['newpassword'] = '';
                 $_POST['cpassword'] = '';
+
+                header('Location: loginPhp.php');
+                exit();
             } else {
                 $errors[] = 'Error Updating Password: ' . mysqli_error($conn);
 

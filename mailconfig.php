@@ -11,8 +11,8 @@ function initializePHPMailer() {
     $mail->isSMTP();
     $mail->Host = 'sandbox.smtp.mailtrap.io';
     $mail->SMTPAuth = true;
-    $mail->Username = '3f5c64e3d2c216';
-    $mail->Password = '114937a1308f7e';
+    $mail->Username = 'c3bfa32884d1fe';
+    $mail->Password = '3a8443294e643f';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
     $mail->Port = 2525; // TCP port to connect to
     $mail->setFrom('info@teknospace.com', 'Teknospace');
