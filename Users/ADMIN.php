@@ -199,6 +199,23 @@ if ($result->num_rows > 0) {
             overlay.addEventListener("click", closeModal);
             
         });
+
+        //logout
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showLogoutModal = function() {
+                console.log("Logout function called"); // Debugging line
+                var modal = document.getElementById('logoutModal');
+                if (modal) {
+                    modal.style.display = "block";
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                        window.location.href = "../aboutUs.php"; // Adjust this URL as needed
+                    }, 1250);
+                } else {
+                    console.error("Logout modal not found"); // Debugging line
+                }
+            };
+        });
     </script>
     <style>
         .background-container img {

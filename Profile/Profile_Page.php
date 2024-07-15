@@ -134,6 +134,107 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             font-weight: bold;
         }
 
+        .burger-icon {
+            display: none;
+        }
+
+        @media screen and (max-width: 490px) {
+            .nav-links {
+                display: none;
+            }
+
+            .burger-icon {
+                display: block;
+                font-size: 24px;
+                cursor: pointer;
+                margin-right: 1rem;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav {
+                padding-right: 25px;
+                padding-left: 25px;
+            }
+
+            .navmodal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            
+            .navmodal-content {
+                display: block;
+                background-color: #630F10;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                width: 80%;
+                max-width: 300px;
+            }
+            .navmodal-content a {
+                display: block;
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                margin: 15px 0;
+                text-align: center;
+                transition: color 0.3s ease;
+            }
+            
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                z-index: 999;
+            }
+            
+            .overlay.active,
+            .navmodal.active {
+                display: block;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .close {
+                color: gold;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #888;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            #posts h2 {
+                margin-left:1rem;
+            }
+        }
+        .navmodal {
+            display: none;
+        }
+        .navmodal-content a:hover, 
+        .navmodal-content a.active {
+            color: gold;
+        }
         .nav-links a {
             color: white;
             margin-left: 20px;
@@ -533,6 +634,8 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                     echo '<a href="../Users/studentHomepage.php">';
                 } elseif ($userType === 'Faculty') {
                     echo '<a href="../Users/facultyHomepage.php">';
+                } elseif ($userType === 'Admin') {
+                    echo '<a href="../Users/ADMIN.php">';
                 }
                 ?>
                 <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
@@ -541,10 +644,23 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             <div class="nav-links">
                 <a href="Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
-                <a href="../aboutUs.php">Log Out</a>
+                <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
+            </div>
+            <div class="burger-icon">
+                <i class='bx bx-menu burger-icon' onclick="toggleMenu()"></i>
             </div>
         </div>
     </header>
+    <!-- navmodal -->
+    <div id="navModal" class="navmodal">
+        <div class="navmodal-content">
+            <span class="close" onclick="toggleMobileMenu()">&times;</span>
+                <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
+                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
+                <!-- not working -->
+                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+        </div>
+    </div>
     <main>
         <section id="profile">
             <div class="cover-photo">
@@ -717,6 +833,15 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                     </div>
                                 </div>
                                 <div class="post-content">
+                                <?php if ($post['posttype'] === 'Lost & Found') : ?>
+                                    <div>
+                                        <?php if ($post['status'] === 'found') : ?>
+                                            <h1 style="color: #800000">! FOUND</h1>
+                                        <?php else : ?>
+                                            <h1 style="color: red">! LOST</h1>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
                                         <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
@@ -738,6 +863,45 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
     </form>
 
     <script>
+        // BURGER ICON
+        document.addEventListener("DOMContentLoaded", function () {
+            var burgerIcon = document.querySelector(".burger-icon");
+            var navLinks = document.querySelector(".nav-links");
+            var modal = document.getElementById('navModal');
+            var overlay = document.querySelector(".overlay");
+            var closeBtn = document.querySelector(".close");
+
+            burgerIcon.addEventListener("click", function () {
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            function closeModal() {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
+            }
+
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", closeModal);
+            
+        });
+        /**LOGOUT MODAL */
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showLogoutModal = function() {
+                console.log("Logout function called");
+                var modal = document.getElementById('logoutModal');
+                if (modal) {
+                    modal.style.display = "block";
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                        window.location.href = "../aboutUs.php"; 
+                    }, 1250);
+                } else {
+                    console.error("Logout modal not found"); 
+                }
+            };
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('post-list').addEventListener('click', function(event) {
                 var button = event.target.closest('.post-options-btn');
