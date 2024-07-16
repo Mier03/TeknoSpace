@@ -178,22 +178,34 @@ if ($result->num_rows > 0) {
         });
 
 
-        /**LOGOUT MODAL */
+        //logout
         document.addEventListener('DOMContentLoaded', function() {
             window.showLogoutModal = function() {
-                console.log("Logout function called");
+                console.log("Logout function called"); 
                 var modal = document.getElementById('logoutModal');
                 if (modal) {
                     modal.style.display = "block";
                     setTimeout(function() {
                         modal.style.display = "none";
                         window.location.href = "../aboutUs.php"; 
+                        logout();
                     }, 1250);
                 } else {
                     console.error("Logout modal not found"); 
                 }
             };
         });
+        function logout() {
+            fetch('logout.php', {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '../aboutUs.php';
+                }
+            }).catch(error => {
+                console.error('Logout failed:', error);
+            });
+        }
             /**Notification Modal */
             document.addEventListener('DOMContentLoaded', function() {
             const notificationIcon = document.querySelector('a[href="#notif"] i');
