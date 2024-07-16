@@ -78,6 +78,11 @@ $email = $_SESSION['valid'];
                 <p>No new notifications</p>
             </div>
         </div>
+         <!-- Interactive Image -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="fullImage">
+    </div>
     </main>
     <script src="comment.js"></script>
     <script>
@@ -152,8 +157,35 @@ $email = $_SESSION['valid'];
                 closeNotificationModal(e);
         }
         });
+        //Image Modal
+            var imageModal = document.getElementById('imageModal');
+            var modalImg = document.getElementById("fullImage");
+            var span = document.querySelector("#imageModal .close");
+
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('post-image')) {
+                    imageModal.style.display = "flex";
+                    modalImg.src = e.target.getAttribute('data-full-image');
+                }
+            });
+
+            span.onclick = function() {
+                imageModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == imageModal) {
+                    imageModal.style.display = "none";
+                }
+            }
+            document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                imageModal.classList.remove('show');
+            }
+        });
         });
 </script>
+
 </body>
     <style>
         .background-container img {
@@ -166,6 +198,56 @@ $email = $_SESSION['valid'];
     opacity: 0.5; 
     object-fit: cover;
     }
+    .post-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+#imageModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imageModal .modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+#imageModal .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#imageModal.show {
+    display: flex;
+}
+#imageModal .close:hover,
+#imageModal .close:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+#imageModal{
+    display: none;
+}
     </style>
 </body>
 </html>

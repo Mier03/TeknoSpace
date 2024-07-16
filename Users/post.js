@@ -89,11 +89,11 @@ document.addEventListener('DOMContentLoaded', function() {
             //Image Modal
             var imageModal = document.getElementById('imageModal');
             var modalImg = document.getElementById("fullImage");
-            var span = document.getElementsByClassName("close")[0];
+            var span = document.querySelector("#imageModal .close");
 
             document.addEventListener('click', function(e) {
                 if (e.target && e.target.classList.contains('post-image')) {
-                    imageModal.style.display = "block";
+                    imageModal.style.display = "flex";
                     modalImg.src = e.target.getAttribute('data-full-image');
                 }
             });
@@ -107,4 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     imageModal.style.display = "none";
                 }
             }
+            document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                imageModal.classList.remove('show');
+            }
+        });
 });

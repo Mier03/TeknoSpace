@@ -387,25 +387,32 @@ if ($result->num_rows > 0) {
         }
         
         /* Image Clickable */
+        .post-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
         #imageModal {
             display: none;
             position: fixed;
             z-index: 1000;
-            padding-top: 100px;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0,0,0);
             background-color: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #imageModal .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
         }
 
         #imageModal .close {
@@ -416,13 +423,13 @@ if ($result->num_rows > 0) {
             font-size: 40px;
             font-weight: bold;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         #imageModal .close:hover,
         #imageModal .close:focus {
             color: #bbb;
             text-decoration: none;
-            cursor: pointer;
         }
     </style>
 </body>

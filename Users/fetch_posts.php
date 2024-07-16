@@ -111,9 +111,9 @@ if (!empty($posts)) {
                 </div>
                 <div class="post-content">
                     <p>'.$post['postContent'].'</p>';
-            if (!empty($post['postImage'])) {
-                echo '<img src="'.$post['postImage'].'" alt="Post Image" class="post-image" data-full-image="'.$post['postImage'].'" style="width: 300px; height: 200px; object-fit: cover; cursor: pointer;">';
-            }
+                    if (!empty($post['postImage'])) {
+                        echo '<img src="'.$post['postImage'].'" alt="Post Image" class="post-image" data-full-image="'.$post['postImage'].'">';
+                    }
         echo '
                     </div>
                     <div class="post-actions">
