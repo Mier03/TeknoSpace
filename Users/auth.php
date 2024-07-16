@@ -3,7 +3,7 @@ session_start();
 
 function checkLogin() {
     if (!isset($_SESSION['valid'])) {
-        header("Location: ../login.php");
+        header("Location: authno.php");
         exit();
     }
 }

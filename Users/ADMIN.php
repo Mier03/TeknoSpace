@@ -205,19 +205,31 @@ if ($result->num_rows > 0) {
         //logout
         document.addEventListener('DOMContentLoaded', function() {
             window.showLogoutModal = function() {
-                console.log("Logout function called"); // Debugging line
+                console.log("Logout function called"); 
                 var modal = document.getElementById('logoutModal');
                 if (modal) {
                     modal.style.display = "block";
                     setTimeout(function() {
                         modal.style.display = "none";
-                        window.location.href = "../aboutUs.php"; // Adjust this URL as needed
+                        window.location.href = "../aboutUs.php"; 
+                        logout();
                     }, 1250);
                 } else {
-                    console.error("Logout modal not found"); // Debugging line
+                    console.error("Logout modal not found"); 
                 }
             };
         });
+        function logout() {
+            fetch('logout.php', {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '../aboutUs.php';
+                }
+            }).catch(error => {
+                console.error('Logout failed:', error);
+            });
+        }
     </script>
     <style>
         .background-container img {
