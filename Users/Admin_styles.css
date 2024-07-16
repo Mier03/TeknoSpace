@@ -695,6 +695,8 @@ tr:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "Outfit", sans-serif;
+    text-decoration: bold;
 }
 
 .logout-icon {

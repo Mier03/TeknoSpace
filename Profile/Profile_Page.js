@@ -33,3 +33,4 @@ document.getElementById('change-cover').addEventListener('click', () => {
     console.log('Change cover photo clicked');
     // Implement cover photo change functionality here
 });
+

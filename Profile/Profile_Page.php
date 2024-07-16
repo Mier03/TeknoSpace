@@ -613,6 +613,38 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             margin-top: 1rem !important; 
             font-family:'Georgia';
         }
+        /* LOGOUT MODAL */
+        .logout-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .logout-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            z-index: 2001;
+            font-family: "Outfit", sans-serif;
+        }
+
+        .logout-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
     </style>
     <!-- <link rel="stylesheet" href="Profile_styles.css"> -->
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
@@ -620,6 +652,9 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -645,6 +680,12 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 <a href="Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
                 <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
+            </div>
+            <div id="logoutModal" class="logout-modal">
+                <div class="logout-modal-content">
+                    <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                    <p>Logged out successfully</p>
+                </div>
             </div>
             <div class="burger-icon">
                 <i class='bx bx-menu burger-icon' onclick="toggleMenu()"></i>
@@ -863,9 +904,36 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
     </form>
 
     <script>
-        // BURGER ICON
-        document.addEventListener("DOMContentLoaded", function () {
-            var burgerIcon = document.querySelector(".burger-icon");
+        /**LOGOUT MODAL */
+        function showLogoutModal() {
+        console.log("Logout function called");
+        var modal = document.getElementById('logoutModal');
+        var navModal = document.getElementById('navModal');
+        if (modal) {
+            modal.style.display = "block";
+            // Close Burger Icon
+            if (navModal) {
+                navModal.classList.remove("active");
+            }
+            setTimeout(function() {
+                modal.style.display = "none";
+                window.location.href = "../aboutUs.php"; 
+            }, 1250);
+        } else {
+            console.error("Logout modal not found"); 
+        }
+        }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var logoutLink = document.querySelector('#navModal a[onclick*="showLogoutModal"]');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLogoutModal();
+            });
+        }
+
+        var burgerIcon = document.querySelector(".burger-icon");
             var navLinks = document.querySelector(".nav-links");
             var modal = document.getElementById('navModal');
             var overlay = document.querySelector(".overlay");
@@ -883,23 +951,6 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
 
             closeBtn.addEventListener("click", closeModal);
             overlay.addEventListener("click", closeModal);
-            
-        });
-        /**LOGOUT MODAL */
-        document.addEventListener('DOMContentLoaded', function() {
-            window.showLogoutModal = function() {
-                console.log("Logout function called");
-                var modal = document.getElementById('logoutModal');
-                if (modal) {
-                    modal.style.display = "block";
-                    setTimeout(function() {
-                        modal.style.display = "none";
-                        window.location.href = "../aboutUs.php"; 
-                    }, 1250);
-                } else {
-                    console.error("Logout modal not found"); 
-                }
-            };
         });
 
         document.addEventListener('DOMContentLoaded', function() {

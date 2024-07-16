@@ -125,7 +125,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .login-success-modal-content {
             background-color: #fefefe;
             margin: 15% auto;
-            
             padding: 20px;
             border-radius: 5px;
             width: 220px;
@@ -133,7 +132,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display: flex;
             align-items: center;
             justify-content: center;
-            
+            font-family: "Outfit", sans-serif;
+            text-decoration: none;
         }
         .login-success-modal-content p{
             margin-top: 10px;

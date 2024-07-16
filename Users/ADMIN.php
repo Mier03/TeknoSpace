@@ -47,7 +47,9 @@ if ($result->num_rows > 0) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
    
 </head>
 
@@ -352,7 +354,7 @@ if ($result->num_rows > 0) {
             margin: 10px 0;
         }
 
-        /* MODAL */
+        /* LOGOUT MODAL */
         .logout-modal {
             display: none;
             position: fixed;
@@ -374,6 +376,8 @@ if ($result->num_rows > 0) {
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: "Outfit", sans-serif;
+            text-decoration: bold;
         }
 
         .logout-icon {
