@@ -49,27 +49,79 @@ if (!isset($_SESSION['valid'])) {
 
 
 /* All Accounts and Verify Account START*/
-.modal-content button {
-    text-align: center;
-    font-weight: bold;
-    display: block;
-    text-decoration: none;
-    border: 2px solid #FFD700;
-    padding: 8px;
-    margin: 5px 0;
+#manageAccountModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
     width: 100%;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    background-color: #dcbb04;
-    color: #1e1e1e;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content button:hover {
-    background-color: rgb(252, 217, 14);
-    color: black;
+#manageAccountModal .modal-content {
+    background-color: maroon !important;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+
+}
+
+.modal-content h2 {
+    color: white;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    #manageAccountModal .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
 }
 /* All Accounts and Verify Account END*/
+
+
+
+    /* LOGOUT MODAL */
+    .logout-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .logout-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Outfit", sans-serif;
+            text-decoration: bold;
+        }
+
+        .logout-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
 </style>
 
 <body>
@@ -82,7 +134,7 @@ if (!isset($_SESSION['valid'])) {
             <div class="nav-links">
                 <a href="#home" class="icon"><i class="fi fi-ss-user"></i></a>
                 <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
-                <a href="../index.php">Log Out</a>
+                <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
             </div>
         </div>
     </header>
@@ -123,6 +175,16 @@ if (!isset($_SESSION['valid'])) {
             </form>
         </div>
 
+
+        <!-- log out -->
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged out successfully</p>
+            </div>
+        </div>
+
+        <!-- search -->
         <div id="searchResults"></div>
         <div id="searchResults">
             <?php
@@ -479,5 +541,39 @@ function deleteUser(userId) {
 }
 
 </script>
+
+<style>
+        /* LOGOUT MODAL */
+        .logout-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .logout-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Outfit", sans-serif;
+            text-decoration: bold;
+        }
+
+        .logout-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+    </style>
 
 </html>

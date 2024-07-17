@@ -556,6 +556,8 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    font-size: 12px;
+    margin-right: 10px;
 }
 
 th {
@@ -563,11 +565,15 @@ th {
     padding: 8px;
     text-align: left;
     border: 1px solid #dddddd;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 td {
     padding: 8px;
     border: 1px solid #dddddd;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 tr:nth-child(even) {
@@ -586,6 +592,7 @@ tr:hover {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 #searchForm {
@@ -624,6 +631,7 @@ tr:hover {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-right: 10px;
 }
 
 .btn-primary:hover {
@@ -639,8 +647,9 @@ tr:hover {
 .search-results-table th,
 .search-results-table td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 10px;
     text-align: left;
+    font-size: 10px;
 }
 
 .search-results-table th {
@@ -668,7 +677,65 @@ tr:hover {
     margin-top: 20px;
 }
 
-/* FOR SEARCH - START*/
+
+@media (max-width: 490px) {
+    .search-container {
+        margin-left: 10px;
+        margin-right: 10px; 
+    }
+
+    .search-input-wrapper {
+        margin-right: 30px;
+        flex-grow: 1;
+    }
+
+    #searchInput {
+        padding: 10px 10px 10px 30px; 
+        font-size: 10px;
+    }
+
+    .btn-primary {
+        padding: 10px;
+        margin-top: 10px;
+        
+        width: 100%; 
+        width: calc(100% - 0px);
+        font-size: 12px;
+    }
+
+    #searchForm {
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+
+    .search-results-table {
+        width: calc(100% - 20px); 
+        margin-left: 10px; 
+        margin-right: 10px;
+        font-size: 10px;
+    }
+
+    .search-results-table th,
+    .search-results-table td {
+        font-size: 8px; 
+    }
+    table {
+        width: 100%;
+        overflow-x: auto; 
+        max-width: 300px;
+        margin-left: 5px;
+        margin-right: 100px;
+    }
+    th, td {
+        max-width: none; 
+        width: 100%; 
+        overflow: visible;
+        white-space: normal; 
+        font-size: 11px;
+        
+    }
+}
+/* FOR SEARCH - END*/
 
 
 /* MODAL LOGOUT */
@@ -736,6 +803,13 @@ tr:hover {
 .modal-content h2 {
     color: white;
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    #manageAccountModal .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
 }
 
 /* For the icon space */

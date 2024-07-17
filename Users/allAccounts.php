@@ -227,6 +227,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
         background-clip: text;
         text-decoration: underline;
     }
+
+/* All Accounts and Verify Account START*/
+#manageAccountModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#manageAccountModal .modal-content {
+    background-color: maroon !important;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+
+}
+
+.modal-content h2 {
+    color: white;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    #manageAccountModal .modal-content {
+        width: 80%;
+        padding: 15px;
+        left: 50%;
+        right: 80%;
+        transform: translate(-50%, -50%);
+        
+    }
+}
+
+@media (max-width: 400px) {
+    #manageAccountModal .modal-content {
+        width: 70%;
+        padding: 10px;
+        left: 50%;
+        right: 80%;
+        transform: translate(-50%, -50%);
+    }
+}
 </style>
 
 
@@ -240,7 +293,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
             <div class="nav-links">
                 <a href="#home" class="icon"><i class="fi fi-ss-user"></i></a>
                 <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
-                <a href="../index.php">Log Out</a>
+                <!-- <a href="../index.php">Log Out</a> -->
+                <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
             </div>
         </div>
     </header>
@@ -279,6 +333,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
+        </div>
+        
+
+
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                <p>Logged out successfully</p>
+            </div>
         </div>
 
         <div id="searchResults"></div>
@@ -741,6 +804,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
             }
         }
     </script>
+    
+    <style>
+        /* LOGOUT MODAL */
+        .logout-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .logout-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Outfit", sans-serif;
+            text-decoration: bold;
+        }
+
+        .logout-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+    </style>
 </body>
 
 </html>
