@@ -142,11 +142,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if input is email or idNumber
         if (filter_var($email_or_id, FILTER_VALIDATE_EMAIL)) {
             $sql = "SELECT * FROM users WHERE email='$email_or_id'";
+            $sql_verify = "SELECT * FROM verify WHERE email='$email_or_id'"; //+
         } else {
             $sql = "SELECT * FROM users WHERE idNumber='$email_or_id'";
+            $sql_verify = "SELECT * FROM verify WHERE idNumber='$email_or_id'"; //+
         }
 
         $result = mysqli_query($conn, $sql);
+        $result_verify = mysqli_query($conn, $sql_verify);
 
         if ($result && mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
@@ -215,7 +218,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $errors[] = 'Wrong Password';
             }
-        } else {
+        } elseif ($result_verify && mysqli_num_rows($result_verify) == 1) {
+            // User found in verify table
+            $row = mysqli_fetch_assoc($result_verify);
+            $_SESSION['verify_user'] = true; 
+            if ($row['userType'] == 'Faculty') {
+                header("Location: ../USERS/verifyFaculty.php"); // Redirect to verifyFaculty.php for non-verified faculty users
+                exit();
+            } 
+        }else {
             $errors[] = 'User not found';
         }
     }

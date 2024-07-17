@@ -6,6 +6,12 @@ include('../helper.php');
 checkLogin();
 checkUserRole('Faculty');
 
+// Check if 'firstName' or 'lastName' is undefined in the session
+if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
+    header("Location: ../USERS/verifyFaculty.php");
+    exit();
+}
+
 if (!isset($_SESSION['valid'])) {
     header("Location: ../Login-Signup/login.php");
     exit();
