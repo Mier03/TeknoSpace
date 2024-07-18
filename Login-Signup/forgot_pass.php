@@ -42,8 +42,9 @@
     <script src="script.js"></script>
 </body>
 <style>
-    .forgot-password{
-        margin-left:125px;
+    .forgot-password p{
+        margin-left:15px;
+        color:#c10202;
     }
 </style>
 </html>

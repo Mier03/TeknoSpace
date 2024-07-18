@@ -56,15 +56,15 @@
     color:#a10202;
 }
 .container-email input {
-    text-indent: 25px;
+    text-indent: 30px;
 }
 
 .container-pass input {
-    text-indent: 25px; /* or remove this line if you want to use the default */
+    text-indent: 30px; /* or remove this line if you want to use the default */
 }
   input::placeholder,
  input::placeholder {
-    text-indent: 25px; 
+    text-indent: 30px; 
 }
 /* Media queries */
 @media (max-width: 768px) {
