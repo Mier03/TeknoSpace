@@ -1,16 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['valid'])) {
-    // Redirect to appropriate page based on user type
-    if ($_SESSION['userType'] == 'Admin') {
-        header("Location: ../USERS/ADMIN.php");
-    } elseif ($_SESSION['userType'] == 'Faculty') {
-        header("Location: ../USERS/facultyHomepage.php");
-    } elseif ($_SESSION['userType'] == 'Student') {
-        header("Location: ../USERS/studentHomepage.php");
-    }
-    exit();
-}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //including connection of database
     include('../config.php');
