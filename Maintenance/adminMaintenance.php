@@ -103,6 +103,7 @@ if ($result->num_rows > 0) {
 
 
     <main class="main">
+        <div class="nav-name">Maintenance</div>
         <div class="create-post">
             <div class="post-header">
                 <img src="<?php echo $profilePic; ?>" alt="Profile Photo">
