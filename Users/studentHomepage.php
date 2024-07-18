@@ -68,13 +68,13 @@ $email = $_SESSION['valid'];
         </ul>
     </nav>
     <main class="main">
-    <div class="posts">
-    </div>
-    <div id="logoutModal" class="logout-modal">
-            <div class="logout-modal-content">
-                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
-                <p>Logged Out Successfully</p>
-            </div>
+        <div class="posts">
+        </div>
+        <div id="logoutModal" class="logout-modal">
+                <div class="logout-modal-content">
+                    <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                    <p>Logged Out Successfully</p>
+                </div>
         </div>
         <div id="notificationModal" class="notification-modal">
             <div class="notification-content">

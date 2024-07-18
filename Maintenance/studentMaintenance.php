@@ -1,4 +1,19 @@
 
+<?php
+include('../Users/auth.php');
+checkLogin();
+checkUserRole('Student');
+
+if (!isset($_SESSION['valid'])) {
+    header("Location: ../Login-Signup/login.php");
+    exit();
+}
+$userName = $_SESSION['firstName'];
+$fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+$course = $_SESSION['course'];
+$idNumber = $_SESSION['idNumber'];
+$email = $_SESSION['valid'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,13 +67,13 @@
         </ul>
     </nav>
     <main class="main">
-    <div class="posts">
-    </div>
-    <div id="logoutModal" class="logout-modal">
-            <div class="logout-modal-content">
-                <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
-                <p>Logged Out Successfully</p>
-            </div>
+        <div class="posts">
+        </div>
+        <div id="logoutModal" class="logout-modal">
+                <div class="logout-modal-content">
+                    <img src="../images/check_gif.webp" alt="Success" class="logout-icon">
+                    <p>Logged Out Successfully</p>
+                </div>
         </div>
         <div id="notificationModal" class="notification-modal">
             <div class="notification-content">
@@ -100,12 +115,24 @@
                     setTimeout(function() {
                         modal.style.display = "none";
                         window.location.href = "../aboutUs.php";
+                        logout();
                     }, 1250);
                 } else {
                     console.error("Logout modal not found");
                 }
             };
         });
+        function logout() {
+            fetch('../Users/logout.php', {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '../aboutUs.php';
+                }
+            }).catch(error => {
+                console.error('Logout failed:', error);
+            });
+        }
 
 
             /**Notification Modal */

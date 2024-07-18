@@ -230,6 +230,39 @@ if ($result->num_rows > 0) {
                 console.error('Logout failed:', error);
             });
         }
+         /**Notification Modal */
+         document.addEventListener('DOMContentLoaded', function() {
+            const notificationIcon = document.querySelector('a[href="#notif"] i');
+            const notificationModal = document.getElementById('notificationModal');
+
+        function openNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'block';
+            notificationIcon.classList.add('active');
+            notificationIcon.classList.remove('fi-br-bell-notification-social-media');
+            notificationIcon.classList.add('fi-br-cross-small');
+            notificationIcon.removeEventListener('click', openNotificationModal);
+            notificationIcon.addEventListener('click', closeNotificationModal);
+        }
+
+        function closeNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'none';
+            notificationIcon.classList.remove('active');
+            notificationIcon.classList.remove('fi-br-cross-small');
+            notificationIcon.classList.add('fi-br-bell-notification-social-media');
+            notificationIcon.removeEventListener('click', closeNotificationModal);
+            notificationIcon.addEventListener('click', openNotificationModal);
+        }
+
+        notificationIcon.addEventListener('click', openNotificationModal);
+
+        window.addEventListener('click', function(e) {
+            if (e.target == notificationModal) {
+                closeNotificationModal(e);
+        }
+    });
+});
     </script>
     <style>
         .background-container img {
