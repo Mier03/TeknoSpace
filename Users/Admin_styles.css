@@ -622,13 +622,26 @@ th {
     border: 1px solid #dddddd;
     text-overflow: ellipsis;
     white-space: nowrap;
+    max-width: 150px;
+    overflow: hidden;
+    font-size: 16px;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 td {
     padding: 8px;
     border: 1px solid #dddddd;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    max-width: 150px;
+    overflow: hidden;
+    font-size: 16px;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 tr:nth-child(even) {
@@ -744,7 +757,7 @@ tr:hover {
         flex-grow: 1;
     }
 
-    #searchInput {
+    #searchInput.form-control {
         padding: 10px 10px 10px 30px; 
         font-size: 10px;
     }
@@ -774,20 +787,106 @@ tr:hover {
     .search-results-table td {
         font-size: 8px; 
     }
+
     table {
         width: 100%;
         overflow-x: auto; 
-        max-width: 300px;
+        max-width: 475px;
         margin-left: 5px;
         margin-right: 100px;
+        font-size: 12px;
     }
-    th, td {
+
+    th {
+        background-color: #dedbdb;
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #dddddd;
+        white-space: nowrap;
+        max-width: 150px;
+        overflow: hidden;
+        font-size: 10px;
+        text-overflow: ellipsis;
+    }
+    /* th, td {
         max-width: none; 
         width: 100%; 
         overflow: visible;
         white-space: normal; 
         font-size: 11px;
         
+    } */
+
+
+    td {
+        padding: 8px;
+        border: 1px solid #dddddd;
+        white-space: nowrap;
+        max-width: 150px;
+        overflow: hidden;
+        font-size: 12px;
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    .edit-icon {
+        margin-right: 20px;
+        color: #007bff;
+        cursor: pointer;
+    }
+}
+
+
+@media (max-width: 780px){
+    .search-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .search-input-wrapper {
+        margin-right: 30px;
+        flex-grow: 1;
+    }
+
+    #searchInput {
+        padding: 10px 10px 10px 0px;
+        font-size: 10px;
+    }
+
+    .btn-primary {
+        padding: 10px;
+        margin-top: 10px;
+
+        width: 100%;
+        width: calc(100% - 0px);
+        font-size: 12px;
+    }
+
+    #searchForm {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-results-table {
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 10px;
+    }
+
+    .search-results-table th,
+    .search-results-table td {
+        font-size: 8px;
+    }
+
+    table {
+        width: 100%;
+        overflow-x: auto;
+        max-width: 760px;
+        margin-left: 5px;
+        margin-right: 20px;
     }
 }
 /* FOR SEARCH - END*/
@@ -844,7 +943,7 @@ tr:hover {
     background-color: maroon !important;
     display: block;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
@@ -860,12 +959,12 @@ tr:hover {
     text-align: center;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     #manageAccountModal .modal-content {
         width: 90%;
         padding: 15px;
     }
-}
+} */
 
 /* For the icon space */
 .nav ul li a .fas { 
@@ -887,6 +986,7 @@ tr:hover {
     align-items: center;
     background-color: #dcbb04;
     color: #1e1e1e;
+    cursor: pointer;
 }
 
 .modal-content button:hover {
@@ -894,6 +994,35 @@ tr:hover {
     color: black;
 }
 
+
+@media (max-width: 600px){
+    #manageAccountModal .modal-content{
+        width: 80%;
+        padding: 15px;
+        top: 25%;
+        transform: translate(-50%, -20%);
+    }
+    .modal-content button {
+        padding: 5px;
+        margin: 12px 0;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    #manageAccountModal .modal-content- {
+        width: 80%;
+        padding: 15px;
+        top: 25%;
+        transform: translate(-50%, -20%);
+    }
+
+    .modal-content button {
+        padding: 5px;
+        margin: 12px 0;
+        font-size: 16px;
+    }
+}
 
 /* All Accounts and Verify Account END*/
 

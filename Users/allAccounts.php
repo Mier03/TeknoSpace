@@ -244,7 +244,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
     background-color: maroon !important;
     display: block;
     position: fixed;
-    top: 50%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
@@ -260,26 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
     text-align: center;
 }
 
-@media (max-width: 600px) {
-    #manageAccountModal .modal-content {
-        width: 80%;
-        padding: 15px;
-        left: 50%;
-        right: 80%;
-        transform: translate(-50%, -50%);
-        
-    }
-}
 
-@media (max-width: 400px) {
-    #manageAccountModal .modal-content {
-        width: 70%;
-        padding: 10px;
-        left: 50%;
-        right: 80%;
-        transform: translate(-50%, -50%);
-    }
-}
 </style>
 
 

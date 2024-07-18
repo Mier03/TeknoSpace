@@ -49,7 +49,7 @@ if (!isset($_SESSION['valid'])) {
 
 
 /* All Accounts and Verify Account START*/
-#manageAccountModal {
+/* #manageAccountModal {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -85,7 +85,7 @@ if (!isset($_SESSION['valid'])) {
         width: 90%;
         padding: 15px;
     }
-}
+} */
 /* All Accounts and Verify Account END*/
 
 
