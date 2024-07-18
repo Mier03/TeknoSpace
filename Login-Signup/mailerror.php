@@ -44,7 +44,7 @@ $prefill_identifier = isset($_GET['identifier']) ? htmlspecialchars($_GET['ident
         <img class="cit" src="../images/cit-logo.png">
 
         <div class="forgot-password">
-            <p>We have sent a password reset link to your email address. <br/> If not sent, contact your administration.</p>
+            <p> Email address not found.<br/>  Please contact administration for further investigation.</p>
         </div>
     </div>
 
@@ -52,9 +52,9 @@ $prefill_identifier = isset($_GET['identifier']) ? htmlspecialchars($_GET['ident
 </body>
 <style>
     .forgot-password{
-        background-color: green;
+        background-color: red;
         color: white; 
-        padding: 10px;
+        padding: 10px; 
         border-radius: 10px; 
         font-size: 18px;
 

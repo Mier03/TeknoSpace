@@ -27,10 +27,10 @@ if ($conn->affected_rows) {
     if ($result === true) {
         header('Location: mailsent.php');
     } else {
-        return $result; // Error message from mailer.php
+        return $result; // Error message from mailer.php 
     }
 } else {
-    return "Email address not found. Please contact administration for further investigation.";
+    header('Location: mailerror.php');
 }
 
 $stmt->close();
