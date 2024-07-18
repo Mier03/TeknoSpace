@@ -216,11 +216,12 @@ body {
     .nav-name {
         display: block;
         background-color: #fff;
-        color: black;
+        color: rgb(119, 0, 0);
         font-weight: bold;
         font-size: 22px;
         padding: 1rem;
         margin-bottom: 10px;
+        text-align:center;
     }
 
 }

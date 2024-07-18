@@ -10,7 +10,7 @@ if (!isset($_SESSION['valid'])) {
     exit();
 }
 $userId = $_SESSION['id'];
-$userName = $_SESSION['username'];
+$userName = $_SESSION['firstName'];
 $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
 
 $sql = "SELECT * FROM profile WHERE userId = '$userId'";
@@ -110,7 +110,7 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
             <div class="post-space" id="postInput">
-                <p>What's on your mind, Your Name?</p>
+                <p>What's on your mind,  <?php echo $userName ?>?</p></p>
             </div>
         </div>
 
