@@ -82,7 +82,13 @@ $email = $_SESSION['valid'];
                 <p>No new notifications</p>
             </div>
         </div>
+       
     </main>
+    <!-- Interactive Image -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="fullImage">
+    </div>
     <script src="comment.js"></script>
     <script>
         // BURGER ICON
@@ -169,6 +175,33 @@ $email = $_SESSION['valid'];
                 closeNotificationModal(e);
         }
         });
+//Image Modal
+            var imageModal = document.getElementById('imageModal');
+            var modalImg = document.getElementById("fullImage");
+            var span = document.querySelector("#imageModal .close");
+
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('post-image')) {
+                    imageModal.style.display = "flex";
+                    modalImg.src = e.target.getAttribute('data-full-image');
+                }
+            });
+
+            span.onclick = function() {
+                imageModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == imageModal) {
+                    imageModal.style.display = "none";
+                }
+            }
+            document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                imageModal.classList.remove('show');
+            }
+        });
+
         });
 </script>
 </body>

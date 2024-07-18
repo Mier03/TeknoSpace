@@ -86,4 +86,25 @@ document.addEventListener('DOMContentLoaded', function() {
             xhr.send(formData);
         }
     }
+    //Image Modal
+    var imageModal = document.getElementById('imageModal');
+    var modalImg = document.getElementById("fullImage");
+    var span = document.getElementsByClassName("close")[0];
+
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('post-image')) {
+            imageModal.style.display = "block";
+            modalImg.src = e.target.getAttribute('data-full-image');
+        }
+    });
+
+    span.onclick = function() {
+        imageModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == imageModal) {
+            imageModal.style.display = "none";
+        }
+    }
 });
