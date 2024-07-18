@@ -67,6 +67,7 @@ $email = $_SESSION['valid'];
         </ul>
     </nav>
     <main class="main">
+        <div class="nav-name">Maintenance</div>
         <div class="posts">
         </div>
         <div id="logoutModal" class="logout-modal">

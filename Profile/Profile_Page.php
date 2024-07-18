@@ -551,9 +551,17 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 font-size: 0.8rem !important;
             }
         }
-        @media screen and (max-width: 980px) {
+
+        @media screen and (max-width: 1030px) {
             #posts h2 {
                 margin-left: 1rem;
+            }
+        }
+        @media screen and (max-width: 1000px) {
+            .post {
+                border-radius: 0 !important;
+                margin-bottom: 10px !important;
+                margin-top: 0 !important;
             }
         }
         @media screen and (max-width: 490px) {
@@ -606,11 +614,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 margin-left: 1rem;
             }
 
-            .post-header-info h3 {
-                font-size: 14px;
-            }
-
-            post-options-btn {
+            .post-options-btn {
                 font-size: 0.5em;
                 padding: 2px;
             }
@@ -632,9 +636,6 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 font-size: 0.9em;
             }
             
-            .post-content h1 {
-                font-size: 1.3rem !important;
-            }
             .toggle-found:before,
             .edit-post:before,
             .delete-post:before,
@@ -650,15 +651,10 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             #posts h2 {
                 font-size: 1.2rem;
             }
-            .post-date {
-                font-size: 10px;
-            }
 
-            .post-content p {
-                font-size: 0.9rem;
-            }
         }
-    /* screen resize end */
+        /* screen resize end */
+
         /* important post - START */
         .important-post {
             border-left: 5px solid red;
@@ -676,7 +672,6 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
         }
 
         /* important post - END */
-
 
         .post-options {
             position: relative;
