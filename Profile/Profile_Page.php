@@ -990,7 +990,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                 <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%;min-width: 100%; height: auto; object-fit: cover">
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -1058,7 +1058,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                 <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%;min-width: 100%; height: auto; object-fit: cover">
                                     <?php endif; ?>
                                 </div>
                             </div>

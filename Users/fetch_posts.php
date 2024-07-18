@@ -82,6 +82,7 @@ if ($result->num_rows > 0) {
         // Assign comments to the corresponding post
         if (!is_null($row['commentId'])) {
             $posts[$post_id]['comments'][] = [
+                'commentId' => $row['commentId'],
                 'comment' => $row['comment'],
                 'commenter' => $row['commenterFname'].' '.$row['commenterLname'],
             ];
@@ -112,7 +113,7 @@ if (!empty($posts)) {
                 <div class="post-content">
                     <p>'.$post['postContent'].'</p>';
         if (!empty($post['postImage'])) {
-            echo '<img src="'.$post['postImage'].'" alt="Post Image" style="max-width: 100%; height: auto;">';
+            echo '<img src="'.$post['postImage'].'" alt="Post Image" style="max-width: 100%;min-width: 100%; height: auto; object-fit: cover">';
         }
         echo '
                     </div>
@@ -140,13 +141,25 @@ if (!empty($posts)) {
                         </div>
                         <div class="comments-list">';
                         if (count($post['comments']) > 0) {
-                                        foreach($post['comments'] as $comment) { 
-                                            echo '<div class="comment">';
-                                            echo '<b>'.$comment['commenter'].'</b>';
-                                            echo '<p>'.$comment['comment'].'</p>';
-                                            echo '</div>';
-                                        }
-                                    }
+                            foreach ($post['comments'] as $comment) {
+                                echo '
+                                <div class="comment" data-cid="'.$comment['commentId'].'">
+                                    <div class ="comment-header">
+                                        <span class="commenter">'.$comment['commenter'].'</span>
+                                    <div class="comment-options">
+                                        <button class="comment-options-btn"><i class="bx bx-dots-horizontal-rounded"></i></button>
+                                        <div class="comment-options-content">
+                                            <a href="#" class="edit-comment" data-cid="'.$comment['commentId'].'">Edit Comment</a>
+                                            <a href="#" class="delete-comment" data-cid="'.$comment['commentId'].'">Delete Comment</a>
+                                        </div>
+                                    </div>
+                                      </div>
+                                    <p class="comment-content">'.$comment['comment'].'</p>
+                                  
+                                </div>';
+                            }
+                            
+                        }
                         echo '</div>
                     </div>
                 </div>
@@ -160,3 +173,65 @@ if (!empty($posts)) {
 
 $conn->close();
 ?>
+<style>
+   .comments-list {
+    /* Optional styling for the comments list */
+    margin: 0;
+    padding: 0;
+}
+
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative; /* Ensures positioning of the options menu is relative to this container */
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.commenter {
+    font-weight: bold;
+}
+
+.comment-options-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.comment-options-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    right: 0; /* Align to the right edge of the comment */
+    top: 100%; /* Position below the button */
+}
+
+.comment-options-content a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+}
+
+.comment-options-content a:hover {
+    background-color: #f0f0f0;
+}
+
+.comment-content {
+    margin-top: 10px;
+}
+
+/* Optional: Show options content when active (for debugging or interaction) */
+.comment-options-content.show {
+    display: block;
+}
+
+</style>
