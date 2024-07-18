@@ -1,9 +1,18 @@
 <?php
-session_start();
+
+include('../Users/auth.php');
 include('../config.php');
 include('../helper.php');
+checkLogin();
+checkUserRole('Faculty');
+
+// Check if 'firstName' or 'lastName' is undefined in the session
+if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
+    header("Location: ../USERS/verifyFaculty.php");
+    exit();
+}
 if (!isset($_SESSION['valid'])) {
-    header("Location: ../login.php");
+    header("Location: ../Login-Signup/login.php");
     exit();
 }
 $userId = $_SESSION['id'];
@@ -142,6 +151,15 @@ if ($result->num_rows > 0) {
                 <p>Logged Out Successfully</p>
             </div>
         </div>
+    
+    <!--Notification Modal-->
+        <div id="notificationModal" class="notification-modal">
+            <div class="notification-content">
+                <span class="close-notification">&times;</span>
+                <p>No new notifications</p>
+            </div>
+        </div>
+
     </main>
     <script src="post.js"></script>
     <script src="comment.js"></script>
@@ -179,12 +197,58 @@ if ($result->num_rows > 0) {
                     setTimeout(function() {
                         modal.style.display = "none";
                         window.location.href = "../aboutUs.php"; // Adjust this URL as needed
+                        logout();
                     }, 1250);
                 } else {
                     console.error("Logout modal not found"); // Debugging line
                 }
             };
         });
+        function logout() {
+            fetch('../Users/logout.php', {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '../aboutUs.php';
+                }
+            }).catch(error => {
+                console.error('Logout failed:', error);
+            });
+        }
+        
+         /**Notification Modal */
+         document.addEventListener('DOMContentLoaded', function() {
+            const notificationIcon = document.querySelector('a[href="#notif"] i');
+            const notificationModal = document.getElementById('notificationModal');
+
+        function openNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'block';
+            notificationIcon.classList.add('active');
+            notificationIcon.classList.remove('fi-br-bell-notification-social-media');
+            notificationIcon.classList.add('fi-br-cross-small');
+            notificationIcon.removeEventListener('click', openNotificationModal);
+            notificationIcon.addEventListener('click', closeNotificationModal);
+        }
+
+        function closeNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'none';
+            notificationIcon.classList.remove('active');
+            notificationIcon.classList.remove('fi-br-cross-small');
+            notificationIcon.classList.add('fi-br-bell-notification-social-media');
+            notificationIcon.removeEventListener('click', closeNotificationModal);
+            notificationIcon.addEventListener('click', openNotificationModal);
+        }
+
+        notificationIcon.addEventListener('click', openNotificationModal);
+
+        window.addEventListener('click', function(e) {
+            if (e.target == notificationModal) {
+                closeNotificationModal(e);
+        }
+    });
+});
     </script>
     <style>
         .background-container img {

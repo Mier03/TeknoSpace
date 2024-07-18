@@ -1,9 +1,12 @@
 <?php
-session_start();
+include('../Users/auth.php');
 include('../config.php');
 include('../helper.php');
+checkLogin();
+checkUserRole('Admin');
+
 if (!isset($_SESSION['valid'])) {
-    header("Location: ../login.php");
+    header("Location: ../Login-Signup/login.php");
     exit();
 }
 $userId = $_SESSION['id'];
@@ -161,13 +164,108 @@ if ($result->num_rows > 0) {
         <div class="posts">
 
         </div>
+      
+    <!--Notification Modal-->
+        <div id="notificationModal" class="notification-modal">
+            <div class="notification-content">
+                <span class="close-notification">&times;</span>
+                <p>No new notifications</p>
+            </div>
+        </div>
+
 
 
     </main>
-
+   
     <script src="post.js"></script>
     <script src = "../Users/admin.js"> </script>
     <script src="comment.js"></script>
+    <script>
+        // BURGER ICON
+        document.addEventListener("DOMContentLoaded", function () {
+            var burgerIcon = document.querySelector(".burger-icon");
+            var navLinks = document.querySelector(".nav-links");
+            var modal = document.getElementById('navModal');
+            var overlay = document.querySelector(".overlay");
+            var closeBtn = document.querySelector(".close");
+
+            burgerIcon.addEventListener("click", function () {
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            function closeModal() {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
+            }
+
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", closeModal);
+            
+        });
+
+        //logout
+        document.addEventListener('DOMContentLoaded', function() {
+            window.showLogoutModal = function() {
+                console.log("Logout function called"); 
+                var modal = document.getElementById('logoutModal');
+                if (modal) {
+                    modal.style.display = "block";
+                    setTimeout(function() {
+                        modal.style.display = "none";
+                        window.location.href = "../aboutUs.php"; 
+                        logout();
+                    }, 1250);
+                } else {
+                    console.error("Logout modal not found"); 
+                }
+            };
+        });
+        function logout() {
+            fetch('../Users/logout.php', {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '../aboutUs.php';
+                }
+            }).catch(error => {
+                console.error('Logout failed:', error);
+            });
+        }
+         /**Notification Modal */
+         document.addEventListener('DOMContentLoaded', function() {
+            const notificationIcon = document.querySelector('a[href="#notif"] i');
+            const notificationModal = document.getElementById('notificationModal');
+
+        function openNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'block';
+            notificationIcon.classList.add('active');
+            notificationIcon.classList.remove('fi-br-bell-notification-social-media');
+            notificationIcon.classList.add('fi-br-cross-small');
+            notificationIcon.removeEventListener('click', openNotificationModal);
+            notificationIcon.addEventListener('click', closeNotificationModal);
+        }
+
+        function closeNotificationModal(e) {
+            e.preventDefault();
+            notificationModal.style.display = 'none';
+            notificationIcon.classList.remove('active');
+            notificationIcon.classList.remove('fi-br-cross-small');
+            notificationIcon.classList.add('fi-br-bell-notification-social-media');
+            notificationIcon.removeEventListener('click', closeNotificationModal);
+            notificationIcon.addEventListener('click', openNotificationModal);
+        }
+
+        notificationIcon.addEventListener('click', openNotificationModal);
+
+        window.addEventListener('click', function(e) {
+            if (e.target == notificationModal) {
+                closeNotificationModal(e);
+        }
+    });
+});
+    </script>
     <style>
         .background-container img {
             position: fixed;
