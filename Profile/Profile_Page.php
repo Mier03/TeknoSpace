@@ -102,7 +102,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             top: 0;
             width: 97.5%;
             padding: 10px 20px;
-            display: relative;
+            display: flex;
             justify-content: space-between;
             align-items: center;
             position: fixed;
@@ -136,6 +136,10 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
 
         .burger-icon {
             display: none;
+        }
+
+        .nav-links {
+            margin-right: 1rem;
         }
 
         @media screen and (max-width: 490px) {
@@ -480,7 +484,181 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
         .post-options-content.show {
             display: block;
         }
+        /* screen resize start */
+    
+        @media screen and (max-width: 629px) {
+            .cover-photo {
+                height: 300px;
+            }
 
+            .profile-photo img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .user-details h1 {
+                font-size: 1.5rem;
+            }
+
+            .user-role {
+                font-size: 0.9rem;
+            }
+
+            .additional-details {
+                padding: 20px;
+            }
+
+            .additional-details h2 {
+                font-size: 1rem;
+                margin-left: 1rem;
+            }
+
+            .additional-details p {
+                font-size: 0.9rem;
+                margin-left: 1rem;
+            }
+            .post-options-btn {
+                font-size: 1em; 
+                padding: 3px; 
+            }
+
+            .post-options-btn i {
+                font-size: 1.2rem !important; 
+            }
+
+            .post-options-content {
+                min-width: 140px !important;
+            }
+
+            .post-options-content a {
+                padding: 3px 6px;
+                font-size: 0.9em;
+            }
+
+            .post-options-content a:before {
+                font-size: 1em;
+            }
+
+            .toggle-found:before,
+            .edit-post:before,
+            .delete-post:before,
+            .toggle-important:before {
+                margin-right: 4px;
+            }
+
+            .important-badge {
+                padding: 6px 8px !important;
+                font-size: 0.8rem !important;
+            }
+        }
+        @media screen and (max-width: 980px) {
+            #posts h2 {
+                margin-left: 1rem;
+            }
+        }
+        @media screen and (max-width: 490px) {
+            .cover-photo {
+                height: 200px;
+            }
+
+            .profile-photo img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-info {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: -100px;
+            }
+
+            .profile-photo {
+                margin-left: 0;
+                margin-bottom: 10px;
+                position: relative;
+            }
+
+            .user-details {
+                margin-top: 0;
+                text-align: left;
+            }
+
+            .user-details h1 {
+                font-size: 1.3rem;
+                margin-top: 5px;
+            }
+
+            .user-role {
+                font-size: 0.9rem;
+            }
+
+            .additional-details {
+                padding: 15px;
+            }
+
+            .additional-details h2 {
+                font-size: 1rem;
+                margin-left: 1rem;
+            }
+
+            .additional-details p {
+                font-size: 0.9rem;
+                margin-left: 1rem;
+            }
+
+            .post-header-info h3 {
+                font-size: 14px;
+            }
+
+            post-options-btn {
+                font-size: 0.5em;
+                padding: 2px;
+            }
+
+            .post-options-btn i {
+                font-size: 1rem !important;
+            }
+
+            .post-options-content {
+                min-width: 130px !important;
+            }
+
+            .post-options-content a {
+                padding: 3px 6px;
+                font-size: 0.8em;
+            }
+
+            .post-options-content a:before {
+                font-size: 0.9em;
+            }
+            
+            .post-content h1 {
+                font-size: 1.3rem !important;
+            }
+            .toggle-found:before,
+            .edit-post:before,
+            .delete-post:before,
+            .toggle-important:before {
+                margin-right: 4px;
+            }
+
+            .important-badge {
+                padding: 4px 6px !important;
+                font-size: 0.7rem !important;
+            }
+
+            #posts h2 {
+                font-size: 1.2rem;
+            }
+            .post-date {
+                font-size: 10px;
+            }
+
+            .post-content p {
+                font-size: 0.9rem;
+            }
+        }
+    /* screen resize end */
         /* important post - START */
         .important-post {
             border-left: 5px solid red;
