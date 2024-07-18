@@ -174,7 +174,7 @@ if ($result->num_rows > 0) {
     </main>
 
     <script src="post.js"></script>
-    <script src = "../Users/admin.js"> </script>
+    <script src = "admin.js"> </script>
     <script src="comment.js"></script>
    
     <style>
