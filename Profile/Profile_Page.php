@@ -818,6 +818,53 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             height: 30px;
             margin-right: 10px;
         }
+          /* Image Clickable */
+          .post-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        #imageModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        #imageModal .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        #imageModal .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        #imageModal .close:hover,
+        #imageModal .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #imageModal{
+            display: none;
+        }
     </style>
     <!-- <link rel="stylesheet" href="Profile_styles.css"> -->
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
@@ -924,7 +971,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                 <div class="post-content">
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%; height: auto;">
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path'])?>">
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -990,10 +1037,11 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                 <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%;min-width: 100%; height: auto; object-fit: cover">
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path'])?>">
                                     <?php endif; ?>
                                 </div>
                             </div>
+                            
                         <?php endforeach; ?>
                     <?php else : ?>
                         <p>No posts available.</p>
@@ -1058,7 +1106,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                 <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" style="max-width: 100%;min-width: 100%; height: auto; object-fit: cover">
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path'])?>">
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -1075,7 +1123,11 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
         <input type="file" id="fileUpload" name="fileUpload" style="display: none;">
         <input type="hidden" id="uploadType" name="uploadType">
     </form>
-
+        <!-- Interactive Image -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="fullImage">
+        </div>
     <script>
         /**LOGOUT MODAL */
         function showLogoutModal() {
@@ -1325,7 +1377,28 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                     });
                 }
             });
-        });
+                    //Image Modal
+            var imageModal = document.getElementById('imageModal');
+            var modalImg = document.getElementById("fullImage");
+            var span = document.getElementsByClassName("close")[0];
+
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('post-image')) {
+                    imageModal.style.display = "block";
+                    modalImg.src = e.target.getAttribute('data-full-image');
+                }
+            });
+
+            span.onclick = function() {
+                imageModal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == imageModal) {
+                    imageModal.style.display = "none";
+                }
+            }
+                });
     </script>
 
 </body>
