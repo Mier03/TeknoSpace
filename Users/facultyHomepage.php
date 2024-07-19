@@ -156,6 +156,11 @@ if ($result->num_rows > 0) {
                 <p>No new notifications</p>
             </div>
         </div>
+                    <!-- Interactive Image -->
+                    <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="fullImage">
+        </div>
     </main>
     
     <script src="post.js"></script>

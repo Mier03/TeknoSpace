@@ -81,6 +81,12 @@ $email = $_SESSION['valid'];
                 <p>No new notifications</p>
             </div>
         </div>
+
+               <!-- Interactive Image -->
+               <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="fullImage">
+        </div>
     </main>
     
     <script src="comment.js"></script>
@@ -168,6 +174,27 @@ $email = $_SESSION['valid'];
                 closeNotificationModal(e);
         }
         });
+            //Image Modal
+    var imageModal = document.getElementById('imageModal');
+    var modalImg = document.getElementById("fullImage");
+    var span = document.getElementsByClassName("close")[0];
+
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('post-image')) {
+            imageModal.style.display = "block";
+            modalImg.src = e.target.getAttribute('data-full-image');
+        }
+    });
+
+    span.onclick = function() {
+        imageModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == imageModal) {
+            imageModal.style.display = "none";
+        }
+    }
         });
     </script>
     <style>
