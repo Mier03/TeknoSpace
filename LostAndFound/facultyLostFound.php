@@ -160,7 +160,11 @@ if ($result->num_rows > 0) {
                 <p>No new notifications</p>
             </div>
         </div>
-
+           <!-- Interactive Image -->
+           <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="fullImage">
+        </div>
     </main>
     <script src="post.js"></script>
     <script src="comment.js"></script>
@@ -414,6 +418,51 @@ if ($result->num_rows > 0) {
             width: 30px;
             height: 30px;
             margin-right: 10px;
+        }
+
+                        /* Image Clickable */
+                        .post-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        #imageModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        #imageModal .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        #imageModal .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        #imageModal .close:hover,
+        #imageModal .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </body>
