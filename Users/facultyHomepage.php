@@ -60,22 +60,26 @@ if ($result->num_rows > 0) {
     <div class="background-container">
         <img src="../images/signin-bg.png" alt="Background Image">
     </div>
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
-                <span>TEKNOSPACE</span>
+    <div class="fixed-wrapper">
+    <header class="header sticky">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
+                    <span>TEKNOSPACE</span>
+                </div>
+                <div class="nav-links">
+                    <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
+                    <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
+                    <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
+                </div>
+                <div class="burger-icon">
+                    <i class='bx bx-menu burger-icon' onclick="toggleMobileMenu()"></i>
+                </div>
             </div>
-            <div class="nav-links">
-                <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
-                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
-                <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
-            </div>
-            <div class="burger-icon">
-                <i class='bx bx-menu burger-icon' onclick="toggleMobileMenu()"></i>
-            </div>
-        </div>
+        </header>
     </header>
+    </div>
         <!-- navmodal -->
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
@@ -87,9 +91,9 @@ if ($result->num_rows > 0) {
     </div>
     <nav class="nav">
         <ul>
-            <li><a href="facultyHomepage.php" class="icon" style="color: #fff3b0; background-color: #8B1818;"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="../Maintenance/facultyMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
-            <li><a href="../LostAndFound/facultyLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
+            <li><a href="facultyHomepage.php" class="icon" style="color: #fff3b0; background-color: #8B1818;" data-page="homepage"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="../Maintenance/facultyMaintenance.php" class="icon" data-page="maintenance"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="../LostAndFound/facultyLostFound.php" class="icon" data-page="lostfound"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
         </ul>
     </nav>
     <main class="main">
@@ -407,6 +411,8 @@ if ($result->num_rows > 0) {
             height: 30px;
             margin-right: 10px;
         }
+
+
 
     </style>
 </body>
