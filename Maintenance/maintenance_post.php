@@ -33,7 +33,7 @@ $sql = "SELECT
        LEFT JOIN users AS commenter ON commenter.id = comments.userId
        WHERE posts.posttype = 'Maintenance'
        GROUP BY posts.id, comments.id, poster.id, commenter.id
-       ORDER BY posts.is_important DESC, posts.created_at DESC, dateCommented DESC";
+       ORDER BY posts.is_important DESC, posts.updated_important_at DESC,  posts.created_at DESC, dateCommented DESC";
 
 $result = $conn->query($sql);
 
