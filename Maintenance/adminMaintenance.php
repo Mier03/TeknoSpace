@@ -375,22 +375,6 @@ if ($result->num_rows > 0) {
             color: gold;
         }
 
-        /* Style for the contenteditable div */
-        #postContent {
-            outline: none;
-            width: 95%;
-            height: 100px;
-            background-color: whitesmoke;
-            font-family: monospace;
-            margin: 0 0;
-            border: none;
-            color: black;
-            resize: vertical;
-            font-size: 18px;
-            border-radius: 10px;
-            padding: 5px;
-            overflow-y: auto;
-        }
 
         /* Placeholder style for contenteditable div */
         #postContent:empty:before {
@@ -484,6 +468,16 @@ if ($result->num_rows > 0) {
 
 
     <script>
+        //createpost
+        document.addEventListener('DOMContentLoaded', function() {
+            var postInput = document.getElementById('postInput');
+            var modal = document.getElementById('postModal');
+
+            postInput.onclick = function() {
+                modal.style.display = "flex";
+            }
+        })
+        
         // BURGER ICON
         document.addEventListener("DOMContentLoaded", function () {
             var burgerIcon = document.querySelector(".burger-icon");

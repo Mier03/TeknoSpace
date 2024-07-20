@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var selectedImage = null; // Store the selected image data URL
 
     postInput.onclick = function() {
-        modal.style.display = "block";
+        modal.style.display = "flex";
     }
 
     span.onclick = function(){
