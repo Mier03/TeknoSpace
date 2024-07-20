@@ -264,6 +264,8 @@ body {
 /* Post Modal styles */
 .postmodal {
     display: none;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -271,16 +273,19 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
 }
 
 .postmodal-content {
-    display: block;
     background-color: #630E15;
-    margin: 15% auto;
     padding: 20px;
     border-radius: 8px;
     width: 500px;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
     color: white;
+    margin: auto;
 }
 
 .overlay {
@@ -357,8 +362,20 @@ body {
         font-size: 15px !important;
     }
 }
+
 @media screen and (max-width: 600px) {
 
+    .postmodal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: auto;
+    }
     .postmodal-content {
         width: 100%;
         height: 100%;
@@ -370,6 +387,8 @@ body {
         display: flex;
         flex-direction: column;
         position: relative;
+        max-width: none;
+        max-height: none;
     }
 
     .close {
@@ -396,6 +415,7 @@ body {
     .post-header img {
         width: 40px;
         height: 40px;
+        margin-left: 1rem;
     }
 
     .post-input {
@@ -566,6 +586,23 @@ body {
 .post-actions a:hover {
     text-decoration: underline;
     color: maroon;
+}
+
+/* Style for the contenteditable div */
+#postContent {
+    outline: none;
+    width: 95%;
+    height: 250px;
+    background-color: whitesmoke;
+    font-family: monospace;
+    margin: 0 0;
+    border: none;
+    color: black;
+    resize: vertical;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px;
+    overflow-y: auto;
 }
 
 /* WRITE COMMENT */
