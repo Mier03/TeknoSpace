@@ -278,9 +278,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                 <!-- <a href="../index.php">Log Out</a> -->
                 <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
             </div>
+            <div class="burger-icon">
+                <i class='bx bx-menu burger-icon' onclick="toggleMobileMenu()"></i>
+            </div>
         </div>
     </header>
-
+    <!-- navmodal -->
+    <div id="navModal" class="navmodal">
+        <div class="navmodal-content">
+            <span class="close" onclick="toggleMobileMenu()">&times;</span>
+            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
+                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
+                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+        </div>
+    </div>
     <nav class="nav">
         <ul>
             <li><a href="ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
@@ -467,6 +478,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
 
     <script src="Admin_Homepage.js"></script>
     <script src="admin.js"></script>
+    <script>
+        // BURGER ICON
+        document.addEventListener("DOMContentLoaded", function () {
+            var burgerIcon = document.querySelector(".burger-icon");
+            var navLinks = document.querySelector(".nav-links");
+            var modal = document.getElementById('navModal');
+            var overlay = document.querySelector(".overlay");
+            var closeBtn = document.querySelector(".close");
+
+            burgerIcon.addEventListener("click", function () {
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            function closeModal() {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
+            }
+
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", closeModal);
+            
+        });
+    </script>
     <!-- Manage Accounts -->
     <script>
         const modal = document.getElementById("manageAccountModal");
