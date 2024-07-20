@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f2f2f2;
+    padding-top: 120px;
 }
 
 .header {
@@ -13,6 +14,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .header-content {
@@ -47,7 +53,13 @@ body {
     font-size: 18px;
     padding: 0 5px;
 }
-
+.nav{
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
 .nav-links a {
     color: white;
     margin-left: 20px;
@@ -153,6 +165,8 @@ body {
 .navmodal {
     display: none;
 }
+
+
 .navmodal-content a:hover, 
 .navmodal-content a.active {
     color: gold;
@@ -222,6 +236,9 @@ body {
         padding: 1rem;
         margin-bottom: 10px;
         text-align:center;
+    }
+    .main{
+        margin-top: 7px;
     }
 
 }
@@ -874,6 +891,7 @@ tr:hover {
         color: #007bff;
         cursor: pointer;
     }
+    
 }
 
 
@@ -1194,3 +1212,6 @@ tr:hover {
             text-decoration: none;
             cursor: pointer;
         }
+
+
+        

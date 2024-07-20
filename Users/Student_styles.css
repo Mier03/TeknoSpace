@@ -5,6 +5,9 @@ body {
     background-color: #f2f2f2;
 }
 
+.main{
+    margin-top: 150px;
+}
 .header {
     background-color: #1D0001;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -13,6 +16,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .header-content {
@@ -36,6 +44,14 @@ body {
 .logo span {
     font-size: 24px;
     font-weight: bold;
+}
+
+.nav{
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    z-index: 999;
 }
 
 .nav-links {
@@ -78,7 +94,9 @@ body {
     .nav-links.show {
         display: flex;
     }
-
+    .main{
+        margin-top: 10px;
+    }
     .nav {
         padding-right: 25px;
         padding-left: 25px;
@@ -222,6 +240,9 @@ body {
         padding: 1rem;
         margin-bottom: 10px;
         text-align:center;
+    }
+    .main {
+        margin-top: 126px;
     }
 
 }
