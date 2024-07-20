@@ -13,7 +13,7 @@ $sql = "SELECT
            posts.content,
            posts.created_at,
            posts.image_path,
-           posts.status,  -- Include the status field
+           posts.status,  
            poster.id AS posterId,
            poster.firstName,
            poster.lastName,
@@ -31,7 +31,7 @@ $sql = "SELECT
         LEFT JOIN users AS commenter ON commenter.id = comments.userId
         WHERE posts.posttype = 'Lost & Found'
         GROUP BY posts.id, comments.id, poster.id, commenter.id
-        ORDER BY posts.created_at DESC, dateCommented DESC";
+        ORDER BY posts.updated_status_at DESC,posts.created_at DESC, dateCommented DESC";
 
 $result = $conn->query($sql);
 
