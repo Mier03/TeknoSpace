@@ -7,7 +7,7 @@ $action = isset($_POST['action']) ? $_POST['action'] : '';
 if ($postId && ($action === 'make' || $action === 'remove')) {
     $isImportant = ($action === 'make') ? 1 : 0;
 
-    $stmt = $conn->prepare("UPDATE posts SET is_important = ? WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE posts SET is_important = ?, updated_important_at = CURRENT_TIMESTAMP WHERE id = ?");
     $stmt->bind_param("ii", $isImportant, $postId);
 
     if ($stmt->execute()) {
