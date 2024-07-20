@@ -295,23 +295,12 @@ if (!empty($commentPostIds)) {
     <title>Profile Page</title>
     <link rel="stylesheet" href="Profile_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
-    <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-straight/css/uicons-thin-straight.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-straight/css/uicons-thin-straight.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-straight/css/uicons-regular-straight.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-straight/css/uicons-thin-straight.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-bold-rounded/css/uicons-bold-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-straight/css/uicons-thin-straight.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-straight/css/uicons-regular-straight.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -522,16 +511,16 @@ if (!empty($commentPostIds)) {
                                     <?php endif; ?>
                                 </div>
                                 <div class="post-actions">
-                                <a href="#" class="like-btn" data-postid="'.$post['id'].'">
-                            <i class="fi <?php echo $post['user_liked'] ?> 'fi-ss-social-network' : 'fi-rs-social-network').'"></i>
-                            <small class="likes-count"><?php echo $post['likes_count']; ?></small> 
-                            Likes
-                        </a>
+                                            <a href="#" class="like-btn" data-postid="'.$post['id'].'">
+                                        <i class=" fi-rs-social-network"></i>
+                                        <small class="likes-count"><?php echo $post['likes_count']; ?></small> 
+                                        Likes
+                                    </a>
 
-                        <a href="#" class="comment-btn">
-                            <i class="fi-ts-comment-dots"></i>
-                            <small><?php echo $post['comments_count']; ?></small> Comment
-                        </a>
+                                    <a href="#" class="comment-btn">
+                                        <i class="fi-ts-comment-dots"></i>
+                                        <small><?php echo $post['comments_count']; ?></small> Comment
+                                    </a>
                             </div>
                         <div class="comments-section" id="comments-<?php echo $post['id']; ?>" style="display: none;">
                             <div class="comments-list">
@@ -539,14 +528,6 @@ if (!empty($commentPostIds)) {
                                     <?php foreach ($post['comments'] as $comment) : ?>
                                         <div class="comment" >
                                         <span class="commenter"><?php echo htmlspecialchars($comment['commenter_name']); ?></span>
-                                            <div class="comment-options">
-                                                <button class="comment-options-btn">
-                                                    <i class="bx bx-dots-horizontal-rounded"></i></button>
-                                                <div class="comment-options-content"  style="display: none;">
-                                                    <a href="#" class="edit-comment" data-comment-text="<?php echo htmlspecialchars($comment['comment']); ?>"><i class="bx bx-edit"></i> Edit</a>
-                                                    <a href="#" class="delete-comment"><i class="bx bx-trash"></i> Delete</a>
-                                                </div>
-                                            </div>
                                             <p class="comment-content"><?php echo htmlspecialchars($comment['comment']); ?></p>
                                         </div>
                                     <?php endforeach; ?>
