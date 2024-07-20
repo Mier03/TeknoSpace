@@ -62,6 +62,192 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
         }
     }
 }
+
+//Fetch Comments
+/*
+$comments = [];
+$sqlComments = "SELECT * FROM comments WHERE userId = '$userId'";
+$resultComments = $conn->query($sqlComments);
+if ($resultComments->num_rows > 0) {
+    while ($row = $resultComments->fetch_assoc()) {
+        $comments[] = $row;
+    }
+}
+
+//fetch post and the comments
+$postsComments = [];
+if ($userType === 'Student') {
+    if (!empty($comments)) {
+        $commentUserIds = array_column($comments, 'userId');
+        $uniqueUserIds = array_unique($commentUserIds);
+    
+        if (!empty($uniqueUserIds)) {
+            $userIdsString = implode(',', $uniqueUserIds);
+            $sqlPosts = "SELECT * FROM posts WHERE userId IN ($userIdsString) ORDER BY created_at DESC";
+            $resultPosts = $conn->query($sqlPosts);
+            if ($resultPosts->num_rows > 0) {
+                while ($row = $resultPosts->fetch_assoc()) {
+                    $postsComments[] = $row;
+                }
+            }
+        }
+    }
+}*/
+
+/*
+$commentsQuery = "SELECT * FROM comments WHERE userId = '{$userId}'";
+$commentsResult = $conn->query($commentsQuery);
+
+$comments = [];
+$commentPostIds = [];
+
+if ($commentsResult->num_rows > 0) {
+    while ($commentRow = $commentsResult->fetch_assoc()) {
+        $comments[] = [
+            'commentId' => $commentRow['Id'], // Use correct column name
+            'postId' => $commentRow['postId'],
+            'comment' => $commentRow['comment'],
+            'commenterId' => $commentRow['userId'], // Adding commenterId for reference
+            'created_at' => $commentRow['created_at'],
+        ];
+
+        $commentPostIds[] = $commentRow['postId'];
+    }
+}
+
+$commentPostIds = array_unique($commentPostIds); // Remove duplicates
+$commentPostIds = implode(',', array_map('intval', $commentPostIds)); // Prepare IDs for query
+
+// Query to get posts associated with the comments
+$postsQuery = "SELECT * FROM posts WHERE id IN ({$commentPostIds})";
+$postsResult = $conn->query($postsQuery);
+
+$posts = [];
+
+if ($postsResult->num_rows > 0) {
+    while ($postRow = $postsResult->fetch_assoc()) {
+        $post_id = $postRow['id'];
+        
+        $profile_image = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I='; 
+        
+        // Fetch profile image from the 'profile' table
+        $profileQuery = "SELECT profile_pic FROM profile WHERE userId = '{$postRow['userId']}'"; // Use correct column
+        $profileResult = $conn->query($profileQuery);
+        
+        if ($profileResult->num_rows > 0) {
+            $profileRow = $profileResult->fetch_assoc();
+            if (!empty($profileRow['profile_pic']) && file_exists($profileRow['profile_pic'])) {
+                $profile_image = $profileRow['profile_pic'];
+            }
+        }
+        
+        $posts[$post_id] = [
+            'id' => $postRow['id'],
+            'fullName' => $postRow['username'], // Use correct column for username
+            'datePosted' => $postRow['created_at'],
+            'postImage' => $postRow['image_path'],
+            'postContent' => $postRow['content'],
+            'isImportant' => $postRow['is_important'],
+            'profileImage' => $profile_image,
+            'comments' => []
+        ];
+    }
+
+    foreach ($comments as $comment) {
+        $postId = $comment['postId'];
+        if (isset($posts[$postId])) {
+            $posts[$postId]['comments'][] = [
+                'commentId' => $comment['commentId'],
+                'comment' => $comment['comment'],
+                'commenterId' => $comment['commenterId'], // Added commenterId for reference
+                'created_at' => $comment['created_at'],
+            ];
+        }
+    }
+}*/
+
+// Query to get user's comments
+$commentsQuery = "SELECT * FROM comments WHERE userId = '{$userId}'";
+$commentsResult = $conn->query($commentsQuery);
+
+$comments = [];
+$commentPostIds = [];
+
+if ($commentsResult->num_rows > 0) {
+    while ($commentRow = $commentsResult->fetch_assoc()) {
+        $comments[] = [
+            'commentId' => $commentRow['Id'], // Use correct column name
+            'postId' => $commentRow['postId'],
+            'comment' => $commentRow['comment'],
+            'commenterId' => $commentRow['userId'], // Added commenterId for reference
+            'created_at' => $commentRow['created_at'],
+        ];
+
+        $commentPostIds[] = $commentRow['postId'];
+    }
+}
+
+// Ensure $commentPostIds is not empty before constructing the query
+if (!empty($commentPostIds)) {
+    $commentPostIds = array_unique($commentPostIds); // Remove duplicates
+    $commentPostIds = implode(',', array_map('intval', $commentPostIds)); // Prepare IDs for query
+
+    // Query to get posts associated with the comments
+    $postsQuery = "SELECT * FROM posts WHERE id IN ({$commentPostIds})";
+    $postsResult = $conn->query($postsQuery);
+
+    $postComments = [];
+
+    if ($postsResult->num_rows > 0) {
+        while ($postRow = $postsResult->fetch_assoc()) {
+            $post_id = $postRow['id'];
+
+            $profile_image = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=';
+
+            // Fetch profile image from the 'profile' table
+            $profileQuery = "SELECT profile_pic FROM profile WHERE userId = '{$postRow['userId']}'"; // Use correct column
+            $profileResult = $conn->query($profileQuery);
+
+            if ($profileResult->num_rows > 0) {
+                $profileRow = $profileResult->fetch_assoc();
+                if (!empty($profileRow['profile_pic']) && file_exists($profileRow['profile_pic'])) {
+                    $profile_image = $profileRow['profile_pic'];
+                }
+            }
+
+            $postComments[$post_id] = [
+                'id' => $postRow['id'],
+                'fullName' => $postRow['username'], // Use correct column for username
+                'datePosted' => $postRow['created_at'],
+                'postImage' => $postRow['image_path'],
+                'postContent' => $postRow['content'],
+                'isImportant' => $postRow['is_important'],
+                'profileImage' => $profile_image,
+                'comments' => []
+            ];
+        }
+
+        foreach ($comments as $comment) {
+            $postId = $comment['postId'];
+            if (isset($postComments[$postId])) {
+                $postComments[$postId]['comments'][] = [
+                    'commentId' => $comment['commentId'],
+                    'comment' => $comment['comment'],
+                    'commenterId' => $comment['commenterId'], // Added commenterId for reference
+                    'created_at' => $comment['created_at'],
+                ];
+            }
+        }
+    } else {
+        // Handle the case when there are no posts found
+        echo "No posts found for the given comment IDs.";
+    }
+} else {
+    // Handle the case when there are no comments for the user
+    echo "No comments found for this user.";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -173,7 +359,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 height: 100%;
                 background-color: rgba(0, 0, 0, 0.5);
             }
-            
+
             .navmodal-content {
                 display: block;
                 background-color: #630F10;
@@ -187,6 +373,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 width: 80%;
                 max-width: 300px;
             }
+
             .navmodal-content a {
                 display: block;
                 color: white;
@@ -196,7 +383,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 text-align: center;
                 transition: color 0.3s ease;
             }
-            
+
             .overlay {
                 display: none;
                 position: fixed;
@@ -207,7 +394,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 background: white;
                 z-index: 999;
             }
-            
+
             .overlay.active,
             .navmodal.active {
                 display: block;
@@ -228,17 +415,21 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 text-decoration: none;
                 cursor: pointer;
             }
+
             #posts h2 {
-                margin-left:1rem;
+                margin-left: 1rem;
             }
         }
+
         .navmodal {
             display: none;
         }
-        .navmodal-content a:hover, 
+
+        .navmodal-content a:hover,
         .navmodal-content a.active {
             color: gold;
         }
+
         .nav-links a {
             color: white;
             margin-left: 20px;
@@ -484,8 +675,9 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
         .post-options-content.show {
             display: block;
         }
+
         /* screen resize start */
-    
+
         @media screen and (max-width: 629px) {
             .cover-photo {
                 height: 300px;
@@ -517,13 +709,14 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 font-size: 0.9rem;
                 margin-left: 1rem;
             }
+
             .post-options-btn {
-                font-size: 1em; 
-                padding: 3px; 
+                font-size: 1em;
+                padding: 3px;
             }
 
             .post-options-btn i {
-                font-size: 1.2rem !important; 
+                font-size: 1.2rem !important;
             }
 
             .post-options-content {
@@ -557,6 +750,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 margin-left: 1rem;
             }
         }
+
         @media screen and (max-width: 1000px) {
             .post {
                 border-radius: 0 !important;
@@ -564,6 +758,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                 margin-top: 0 !important;
             }
         }
+
         @media screen and (max-width: 490px) {
             .cover-photo {
                 height: 200px;
@@ -635,7 +830,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             .post-options-content a:before {
                 font-size: 0.9em;
             }
-            
+
             .toggle-found:before,
             .edit-post:before,
             .delete-post:before,
@@ -653,6 +848,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             }
 
         }
+
         /* screen resize end */
 
         /* important post - START */
@@ -741,10 +937,12 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             font-size: 1.1em;
             vertical-align: middle;
         }
+
         .toggle-found:before {
             content: '\e9c1';
             color: #800000;
         }
+
         .edit-post:before {
             /* pa edit sa iconnn hehe  or remove nalang if di ninyo bet mag icon*/
             content: '\ea8b';
@@ -776,6 +974,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             margin-right: 6px;
             border-radius: 4px;
         }
+
         .post-content h1 {
             display: flex;
             justify-content: space-between;
@@ -783,9 +982,10 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             color: rgb(204, 35, 35);
             padding: 0 !important;
             margin-bottom: 0;
-            margin-top: 1rem !important; 
-            font-family:'Georgia';
+            margin-top: 1rem !important;
+            font-family: 'Georgia';
         }
+
         /* LOGOUT MODAL */
         .logout-modal {
             display: none;
@@ -818,13 +1018,15 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             height: 30px;
             margin-right: 10px;
         }
-          /* Image Clickable */
-          .post-image {
+
+        /* Image Clickable */
+        .post-image {
             width: 100%;
             height: 500px;
             object-fit: cover;
             cursor: pointer;
         }
+
         #imageModal {
             display: none;
             position: fixed;
@@ -835,8 +1037,8 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.9);
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
         }
 
         #imageModal .modal-content {
@@ -862,8 +1064,91 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             text-decoration: none;
             cursor: pointer;
         }
-        #imageModal{
+
+        #imageModal {
             display: none;
+        }
+
+
+        /* comments part eit and delete toggle*/
+        .comments-list {
+            margin: 0;
+            padding: 0;
+        }
+
+        .comment {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .commenter {
+            font-weight: bold;
+        }
+
+        .comment-options-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            top: 5px;
+            right: 10px;
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            color: #777;
+        }
+
+        .comment-options-btn:hover {
+            background-color: #f0f0f0;
+            border-radius: 50%;
+        }
+
+        .comment-options-content {
+            position: absolute;
+            top: 32%;
+            right: 2%;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .comment-options-content a {
+            color: #333333;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: flex;
+            font-size: 14px;
+            align-items: center;
+        }
+
+        .comment-options-content a i {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .comment-options-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .comment-content {
+            margin-top: 10px;
+        }
+
+        .bold-text {
+            font-weight: bold;
         }
     </style>
     <!-- <link rel="stylesheet" href="Profile_styles.css"> -->
@@ -916,10 +1201,10 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
             <span class="close" onclick="toggleMobileMenu()">&times;</span>
-                <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
-                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
-                <!-- not working -->
-                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"> Profile</span></a>
+            <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link"> Notifications</span></a>
+            <!-- not working -->
+            <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit'></i> Log Out</a>
         </div>
     </div>
     <main>
@@ -947,41 +1232,77 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
 
         <?php if ($userType === 'Student') : ?>
             <section id="posts">
-                <h2>Posts</h2>
+                <h2>Comments</h2>
                 <div id="post-list">
-                    <?php if (!empty($posts)) : ?>
-                        <?php foreach ($posts as $post) : ?>
+                    <?php if (!empty($postComments)) : ?>
+                        <?php foreach ($postComments as $post) : ?>
                             <div class="post" data-post-id="<?php echo htmlspecialchars($post['id']); ?>">
                                 <div class="post-header">
                                     <div class="profile-pic">
-                                        <img src="<?php echo $profilePic; ?>" alt="Profile Photo">
+                                        <img src="<?php echo htmlspecialchars($post['profileImage']); ?>" alt="Profile Photo">
                                     </div>
                                     <div class="post-header-info">
-                                        <h3><?php echo htmlspecialchars($post['username']); ?></h3>
-                                        <span class="post-date"><?php echo htmlspecialchars(relative_time($post['created_at'])); ?></span>
+                                        <h3><?php echo htmlspecialchars($post['fullName']); ?></h3>
+                                        <span class="post-date"><?php echo htmlspecialchars(relative_time($post['datePosted'])); ?></span>
                                     </div>
-                                    <div class="post-options">
-                                        <button class="post-options-btn"><i class='bx bx-dots-horizontal-rounded'></i></button>
-                                        <div class="post-options-content">
-                                            <a href="#" class="edit-post">Edit Post</a>
-                                            <a href="#" class="delete-post">Delete Post</a>
-                                        </div>
-                                    </div>
+                                    <!-- <div class="post-options">
+                            <button class="post-options-btn"><i class='bx bx-dots-horizontal-rounded'></i></button>
+                            <div class="post-options-content">
+                                <a href="#" class="edit-post">Edit Post</a>
+                                <a href="#" class="delete-post">Delete Post</a>
+                            </div>
+                        </div> -->
                                 </div>
                                 <div class="post-content">
-                                    <p><?php echo htmlspecialchars($post['content']); ?></p>
-                                    <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path'])?>">
+                                    <p><?php echo htmlspecialchars($post['postContent']); ?></p>
+                                    <?php if (!empty($post['postImage'])) : ?>
+                                        <img src="<?php echo htmlspecialchars($post['postImage']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['postImage']) ?>">
                                     <?php endif; ?>
+                                </div>
+
+                                <div class="post-comments">
+                                    <?php
+                                    foreach ($post['comments'] as $comment) {
+                                        echo '<div class="comment">';
+                                        echo '<div class="comment-header">';
+                                        // Display the commenter's name
+                                        $commenterName = htmlspecialchars($_SESSION['firstName'] . ' ' . $_SESSION['lastName']);
+                                        echo '<span class="comment-username bold-text">' . $commenterName . '</span>';
+                                        // echo '<span class="comment-date">' . htmlspecialchars(relative_time($comment['created_at'])) . '</span>';
+
+                                        // Options button and dropdown
+                                        echo '<button class="comment-options-btn"><i class="bx bx-dots-horizontal-rounded"></i></button>';
+                                        echo '<div class="comment-options-content" style="display: none;">';
+                                        echo '<a href="#" class="edit-comment" data-comment-id="' . $comment['commentId'] . '" data-comment-text="' . htmlspecialchars($comment['comment']) . '"><i class="bx bx-edit"></i>Edit</a>';
+                                        echo '<a href="#" class="delete-comment" data-comment-id="' . $comment['commentId'] . '"><i class="bx bx-trash"></i>Delete</a>';
+                                        echo '</div>';
+
+                                        echo '</div>'; // Close comment-header
+
+                                        // Display the comment content
+                                        echo '<p class="comment-content">' . htmlspecialchars($comment['comment']) . '</p>';
+
+                                        // Edit comment form
+                                        echo '<div class="edit-comment-form" data-comment-id="' . $comment['commentId'] . '" style="display: none;">';
+                                        echo '<textarea class="edit-comment-text">' . htmlspecialchars($comment['comment']) . '</textarea>';
+                                        echo '<button class="save-edit-comment">Save</button>';
+                                        echo '<button class="cancel-edit-comment">Cancel</button>';
+                                        echo '</div>';
+
+                                        echo '</div>';
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <p>No posts available.</p>
+                        <p>No comments available.</p>
                     <?php endif; ?>
                 </div>
             </section>
         <?php endif; ?>
+
+
         <?php if ($userType === 'Faculty') : ?>
             <section id="posts">
                 <h2>Posts</h2>
@@ -1026,22 +1347,22 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                <?php if ($post['posttype'] === 'Lost & Found') : ?>
-                                    <div>
-                                        <?php if ($post['status'] === 'found') : ?>
-                                            <h1 style="color: #800000">! FOUND</h1>
-                                        <?php else : ?>
-                                            <h1 style="color: red">! LOST</h1>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endif; ?>
+                                    <?php if ($post['posttype'] === 'Lost & Found') : ?>
+                                        <div>
+                                            <?php if ($post['status'] === 'found') : ?>
+                                                <h1 style="color: #800000">! FOUND</h1>
+                                            <?php else : ?>
+                                                <h1 style="color: red">! LOST</h1>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path'])?>">
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path']) ?>">
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            
+
                         <?php endforeach; ?>
                     <?php else : ?>
                         <p>No posts available.</p>
@@ -1095,18 +1416,18 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                <?php if ($post['posttype'] === 'Lost & Found') : ?>
-                                    <div>
-                                        <?php if ($post['status'] === 'found') : ?>
-                                            <h1 style="color: #800000">! FOUND</h1>
-                                        <?php else : ?>
-                                            <h1 style="color: red">! LOST</h1>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endif; ?>
+                                    <?php if ($post['posttype'] === 'Lost & Found') : ?>
+                                        <div>
+                                            <?php if ($post['status'] === 'found') : ?>
+                                                <h1 style="color: #800000">! FOUND</h1>
+                                            <?php else : ?>
+                                                <h1 style="color: red">! LOST</h1>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
-                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path'])?>">
+                                        <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path']) ?>">
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -1123,48 +1444,48 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
         <input type="file" id="fileUpload" name="fileUpload" style="display: none;">
         <input type="hidden" id="uploadType" name="uploadType">
     </form>
-        <!-- Interactive Image -->
-        <div id="imageModal" class="modal">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="fullImage">
-        </div>
+    <!-- Interactive Image -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="fullImage">
+    </div>
     <script>
         /**LOGOUT MODAL */
         function showLogoutModal() {
-        console.log("Logout function called");
-        var modal = document.getElementById('logoutModal');
-        var navModal = document.getElementById('navModal');
-        if (modal) {
-            modal.style.display = "block";
-            // Close Burger Icon
-            if (navModal) {
-                navModal.classList.remove("active");
+            console.log("Logout function called");
+            var modal = document.getElementById('logoutModal');
+            var navModal = document.getElementById('navModal');
+            if (modal) {
+                modal.style.display = "block";
+                // Close Burger Icon
+                if (navModal) {
+                    navModal.classList.remove("active");
+                }
+                setTimeout(function() {
+                    modal.style.display = "none";
+                    window.location.href = "../aboutUs.php";
+                }, 1250);
+            } else {
+                console.error("Logout modal not found");
             }
-            setTimeout(function() {
-                modal.style.display = "none";
-                window.location.href = "../aboutUs.php"; 
-            }, 1250);
-        } else {
-            console.error("Logout modal not found"); 
-        }
         }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var logoutLink = document.querySelector('#navModal a[onclick*="showLogoutModal"]');
-        if (logoutLink) {
-            logoutLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                showLogoutModal();
-            });
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoutLink = document.querySelector('#navModal a[onclick*="showLogoutModal"]');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showLogoutModal();
+                });
+            }
 
-        var burgerIcon = document.querySelector(".burger-icon");
+            var burgerIcon = document.querySelector(".burger-icon");
             var navLinks = document.querySelector(".nav-links");
             var modal = document.getElementById('navModal');
             var overlay = document.querySelector(".overlay");
             var closeBtn = document.querySelector(".close");
 
-            burgerIcon.addEventListener("click", function () {
+            burgerIcon.addEventListener("click", function() {
                 modal.classList.toggle("active");
                 overlay.classList.toggle("active");
             });
@@ -1284,34 +1605,34 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             function toggleFound(postId, action, toggleLink) {
                 if (confirm('Is this item found?')) {
                     fetch('update_status.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: `postId=${postId}&action=${action}`
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            const post = toggleLink.closest('.post');
-                            const lostHeading = post.querySelector('h1');
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `postId=${postId}&action=${action}`
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                const post = toggleLink.closest('.post');
+                                const lostHeading = post.querySelector('h1');
 
-                            if (lostHeading) {
-                                lostHeading.innerText = '! FOUND';
-                                lostHeading.style.color = '#800000'; // Optionally change the color if needed
+                                if (lostHeading) {
+                                    lostHeading.innerText = '! FOUND';
+                                    lostHeading.style.color = '#800000'; // Optionally change the color if needed
+                                }
+                            } else {
+                                alert('Failed to update status: ' + (data.error || 'Unknown error'));
                             }
-                        } else {
-                            alert('Failed to update status: ' + (data.error || 'Unknown error'));
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Error: ' + error.message);
-                    });
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error: ' + error.message);
+                        });
                 }
             }
 
-            
+
             function saveEdit(postId, newContent, contentElement, originalContent) {
                 fetch('edit_post.php', {
                         method: 'POST',
@@ -1377,7 +1698,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                     });
                 }
             });
-                    //Image Modal
+            //Image Modal
             var imageModal = document.getElementById('imageModal');
             var modalImg = document.getElementById("fullImage");
             var span = document.getElementsByClassName("close")[0];
@@ -1398,8 +1719,117 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
                     imageModal.style.display = "none";
                 }
             }
+        });
+
+
+
+        // Edit and delete comment toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const optionsButtons = document.querySelectorAll('.comment-options-btn');
+
+            optionsButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const optionsContent = this.nextElementSibling;
+
+                    // Close all other open dropdowns
+                    document.querySelectorAll('.comment-options-content').forEach(dropdown => {
+                        if (dropdown !== optionsContent) {
+                            dropdown.style.display = 'none';
+                        }
+                    });
+
+
+                    optionsContent.style.display = optionsContent.style.display === 'none' ? 'block' : 'none';
                 });
+            });
+
+            // edit comment 
+            document.querySelectorAll('.edit-comment').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const commentId = this.getAttribute('data-comment-id');
+                    const commentText = this.getAttribute('data-comment-text');
+                    edit_comment(commentId, commentText);
+                });
+            });
+
+            // delete comment 
+            document.querySelectorAll('.delete-comment').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const commentId = this.getAttribute('data-comment-id');
+                    delete_comment(commentId);
+                });
+            });
+
+        });
+
+
+        function edit_comment(commentId, currentText) {
+            const newText = prompt('Edit your comment:', currentText);
+
+            if (newText !== null && newText !== currentText) {
+
+                fetch('update_comment.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `comment_id=${commentId}&new_text=${encodeURIComponent(newText)}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+
+                            document.querySelector(`#comment-${commentId} .comment-text`).textContent = newText;
+                            
+                            dropdown.style.display = 'none';
+                            console.log('Comment updated successfully');
+                            location.reload();
+
+                        } else {
+                            console.error('Failed to update comment:', data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        }
+
+        function delete_comment(commentId) {
+            if (confirm('Are you sure you want to delete this comment?')) {
+
+                fetch('delete_comment.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `comment_id=${commentId}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            dropdown.style.display = 'none';
+                            document.querySelector(`#comment-${commentId}`).remove();
+                            console.log('Comment deleted successfully');
+                            location.reload();
+
+                        } else {
+                            console.error('Failed to delete comment:', data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        }
     </script>
+
+
+
+
 
 </body>
 
