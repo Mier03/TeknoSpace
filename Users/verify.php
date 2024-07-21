@@ -46,6 +46,13 @@ if (!isset($_SESSION['valid'])) {
     background-color: #f44336;
     color: white;
 }
+@media (max-width: 768px) {
+    .verify-btn, .delete-btn {
+        padding: 5px 5px;
+        font-size:10px;
+    }
+}
+
 
 
 /* All Accounts and Verify Account START*/

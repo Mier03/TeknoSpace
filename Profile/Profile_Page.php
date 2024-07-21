@@ -203,7 +203,7 @@ if ($postsResult->num_rows > 0) {
 }*/
 
 // Query to get user's comments
-$commentsQuery = "SELECT * FROM comments WHERE userId = '{$userId}'";
+$commentsQuery = "SELECT * FROM comments WHERE userId = '{$userId}' ORDER BY comments.updated_comment_at DESC ";
 $commentsResult = $conn->query($commentsQuery);
 
 $comments = [];
@@ -228,8 +228,14 @@ if (!empty($commentPostIds)) {
     $commentPostIds = array_unique($commentPostIds); // Remove duplicates
     $commentPostIds = implode(',', array_map('intval', $commentPostIds)); // Prepare IDs for query
 
-    // Query to get posts associated with the comments
-    $postsQuery = "SELECT * FROM posts WHERE id IN ({$commentPostIds})";
+    // Query to get posts associated with the comments along with like counts
+    $postsQuery = "
+        SELECT p.*, COUNT(l.id) AS like_count
+        FROM posts p
+        LEFT JOIN likes l ON p.id = l.postId
+        WHERE p.id IN ({$commentPostIds})
+        GROUP BY p.id
+    ";
     $postsResult = $conn->query($postsQuery);
 
     $postComments = [];
@@ -259,6 +265,7 @@ if (!empty($commentPostIds)) {
                 'postContent' => $postRow['content'],
                 'isImportant' => $postRow['is_important'],
                 'profileImage' => $profile_image,
+                'likeCount' => $postRow['like_count'], // Add like count
                 'comments' => []
             ];
         }
@@ -403,11 +410,18 @@ if (!empty($commentPostIds)) {
                                         <img src="<?php echo htmlspecialchars($post['postImage']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['postImage']) ?>">
                                     <?php endif; ?>
                                 </div>
-                                <a href="#" class="comment-btn">
-                                    <i class="fi fi-ts-comment-dots"></i> 
-                                    <small><?php echo count($post['comments'])?></small>
-                                    Comment
-                                </a>
+                                <div class="post-actions">
+                                    <a href="#" class="like-btn">
+                                        <i class="fi fi-rs-social-network"></i>
+                                        <small><?php echo ($post['likeCount'])?></small> 
+                                        Likes
+                                    </a>
+                                    <a href="#" class="comment-btn">
+                                        <i class="fi fi-ts-comment-dots"></i> 
+                                        <small><?php echo count($post['comments'])?></small>
+                                        Comment
+                                    </a>
+                                </div>
                                 <div class="comments-section" style="display:none">
                                     <?php
                                     foreach ($post['comments'] as $comment) {
@@ -421,8 +435,9 @@ if (!empty($commentPostIds)) {
                                         // Options button and dropdown
                                         echo '<button class="comment-options-btn"><i class="bx bx-dots-horizontal-rounded"></i></button>';
                                         echo '<div class="comment-options-content" style="display: none;">';
-                                        echo '<a href="#" class="edit-comment" data-comment-id="' . $comment['commentId'] . '" data-comment-text="' . htmlspecialchars($comment['comment']) . '"><i class="bx bx-edit"></i>Edit</a>';
-                                        echo '<a href="#" class="delete-comment" data-comment-id="' . $comment['commentId'] . '"><i class="bx bx-trash"></i>Delete</a>';
+                                        echo '<a href="#" class="edit-comment" data-comment-id="' . $comment['commentId'] . '" data-comment-text="' . htmlspecialchars($comment['comment']) . '"><i class="bx bx-edit"></i> 
+                                        <span>Edit Comment</span></a>';
+                                        echo '<a href="#" class="delete-comment" data-comment-id="' . $comment['commentId'] . '"><i class="bx bx-trash"></i>   <span>Delete Comment</span></a>';
                                         echo '</div>';
 
                                         echo '</div>'; // Close comment-header
@@ -433,7 +448,7 @@ if (!empty($commentPostIds)) {
                                         // Edit comment form
                                         echo '<div class="edit-comment-form" data-comment-id="' . $comment['commentId'] . '" style="display: none;">';
                                         echo '<textarea class="edit-comment-text">' . htmlspecialchars($comment['comment']) . '</textarea>';
-                                        echo '<button class="save-edit-comment">Save</button>';
+                                        echo '<button data-comment-id="' . $comment['commentId'] . '" data-comment-text="' . htmlspecialchars($comment['comment']) . '" class="save-edit-comment">Save</button>';
                                         echo '<button class="cancel-edit-comment">Cancel</button>';
                                         echo '</div>';
 

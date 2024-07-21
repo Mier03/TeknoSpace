@@ -64,10 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
             var originalContent = contentElement.textContent;
 
             contentElement.innerHTML = `
-            <textarea>${originalContent}</textarea>
+             <textarea>${originalContent}</textarea>
+        <div class="button-container">
             <button class="save-edit">Save</button>
             <button class="cancel-edit">Cancel</button>
-        `;
+        </div>
+    `;
 
             post.querySelector('.save-edit').addEventListener('click', function() {
                 var newContent = post.querySelector('textarea').value;
@@ -77,8 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
             post.querySelector('.cancel-edit').addEventListener('click', function() {
                 contentElement.innerHTML = originalContent;
             });
-
-
         }
 
         if (event.target.classList.contains('delete-post')) {
@@ -294,9 +294,41 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.edit-comment').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const commentId = this.getAttribute('data-comment-id');
-            const commentText = this.getAttribute('data-comment-text');
-            edit_comment(commentId, commentText);
+
+            // get parent .comment
+            const parentComment = link.parentNode.parentNode.parentNode;
+
+            // hide .comment-content
+            parentComment.querySelector('.comment-content').style.display = 'none';
+
+            // display .edit-comment-form
+            parentComment.querySelector('.edit-comment-form').style.display = 'block';
+        });
+    });
+
+    // Edit comment save submit
+    document.querySelectorAll('.save-edit-comment').forEach(editCommentSaveBtn => {
+        editCommentSaveBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // execute edit_comment function
+            edit_comment(
+                this.getAttribute('data-comment-id'),
+                this.getAttribute('data-comment-text'), // old comment
+                editCommentSaveBtn.parentNode.querySelector('.edit-comment-text').value // new comment
+            );
+        });
+    });
+    //cancel edit
+    document.querySelectorAll('.cancel-edit-comment').forEach(editCommentSaveBtn => {
+        editCommentSaveBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // execute edit_comment function
+            edit_comment(
+                this.getAttribute('data-comment-id'),
+                this.getAttribute('data-comment-text'), // old comment
+            );
         });
     });
 
@@ -382,28 +414,20 @@ function attachPostEventListeners() {
 }
 
 
-function edit_comment(commentId, currentText) {
-    const newText = prompt('Edit your comment:', currentText);
+function edit_comment(commentId, oldComment, newComment) {
 
-    if (newText !== null && newText !== currentText) {
-
+    if (newComment !== null && newComment !== oldComment) {
         fetch('update_comment.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `comment_id=${commentId}&new_text=${encodeURIComponent(newText)}`
+                body: `comment_id=${commentId}&new_text=${encodeURIComponent(newComment)}`
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-
-                    document.querySelector(`#comment-${commentId} .comment-text`).textContent = newText;
-                    
-                    dropdown.style.display = 'none';
-                    console.log('Comment updated successfully');
                     location.reload();
-
                 } else {
                     console.error('Failed to update comment:', data.error);
                 }
@@ -427,9 +451,6 @@ function delete_comment(commentId) {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    dropdown.style.display = 'none';
-                    document.querySelector(`#comment-${commentId}`).remove();
-                    console.log('Comment deleted successfully');
                     location.reload();
 
                 } else {

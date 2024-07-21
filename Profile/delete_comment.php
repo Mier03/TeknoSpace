@@ -11,11 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = $stmt->execute();
 
     if ($success) {
-        echo "success";
+        echo json_encode(['success' => true]);
     } else {
-        echo "error:Failed to delete comment";
+        echo json_encode(['success' => false, 'error' => 'Failed to delete comment']);
     }
-
     $stmt->close();
     $conn->close();
 }
