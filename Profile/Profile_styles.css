@@ -1049,3 +1049,10 @@
 .edit-comment-form .cancel-edit-comment {
     background-color: #dc3545; 
 }
+.comment-options-content i{
+    color:#800000;
+    
+}
+.comment-options-content span{
+   margin-left:5px;
+}

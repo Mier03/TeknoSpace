@@ -435,8 +435,9 @@ if (!empty($commentPostIds)) {
                                         // Options button and dropdown
                                         echo '<button class="comment-options-btn"><i class="bx bx-dots-horizontal-rounded"></i></button>';
                                         echo '<div class="comment-options-content" style="display: none;">';
-                                        echo '<a href="#" class="edit-comment" data-comment-id="' . $comment['commentId'] . '" data-comment-text="' . htmlspecialchars($comment['comment']) . '"><i class="bx bx-edit"></i> Edit</a>';
-                                        echo '<a href="#" class="delete-comment" data-comment-id="' . $comment['commentId'] . '"><i class="bx bx-trash"></i> Delete</a>';
+                                        echo '<a href="#" class="edit-comment" data-comment-id="' . $comment['commentId'] . '" data-comment-text="' . htmlspecialchars($comment['comment']) . '"><i class="bx bx-edit"></i> 
+                                        <span>Edit Comment</span></a>';
+                                        echo '<a href="#" class="delete-comment" data-comment-id="' . $comment['commentId'] . '"><i class="bx bx-trash"></i>   <span>Delete Comment</span></a>';
                                         echo '</div>';
 
                                         echo '</div>'; // Close comment-header
