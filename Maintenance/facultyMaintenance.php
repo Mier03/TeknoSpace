@@ -166,17 +166,7 @@ if ($result->num_rows > 0) {
     </main>
     <script src="post.js"></script>
     <script src="comment.js"></script>
-    <script>
-        //createpost
-        document.addEventListener('DOMContentLoaded', function() {
-            var postInput = document.getElementById('postInput');
-            var modal = document.getElementById('postModal');
-
-            postInput.onclick = function() {
-                modal.style.display = "flex";
-            }
-        })
-        
+    <script>      
         // BURGER ICON
         document.addEventListener("DOMContentLoaded", function () {
             var burgerIcon = document.querySelector(".burger-icon");
