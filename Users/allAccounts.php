@@ -42,22 +42,22 @@ if (isset($_GET['userId'])) {
 // Reset Password
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
     $userId = $_POST['reset_password'];
-    
-    
+
+
     $sql = "UPDATE users SET password = NULL WHERE Id = ?";
-    
-    
+
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $userId);
-    
-    
+
+
     if ($stmt->execute()) {
         echo "<script>alert('Password has been reset successfully.');</script>";
     } else {
         echo "<script>alert('Error resetting password: " . $conn->error . "');</script>";
     }
-    
-    
+
+
     $stmt->close();
 }
 
@@ -228,39 +228,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
         text-decoration: underline;
     }
 
-/* All Accounts and Verify Account START*/
-#manageAccountModal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
+    /* remove account and save changes */
 
-#manageAccountModal .modal-content {
-    background-color: maroon !important;
-    display: block;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 500px;
+    .button-container {
+        text-align: center;
+    }
 
-}
+    .remove-account-text {
+        color: maroon;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-.modal-content h2 {
-    color: white;
-    text-align: center;
-}
+    .remove-account-text:hover {
+        text-decoration: underline;
+    }
 
 
+    /* All Accounts and Verify Account START*/
+    #manageAccountModal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #manageAccountModal .modal-content {
+        background-color: maroon !important;
+        display: block;
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 80%;
+        max-width: 500px;
+
+    }
+
+    .modal-content h2 {
+        color: white;
+        text-align: center;
+    }
 </style>
 
 
@@ -287,9 +302,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
             <span class="close" onclick="toggleMobileMenu()">&times;</span>
-            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
-                <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
-                <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
+            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"> Profile</span></a>
+            <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link"> Notifications</span></a>
+            <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit'></i> Log Out</a>
         </div>
     </div>
     <nav class="nav">
@@ -327,7 +342,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
-        
+
 
 
         <div id="logoutModal" class="logout-modal">
@@ -467,6 +482,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                     <label for="editEmail">Email:</label>
                     <input type="email" id="editEmail"><br>
                     <button type="button" onclick="saveChanges()">Save Changes</button>
+                    <span id="removeAccountBtn" class="remove-account-text">Remove Account</span>
                 </form>
 
             </div>
@@ -480,14 +496,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
     <script src="admin.js"></script>
     <script>
         // BURGER ICON
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             var burgerIcon = document.querySelector(".burger-icon");
             var navLinks = document.querySelector(".nav-links");
             var modal = document.getElementById('navModal');
             var overlay = document.querySelector(".overlay");
             var closeBtn = document.querySelector(".close");
 
-            burgerIcon.addEventListener("click", function () {
+            burgerIcon.addEventListener("click", function() {
                 modal.classList.toggle("active");
                 overlay.classList.toggle("active");
             });
@@ -499,7 +515,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
 
             closeBtn.addEventListener("click", closeModal);
             overlay.addEventListener("click", closeModal);
-            
+
         });
     </script>
     <!-- Manage Accounts -->
@@ -714,6 +730,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
             const editId = userData.Id;
             fetchProfileImage(editId);
 
+            document.getElementById("removeAccountBtn").addEventListener("click", function(){
+                openRemoveModal(userData.Id);
+            });
+
+
             modalEdit.style.display = "block";
         }
 
@@ -789,6 +810,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                     alert("An error occurred while updating the user");
                 });
         }
+
+
+        // remove account
+        function openRemoveModal(userId) {
+            if (confirm("Are you sure you want to remove this account? This action cannot be undone.")) {
+                removeAccount(userId);
+            }
+        }
+
+        function removeAccount(userId) {
+            fetch('remove_account.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Account removed successfully");
+                        location.reload();
+                    } else {
+                        alert("Error removing account: " + data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert("An error occurred while removing the account");
+                });
+        }
     </script>
 
 
@@ -821,7 +875,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
             }
         }
     </script>
-    
+
     <style>
         /* LOGOUT MODAL */
         .logout-modal {
