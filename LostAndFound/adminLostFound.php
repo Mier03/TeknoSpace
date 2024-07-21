@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-    <div class="background-container">
+<div class="background-container">
         <img src="../images/signin-bg.png" alt="Background Image">
     </div>
     <header class="header">
@@ -177,7 +177,31 @@ if ($result->num_rows > 0) {
             <img class="modal-content" id="fullImage">
         </div>
     </main>
+    <script>
+        
+        // BURGER ICON
+        document.addEventListener("DOMContentLoaded", function () {
+            var burgerIcon = document.querySelector(".burger-icon");
+            var navLinks = document.querySelector(".nav-links");
+            var modal = document.getElementById('navModal');
+            var overlay = document.querySelector(".overlay");
+            var closeBtn = document.querySelector(".close");
 
+            burgerIcon.addEventListener("click", function () {
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            });
+
+            function closeModal() {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
+            }
+
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", closeModal);
+            
+        });
+    </script>
     <script src="post.js"></script>
     <script src = "admin.js"> </script>
     <script src="comment.js"></script>
@@ -331,8 +355,8 @@ if ($result->num_rows > 0) {
             margin-right: 10px;
         }
 
-                        /* Image Clickable */
-                        .post-image {
+        /* Image Clickable */
+        .post-image {
             width: 100%;
             height: 500px;
             object-fit: cover;
@@ -375,42 +399,15 @@ if ($result->num_rows > 0) {
             text-decoration: none;
             cursor: pointer;
         }
+
+        .navmodal.active {
+            display: flex;
+        }
+
     </style>
 
 
     <script>
-        //createpost
-        document.addEventListener('DOMContentLoaded', function() {
-            var postInput = document.getElementById('postInput');
-            var modal = document.getElementById('postModal');
-
-            postInput.onclick = function() {
-                modal.style.display = "flex";
-            }
-        })
-        
-        // BURGER ICON
-        document.addEventListener("DOMContentLoaded", function () {
-            var burgerIcon = document.querySelector(".burger-icon");
-            var navLinks = document.querySelector(".nav-links");
-            var modal = document.getElementById('navModal');
-            var overlay = document.querySelector(".overlay");
-            var closeBtn = document.querySelector(".close");
-
-            burgerIcon.addEventListener("click", function () {
-                modal.classList.toggle("active");
-                overlay.classList.toggle("active");
-            });
-
-            function closeModal() {
-                modal.classList.remove("active");
-                overlay.classList.remove("active");
-            }
-
-            closeBtn.addEventListener("click", closeModal);
-            overlay.addEventListener("click", closeModal);
-            
-        });
         document.addEventListener('DOMContentLoaded', function() {
             window.showLogoutModal = function() {
                 console.log("Logout function called"); // Debugging line
