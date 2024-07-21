@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="common-auth.css">
+    <!-- <link rel="stylesheet" href="common-auth.css"> -->
     <link rel="stylesheet" href="login.css">
     <title>Forgot Password</title>
 
@@ -71,28 +71,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <form id="autoSubmitForm" method="post" action="finalForgotPass.php">
-            <?php
-                if (!empty($errors)) {
-                    foreach ($errors as $error) {
-                        echo '<span class="error-msg">' . $error . '</span>';
+                <?php
+                    if (!empty($errors)) {
+                        foreach ($errors as $error) {
+                            echo '<span class="error-msg">' . $error . '</span>';
+                        }
                     }
-                }
 
-                if (!empty($successes)) {
-                    foreach ($successes as $success) {
-                        echo '<span class="success-msg">' . $success . '</span>';
+                    if (!empty($successes)) {
+                        foreach ($successes as $success) {
+                            echo '<span class="success-msg">' . $success . '</span>';
+                        }
                     }
-                }
-                ?>
-                
-                <!-- <input type="text" name="email_or_id" placeholder="Email or ID Number" required value="<?php echo isset($_POST['email_or_id']) ? $_POST['email_or_id'] : '' ?>"> -->
-                <input type="text" name="email_or_id" placeholder="Email or ID Number" required value="<?php echo htmlspecialchars($emailToChangePass); ?>" readonly>
-                <input type="password" name="newpassword" placeholder="New Password" required value="<?php echo isset($_POST['newpassword']) ? $_POST['newpassword'] : '' ?>">
-                <input type="password" name="cpassword" placeholder="Confirm New Password" required value="<?php echo isset($_POST['cpassword']) ? $_POST['cpassword'] : '' ?>">
-                <!-- <button type="submit" name="submit_newpass">Change Password</button> -->
-                
-            </form>
-            <p class="dont-account">Already have an account? <a href="login.php" id="showSignup">Sign In</a></p>
+                    ?>
+                    <div class="setnewpass">
+                    <!-- <input type="text" name="email_or_id" placeholder="Email or ID Number" required value="<?php echo isset($_POST['email_or_id']) ? $_POST['email_or_id'] : '' ?>"> -->
+                    <input type="text" name="email_or_id" placeholder="Email or ID Number" required value="<?php echo htmlspecialchars($emailToChangePass); ?>" readonly>
+                    <input type="password" name="newpassword" placeholder="New Password" required value="<?php echo isset($_POST['newpassword']) ? $_POST['newpassword'] : '' ?>">
+                    <input type="password" name="cpassword" placeholder="Confirm New Password" required value="<?php echo isset($_POST['cpassword']) ? $_POST['cpassword'] : '' ?>">
+                    <!-- <button type="submit" name="submit_newpass">Change Password</button> -->
+                    </div>
+                </form>
+                    <p class="dont-account">Already have an account? <a href="login.php" id="showSignup">Sign In</a></p>
         </div>
            
     </div>
@@ -108,9 +108,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </script>
 
 </html>
-
-
-
 
 <?php
     } else {

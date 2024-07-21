@@ -62,9 +62,17 @@
 .container-pass input {
     text-indent: 30px; /* or remove this line if you want to use the default */
 }
-  input::placeholder,
- input::placeholder {
+ .container-email input::placeholder,
+ .container-pass input::placeholder {
     text-indent: 30px; 
+}
+.setnewpass input::placeholder
+ {
+   text-indent: 0px; 
+}
+.forgot-password p{
+    margin-left:15px;
+    color:#fff7f7;
 }
 /* Media queries */
 @media (max-width: 768px) {

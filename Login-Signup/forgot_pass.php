@@ -32,7 +32,7 @@
                 <p>Forgot password?</p>
             </div>
 
-            <form method="post" action="send-password-reset.php">
+            <form class="send-email" method="post" action="send-password-reset.php">
                 <input type="text" name="email" placeholder="Email">
                 <button type="submit" name="submit_newpass">Send</button>
             </form>
@@ -42,9 +42,11 @@
     <script src="script.js"></script>
 </body>
 <style>
-    .forgot-password p{
-        margin-left:15px;
-        color:#c10202;
-    }
+  
+    .send-email input[type="text"]::placeholder {
+    text-align: left; /* Aligns the placeholder text to the left */
+    padding-left: 0; /* Ensure no extra padding is applied to the placeholder */
+}
+
 </style>
 </html>
