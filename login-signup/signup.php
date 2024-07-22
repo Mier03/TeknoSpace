@@ -72,8 +72,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
             </div>
         </div>
-    
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <img src="../images/check_gif.webp" alt="Success" class="success-image">
+                <p>Signed up successfully!</p>
+            </div>
+        </div>
     <script src="script.js"></script>
+    <script>
+        window.onclick = function(event) {
+            var modal = document.getElementById('successModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -95,7 +95,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION['course'] = $course;
                             $_SESSION['id'] = $conn->insert_id; 
     
-                            header("Location: login.php");
+                            echo "<script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                var modal = document.getElementById('successModal');
+                                modal.style.display = 'block';
+                                setTimeout(function() {
+                                    modal.style.display = 'none';
+                                    window.location.href = 'login.php';
+                                }, 1250);
+                            });
+                    </script>";
                         } else {
                             $errors[] = 'Error to insert new user. Contact admin for further investigation.';
                         }
