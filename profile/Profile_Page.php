@@ -99,108 +99,6 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
         }
     }
 }
-//Fetch Comments
-/*
-$comments = [];
-$sqlComments = "SELECT * FROM comments WHERE userId = '$userId'";
-$resultComments = $conn->query($sqlComments);
-if ($resultComments->num_rows > 0) {
-    while ($row = $resultComments->fetch_assoc()) {
-        $comments[] = $row;
-    }
-}
-
-//fetch post and the comments
-$postsComments = [];
-if ($userType === 'Student') {
-    if (!empty($comments)) {
-        $commentUserIds = array_column($comments, 'userId');
-        $uniqueUserIds = array_unique($commentUserIds);
-    
-        if (!empty($uniqueUserIds)) {
-            $userIdsString = implode(',', $uniqueUserIds);
-            $sqlPosts = "SELECT * FROM posts WHERE userId IN ($userIdsString) ORDER BY created_at DESC";
-            $resultPosts = $conn->query($sqlPosts);
-            if ($resultPosts->num_rows > 0) {
-                while ($row = $resultPosts->fetch_assoc()) {
-                    $postsComments[] = $row;
-                }
-            }
-        }
-    }
-}*/
-
-/*
-$commentsQuery = "SELECT * FROM comments WHERE userId = '{$userId}'";
-$commentsResult = $conn->query($commentsQuery);
-
-$comments = [];
-$commentPostIds = [];
-
-if ($commentsResult->num_rows > 0) {
-    while ($commentRow = $commentsResult->fetch_assoc()) {
-        $comments[] = [
-            'commentId' => $commentRow['Id'], // Use correct column name
-            'postId' => $commentRow['postId'],
-            'comment' => $commentRow['comment'],
-            'commenterId' => $commentRow['userId'], // Adding commenterId for reference
-            'created_at' => $commentRow['created_at'],
-        ];
-
-        $commentPostIds[] = $commentRow['postId'];
-    }
-}
-
-$commentPostIds = array_unique($commentPostIds); // Remove duplicates
-$commentPostIds = implode(',', array_map('intval', $commentPostIds)); // Prepare IDs for query
-
-// Query to get posts associated with the comments
-$postsQuery = "SELECT * FROM posts WHERE id IN ({$commentPostIds})";
-$postsResult = $conn->query($postsQuery);
-
-$posts = [];
-
-if ($postsResult->num_rows > 0) {
-    while ($postRow = $postsResult->fetch_assoc()) {
-        $post_id = $postRow['id'];
-        
-        $profile_image = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I='; 
-        
-        // Fetch profile image from the 'profile' table
-        $profileQuery = "SELECT profile_pic FROM profile WHERE userId = '{$postRow['userId']}'"; // Use correct column
-        $profileResult = $conn->query($profileQuery);
-        
-        if ($profileResult->num_rows > 0) {
-            $profileRow = $profileResult->fetch_assoc();
-            if (!empty($profileRow['profile_pic']) && file_exists($profileRow['profile_pic'])) {
-                $profile_image = $profileRow['profile_pic'];
-            }
-        }
-        
-        $posts[$post_id] = [
-            'id' => $postRow['id'],
-            'fullName' => $postRow['username'], // Use correct column for username
-            'datePosted' => $postRow['created_at'],
-            'postImage' => $postRow['image_path'],
-            'postContent' => $postRow['content'],
-            'isImportant' => $postRow['is_important'],
-            'profileImage' => $profile_image,
-            'comments' => []
-        ];
-    }
-
-    foreach ($comments as $comment) {
-        $postId = $comment['postId'];
-        if (isset($posts[$postId])) {
-            $posts[$postId]['comments'][] = [
-                'commentId' => $comment['commentId'],
-                'comment' => $comment['comment'],
-                'commenterId' => $comment['commenterId'], // Added commenterId for reference
-                'created_at' => $comment['created_at'],
-            ];
-        }
-    }
-}*/
 
 // Query to get user's comments
 $commentsQuery = "SELECT * FROM comments WHERE userId = '{$userId}' ORDER BY comments.updated_comment_at DESC ";
@@ -322,11 +220,11 @@ if (!empty($commentPostIds)) {
             <div class="logo">
                 <?php
                 if ($userType === 'Student') {
-                    echo '<a href="../Users/studentHomepage.php">';
+                    echo '<a href="../users/studentHomepage.php">';
                 } elseif ($userType === 'Faculty') {
-                    echo '<a href="../Users/facultyHomepage.php">';
+                    echo '<a href="../users/facultyHomepage.php">';
                 } elseif ($userType === 'Admin') {
-                    echo '<a href="../Users/ADMIN.php">';
+                    echo '<a href="../users/ADMIN.php">';
                 }
                 ?>
                 <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">
@@ -352,7 +250,7 @@ if (!empty($commentPostIds)) {
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
             <span class="close" onclick="toggleMobileMenu()">&times;</span>
-            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"> Profile</span></a>
+            <a href="../profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"> Profile</span></a>
             <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link"> Notifications</span></a>
             <!-- not working -->
             <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit'></i> Log Out</a>

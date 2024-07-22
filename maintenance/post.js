@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../Users/create_post.php", true);
+            xhr.open("POST", "../users/create_post.php", true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     postContent.innerHTML = ''; // Clear text content

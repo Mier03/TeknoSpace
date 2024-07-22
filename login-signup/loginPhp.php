@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         document.addEventListener('DOMContentLoaded', function() {
                         showSuccessModal();
                         setTimeout(function() {
-                            window.location.href = '../USERS/ADMIN.php';
+                            window.location.href = '../users/ADMIN.php';
                         }, 1500);
                         });
                         </script>";
@@ -176,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         document.addEventListener('DOMContentLoaded', function() {
                             showSuccessModal();
                             setTimeout(function() {
-                                window.location.href = '../USERS/studentHomepage.php';
+                                window.location.href = '../users/studentHomepage.php';
                             }, 1500);
                             });
                         </script>";
@@ -186,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     document.addEventListener('DOMContentLoaded', function() {
                         showSuccessModal();
                         setTimeout(function() {
-                            window.location.href = '../USERS/facultyHomepage.php';
+                            window.location.href = '../users/facultyHomepage.php';
                         }, 1500);
                         });
                         </script>";
@@ -201,7 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = mysqli_fetch_assoc($result_verify);
             $_SESSION['verify_user'] = true;
             if ($row['userType'] == 'Faculty' || $row['userType'] == 'Student') {
-                header("Location: ../USERS/verifyFaculty.php"); // Redirect to verifyFaculty.php for non-verified faculty users
+                header("Location: ../users/verifyFaculty.php"); // Redirect to verifyFaculty.php for non-verified faculty users
                 exit();
             }
         } else {
