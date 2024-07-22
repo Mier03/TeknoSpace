@@ -79,29 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // if no error proceed to insertion
         if (empty($errors)) {
 
-            if ($userType === 'Faculty') {
-                $table = 'verify';
-            } elseif ($userType === 'Student') {
-                $table = 'users';
-            } else {
-                $errors[] = "Invalid user type.";
-            }
-
-            if (empty($errors)) {
-                $sql = "INSERT INTO $table (userType, firstName, middleName, lastName, idNumber, email, course, password) 
-                    VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course', '$password')";
-
-                if ($conn->query($sql) === TRUE) {
-                    if ($userType === 'Student') {
-                        $last_id = $conn->insert_id; // Get the last inserted ID
-
-                        // Insert into profile table
-                        $defaultProfilePic = "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg";
-                        $defaultCoverPhoto = "https://www.rappler.com/tachyon/2021/09/cit-campus-20210916.png?resize=850%2C315&zoom=1";
-                        $profileSql = "INSERT INTO profile (userId, profile_pic, cover_photo) 
-                               VALUES ('$last_id', '$defaultProfilePic', '$defaultCoverPhoto')";
-
-                        if ($conn->query($profileSql) === TRUE) {
+            if ($userType === 'Faculty' || $userType === 'Student') {
+                if (empty($errors)) {
+                    $sql = "INSERT INTO verify (userType, firstName, middleName, lastName, idNumber, email, course, password) 
+                        VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course', '$password')";
+    
+                    if ($conn->query($sql) === TRUE) {
+                        if ($userType === 'Faculty' || $userType === 'Student') {
                             $_SESSION['userType'] = $userType;
                             $_SESSION['first_name'] = $firstName;
                             $_SESSION['middle_name'] = $middleName;
@@ -109,28 +93,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION['idNumber'] = $idNumber;
                             $_SESSION['valid'] = $email;
                             $_SESSION['course'] = $course;
-                            $_SESSION['id'] = $last_id;
-
+                            $_SESSION['id'] = $conn->insert_id; 
+    
                             header("Location: login.php");
                         } else {
-                            $errors[] = 'Error to insert new profile. Contact admin for further investigation.';
+                            $errors[] = 'Error to insert new user. Contact admin for further investigation.';
                         }
-                    } elseif ($userType === 'Faculty') {
-                        $_SESSION['userType'] = $userType;
-                        $_SESSION['first_name'] = $firstName;
-                        $_SESSION['middle_name'] = $middleName;
-                        $_SESSION['last_name'] = $lastName;
-                        $_SESSION['idNumber'] = $idNumber;
-                        $_SESSION['valid'] = $email;
-                        $_SESSION['course'] = $course;
-                        $_SESSION['id'] = $conn->insert_id; 
-
-                        header("Location: login.php");
-                    } else {
-                        $errors[] = 'Error to insert new user. Contact admin for further investigation.';
                     }
                 }
+            } else {
+                $errors[] = "Invalid user type.";
             }
+
+            
         }
     } elseif (isset($_POST['submit_signin'])) { // name of the button in the html tag for log in
         $errors = [];
@@ -225,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // User found in verify table
             $row = mysqli_fetch_assoc($result_verify);
             $_SESSION['verify_user'] = true;
-            if ($row['userType'] == 'Faculty') {
+            if ($row['userType'] == 'Faculty' || $row['userType'] == 'Student') {
                 header("Location: ../USERS/verifyFaculty.php"); // Redirect to verifyFaculty.php for non-verified faculty users
                 exit();
             }
