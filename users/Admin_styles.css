@@ -410,7 +410,10 @@ body {
         max-width: none;
         max-height: none;
     }
-
+    
+    .postmodal-content .post-header {
+        padding: 10px 15px;
+    }
     .close {
         position: absolute;
         top: 10px;
@@ -473,9 +476,17 @@ body {
         margin: 0 20px 20px 20px !important;
         background-color: #ffd700;
         color: #000;
+        justify-content: space-between;
+    }
+    #postContent:empty:before {
+        font-size: 16px;
     }
 }
-
+@media screen and (max-width: 440px) {
+    .btn-post {
+        width: 90% !important;
+    }
+}
 
 /* .modal-content textarea {
     width: 95%;
