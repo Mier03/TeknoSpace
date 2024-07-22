@@ -19,12 +19,12 @@ const modal = document.getElementById("manageAccountModal");
 
         function goToAllAccounts() {
             modal.style.display = "none";
-            window.location.href = "../Users/allAccounts.php"; 
+            window.location.href = "../users/allAccounts.php"; 
         }
 
         function goToVerifyAccounts() {
             modal.style.display = "none";
-            window.location.href = "../Users/verify.php"; 
+            window.location.href = "../users/verify.php"; 
         }
 
         const postModal = document.getElementById("postModal");

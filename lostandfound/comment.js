@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //fetch and display posts
     function loadPosts() {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "fetch-LF-post.php", true);
+        xhr.open("GET", "fetch-lf-post.php", true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 document.querySelector('.posts').innerHTML = xhr.responseText;
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
                 // Send AJAX request to like.php
                 const xhr = new XMLHttpRequest();
-                xhr.open('POST', '../Users/like.php', true);
+                xhr.open('POST', '../users/like.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     formData.append("userId", btn.getAttribute('data-uid'));
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "../Users/create_comment.php", true);
+                    xhr.open("POST", "../users/create_comment.php", true);
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                             loadPosts();

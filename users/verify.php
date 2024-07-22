@@ -140,7 +140,7 @@ if (!isset($_SESSION['valid'])) {
             </div>
             <div class="nav-links">
                 <!-- <a href="#home" class="icon"><i class="fi fi-ss-user"></i></a> -->
-                <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"></span></a>
+                <a href="../profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"></span></a>
                 <a href="#profile" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
                 <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
             </div>
@@ -154,7 +154,7 @@ if (!isset($_SESSION['valid'])) {
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
             <span class="close" onclick="toggleMobileMenu()">&times;</span>
-            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
+            <a href="../profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
                 <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
         </div>
@@ -163,7 +163,7 @@ if (!isset($_SESSION['valid'])) {
     <nav class="nav">
         <ul>
             <li><a href="ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="../Maintenance/adminMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="../maintenance/adminMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
                 <a href="#manageAccount" class="icon manage-account" style="color: #fff3b0; background-color: #8B1818;" ><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>

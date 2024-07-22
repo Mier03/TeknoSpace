@@ -10,7 +10,7 @@ function sendPasswordResetEmail($email, $token) {
         $mail->Subject = 'Password Reset';
 
         $mail->Body = <<<EOT
-        Click <a href="http://localhost/TeknoSpace/Login-Signup/forgotPass.php?token=$token">here</a> 
+        Click <a href="http://localhost/TeknoSpace/login-signup/forgotPass.php?token=$token">here</a> 
         to reset your password.
         EOT;
 

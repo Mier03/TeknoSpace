@@ -63,7 +63,7 @@
     <div class="container">
         <h1>Unauthorized Access</h1>
         <p>You do not have permission to access this page.</p>
-        <p>Please <a href="../Login-Signup/login.php">login</a> with appropriate credentials.</p>
+        <p>Please <a href="../login-signup/login.php">login</a> with appropriate credentials.</p>
         <p class="intimidating">Access Denied</p>
     </div>
 </body>

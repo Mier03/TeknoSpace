@@ -1,6 +1,6 @@
 <?php
 
-include('../Users/auth.php');
+include('../users/auth.php');
 include('../config.php');
 include('../helper.php');
 checkLogin();
@@ -8,11 +8,11 @@ checkUserRole('Faculty');
 
 // Check if 'firstName' or 'lastName' is undefined in the session
 if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
-    header("Location: ../USERS/verifyFaculty.php");
+    header("Location: ../users/verifyFaculty.php");
     exit();
 }
 if (!isset($_SESSION['valid'])) {
-    header("Location: ../Login-Signup/login.php");
+    header("Location: ../login-signup/login.php");
     exit();
 }
 $userId = $_SESSION['id'];
@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknospace</title>
-    <link rel="stylesheet" href="../Users/Admin_styles.css">
+    <link rel="stylesheet" href="../users/Admin_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -66,7 +66,7 @@ if ($result->num_rows > 0) {
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
-                <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
+                <a href="../profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i></a>
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i></a>
                 <a href="#" onclick="showLogoutModal(); return false;">Log Out</a>
             </div>
@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
             <span class="close" onclick="toggleMobileMenu()">&times;</span>
-            <a href="../Profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
+            <a href="../profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link">      Profile</span></a>
                 <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link">     Notifications</span></a>
                 <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit' ></i>     Log Out</a>
         </div>
@@ -88,8 +88,8 @@ if ($result->num_rows > 0) {
 
     <nav class="nav">
         <ul>
-            <li><a href="../Users/facultyHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="../Maintenance/facultyMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="../users/facultyHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="../maintenance/facultyMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="facultyLostFound.php" class="icon" style="color: #fff3b0; background-color: #8B1818;"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
         </ul>
     </nav>
@@ -211,7 +211,7 @@ if ($result->num_rows > 0) {
             };
         });
         function logout() {
-            fetch('../Users/logout.php', {
+            fetch('../users/logout.php', {
                 method: 'POST',
             }).then(response => {
                 if (response.ok) {
