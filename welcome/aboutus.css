@@ -45,6 +45,20 @@
     transition: ease-in-out 0.5s;
 }
 
+@media (max-width: 860px) {
+    nav{
+        padding-left: 10px !important;
+    }
+    .nav-links ul li a {
+        color: white;
+        font-weight: bold;
+        font-size: 16px !important;
+    }
+    .welcome-nav a {
+        font-size: 14px !important;
+    }
+}
+
 /*tablets*/
 @media (max-width: 768px) {
     .tekno-header {
@@ -89,8 +103,9 @@ nav {
 }
 
 .logo-title-container h1 {
+    font-family: Arial, sans-serif;
     color: white;
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .welcome-nav {
