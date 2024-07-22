@@ -12,7 +12,16 @@
         $dbName = 'pljrluqz_teknospace';
     }
  
-    $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName) or die("Couldn't connect");
+    try {
+        $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
+        if (!$conn) {
+            throw new Exception("Connection failed: " . mysqli_connect_error());
+        }
+        echo "Connected successfully";
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    
    // $conn = mysqli_connect('sql312.infinityfree.com', 'if0_36811532', 'EOAadDVdofVT', 'if0_36811532_teknoDB')or die("Couldn't connect");
     return $conn;
 ?>
