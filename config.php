@@ -11,7 +11,6 @@
         $dbPass = 'angiedb234;;';
         $dbName = 'pljrluqz_teknospace';
     }
-    echo $env; exit;
  
     try {
         $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
