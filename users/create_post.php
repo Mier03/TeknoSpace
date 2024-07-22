@@ -21,7 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $targetDir = "../uploads/";
-        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+        $uniqueId = uniqid();
+        $originalName = basename($_FILES["image"]["name"]);
+        $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+        $newName = str_replace(' ', '_', pathinfo($originalName, PATHINFO_FILENAME)) . '_' . $uniqueId . '.' . $extension;
+        $targetFile = $targetDir . $newName;
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile);
         $imagePath = $targetFile;
     }

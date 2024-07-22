@@ -13,8 +13,11 @@ $userId = $_SESSION['id'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['fileUpload'])) {
     $uploadType = $_POST['uploadType'];
     $targetDir = "../uploads/";
+    $uniqueId = uniqid();
     $fileName = basename($_FILES["fileUpload"]["name"]);
-    $targetFilePath = $targetDir . $fileName;
+    $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+    $newName = str_replace(' ', '_', pathinfo($fileName, PATHINFO_FILENAME)) . '_' . $uniqueId . '.' . $extension;
+    $targetFilePath = $targetDir . $newName;
     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
     // Allow certain file formats
