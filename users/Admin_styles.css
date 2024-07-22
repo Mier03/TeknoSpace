@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f2f2f2;
-    padding-top: 120px;
+    padding-top: 130px;
 }
 
 .header {
@@ -214,6 +214,9 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+    body {
+        padding-top: 120px;
+    }
     .nav ul li a {
         flex-direction: column;
         padding: 5px 2.5px;
@@ -348,7 +351,10 @@ body {
     .create-post {
         border-radius: 0 !important;
         margin-bottom: 10px !important;
-        margin-top: 0 !important;
+        margin-top: 0px !important;
+        padding: 15px;
+        display: flex;
+        align-items: center;
     }
 
     .create-post .post-header {
@@ -363,13 +369,10 @@ body {
     .create-post .post-header img {
         margin-right: 10px;
     }
-    .create-post {
-        display: flex;
-        align-items: center;
-    }
+
     .post-space {
         border-radius: 50px;
-        padding: 10px 15px;
+        padding: 15px 20px;
         flex-grow: 1;
     }
     .post-space p {
@@ -432,7 +435,6 @@ body {
     .post-header img {
         width: 40px;
         height: 40px;
-        margin-left: 1rem;
     }
 
     .post-input {
