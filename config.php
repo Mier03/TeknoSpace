@@ -11,13 +11,10 @@
         $dbPass = 'angiedb234;;';
         $dbName = 'pljrluqz_teknospace';
     }
+    echo $env; exit;
  
     try {
         $conn = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
-        if (!$conn) {
-            throw new Exception("Connection failed: " . mysqli_connect_error());
-        }
-        echo "Connected successfully";
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
