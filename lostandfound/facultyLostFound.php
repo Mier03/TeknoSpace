@@ -133,13 +133,6 @@ if ($result->num_rows > 0) {
                         <input type="file" id="postImage" accept="image/*" style="display: none;">
                         <label for="postImage" class="custom-file-upload">Add Picture or Video</label>
                     </div>
-                    <div class="important">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="label-text">LOST</span>
-                    </div>
                 </div>
                 <button class="btn-post" id="submitPost">Post</button>
             </div>
@@ -267,77 +260,6 @@ if ($result->num_rows > 0) {
             opacity: 0.5;
             object-fit: cover;
         }
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 32px;
-            height: 20px;
-        }
-
-        /* Hide default HTML checkbox */
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: gold; /* Initial color is gold */
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 12px;
-            width: 12px;
-            right: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #ccc; /* Change to gray when checked */
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(-12px);
-            -ms-transform: translateX(-12px);
-            transform: translateX(-12px);
-        }
-
-        .label-text {
-            font-size: 14px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-        .background-container img {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.5;
-            object-fit: cover;
-        }
-
         .post-options {
             display: flex;
             justify-content: space-between;
