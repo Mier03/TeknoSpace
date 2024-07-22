@@ -63,7 +63,7 @@ $email = $_SESSION['valid'];
         <ul>
             <li><a href="../users/studentHomepage.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
             <li><a href="studentMaintenance.php" class="icon" style="color: #fff3b0; background-color: #8B1818;"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
-            <li><a href="../LostAndFound/studentLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
+            <li><a href="../lostandfound/studentLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
         </ul>
     </nav>
     <main class="main">

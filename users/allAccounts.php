@@ -311,7 +311,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
         <ul>
             <li><a href="admin.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
             <li><a href="../maintenance/adminMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
-            <li><a href="../LostAndFound/adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
+            <li><a href="../lostandfound/adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
                 <a href="#manageAccount" class="icon manage-account" style="color: #fff3b0; background-color: #8B1818;"><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a>
             </li>
