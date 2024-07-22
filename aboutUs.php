@@ -104,10 +104,12 @@ if (isset($_POST['submit_signup'])) {
                 <!--<img src="images/groufie 2.jpg" alt="Our Team">-->
             </div>
             <div class="text-container">
+                <div class="text-container-team">
                 <h1>The Team</h1>
                 <p>Meet us, the creators of Tekno Space! We are passionate students dedicated to keeping our 
                     school community informed and connected. Through Tekno Space, 
-                    we strive to deliver accurate updates and engaging content that enriches your school experience.</p>
+                    we strive to deliver accurate updates and engaging content that enriches your school experience.</p>        
+                </div>
             </div>
         </div>
     </section>
