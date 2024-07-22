@@ -6,7 +6,7 @@
     $dbName = 'teknospace';
 
     if ($env != 'localhost') {
-        $dbHost = '163.44.242.11';
+        $dbHost = 'localhost';
         $dbUser = 'pljrluqz_angie';
         $dbPass = 'angiedb234;;';
         $dbName = 'pljrluqz_teknospace';
@@ -21,7 +21,7 @@
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
-    
+
    // $conn = mysqli_connect('sql312.infinityfree.com', 'if0_36811532', 'EOAadDVdofVT', 'if0_36811532_teknoDB')or die("Couldn't connect");
     return $conn;
 ?>
