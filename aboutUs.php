@@ -34,7 +34,7 @@ if (isset($_POST['submit_signup'])) {
                 <div class="logo-title-container">
                     <!-- HERE -->
                     <a href="aboutUs.php"><img src="images/logo circle.png" alt="Tekno Space Logo"></a>
-                    <h1>Tekno Space</h1>
+                    <h1>TEKNOSPACE</h1>
                 </div>
                 <div class="welcome-nav">
                     <a href="#aboutus">About Us</a>
