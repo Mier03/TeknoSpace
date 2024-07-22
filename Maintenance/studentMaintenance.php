@@ -1,6 +1,6 @@
 
 <?php
-include('../Users/auth.php');
+include('../users/auth.php');
 checkLogin();
 checkUserRole('Student');
 
