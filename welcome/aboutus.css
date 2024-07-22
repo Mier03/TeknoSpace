@@ -230,12 +230,9 @@ nav {
     flex: 1;
     padding: 20px;
 }
-.text-container-team {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    margin-top:200px;
+
+.text-container-team{
+    margin-top: 200px;
 }
 
 .alternating-section .image-container img {
@@ -293,6 +290,7 @@ nav {
 }
 
 @media (max-width: 768px) {
+
     .header {
         height: 50px; 
     }

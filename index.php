@@ -98,7 +98,7 @@ if (isset($_POST['submit_signup'])) {
     <section id="theteam" class="alternating-section reverse">
         <div class="bg">
             <!-- HERE -->
-            <img src="images/background-team.png" alt="Background">
+            <img src="images/background-team2.png" alt="Background">
         </div>
         <div class="section-content">
             <div class="image-container">
