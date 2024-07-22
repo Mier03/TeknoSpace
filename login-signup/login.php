@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $redirect_url = '';
             switch ($_SESSION['userType']) {
                 case 'Admin':
-                    $redirect_url = '../users/ADMIN.php';
+                    $redirect_url = '../users/admin.php';
                     break;
                 case 'Student':
                     $redirect_url = '../users/studentHomepage.php';

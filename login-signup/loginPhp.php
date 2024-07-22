@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         document.addEventListener('DOMContentLoaded', function() {
                         showSuccessModal();
                         setTimeout(function() {
-                            window.location.href = '../users/ADMIN.php';
+                            window.location.href = '../users/admin.php';
                         }, 1500);
                         });
                         </script>";

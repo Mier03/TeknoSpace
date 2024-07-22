@@ -224,7 +224,7 @@ if (!empty($commentPostIds)) {
                 } elseif ($userType === 'Faculty') {
                     echo '<a href="../users/facultyHomepage.php">';
                 } elseif ($userType === 'Admin') {
-                    echo '<a href="../users/ADMIN.php">';
+                    echo '<a href="../users/admin.php">';
                 }
                 ?>
                 <img src="../images/teknospace-logo.jpg" alt="Teknospace Logo">

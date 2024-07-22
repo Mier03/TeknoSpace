@@ -135,7 +135,7 @@ if (!isset($_SESSION['valid'])) {
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <a href="ADMIN.php"><img src="../images/teknospace-logo.jpg" alt="Tekno Space Logo"></a>
+                <a href="admin.php"><img src="../images/teknospace-logo.jpg" alt="Tekno Space Logo"></a>
                 <span>TEKNOSPACE</span>
             </div>
             <div class="nav-links">
@@ -162,7 +162,7 @@ if (!isset($_SESSION['valid'])) {
 
     <nav class="nav">
         <ul>
-            <li><a href="ADMIN.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="admin.php" class="icon"><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
             <li><a href="../maintenance/adminMaintenance.php" class="icon"><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="../LostAndFound/adminLostFound.php" class="icon"><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <li>
