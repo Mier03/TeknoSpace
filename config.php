@@ -7,7 +7,7 @@
 
     if ($env != 'localhost') {
         $dbHost = 'localhost';
-        $dbUser = 'angie';
+        $dbUser = 'pljrluqz_angie';
         $dbPass = 'angiedb234;;';
         $dbName = 'pljrluqz_teknospace';
     }
