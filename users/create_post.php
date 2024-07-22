@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_SESSION['firstName'].' '. $_SESSION['lastName']; 
     $profile_image = "https://static.thenounproject.com/png/3918329-200.png"; //change this
     $imagePath = "";
-    $isPostImportant = (int) $_POST['isImportant'];
+    $isPostImportant = (int) $_POST['isImportant'] ?? 0;
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $targetDir = "../uploads/";
