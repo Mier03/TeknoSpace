@@ -60,7 +60,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Unverified Faculty Account</h1>
+        <h1>Unverified Account</h1>
         <p>Please wait for the admin to verify your account.</p>
         <p class="intimidating">Access Denied</p>
     </div>
