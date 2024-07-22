@@ -43,8 +43,9 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknospace</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
     <link rel="stylesheet" href="Admin_styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -60,8 +61,6 @@ if ($result->num_rows > 0) {
     <div class="background-container">
         <img src="../images/signin-bg.png" alt="Background Image">
     </div>
-    <div class="fixed-wrapper">
-    <header class="header sticky">
         <header class="header">
             <div class="header-content">
                 <div class="logo">
@@ -77,9 +76,7 @@ if ($result->num_rows > 0) {
                     <i class='bx bx-menu burger-icon' onclick="toggleMobileMenu()"></i>
                 </div>
             </div>
-        </header>
     </header>
-    </div>
         <!-- navmodal -->
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">

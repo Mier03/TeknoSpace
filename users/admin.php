@@ -57,7 +57,6 @@ if ($result->num_rows > 0) {
     <div class="background-container">
         <img src="../images/signin-bg.png" alt="Background Image">
     </div>
-    
     <header class="header">
         <div class="header-content">
             <div class="logo">
