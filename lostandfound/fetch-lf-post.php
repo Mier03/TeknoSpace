@@ -149,7 +149,7 @@ if (!empty($posts)) {
     }
     } else {
     echo '<div class="post-container">
-                <div class="post">"No posts found."</div>
+                <div class="post">No posts found.</div>
           </div>';
     }
     

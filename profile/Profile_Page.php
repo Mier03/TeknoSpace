@@ -242,17 +242,16 @@ if (!empty($commentPostIds)) {
                 </div>
             </div>
             <div class="burger-icon">
-                <i class='bx bx-menu burger-icon' onclick="toggleMenu()"></i>
+                <i class='bx bx-menu burger-icon'></i>
             </div>
         </div>
     </header>
     <!-- navmodal -->
     <div id="navModal" class="navmodal">
         <div class="navmodal-content">
-            <span class="close" onclick="toggleMobileMenu()">&times;</span>
+            <span class="close">&times;</span>
             <a href="../profile/Profile_Page.php" class="icon"><i class="fi fi-ss-user"></i><span class="nav-link"> Profile</span></a>
             <a href="#notif" class="icon"><i class="fi fi-br-bell-notification-social-media"></i><span class="nav-link"> Notifications</span></a>
-            <!-- not working -->
             <a href="#" onclick="showLogoutModal(); return false;"><i class='bx bx-exit'></i> Log Out</a>
         </div>
     </div>
@@ -358,7 +357,7 @@ if (!empty($commentPostIds)) {
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <p>No comments available.</p>
+                        <p style="margin-left: 1rem;">No comments available.</p>
                     <?php endif; ?>
                 </div>
             </section>
@@ -456,7 +455,7 @@ if (!empty($commentPostIds)) {
 
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <p>No posts available.</p>
+                        <p style="margin-left: 1rem;">No posts available.</p>
                     <?php endif; ?>
                 </div>
             </section>
