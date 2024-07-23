@@ -54,9 +54,67 @@ document.addEventListener('DOMContentLoaded', function() {
             button.nextElementSibling.classList.toggle('show');
         }
 
-
-
+        /* POST MODAL */
+        let currentPostId;
+        let currentPost;
+        
         if (event.target.classList.contains('edit-post')) {
+            event.preventDefault();
+            currentPost = event.target.closest('.post');
+            currentPostId = currentPost.dataset.postId;
+            let contentElement = currentPost.querySelector('.post-content p');
+            let originalContent = contentElement.textContent;
+            
+            let modal = document.getElementById('editPostModal');
+            let textarea = document.getElementById('editPostContent');
+            textarea.value = originalContent;
+            modal.style.display = "block";
+        }
+        
+        if (event.target.classList.contains('delete-post')) {
+            event.preventDefault();
+            currentPost = event.target.closest('.post');
+            currentPostId = currentPost.dataset.postId;
+            
+            let modal = document.getElementById('deletePostModal');
+            modal.style.display = "block";
+        }
+        
+        document.querySelectorAll('.modal .close').forEach(closeBtn => {
+            closeBtn.onclick = function() {
+                this.closest('.modal').style.display = "none";
+            }
+        });
+        
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+        
+        document.getElementById('saveEditPost').addEventListener('click', function() {
+            let newContent = document.getElementById('editPostContent').value;
+            let contentElement = currentPost.querySelector('.post-content p');
+            saveEdit(currentPostId, newContent, contentElement, contentElement.textContent);
+            document.getElementById('editPostModal').style.display = "none";
+        });
+        
+        document.getElementById('cancelEditPost').addEventListener('click', function() {
+            document.getElementById('editPostModal').style.display = "none";
+        });
+        
+        document.getElementById('confirmDeletePost').addEventListener('click', function() {
+            deletePost(currentPostId, currentPost);
+            document.getElementById('deletePostModal').style.display = "none";
+        });
+        
+        document.getElementById('cancelDeletePost').addEventListener('click', function() {
+            document.getElementById('deletePostModal').style.display = "none";
+        });
+
+
+
+        /*if (event.target.classList.contains('edit-post')) {
             event.preventDefault();
             var post = event.target.closest('.post');
             var postId = post.dataset.postId;
@@ -90,7 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
 
-        }
+        }*/
+
 
         if (event.target.classList.contains('toggle-important')) {
             event.preventDefault();
@@ -150,35 +209,73 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    function toggleFound(postId, action, toggleLink) {
-        if (confirm('Is this item found?')) {
-            fetch('update_status.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: `postId=${postId}&action=${action}`
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const post = toggleLink.closest('.post');
-                        const lostHeading = post.querySelector('h1');
+// Found Item Modal
+    var foundItemModal = document.getElementById('foundItemModal');
+    var confirmFoundBtn = document.getElementById('confirmFoundItem');
+    var cancelFoundBtn = document.getElementById('cancelFoundItem');
+    var currentPostId;
 
-                        if (lostHeading) {
-                            lostHeading.innerText = '! FOUND';
-                            lostHeading.style.color = '#800000'; // Optionally change the color if needed
-                        }
-                    } else {
-                        alert('Failed to update status: ' + (data.error || 'Unknown error'));
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error: ' + error.message);
-                });
+    // Event listener for found button in drop-down
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('toggle-found')) {
+            e.preventDefault();
+            currentPostId = e.target.closest('.post').dataset.postId;
+            foundItemModal.style.display = "block";
         }
+    });
+
+    // Confirm button in modal
+    confirmFoundBtn.onclick = function() {
+        toggleFound(currentPostId);
+        foundItemModal.style.display = "none";
+    };
+
+    // Cancel button in modal
+    cancelFoundBtn.onclick = function() {
+        foundItemModal.style.display = "none";
+    };
+
+    // Close modal when clicking outside or on the close button
+    window.onclick = function(event) {
+        if (event.target == foundItemModal) {
+            foundItemModal.style.display = "none";
+        }
+    };
+
+    var closeButtons = document.getElementsByClassName("close");
+    for (var i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].onclick = function() {
+            foundItemModal.style.display = "none";
+        };
     }
+
+
+function toggleFound(postId) {
+    fetch('update_status.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `postId=${postId}&action=found`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const post = document.querySelector(`.post[data-post-id="${postId}"]`);
+            const statusHeading = post.querySelector('h1');
+            if (statusHeading) {
+                statusHeading.innerText = '! FOUND';
+                statusHeading.className = 'found-status';
+            }
+        } else {
+            console.error('Failed to update status:', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 
 
     function saveEdit(postId, newContent, contentElement, originalContent) {
