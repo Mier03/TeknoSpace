@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Unauthorized Access</title>
+    <link rel="icon" href="../images/urlicon.png" type="image/x-icon">
     <style>
         body {
             background-color: #E9D2B0;

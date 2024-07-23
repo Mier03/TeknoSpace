@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="signup.css">
     <link rel="stylesheet" href="common-auth.css">
     <title>Sign Up Page</title>
+    <link rel="icon" href="../images/urlicon.png" type="image/x-icon">
 
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

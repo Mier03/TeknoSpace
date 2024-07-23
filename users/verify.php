@@ -17,7 +17,8 @@ if (!isset($_SESSION['valid'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teknospace</title>
+    <title>Verify Accounts</title>
+    <link rel="icon" href="../images/urlicon.png" type="image/x-icon">
     <link rel="stylesheet" href="Admin_styles.css">
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO7IQ84s9PNogtYXeoy7CsfrMWOEWM6VCc1lwv02D67M0ji_SCx9-MgL3vEECexc7UnVU&usqp=CAU">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-straight/css/uicons-solid-straight.css'>
@@ -52,49 +53,6 @@ if (!isset($_SESSION['valid'])) {
         font-size:10px;
     }
 }
-
-
-
-/* All Accounts and Verify Account START*/
-/* #manageAccountModal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-#manageAccountModal .modal-content {
-    background-color: maroon !important;
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 500px;
-
-}
-
-.modal-content h2 {
-    color: white;
-    text-align: center;
-}
-
-@media (max-width: 600px) {
-    #manageAccountModal .modal-content {
-        width: 90%;
-        padding: 15px;
-    }
-} */
-/* All Accounts and Verify Account END*/
-
 
 
     /* LOGOUT MODAL */
