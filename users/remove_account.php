@@ -1,8 +1,15 @@
 <?php
 require_once '../config.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+    exit;
+}
+
+
 $data = json_decode(file_get_contents('php://input'), true);
 $userId = $data['userId'] ?? null;
+
 
 if (!$userId) {
     echo json_encode(['success' => false, 'message' => 'User ID is required']);
