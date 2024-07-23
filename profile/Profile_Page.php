@@ -402,21 +402,21 @@ if (!empty($commentPostIds)) {
                                                     <a href="#" class="toggle-important" data-action="make">Make Important</a>
                                                 <?php endif; ?>
                                             <?php elseif ($post['posttype'] === 'Lost & Found') : ?>
-                                                <a href="#" class="toggle-found" data-action="found" onclick="toggleFound(<?php echo $post['id']; ?>, 'found', this);">Found</a>
+                                                <a href="#" class="toggle-found" data-post-id="<?php echo $post['id']; ?>">Found</a>
                                             <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                    <?php if ($post['posttype'] === 'Lost & Found') : ?>
-                                        <div>
-                                            <?php if ($post['status'] === 'found') : ?>
-                                                <h1 style="color: #800000">! FOUND</h1>
-                                            <?php else : ?>
-                                                <h1 style="color: red">! LOST</h1>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endif; ?>
+                                <?php if ($post['posttype'] === 'Lost & Found') : ?>
+                                    <div>
+                                        <?php if ($post['status'] === 'found') : ?>
+                                            <h1 class="found-status">! FOUND</h1>
+                                        <?php else : ?>
+                                            <h1 class="lost-status">! LOST</h1>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                                     <?php if (!empty($post['image_path'])) : ?>
                                         <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post Image" class="post-image" data-full-image="<?php echo htmlspecialchars($post['image_path']) ?>">
@@ -463,6 +463,40 @@ if (!empty($commentPostIds)) {
 
        
     </main>
+<div id="editPostModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Edit Post</h2>
+        <textarea id="editPostContent"></textarea>
+        <div class="button-container">
+            <button id="saveEditPost">Save</button>
+            <button id="cancelEditPost">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="deletePostModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Delete Post</h2>
+        <p>Are you sure you want to delete this post?</p>
+        <div class="button-container">
+            <button id="confirmDeletePost">Delete</button>
+            <button id="cancelDeletePost">Cancel</button>
+        </div>
+    </div>
+</div>    
+<div id="foundItemModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Item Found</h2>
+        <p>Is this item found?</p>
+        <div class="button-container">
+            <button id="confirmFoundItem">Found</button>
+            <button id="cancelFoundItem">Cancel</button>
+        </div>
+    </div>
+</div>
 
     <form id="uploadForm" method="post" action="ProfileCoverUpload.php" enctype="multipart/form-data">
         <input type="file" id="fileUpload" name="fileUpload" style="display: none;">

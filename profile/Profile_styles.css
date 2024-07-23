@@ -1056,3 +1056,189 @@
 .comment-options-content span{
    margin-left:5px;
 }
+
+
+/* CONFIRMATION MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#editPostContent {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    text-align: right;
+}
+
+.button-container button {
+    margin-left: 10px;
+}
+
+#saveEditPost,
+#confirmDeletePost,
+#cancelEditPost,
+#cancelDeletePost {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+
+#saveEditPost {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+#saveEditPost:hover {
+    background-color: #45a049;
+}
+
+
+#confirmDeletePost {
+    background-color: #f44336; 
+    color: white;
+}
+
+#confirmDeletePost:hover {
+    background-color: #da190b; 
+}
+
+
+#cancelEditPost,
+#cancelDeletePost {
+    background-color: #f1f1f1; 
+    color: black;
+}
+
+#cancelEditPost:hover,
+#cancelDeletePost:hover {
+    background-color: #ddd; 
+}
+
+
+.button-container {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.button-container button {
+    margin-left: 10px;
+}
+
+
+#editCommentModal .modal-content,
+#deleteCommentModal .modal-content {
+    max-width: 400px;
+}
+
+#editCommentContent {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+#saveEditComment,
+#confirmDeleteComment,
+#cancelEditComment,
+#cancelDeleteComment {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#saveEditComment {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#saveEditComment:hover {
+    background-color: #45a049;
+}
+
+#confirmDeleteComment {
+    background-color: #f44336;
+    color: white;
+}
+
+#confirmDeleteComment:hover {
+    background-color: #da190b;
+}
+
+#cancelEditComment,
+#cancelDeleteComment {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+#cancelEditComment:hover,
+#cancelDeleteComment:hover {
+    background-color: #ddd;
+}
+
+#confirmFoundItem, #cancelFoundItem{
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#confirmFoundItem{
+    background-color: #4CAF50;
+    color: white;
+}
+
+#cancelFoundItem{
+    background-color: #f1f1f1;
+    color: black;
+}
+
+#cancelFoundItem:hover{
+    background-color: #ddd;
+}
+
+#confirmFoundItem:hover{
+    background-color: #45a049;
+}
