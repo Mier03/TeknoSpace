@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="signup.css">
     <link rel="stylesheet" href="common-auth.css">
-    <title>Sign In/Sign Up Page | Dan Aleko</title>
+    <title>Sign Up Page</title>
 
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

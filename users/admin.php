@@ -17,18 +17,19 @@ $course = $_SESSION['course'];
 $idNumber = $_SESSION['idNumber'];
 $email = $_SESSION['valid'];
 
+
 $sql = "SELECT * FROM profile WHERE userId = '$userId'";
 $result = $conn->query($sql);
-$profilePic = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=';
+$default_profile_image = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=';
+
 
 if ($result->num_rows > 0) {
     $profile_row = $result->fetch_assoc();
 
-    if (
-        !empty($profile_row['profile_pic']) 
-        && file_exists($profile_row['profile_pic'])
-    ) {
+    if (!empty($profile_row['profile_pic']) && file_exists($profile_row['profile_pic'])) {
         $profilePic = $profile_row['profile_pic'];
+    } else {
+        $profilePic = $default_profile_image;
     }
 }
 
@@ -110,7 +111,7 @@ if ($result->num_rows > 0) {
         <div class="nav-name">School Updates</div>
         <div class="create-post">
             <div class="post-header">
-                <img src="<?php echo $profilePic; ?>" alt="Profile Photo">
+                <img src="<?php  echo $profilePic; ?>" alt="Profile Photo">
                 <div class="post-header-info">
                     <h3><?php echo $fullName ?></h3>
                 </div>
@@ -127,7 +128,7 @@ if ($result->num_rows > 0) {
                 <span class="close">&times;</span>
                 <h2>Create post</h2>
                 <div class="post-header">
-                    <img src="<?php echo $profilePic; ?>" alt="Profile Photo">
+                    <img src="<?php  echo $profilePic; ?>" alt="Profile Photo">
                     <div class="post-header-info">
                         <h3><?php echo $fullName ?></h3>
                         <select id="postAudience">
