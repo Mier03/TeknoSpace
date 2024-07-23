@@ -401,7 +401,7 @@ if (!empty($commentPostIds)) {
                                                 <?php else : ?>
                                                     <a href="#" class="toggle-important" data-action="make">Make Important</a>
                                                 <?php endif; ?>
-                                            <?php elseif ($post['posttype'] === 'Lost & Found') : ?>
+                                            <?php elseif ($post['posttype'] === 'Lost & Found' && $post['status'] !== 'found') : ?>
                                                 <a href="#" class="toggle-found" data-post-id="<?php echo $post['id']; ?>">Found</a>
                                             <?php endif; ?>
                                         </div>
