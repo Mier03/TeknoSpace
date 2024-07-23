@@ -256,7 +256,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const lostHeading = post.querySelector('h1');
                 if (lostHeading) {
                     lostHeading.innerText = '! FOUND';
+                    lostHeading.className = 'found-status';
                 }
+
+                // Hide the "Found" button
+                toggleLink.style.display = 'none';
             } 
         })
         .catch(error => {
