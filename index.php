@@ -10,7 +10,8 @@ if (isset($_POST['submit_signup'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>Index</title>
+    <link rel="icon" href="../images/urlicon.png" type="image/x-icon">
     <!-- HERE -->
     <link rel="stylesheet" href="welcome/aboutus.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
