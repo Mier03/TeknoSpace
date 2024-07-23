@@ -1,12 +1,19 @@
 <?php
 
 include('../config.php');
-include('search.php');
+include('resetbyadmin.php'); // for reset password
+include('search.php'); // for search
+
 
 
 if (!isset($_SESSION['valid'])) {
     header("Location: ../login.php");
     exit();
+}
+
+if (isset($_SESSION['password_reset'])) {
+    echo "<script>alert('Password reset successfully.');</script>";
+    unset($_SESSION['password_reset']);
 }
 
 if (isset($_GET['userId'])) {
@@ -22,12 +29,14 @@ if (isset($_GET['userId'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
+
+
     if ($result->num_rows > 0) {
         $userData = $result->fetch_assoc();
 
         // If no profile pic, set a default
         if (empty($userData['profile_pic'])) {
-            $userData['profile_pic'] = 'path/to/default/profile-image.jpg';
+            $userData['profile_pic'] = '../images/profile-icon.png';
         }
 
         echo json_encode($userData);
@@ -39,27 +48,8 @@ if (isset($_GET['userId'])) {
     $conn->close();
 }
 
-// Reset Password
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
-    $userId = $_POST['reset_password'];
 
 
-    $sql = "UPDATE users SET password = NULL WHERE Id = ?";
-
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
-
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Password has been reset successfully.');</script>";
-    } else {
-        echo "<script>alert('Error resetting password: " . $conn->error . "');</script>";
-    }
-
-
-    $stmt->close();
-}
 
 
 
@@ -730,7 +720,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
             const editId = userData.Id;
             fetchProfileImage(editId);
 
-            document.getElementById("removeAccountBtn").addEventListener("click", function(){
+            document.getElementById("removeAccountBtn").addEventListener("click", function() {
                 openRemoveModal(userData.Id);
             });
 
@@ -743,10 +733,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                 .then(response => response.json())
                 .then(data => {
                     if (data.profile_pic) {
+                        console.log('Setting profile image:', data.profile_pic);
                         document.getElementById("profileImage").src = data.profile_pic;
+                        let profileImg = document.getElementById("profileImage");
+                        profileImg.onerror = function() {
+                            console.log('Error loading profile image, using default');
+                            this.src = "https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=";
+                        };
                     } else {
                         // Set a default image if no profile picture is found
-                        document.getElementById("profileImage").src = "../images/profile-icon.png";
+                        document.getElementById("profileImage").src = "https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=";
                     }
 
                     if (data.cover_photo) {
@@ -760,7 +756,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                 .catch(error => {
                     console.error('Error fetching profile image:', error);
                     // default image
-                    document.getElementById("profileImage").src = "../images/profile-icon.png";
+                    document.getElementById("profileImage").src = "https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=";
                     document.getElementById("coverPhoto").style.backgroundImage = "url('../images/Background.png')";
                 });
         }
@@ -800,7 +796,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
                         alert("User updated successfully");
                         closeModal();
                         //for refresh
-                        location.reload();
+                        //location.reload();
+                        window.location.href = window.location.href.split('?')[0];
                     } else {
                         alert("Error updating user: " + data.message);
                     }
@@ -855,6 +852,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
             document.getElementById('editModal').style.display = 'none';
         }
 
+        // reset password
         function confirmResetPassword() {
             if (confirm('Are you sure you want to reset the password of this user?')) {
                 const userId = document.getElementById("editId").value;
@@ -866,7 +864,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset_password'])) {
 
                 const input = document.createElement('input');
                 input.type = 'hidden';
-                input.name = 'reset_password';
+                input.name = 'resetpasswordbyadmin'; // Code above for resetting passwrd
                 input.value = userId;
 
                 form.appendChild(input);

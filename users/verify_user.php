@@ -55,7 +55,7 @@ try {
         $last_id = $conn->insert_id; // Get the last inserted ID for the profile
         $insertStmt->close();
 
-        $defaultProfilePic = "https://st.depositphotos.com/2101611/3925/v/600/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg";
+        $defaultProfilePic = "https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=";
         $defaultCoverPhoto = "https://www.rappler.com/tachyon/2021/09/cit-campus-20210916.png?resize=850%2C315&zoom=1";
         $profileSql = "INSERT INTO profile (userId, profile_pic, cover_photo) 
                            VALUES (?, ?, ?)";

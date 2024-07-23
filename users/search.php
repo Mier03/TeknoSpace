@@ -26,8 +26,6 @@ if (isset($_POST['search'])) {
     } else {
         echo json_encode(['status' => 'no_results']);
     }
-} //else{
-// echo json_encode(['status' => 'error', 'message' => 'No search term provided']);
-//}
+} 
 
 ?>

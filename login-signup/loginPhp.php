@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (empty($errors)) {
                     $sql = "INSERT INTO verify (userType, firstName, middleName, lastName, idNumber, email, course, password) 
                         VALUES ('$userType', '$firstName', '$middleName', '$lastName', '$idNumber', '$email', '$course', '$password')";
-    
+
                     if ($conn->query($sql) === TRUE) {
                         if ($userType === 'Faculty' || $userType === 'Student') {
                             $_SESSION['userType'] = $userType;
@@ -93,8 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION['idNumber'] = $idNumber;
                             $_SESSION['valid'] = $email;
                             $_SESSION['course'] = $course;
-                            $_SESSION['id'] = $conn->insert_id; 
-    
+                            $_SESSION['id'] = $conn->insert_id;
+
                             echo "<script>
                                 document.addEventListener('DOMContentLoaded', function() {
                                 var modal = document.getElementById('successModal');
@@ -113,8 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $errors[] = "Invalid user type.";
             }
-
-            
         }
     } elseif (isset($_POST['submit_signin'])) { // name of the button in the html tag for log in
         $errors = [];
@@ -142,7 +140,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = mysqli_fetch_assoc($result);
 
             if (empty($row['password']) || $row['password'] === null) {
-                $identifier = urlencode($email_or_id);
+                //checks if input kay email or idnumber
+                if (filter_var($email_or_id, FILTER_VALIDATE_EMAIL)) {
+                    $identifier = urlencode($email_or_id);
+                } else {
+                    $idNumberInput = $email_or_id;
+                    $stmt = $conn->prepare("SELECT email FROM users WHERE idNumber = ?");
+                    $stmt->bind_param("s", $idNumberInput);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        //Fetch the email of that id number
+                        $row = $result->fetch_assoc();
+                        $identifier = urlencode($row['email']);
+                    } else {
+                        die("ID number not found.");
+                    }
+                    $stmt->close();
+                    $conn->close();
+                }
+                
                 echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
                         alert('Your password has been reset. Initial password setup required.');
