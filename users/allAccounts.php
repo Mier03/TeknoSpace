@@ -811,35 +811,37 @@ if (isset($_GET['userId'])) {
 
         // remove account
         function openRemoveModal(userId) {
+            console.log('openRemoveModal called with userId:', userId);
             if (confirm("Are you sure you want to remove this account? This action cannot be undone.")) {
                 removeAccount(userId);
+                
             }
         }
 
         function removeAccount(userId) {
-            fetch('remove_account.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        userId: userId
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("Account removed successfully");
-                        location.reload();
-                    } else {
-                        alert("Error removing account: " + data.message);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    alert("An error occurred while removing the account");
-                });
-        }
+                    fetch('remove_account.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                userId: userId
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert("Account removed successfully");
+                                location.reload();
+                            } else {
+                                alert("Error removing account: " + data.message);
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            alert("An error occurred while removing the account");
+                        });
+                }
     </script>
 
 
