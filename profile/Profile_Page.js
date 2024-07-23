@@ -209,72 +209,68 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-// Found Item Modal
-    var foundItemModal = document.getElementById('foundItemModal');
-    var confirmFoundBtn = document.getElementById('confirmFoundItem');
-    var cancelFoundBtn = document.getElementById('cancelFoundItem');
-    var currentPostId;
+    let currentPostId, currentAction, currentToggleLink;
 
-    // Event listener for found button in drop-down
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('toggle-found')) {
-            e.preventDefault();
-            currentPostId = e.target.closest('.post').dataset.postId;
-            foundItemModal.style.display = "block";
-        }
-    });
-
-    // Confirm button in modal
-    confirmFoundBtn.onclick = function() {
-        toggleFound(currentPostId);
-        foundItemModal.style.display = "none";
-    };
-
-    // Cancel button in modal
-    cancelFoundBtn.onclick = function() {
-        foundItemModal.style.display = "none";
-    };
-
-    // Close modal when clicking outside or on the close button
-    window.onclick = function(event) {
-        if (event.target == foundItemModal) {
-            foundItemModal.style.display = "none";
-        }
-    };
-
-    var closeButtons = document.getElementsByClassName("close");
-    for (var i = 0; i < closeButtons.length; i++) {
-        closeButtons[i].onclick = function() {
-            foundItemModal.style.display = "none";
-        };
+    // Function to open the modal
+    function openFoundModal(postId, action, toggleLink) {
+        currentPostId = postId;
+        currentAction = action;
+        currentToggleLink = toggleLink;
+        document.getElementById('foundItemModal').style.display = 'block';
     }
-
-
-function toggleFound(postId) {
-    fetch('update_status.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `postId=${postId}&action=found`
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const post = document.querySelector(`.post[data-post-id="${postId}"]`);
-            const statusHeading = post.querySelector('h1');
-            if (statusHeading) {
-                statusHeading.innerText = '! FOUND';
-                statusHeading.className = 'found-status';
-            }
-        } else {
-            console.error('Failed to update status:', data.error);
+    
+    // Event listener for the "Found" button in the post options
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('toggle-found')) {
+            event.preventDefault();
+            const postId = event.target.closest('.post').dataset.postId;
+            const action = 'found';
+            openFoundModal(postId, action, event.target);
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
     });
-}
+    
+    // Confirm button in the modal
+    document.getElementById('confirmFoundItem').addEventListener('click', function() {
+        toggleFound(currentPostId, currentAction, currentToggleLink);
+        document.getElementById('foundItemModal').style.display = 'none';
+    });
+    
+    // Cancel button in the modal
+    document.getElementById('cancelFoundItem').addEventListener('click', function() {
+        document.getElementById('foundItemModal').style.display = 'none';
+    });
+    
+    // Function to update the item status
+    function toggleFound(postId, action, toggleLink) {
+        fetch('update_status.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `postId=${postId}&action=${action}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const post = toggleLink.closest('.post');
+                const lostHeading = post.querySelector('h1');
+                if (lostHeading) {
+                    lostHeading.innerText = '! FOUND';
+                }
+            } 
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error: ' + error.message);
+        });
+    }
+    
+    // Close the modal if user clicks outside of it
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('foundItemModal')) {
+            document.getElementById('foundItemModal').style.display = "none";
+        }
+    }
 
 
 
