@@ -229,8 +229,7 @@
         main {
             max-width: 1000px;
             margin: 0 auto;
-            padding-top: 52px;
-            min-height: 100vh;
+            padding-top: 70px;
         }
 
         #profile {
@@ -239,7 +238,6 @@
 
         .cover-photo {
             position: relative;
-            display: block;
             height: 400px;
             overflow: hidden;
         }
