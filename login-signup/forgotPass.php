@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php
     } else {
-        echo "Token not found or expired.";
+        echo "Token not found or already used.";
     }
 
     $stmt->close();
