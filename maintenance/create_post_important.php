@@ -69,3 +69,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
+<style>
+    /*important post*/
+.post-container {
+    background-color: #fff;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.important-post {
+    background-color: #fff;
+    border: 1px solid #dddfe2;  
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.important-badge {
+    background-color: transparent;
+    color: rgb(246, 0, 0);
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;  
+    right: 10px;
+}
+
+.important-badge::before {
+    content: "❗";
+    margin-right: 5px;
+}
+
+</style>
