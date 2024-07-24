@@ -4,7 +4,6 @@ include('auth.php');
 include('../config.php');
 include('../helper.php');
 checkLogin();
-checkUserRole('Faculty');
 
 // Check if 'firstName' or 'lastName' is undefined in the session
 if (!isset($_SESSION['firstName']) || !isset($_SESSION['lastName'])) {
@@ -19,6 +18,49 @@ if (!isset($_SESSION['valid'])) {
 $userId = $_SESSION['id'];
 $userName = $_SESSION['firstName'];
 $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+$userType = $_SESSION['userType'];
+
+$schoolUpdatesUrl = '';
+
+switch ($userType) {
+    case 'Student':
+        $schoolUpdatesUrl = 'studentHomepage.php';
+        break;
+    case 'Admin':
+        $schoolUpdatesUrl = 'admin.php';
+        break;
+    case 'Faculty':
+        $schoolUpdatesUrl = 'facultyHomepage.php';
+        break;
+}
+
+$maintenanceUrl = '';
+
+switch ($userType) {
+    case 'Student':
+        $maintenanceUrl = '../maintenance/studentMaintenance.php';
+        break;
+    case 'Admin':
+        $maintenanceUrl = '../maintenance/adminMaintenance.php';
+        break;
+    case 'Faculty':
+        $maintenanceUrl = '../maintenance/facultyMaintenance.php';
+        break;
+}
+
+$lost_foundUrl = '';
+
+switch ($userType) {
+    case 'Student':
+        $lost_foundUrl = '../lostandfound/studentLostFound.php';
+        break;
+    case 'Admin':
+        $lost_foundUrl = '../lostandfound/adminLostFound.php';
+        break;
+    case 'Faculty':
+        $lost_foundUrl = '../lostandfound/facultyLostFound.php';
+        break;
+}
 
 $sql = "SELECT * FROM profile WHERE userId = '$userId'";
 $result = $conn->query($sql);
@@ -86,21 +128,33 @@ if ($result->num_rows > 0) {
     </div>
     <nav class="nav">
         <ul>
-            <li><a href="facultyHomepage.php" class="icon" ><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
-            <li><a href="../maintenance/facultyMaintenance.php" class="icon" ><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
-            <li><a href="../lostandfound/facultyLostFound.php" class="icon" ><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
+            <li><a href="<?php echo $schoolUpdatesUrl; ?>" class="icon" ><i class="fi fi-ss-megaphone"></i><span class="nav-text">School Updates</span></a></li>
+            <li><a href="<?php echo $maintenanceUrl; ?>" class="icon" ><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
+            <li><a href="<?php echo $lost_foundUrl; ?>" class="icon" ><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
+            <?php if ($userType === 'Admin') : ?>
+                <li><a href="#manageAccount" class="icon manage-account"><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a></li>
+            <?php endif; ?>
         </ul>
     </nav>
+    <div id="manageAccountModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Manage Accounts</h2>
+            <button onclick="goToAllAccounts()">All Accounts</button>
+            <button onclick="goToVerifyAccounts()">Verify Accounts</button>
+        </div>
+    </div>
     <main class="main">
-        <div class="gif-container">
-            <img src="../images/dancing-tiger.gif" alt="Welcome GIF" class="welcome-gif">
-        </div>
-        <div class="welcome-message">
-            <h1>Welcome Back to TeknoSpace, <?php echo $userName ?>!</h1>
-        </div>
-        <div class="gif-container">
-            <img src="../images/dancing-tiger.gif" alt="Welcome GIF" class="welcome-gif">
-        </div>
+    <div class="gif-container">
+        <img src="../images/dancing-tiger.gif" alt="Welcome GIF" class="welcome-gif" onerror="this.onerror=null; this.src='https://i.pinimg.com/originals/e4/26/ae/e426aee03c5bc7ec7bf04c3ceecd4315.gif';">
+    </div>
+    <div class="welcome-message">
+        <h1>Welcome Back to TeknoSpace, <?php echo $userName; ?>!</h1>
+    </div>
+    <div class="gif-container">
+        <img src="../images/dancing-tiger.gif" alt="Welcome GIF" class="welcome-gif" onerror="this.onerror=null; this.src='https://i.pinimg.com/originals/e4/26/ae/e426aee03c5bc7ec7bf04c3ceecd4315.gif';">
+    </div>
+
     </div>
         <div id="logoutModal" class="logout-modal">
                 <div class="logout-modal-content">
@@ -139,6 +193,34 @@ if ($result->num_rows > 0) {
             
         });
 
+        const modal = document.getElementById("manageAccountModal");
+        const manageAccountLink = document.querySelector('.manage-account');
+        const closeBtn = document.querySelector('.modal-content .close');
+
+        manageAccountLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = "block";
+        });
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = "none"; 
+        });
+
+        window.addEventListener('click', function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        function goToAllAccounts() {
+            modal.style.display = "none";
+            window.location.href = "allAccounts.php"; 
+        }
+
+        function goToVerifyAccounts() {
+            modal.style.display = "none";
+            window.location.href = "verify.php"; 
+        }
 
         //logout
         document.addEventListener('DOMContentLoaded', function() {
