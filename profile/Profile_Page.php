@@ -1,10 +1,15 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['valid'])) {
-    header("Location: ../login.php");
-    exit();
+include('auth.php');
+checkLogin();
+function checkAllowedRoles($allowedRoles) {
+    if (!isset($_SESSION['userType']) || !in_array($_SESSION['userType'], $allowedRoles)) {
+        header("Location: authno.php");
+        exit();
+    }
 }
+checkAllowedRoles(['Faculty', 'Admin', 'Student']);
 
 include('../config.php');
 include('../helper.php');
@@ -494,6 +499,17 @@ if (!empty($commentPostIds)) {
         <div class="button-container">
             <button id="confirmFoundItem">Found</button>
             <button id="cancelFoundItem">Cancel</button>
+        </div>
+    </div>
+</div>
+<div id="deleteCommentModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Delete Comment</h2>
+        <p>Are you sure you want to delete this comment?</p>
+        <div class="button-container">
+            <button id="confirmDeleteComment">Delete</button>
+            <button id="cancelDeleteComment">Cancel</button>
         </div>
     </div>
 </div>

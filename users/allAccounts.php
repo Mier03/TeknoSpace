@@ -3,7 +3,9 @@
 include('../config.php');
 include('resetbyadmin.php'); // for reset password
 include('search.php'); // for search
-
+include('auth.php');
+checkLogin();
+checkUserRole('Admin');
 
 
 if (!isset($_SESSION['valid'])) {

@@ -52,8 +52,20 @@ const modal = document.getElementById("manageAccountModal");
             
             setTimeout(function() {
                 modal.style.display = "none";
-                window.location.href = "../index.php";
+                window.location.href='../aboutUs.php';
+                logout();
             }, 1500);
+        }
+        function logout() {
+            fetch('logout.php', {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = '../aboutUs.php';
+                }
+            }).catch(error => {
+                console.error('Logout failed:', error);
+            });
         }
 
         /* Log  Out Modal Javascript*/

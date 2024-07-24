@@ -12,10 +12,23 @@
         setTimeout(function() {
             modal.style.display = "none";
             window.location.href = "../aboutUs.php";
+            logout();
         }, 1250);
     } else {
         console.error("Logout modal not found");
     }
+}
+
+function logout() {
+    fetch('../users/logout.php', {
+        method: 'POST',
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = '../aboutUs.php';
+        }
+    }).catch(error => {
+        console.error('Logout failed:', error);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -430,13 +443,46 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Delete comment
+    let currentCommentId;
+
     document.querySelectorAll('.delete-comment').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const commentId = this.getAttribute('data-comment-id');
-            delete_comment(commentId);
+            currentCommentId = this.getAttribute('data-comment-id');
+            document.getElementById('deleteCommentModal').style.display = 'block';
         });
     });
+    
+
+    document.getElementById('confirmDeleteComment').addEventListener('click', function() {
+        delete_comment(currentCommentId);
+        document.getElementById('deleteCommentModal').style.display = 'none';
+    });
+    
+    document.getElementById('cancelDeleteComment').addEventListener('click', function() {
+        document.getElementById('deleteCommentModal').style.display = 'none';
+    });
+    
+    function delete_comment(commentId) {
+        fetch('delete_comment.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `comment_id=${commentId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                console.error('Failed to delete comment:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 
     // Attach event listeners to posts
     attachPostEventListeners();

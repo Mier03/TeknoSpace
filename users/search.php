@@ -1,8 +1,10 @@
 <?php
 
-
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include('../config.php');
+
 
 if (!isset($_SESSION['valid'])) {
     echo json_encode(['error' => 'Not authorized']);

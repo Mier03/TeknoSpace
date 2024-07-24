@@ -1,14 +1,11 @@
 <?php
-
+session_start();
+include('auth.php');
 include('../config.php');
 include('search.php');
 
-
-if (!isset($_SESSION['valid'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
+checkLogin();
+checkUserRole('Admin');
 ?>
 
 <!DOCTYPE html>
