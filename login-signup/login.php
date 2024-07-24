@@ -90,18 +90,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <?php
         if (isset($_SESSION['login_success']) && $_SESSION['login_success'] === true) {
-            $redirect_url = '';
-            switch ($_SESSION['userType']) {
-                case 'Admin':
-                    $redirect_url = '../users/admin.php';
-                    break;
-                case 'Student':
-                    $redirect_url = '../users/studentHomepage.php';
-                    break;
-                case 'Faculty':
-                    $redirect_url = '../users/facultyHomepage.php';
-                    break;
-            }
+            $redirect_url = '../users/mainHomepage.php';
+            // switch ($_SESSION['userType']) {
+            //     case 'Admin':
+            //         $redirect_url = '../users/admin.php';
+            //         break;
+            //     case 'Student':
+            //         $redirect_url = '../users/studentHomepage.php';
+            //         break;
+            //     case 'Faculty':
+            //         $redirect_url = '../users/facultyHomepage.php';
+            //         break;
+            // }
             if (!empty($redirect_url)) {
                 echo "document.addEventListener('DOMContentLoaded', function() { showLoginSuccessModal('$redirect_url'); });";
             }
