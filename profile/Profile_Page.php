@@ -439,7 +439,7 @@ if (!empty($commentPostIds)) {
                                 <?php if (count($post['comments']) > 0) : ?>
                                     <?php foreach ($post['comments'] as $comment) : ?>
                                         <div class="comment" >
-                                        <span class="commenter"><?php echo htmlspecialchars($comment['commenter_name']); ?></span>
+                                        <span class="commenter"><?php echo htmlspecialchars($comment['commenter_name']).' '.htmlspecialchars($comment['commenter_lastname']); ?></span>
                                             <p class="comment-content"><?php echo htmlspecialchars($comment['comment']); ?></p>
                                         </div>
                                     <?php endforeach; ?>
