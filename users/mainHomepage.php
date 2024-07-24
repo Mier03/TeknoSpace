@@ -132,7 +132,7 @@ if ($result->num_rows > 0) {
             <li><a href="<?php echo $maintenanceUrl; ?>" class="icon" ><i class="fi fi-br-tools"></i><span class="nav-text">Maintenance</span></a></li>
             <li><a href="<?php echo $lost_foundUrl; ?>" class="icon" ><i class="fi fi-ss-grocery-basket"></i><span class="nav-text">Lost and Found</span></a></li>
             <?php if ($userType === 'Admin') : ?>
-                <li><a href="#manageAccount" class="icon manage-account"><i class="fas fa-user-cog"></i><span class="nav-text">Manage Account</span></a></li>
+                <li><a href="#manageAccount" class="icon manage-account"><i class="fi fi-ss-user-gear"></i><span class="nav-text">Manage Account</span></a></li>
             <?php endif; ?>
         </ul>
     </nav>
