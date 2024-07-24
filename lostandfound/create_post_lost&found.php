@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imagePath = $targetFile;
     }
 
-    $sql = "INSERT INTO posts (username, content, posttype, profile_image, image_path, userId, is_important) VALUES ('$username', '$content','$posttype', '$profile_image', '$imagePath', '$loggedUserId', '$isPostImportant')";
+    $sql = "INSERT INTO posts (username, content, posttype,  profile_image, image_path, userId, status) VALUES ('$username', '$content','$posttype',  '$profile_image', '$imagePath', '$loggedUserId','lost')";
 
     if ($conn->query($sql) === TRUE) {
         $post_id = $conn->insert_id;

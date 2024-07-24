@@ -116,11 +116,6 @@ if ($result->num_rows > 0) {
                     <img src="<?php echo $profilePic; ?>" alt="Profile Photo">
                     <div class="post-header-info">
                         <h3><?php echo $fullName ?></h3>
-                        <select id="postAudience">
-                            <option value="All students">All students</option>
-                            <option value="Department">Department</option>
-                        </select>
-
                     </div>
                 </div>
                 <div class="post-input">
