@@ -795,7 +795,7 @@ if (isset($_GET['userId'])) {
                     if (data.success) {
                         alert("User updated successfully");
                         closeModal();
-                        //for refresh
+                       //for refresh
                         //location.reload();
                         window.location.href = window.location.href.split('?')[0];
                     } else {
@@ -807,6 +807,7 @@ if (isset($_GET['userId'])) {
                     alert("An error occurred while updating the user");
                 });
         }
+   
 
 
         // remove account

@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var span = document.querySelector('#postModal .close');
     var submitPost = document.getElementById('submitPost');
     var postContent = document.getElementById('postContent');
-    var postAudience = document.getElementById('postAudience');
     var postImage = document.getElementById('postImage');
     
     var isImportantToggle = document.getElementById('importantToggle');
@@ -59,14 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     submitPost.onclick = function() {
         var textContent = postContent.innerText; // Get text content
-        var audience = postAudience.value;
         var imageFile = postImage.files[0];
         var post = 'Announcement';
 
         if (textContent || imageFile) {
             var formData = new FormData();
             formData.append("content", textContent); // Append text content
-            formData.append("audience", audience);
             formData.append("posts", post);
             formData.append("isImportant", isImportantToggle.checked ? 1 : 0);
             if (imageFile) {

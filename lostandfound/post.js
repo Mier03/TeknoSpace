@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var span = document.querySelector('#postModal .close');
     var submitPost = document.getElementById('submitPost');
     var postContent = document.getElementById('postContent');
-    var postAudience = document.getElementById('postAudience');
     var postImage = document.getElementById('postImage');
 
     var selectedImage = null; // Store the selected image data URL
@@ -58,21 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     submitPost.onclick = function() {
         var textContent = postContent.innerText; // Get text content
-        var audience = postAudience.value;
         var imageFile = postImage.files[0];
         var post = 'Lost & Found';
 
         if (textContent || imageFile) {
             var formData = new FormData();
             formData.append("content", textContent); // Append text content
-            formData.append("audience", audience);
             formData.append("posts", post);
             if (imageFile) {
                 formData.append("image", imageFile);
             }
 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../users/create_post.php", true);
+            xhr.open("POST", "create_post_lost&found.php", true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     postContent.innerHTML = ''; // Clear text content

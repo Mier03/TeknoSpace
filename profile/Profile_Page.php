@@ -13,6 +13,7 @@ $userId = $_SESSION['id'];
 $userType = $_SESSION['userType'];
 $firstName = $_SESSION['firstName'];
 $lastName = $_SESSION['lastName'];
+
 $course = $_SESSION['course'];
 $idNumber = $_SESSION['idNumber'];
 $email = $_SESSION['valid'];
@@ -54,7 +55,7 @@ if ($result->num_rows > 0) {
 // Fetch user posts only if user is Faculty
 $posts = [];
 if ($userType === 'Faculty' || $userType === 'Admin') {
-    $sqlPosts = "SELECT p.*, u.firstname AS post_creator_name, 
+    $sqlPosts = "SELECT p.*, u.firstName AS post_creator_name, u.lastName AS post_creator_lastname,
                  (SELECT COUNT(*) FROM likes WHERE postId = p.id) AS likes_count
                  FROM posts p 
                  JOIN users u ON p.userId = u.id
@@ -69,7 +70,7 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
     if ($resultPosts->num_rows > 0) {
         while ($row = $resultPosts->fetch_assoc()) {
             // Fetch comments for this post
-            $sqlComments = "SELECT c.*, u.firstname AS commenter_name, u.lastname AS commenter_lastname 
+            $sqlComments = "SELECT c.*, u.firstName AS commenter_name, u.lastName AS commenter_lastname 
             FROM comments c
             JOIN users u ON c.userId = u.id
             WHERE c.postId = ?
@@ -78,7 +79,6 @@ if ($userType === 'Faculty' || $userType === 'Admin') {
             $stmtComments->bind_param("i", $row['id']);
             $stmtComments->execute();
             $resultComments = $stmtComments->get_result();
-            
             $comments = [];
             while ($comment = $resultComments->fetch_assoc()) {
                 $comments[] = $comment;
@@ -267,7 +267,7 @@ if (!empty($commentPostIds)) {
                     <button class="change-photo" id="change-profile"><i class='bx bxs-camera'></i></i></button>
                 </div>
                 <div class="user-details">
-                    <h1><?php echo $firstName . ' ' . $lastName; ?></h1>
+                    <h1><?php echo $firstName.' '.$lastName; ?></h1>
                     <p class="user-role"><?php echo $userType; ?></p>
                 </div>
             </div>
@@ -380,7 +380,7 @@ if (!empty($commentPostIds)) {
                                     </div>
 
                                     <div class="post-header-info">
-                                        <h3><?php echo htmlspecialchars($post['username']); ?></h3>
+                                    <h3><?php echo htmlspecialchars($post['post_creator_name']) . ' ' . htmlspecialchars($post['post_creator_lastname']); ?></h3>
                                         <span class="post-date"><?php echo htmlspecialchars(relative_time($post['created_at'])); ?></span>
                                     </div>
 
@@ -439,7 +439,7 @@ if (!empty($commentPostIds)) {
                                 <?php if (count($post['comments']) > 0) : ?>
                                     <?php foreach ($post['comments'] as $comment) : ?>
                                         <div class="comment" >
-                                        <span class="commenter"><?php echo htmlspecialchars($comment['commenter_name']); ?></span>
+                                        <span class="commenter"><?php echo htmlspecialchars($comment['commenter_name']).' '.htmlspecialchars($comment['commenter_lastname']); ?></span>
                                             <p class="comment-content"><?php echo htmlspecialchars($comment['comment']); ?></p>
                                         </div>
                                     <?php endforeach; ?>
