@@ -146,13 +146,6 @@ if (!empty($posts)) {
                                 <div class="comment" data-cid="'.$comment['commentId'].'">
                                     <div class ="comment-header">
                                         <span class="commenter">'.$comment['commenter'].'</span>
-                                    <div class="comment-options">
-                                        <button class="comment-options-btn"><i class="bx bx-dots-horizontal-rounded"></i></button>
-                                        <div class="comment-options-content">
-                                            <a href="#" class="edit-comment" data-cid="'.$comment['commentId'].'">Edit Comment</a>
-                                            <a href="#" class="delete-comment" data-cid="'.$comment['commentId'].'">Delete Comment</a>
-                                        </div>
-                                    </div>
                                       </div>
                                     <p class="comment-content">'.$comment['comment'].'</p>
                                   
