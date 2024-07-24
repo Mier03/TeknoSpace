@@ -296,7 +296,7 @@ if ($result->num_rows > 0) {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 50vh;
+            height: 80vh;
         }
 
         .welcome-message {
