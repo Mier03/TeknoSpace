@@ -24,9 +24,11 @@ $profilePic = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar
 
 if ($result->num_rows > 0) {
     $profile_row = $result->fetch_assoc();
+
     if (!empty($profile_row['profile_pic']) && file_exists($profile_row['profile_pic'])) {
         $profilePic = $profile_row['profile_pic'];
     } 
+    
 }
 
 ?>

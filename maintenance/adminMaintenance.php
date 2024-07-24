@@ -15,7 +15,7 @@ $fullName = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
 
 $sql = "SELECT * FROM profile WHERE userId = '$userId'";
 $result = $conn->query($sql);
-$default_profile_image = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=';
+$profilePic  = 'https://media.istockphoto.com/id/1327592449/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=yqoos7g9jmufJhfkbQsk-mdhKEsih6Di4WZ66t_ib7I=';
 
 
 if ($result->num_rows > 0) {
@@ -23,8 +23,6 @@ if ($result->num_rows > 0) {
 
     if (!empty($profile_row['profile_pic']) && file_exists($profile_row['profile_pic'])) {
         $profilePic = $profile_row['profile_pic'];
-    } else {
-        $profilePic = $default_profile_image;
     }
 }
 
