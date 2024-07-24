@@ -221,22 +221,16 @@ if ($result->num_rows > 0) {
         }
 
         //logout
-        document.addEventListener('DOMContentLoaded', function() {
-            window.showLogoutModal = function() {
-                console.log("Logout function called"); 
-                var modal = document.getElementById('logoutModal');
-                if (modal) {
-                    modal.style.display = "block";
-                    setTimeout(function() {
-                        modal.style.display = "none";
-                        window.location.href = "../aboutUs.php"; 
-                        logout();
-                    }, 1250);
-                } else {
-                    console.error("Logout modal not found"); 
-                }
-            };
-        });
+        function showLogoutModal() {
+            var modal = document.getElementById('logoutModal');
+            modal.style.display = "block";
+            
+            setTimeout(function() {
+                modal.style.display = "none";
+                window.location.href='../aboutUs.php';
+                logout();
+            }, 1500);
+        }
         function logout() {
             fetch('logout.php', {
                 method: 'POST',
@@ -248,6 +242,7 @@ if ($result->num_rows > 0) {
                 console.error('Logout failed:', error);
             });
         }
+        
             /**Notification Modal */
             document.addEventListener('DOMContentLoaded', function() {
             const notificationIcon = document.querySelector('a[href="#notif"] i');
