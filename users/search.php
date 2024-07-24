@@ -5,12 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include('../config.php');
 
-
-if (!isset($_SESSION['valid'])) {
-    echo json_encode(['error' => 'Not authorized']);
-    exit();
-}
-
 if (isset($_POST['search'])) {
     $filtervalues = mysqli_real_escape_string($conn, $_POST['search']);
     $query = "SELECT id, userType, firstName, middleName, lastName, idNumber, course, email
